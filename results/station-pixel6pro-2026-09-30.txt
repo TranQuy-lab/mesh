@@ -8,3 +8,10 @@
 - Thời gian nghe: khoảng 30 giây
 - Kết quả: **chưa nhận được SOS**; không thấy quảng cáo manufacturer `0xFFFF` từ Pixel trên laptop
 - Diễn giải: chưa thể kết luận codec sai. Đây là phép thử đầu tiên của chiều Pixel → laptop; cần thử thêm với USB Bluetooth khác/điện thoại thứ hai và kiểm tra driver BlueZ.
+
+## Thử loại trừ nguyên nhân (cùng ngày)
+
+- Đã thử quảng cáo legacy **scannable nhưng không kết nối**: không nhận.
+- Đã thử tạm quảng cáo legacy **connectable**: không nhận.
+- Quét BLE tổng quát bằng Bleak và `bluetoothctl scan le`: đều không thấy thiết bị.
+- Kết luận cập nhật: lỗi xảy ra trước lớp lọc `0xFFFF` và trước lớp giải mã SOS; ưu tiên kiểm tra adapter/driver hoặc thay USB Bluetooth.

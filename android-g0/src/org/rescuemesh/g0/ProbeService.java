@@ -288,7 +288,10 @@ public final class ProbeService extends Service implements SensorEventListener {
                     .setInterval(interval)
                     .setTxPowerLevel(AdvertisingSetParameters.TX_POWER_HIGH)
                     .setConnectable(false)
-                    .setScannable(false)
+                    // A scannable legacy packet is received more consistently by
+                    // BlueZ laptop adapters while the SOS payload remains in the
+                    // primary advertisement; no GATT connection is required.
+                    .setScannable(true)
                     .build();
             log("advertise_config", "mode=" + advertiseMode + ",interval_units=" + interval);
             try {
