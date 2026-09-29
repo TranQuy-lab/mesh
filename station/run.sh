@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")"
-python3 station_receiver.py "$@"
+cd ..
+python3 station/receiver.py "$@"

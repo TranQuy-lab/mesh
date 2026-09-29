@@ -45,4 +45,6 @@ fi
   "$build_dir/aligned.apk"
 
 "$tools_dir/apksigner" verify --verbose "$build_dir/rescuemesh-g0.apk"
+mkdir -p "$project_dir/../releases"
+cp "$build_dir/rescuemesh-g0.apk" "$project_dir/../releases/rescuemesh-g0.apk"
 echo "$build_dir/rescuemesh-g0.apk"

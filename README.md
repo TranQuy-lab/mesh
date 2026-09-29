@@ -27,7 +27,8 @@ Bộ tài liệu kế hoạch cho đề tài **RescueMesh-AI**: mạng liên l�
 | [rescuemesh/test_g0_schedule.py](rescuemesh/test_g0_schedule.py) | 4 kiểm thử cân bằng, full factorial và tái lập lịch G0-S |
 | [results/sim-smoke.csv](results/sim-smoke.csv) | 270 lượt smoke test, không dùng để kết luận hiệu năng thực |
 | [android-g0/](android-g0/) | APK nút mạng Android: phát SOS, quét BLE và chuyển tiếp gói mới |
-| [station_receiver.py](station_receiver.py) | Trạm thu trên laptop: nhận BLE, kiểm tra HMAC, chống trùng và lưu SOS |
+| [station/](station/) | Trạm thu trên laptop: nhận BLE, kiểm tra HMAC, chống trùng và lưu SOS |
+| [releases/rescuemesh-g0.apk](releases/rescuemesh-g0.apk) | APK cài trực tiếp lên điện thoại |
 | [android-g0/src/org/rescuemesh/g0/SosCodec.java](android-g0/src/org/rescuemesh/g0/SosCodec.java) | Codec SOS Java đối chiếu byte-for-byte với golden vector Python |
 | [ket-qua-ra-soat-va-nghien-cuu-ban-dau.md](ket-qua-ra-soat-va-nghien-cuu-ban-dau.md) | Phán quyết thiết kế, SIM-SMOKE và kết quả G0 trên Pixel 6 Pro |
 | [nghien-cuu-ble-mesh-va-ke-hoach-g0.md](nghien-cuu-ble-mesh-va-ke-hoach-g0.md) | Bằng chứng BLE/DTN trên smartphone và factorial screening G0-S |
@@ -57,9 +58,9 @@ cd rescuemesh && python3 packets.py
 
 ## Chạy bản trình diễn với hai điện thoại và laptop
 
-1. Trên laptop cài thư viện Bluetooth một lần: `python3 -m pip install -r station-requirements.txt`.
-2. Cắm hoặc bật Bluetooth trên laptop rồi chạy `./run_station.sh`. Cửa sổ này là trạm; SOS hợp lệ được in ra và lưu vào `results/station-events.jsonl`.
-3. Cài file [rescuemesh-g0.apk](android-g0/build/rescuemesh-g0.apk) lên từng điện thoại, mở ứng dụng và cấp các quyền Bluetooth/thông báo.
+1. Trên laptop cài thư viện Bluetooth một lần: `python3 -m pip install -r station/requirements.txt`.
+2. Cắm hoặc bật Bluetooth trên laptop rồi chạy `./station/run.sh`. Cửa sổ này là trạm; SOS hợp lệ được in ra và lưu vào `results/station-events.jsonl`.
+3. Cài file [rescuemesh-g0.apk](releases/rescuemesh-g0.apk) lên từng điện thoại, mở ứng dụng và cấp các quyền Bluetooth/thông báo.
 4. Nhấn **Bật nút mạng** trên cả hai máy. Một máy phát SOS, cả hai máy đều quét; gói mới được chuyển tiếp với số bước tăng lên và thời gian sống giảm đi.
 
 Bản hiện tại dùng khóa thử nghiệm có sẵn trong mã để trình diễn trong phòng lab. Khi chuyển sang triển khai thật, thay khóa bằng khóa riêng của mạng cứu hộ.

@@ -9,7 +9,7 @@
 
 **Tên làm việc:** RescueMesh-AI — Mạng liên lạc cứu hộ BLE ngoại tuyến cho vùng bão lũ mất sóng, có AI hỗ trợ tạo SOS khi người dùng không thể thao tác
 **Tài liệu liên quan:** [Cấu trúc đề tài](cau-truc-de-tai-rescuemesh-ai.md) · [Xác minh nguồn & tài liệu tham khảo](xac-minh-nguon-va-tai-lieu-tham-khao.md)
-**Ngày lập:** 2026-09-28 · **Cập nhật:** 2026-09-29 · **Trạng thái:** v1.0 đã có codec và G0 sơ bộ; mesh nhiều hop, collision và tải nhiều SOS còn phải đo
+**Ngày lập:** 2026-09-28 · **Cập nhật:** 2026-09-29 · **Trạng thái:** v1.0 đã có codec, APK nút mạng và trạm thu laptop; mesh nhiều hop, collision, ACK và tải nhiều SOS còn phải đo
 
 ---
 
@@ -18,7 +18,7 @@
 1. **Định vị phải đổi.** Đóng góp trung tâm là **vòng lặp cứu hộ trong bão lũ mất sóng**: người dân tạo SOS → điện thoại chuyển tiếp → trạm xác nhận; AI cảm biến chỉ là phương án phụ khi người dùng không thể thao tác.
 2. **Hướng đã chốt:** ưu tiên managed flooding có kiểm soát, gradient theo trạm và store-carry-forward; không dùng AI định tuyến. Phần phát hiện ngã/bất động là work package phụ, chạy sau khi đường SOS cốt lõi được kiểm chứng.
 3. **Ba lỗi thiết kế trong bản nháp gói tin phải sửa trước khi code** (đã kiểm tra số học, §8): SOS 21 byte vượt payload 20 byte của ATT MTU mặc định; ACK định danh nạn nhân bằng `srcID_low16` (16 bit) sụp đổ khi n ≥ 1000 nút; và cơ chế khóa riêng "cấp khi còn mạng" mâu thuẫn với mục tiêu offline hoàn toàn — cả ba đều là **đóng góp thiết kế** nếu xử lý và đo tử tế.
-4. **Trình tự đúng:** khóa phạm vi và sổ bằng chứng trước → codec + simulator chạy được (WP1) → mô hình phát hiện ngã (WP2) → thí nghiệm mesh có hiệu chuẩn với đo thực (WP3) → tích hợp và đo đầu-cuối (WP4) → viết (WP5). Không viết bài trước khi có cổng G2 và G3.
+4. **Trình tự đúng:** khóa phạm vi và sổ bằng chứng → codec/APK/trạm tối thiểu (đã có) → hiệu chuẩn đường BLE hai chiều bằng 2 điện thoại + laptop → simulator có collision/tải nhiều SOS → tích hợp đo đầu-cuối → AI phát hiện ngã → viết. Không viết kết luận hiệu năng trước khi qua G3.
 5. **Điểm chết về phương pháp luận phải tránh:** chia tập theo cửa sổ ngẫu nhiên (rò rỉ dữ liệu cùng người), tuyên bố "gradient tốt hơn flooding" chỉ từ mô phỏng chưa hiệu chuẩn, và coi kết quả mô phỏng là kết quả thực địa.
 
 ---
@@ -208,6 +208,11 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 
 ## 9. Phương pháp theo gói công việc
 
+### WP0 — Bản trình diễn tối thiểu (đã hoàn thành một phần)
+- APK Android: phát SOS, quét BLE, chống trùng và chuyển tiếp gói mới.
+- Trạm laptop: nhận 24 byte, kiểm tra HMAC, chống trùng và ghi JSONL.
+- Việc còn thiếu của WP0: kiểm tra chiều điện thoại → trạm trên ít nhất hai máy, đo khoảng cách và xác nhận ACK/beacon.
+
 ### WP1 — Codec và simulator (tuần 1–3)
 - Viết codec Python (đóng/gói, kiểm thử thuộc tính, fuzz) theo thiết kế đã sửa ở §8; sinh vector test cố định.
 - Nâng simulator: nút, hàng xóm theo khoảng cách, PDR/collision theo trace BLE, hàng đợi ưu tiên, fairness, cache, jitter, gradient theo hop, relay suppression, store-and-forward, trạm sập theo lịch.
@@ -304,7 +309,7 @@ gantt
 
 | Cổng | Điều kiện qua cổng | Nếu không qua |
 |---|---|---|
-| **G0 — Khóa phạm vi** | Sổ bằng chứng có ngày; phi mục tiêu đã ghi; mô hình mối đe dọa đã chọn | Chưa code |
+| **G0 — Khóa phạm vi** | Sổ bằng chứng có ngày; phi mục tiêu đã ghi; mô hình mối đe dọa đã chọn | Giữ phạm vi bão lũ/mất sóng, không mở rộng AI |
 | **G1 — Codec** | Round-trip 100 %; khung mặc định ≤ 24 byte; test thuộc tính + fuzz qua | Sửa thiết kế, không đi tiếp |
 | **G2 — Phát hiện** | Recall ≥ mục tiêu ở ngân sách FAR đặt trước, chia LOSO; có kết quả chuyển miền | Thu hẹp về "ngưỡng + luật" và nói rõ, hoặc đổi kho dữ liệu |
 | **G3 — Hiệu chuẩn** | Sai số mô hình PDR so với đo thực trong ngưỡng đã đặt trước | Không tuyên bố so sánh định tuyến |

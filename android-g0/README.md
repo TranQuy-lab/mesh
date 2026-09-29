@@ -1,11 +1,11 @@
-# RescueMesh G0 — đầu dò Android
+# RescueMesh v1.0 — nút mạng Android
 
-Ứng dụng tối thiểu dùng để kiểm tra tính khả thi trước khi xây ứng dụng chính. Nó chạy dưới dạng foreground service và đồng thời:
+Ứng dụng chạy dưới dạng foreground service và đồng thời:
 
 - phát SOS v1 dài 24 byte trong manufacturer data `0xFFFF`; sequence và HMAC
   được cập nhật mỗi giây, khởi đầu bằng golden vector;
-- quét BLE với filter manufacturer + protocol version, xác thực HMAC và đếm
-  message ID duy nhất (`time8`, `seq`);
+- quét BLE với filter manufacturer + protocol version, xác thực HMAC, bỏ gói
+  trùng và chuyển tiếp gói mới về phía trạm;
 - đăng ký accelerometer với chu kỳ yêu cầu 50 ms và batching tối đa 2 s;
 - ghi một dòng trạng thái mỗi 10 s bằng tag `RescueMeshG0`.
 
@@ -19,7 +19,8 @@ SDK cục bộ được đặt ở `../.android-sdk`. Chạy:
 ./build.sh
 ```
 
-APK đã ký debug được tạo tại `build/rescuemesh-g0.apk`.
+APK đã ký debug được tạo tại `build/rescuemesh-g0.apk` và tự chép vào
+`../releases/rescuemesh-g0.apk`.
 
 Codec SOS Java dùng chung golden vector với Python. Kiểm tra độc lập:
 
@@ -30,7 +31,7 @@ Codec SOS Java dùng chung golden vector với Python. Kiểm tra độc lập:
 ## Cài và chạy
 
 ```bash
-adb install -r build/rescuemesh-g0.apk
+adb install -r ../releases/rescuemesh-g0.apk
 adb shell pm grant org.rescuemesh.g0 android.permission.BLUETOOTH_SCAN
 adb shell pm grant org.rescuemesh.g0 android.permission.BLUETOOTH_ADVERTISE
 adb shell pm grant org.rescuemesh.g0 android.permission.BLUETOOTH_CONNECT
@@ -57,11 +58,12 @@ Dừng phép đo nhưng giữ ứng dụng để dùng lại:
 adb shell am stopservice org.rescuemesh.g0/.ProbeService
 ```
 
-## Giới hạn
+## Giới hạn hiện tại
 
 - Callback `onStartSuccess` và `dumpsys bluetooth_manager` xác nhận controller đã nhận cấu hình phát, nhưng laptop hiện chưa giải mã được chiều Pixel → laptop.
 - Chiều laptop → Pixel đã so khớp byte-for-byte. Unfiltered scan dừng khi màn hình tắt theo quy định Android; vì vậy đầu dò dùng `ScanFilter`.
 - `sensor_hz` được tính từ timestamp sự kiện Android. Chu kỳ truyền vào `registerListener` chỉ là yêu cầu; phần cứng/hệ điều hành có thể chọn nhịp khác.
 - `messages_issued` là số message ứng dụng đã giao cho controller, không phải bằng
   chứng mọi advertising event đã phát trên không khí.
-- Đây là đầu dò kỹ thuật, chưa có giao diện, khóa sản xuất, luân phiên định danh, lưu dữ liệu nghiên cứu hay xử lý đồng thuận.
+- Đây vẫn là nguyên mẫu phòng lab: dùng khóa thử nghiệm chung, tọa độ mẫu và
+  chưa có bản đồ hoặc beacon/ACK ngược từ trạm.
