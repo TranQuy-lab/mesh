@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.Log;
 
 import java.util.HashSet;
@@ -45,7 +46,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private static final byte[] DEVICE_KEY =
             "device-key-for-tests".getBytes(StandardCharsets.UTF_8);
     private static final String SOS_GOLDEN_HEX =
-            "46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028";
+            "46f32a89abcdef399de83fcb3d2d53bc4c1ba811078a6028";
     private static final byte[] SOS_GOLDEN = SosCodec.packSos(
             0x89abcdefL, 12345, 21.028511, 105.804817,
             1, 2, 3, 11, 3, 0, 7, 15, 42, DEVICE_KEY);
@@ -53,6 +54,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Set<String> devices = new HashSet<>();
     private final Set<Integer> messageIds = new HashSet<>();
+    private final Set<String> seenFrames = new HashSet<>();
     private long startedElapsedMs;
     private long scanCallbacks;
     private long goldenMatches;
@@ -63,6 +65,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private long lastSensorNs;
     private boolean advertisingStarted;
     private boolean scanningStarted;
+    private long localSourceId = 0x89abcdefL;
 
     private BluetoothLeAdvertiser advertiser;
     private AdvertisingSet advertisingSet;
@@ -99,7 +102,7 @@ public final class ProbeService extends Service implements SensorEventListener {
             if (advertisingSet == null) return;
             int seq = (42 + (int) messagesIssued) & 0xff;
             long minute = 12345 + messagesIssued / 60;
-            byte[] frame = SosCodec.packSos(0x89abcdefL, minute, 21.028511, 105.804817,
+            byte[] frame = SosCodec.packSos(localSourceId, minute, 21.028511, 105.804817,
                     1, 2, 3, 11, 3, 0, 7, 15, seq, DEVICE_KEY);
             advertisingSet.setAdvertisingData(advertiseData(frame));
             messagesIssued++;
@@ -115,9 +118,18 @@ public final class ProbeService extends Service implements SensorEventListener {
             if (manufacturerData != null && manufacturerData.length == SosCodec.SIZE
                     && SosCodec.verify(manufacturerData, DEVICE_KEY)) {
                 validProtocolFrames++;
-                int messageId = ((manufacturerData[7] & 0xff) << 8)
-                        | (manufacturerData[2] & 0xff);
+                int messageId = ((manufacturerData[3] & 0xff) << 24)
+                        | ((manufacturerData[4] & 0xff) << 16)
+                        | ((manufacturerData[5] & 0xff) << 8)
+                        | (manufacturerData[6] & 0xff);
                 messageIds.add(messageId);
+                String frameId = SosCodec.toHex(manufacturerData);
+                if ((manufacturerData[3] & 0xff) != ((localSourceId >>> 24) & 0xff)
+                        || (manufacturerData[4] & 0xff) != ((localSourceId >>> 16) & 0xff)
+                        || (manufacturerData[5] & 0xff) != ((localSourceId >>> 8) & 0xff)
+                        || (manufacturerData[6] & 0xff) != (localSourceId & 0xff)) {
+                    if (seenFrames.add(frameId)) relay(manufacturerData);
+                }
             }
             if (Arrays.equals(SOS_GOLDEN, manufacturerData)) {
                 goldenMatches++;
@@ -180,6 +192,7 @@ public final class ProbeService extends Service implements SensorEventListener {
                 .build();
         startForeground(NOTIFICATION_ID, notification);
         startedElapsedMs = SystemClock.elapsedRealtime();
+        localSourceId = localSourceId();
         log("codec_selftest", "golden=" + SOS_GOLDEN_HEX.equals(SosCodec.toHex(SOS_GOLDEN))
                 + ",verify=" + SosCodec.verify(SOS_GOLDEN, DEVICE_KEY));
         logCapabilities();
@@ -277,7 +290,7 @@ public final class ProbeService extends Service implements SensorEventListener {
                     .setScannable(false)
                     .build();
             log("advertise_config", "mode=" + advertiseMode + ",interval_units=" + interval);
-            advertiser.startAdvertisingSet(parameters, advertiseData(SOS_GOLDEN),
+            advertiser.startAdvertisingSet(parameters, advertiseData(initialFrame()),
                     null, null, null, advertiseCallback);
         }
 
@@ -299,12 +312,36 @@ public final class ProbeService extends Service implements SensorEventListener {
         }
     }
 
+    /** Relay keeps the end-to-end MAC valid because byte 1 is route metadata. */
+    private void relay(byte[] received) {
+        if (advertisingSet == null || received.length != SosCodec.SIZE) return;
+        int route = received[1] & 0xff;
+        int ttl = (route >>> 4) & 0x0f;
+        int hop = route & 0x0f;
+        if (ttl == 0) return;
+        byte[] forwarded = received.clone();
+        forwarded[1] = (byte) (((ttl - 1) << 4) | Math.min(15, hop == 15 ? 0 : hop + 1));
+        try { advertisingSet.setAdvertisingData(advertiseData(forwarded)); }
+        catch (Exception error) { log("relay", "ok=false,error=" + error.getClass().getSimpleName()); }
+    }
+
+    private long localSourceId() {
+        String id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        if (id == null) return 0x89abcdefL;
+        return ((long) id.hashCode()) & 0xffff_ffffL;
+    }
+
     private static AdvertiseData advertiseData(byte[] frame) {
         return new AdvertiseData.Builder()
                 .setIncludeDeviceName(false)
                 .setIncludeTxPowerLevel(false)
                 .addManufacturerData(COMPANY_ID_LAB, frame)
                 .build();
+    }
+
+    private byte[] initialFrame() {
+        return SosCodec.packSos(localSourceId, 12345, 21.028511, 105.804817,
+                1, 2, 3, 11, 3, 0, 7, 15, 42, DEVICE_KEY);
     }
 
     private void startSensorProbe() {

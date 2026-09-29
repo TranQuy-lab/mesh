@@ -1,6 +1,6 @@
 # AIforlife — RescueMesh-AI
 
-Bộ tài liệu kế hoạch cho đề tài **RescueMesh-AI**: mạng BLE mesh ngoại tuyến có phát hiện té ngã/bất động trên thiết bị và định tuyến gradient, phục vụ cứu hộ thảm họa.
+Bộ tài liệu kế hoạch cho đề tài **RescueMesh-AI**: mạng liên lạc cứu hộ BLE ngoại tuyến cho vùng bão lũ mất sóng, có managed flooding/gradient/store-carry-forward và AI hỗ trợ tạo SOS khi người dùng không thể thao tác.
 
 ## Đọc theo thứ tự
 
@@ -21,12 +21,13 @@ Bộ tài liệu kế hoạch cho đề tài **RescueMesh-AI**: mạng BLE mesh 
 |---|---|
 | [rescuemesh/packets.py](rescuemesh/packets.py) | Codec v1 cho BLE legacy advertising: SOS 24 B, ID 32 bit, HMAC 64 bit, ACK token 32 bit |
 | [rescuemesh/test_packets.py](rescuemesh/test_packets.py) | 15 test codec (golden vectors, round-trip, HMAC/tamper, biên 24 B, fuzz 500 mẫu) |
-| [rescuemesh/sim.py](rescuemesh/sim.py) | Simulator rời rạc tối thiểu cho flood/Trickle/gradient; hiện chỉ là `SIM-SMOKE` chưa hiệu chuẩn |
+| [rescuemesh/sim.py](rescuemesh/sim.py) | Simulator rời rạc tối thiểu cho flood/Trickle/gradient; hiện chỉ là `SIM-SMOKE` chưa hiệu chuẩn, chưa mô phỏng collision hoặc tải nhiều SOS |
 | [rescuemesh/test_sim.py](rescuemesh/test_sim.py) | 5 kiểm soát âm/tái lập cho simulator |
 | [rescuemesh/generate_g0_schedule.py](rescuemesh/generate_g0_schedule.py) | Sinh lịch factorial G0-S có block và random hóa |
 | [rescuemesh/test_g0_schedule.py](rescuemesh/test_g0_schedule.py) | 4 kiểm thử cân bằng, full factorial và tái lập lịch G0-S |
 | [results/sim-smoke.csv](results/sim-smoke.csv) | 270 lượt smoke test, không dùng để kết luận hiệu năng thực |
-| [android-g0/](android-g0/) | APK đầu dò Android: phát golden SOS, quét BLE và đo accelerometer |
+| [android-g0/](android-g0/) | APK nút mạng Android: phát SOS, quét BLE và chuyển tiếp gói mới |
+| [station_receiver.py](station_receiver.py) | Trạm thu trên laptop: nhận BLE, kiểm tra HMAC, chống trùng và lưu SOS |
 | [android-g0/src/org/rescuemesh/g0/SosCodec.java](android-g0/src/org/rescuemesh/g0/SosCodec.java) | Codec SOS Java đối chiếu byte-for-byte với golden vector Python |
 | [ket-qua-ra-soat-va-nghien-cuu-ban-dau.md](ket-qua-ra-soat-va-nghien-cuu-ban-dau.md) | Phán quyết thiết kế, SIM-SMOKE và kết quả G0 trên Pixel 6 Pro |
 | [nghien-cuu-ble-mesh-va-ke-hoach-g0.md](nghien-cuu-ble-mesh-va-ke-hoach-g0.md) | Bằng chứng BLE/DTN trên smartphone và factorial screening G0-S |
@@ -53,4 +54,13 @@ cd rescuemesh && python3 packets.py
 - Cổng **G1 (codec)**: Python 15/15 và Java 4/4 test xanh; Pixel/API 36 tự kiểm tra `golden=true, verify=true`. Kotlin chỉ còn là lựa chọn ngôn ngữ ứng dụng, không còn là blocker interoperability JVM.
 - Cổng **G0 (BLE advertising)**: đạt một phần trên Pixel 6 Pro — controller giữ legacy advertising khi tắt màn hình và filtered scan nhận đúng 24 byte từ laptop; còn thiếu xác nhận chiều Pixel → máy thu, đa model và đo pin khi rút USB.
 - **Khảo sát tài liệu**: đã xong cho phần phát hiện ngã (bằng chứng mạnh); phần BLE mesh/DTN cho thảm họa **chưa xác minh được số liệu** → phải tự đo, không được trích (xem tài liệu số 3, §4.4).
+
+## Chạy bản trình diễn với hai điện thoại và laptop
+
+1. Trên laptop cài thư viện Bluetooth một lần: `python3 -m pip install -r station-requirements.txt`.
+2. Cắm hoặc bật Bluetooth trên laptop rồi chạy `./run_station.sh`. Cửa sổ này là trạm; SOS hợp lệ được in ra và lưu vào `results/station-events.jsonl`.
+3. Cài file [rescuemesh-g0.apk](android-g0/build/rescuemesh-g0.apk) lên từng điện thoại, mở ứng dụng và cấp các quyền Bluetooth/thông báo.
+4. Nhấn **Bật nút mạng** trên cả hai máy. Một máy phát SOS, cả hai máy đều quét; gói mới được chuyển tiếp với số bước tăng lên và thời gian sống giảm đi.
+
+Bản hiện tại dùng khóa thử nghiệm có sẵn trong mã để trình diễn trong phòng lab. Khi chuyển sang triển khai thật, thay khóa bằng khóa riêng của mạng cứu hộ.
 - WP2–WP5: chưa bắt đầu. Mọi con số trong tài liệu hiện là **phân tích thiết kế**, chưa phải kết quả thực nghiệm.
