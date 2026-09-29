@@ -1,0 +1,16 @@
+# Kiểm tra hai điện thoại — Pixel 6 Pro và Redmi Note 14 Pro
+
+- Pixel 6 Pro: phát SOS, quét BLE; `advertising=true`.
+- Redmi Note 14 Pro: cài cùng APK, Bluetooth bật, quét BLE.
+- Redmi ghi nhận sau khoảng 10 giây: `scan_callbacks=26`, `valid_frames=26`,
+  `unique_messages=1`, `unique_devices=1`.
+- Sau khoảng 80 giây: `valid_frames=30`, vẫn chỉ 1 SOS duy nhất do cơ chế chống
+  trùng hoạt động.
+- Codec trên Redmi: `golden=true, verify=true`.
+- Redmi không phát lại được trong phiên này: Android trả
+  `advertise_start,ok=false,error=2` (firmware đã hết slot quảng cáo).
+
+## Kết luận
+
+Đường **Pixel → Redmi qua BLE** đã được xác nhận. Laptop vẫn chưa nhận BLE;
+vấn đề laptop độc lập với codec và đường truyền giữa hai điện thoại.

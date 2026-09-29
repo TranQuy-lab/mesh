@@ -107,7 +107,8 @@ public final class ProbeService extends Service implements SensorEventListener {
             log("advertise_start", "ok=true,legacy=true,api=legacy,tx_mode="
                     + settingsInEffect.getTxPowerLevel() + ",connectable=false,payload_bytes="
                     + initialFrame().length + ",messages_issued=" + messagesIssued);
-            handler.postDelayed(rotateMessage, 1_000L);
+            // The legacy Android API cannot update data in-place. Keeping the
+            // frame running avoids a restart storm on Xiaomi/MIUI controllers.
         }
 
         @Override public void onStartFailure(int errorCode) {
@@ -300,19 +301,21 @@ public final class ProbeService extends Service implements SensorEventListener {
         if (advertiser == null) {
             log("advertise_start", "ok=false,error=advertiser_null");
         } else {
-            int mode = "balanced".equals(advertiseMode)
-                    ? AdvertiseSettings.ADVERTISE_MODE_BALANCED
-                    : AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY;
-            AdvertiseSettings settings = new AdvertiseSettings.Builder()
-                    .setAdvertiseMode(mode)
-                    .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+            int interval = "balanced".equals(advertiseMode)
+                    ? AdvertisingSetParameters.INTERVAL_MEDIUM
+                    : AdvertisingSetParameters.INTERVAL_LOW;
+            AdvertisingSetParameters settings = new AdvertisingSetParameters.Builder()
+                    .setLegacyMode(true)
+                    .setInterval(interval)
+                    .setTxPowerLevel(AdvertisingSetParameters.TX_POWER_HIGH)
                     .setConnectable(false)
-                    .setTimeout(0)
+                    .setScannable(true)
                     .build();
-            log("advertise_config", "mode=" + advertiseMode + ",api=legacy,connectable=false");
+            log("advertise_config", "mode=" + advertiseMode + ",api=advertising_set,connectable=false");
             try {
-                legacyAdvertising = true;
-                advertiser.startAdvertising(settings, advertiseData(initialFrame()), legacyAdvertiseCallback);
+                legacyAdvertising = false;
+                advertiser.startAdvertisingSet(settings, advertiseData(initialFrame()),
+                        null, null, null, advertiseCallback);
             } catch (IllegalArgumentException error) {
                 legacyAdvertising = false;
                 log("advertise_start", "ok=false,error=callback_busy");
@@ -331,13 +334,17 @@ public final class ProbeService extends Service implements SensorEventListener {
                     .setManufacturerData(COMPANY_ID_LAB,
                             new byte[] {0x40}, new byte[] {(byte) 0xc0})
                     .build());
-            try {
-                scanner.startScan(filters, settings, scanCallback);
-                scanningStarted = true;
-                log("scan_start", "ok=true,mode=" + scanMode + ",filtered=true");
-            } catch (IllegalArgumentException error) {
-                log("scan_start", "ok=false,error=callback_busy");
-            }
+            // Some Xiaomi controllers reject a simultaneous advertise+scan
+            // request if scan is opened before the advertiser callback returns.
+            handler.postDelayed(() -> {
+                try {
+                    scanner.startScan(filters, settings, scanCallback);
+                    scanningStarted = true;
+                    log("scan_start", "ok=true,mode=" + scanMode + ",filtered=true");
+                } catch (IllegalArgumentException error) {
+                    log("scan_start", "ok=false,error=callback_busy");
+                }
+            }, 1_200L);
         }
     }
 
