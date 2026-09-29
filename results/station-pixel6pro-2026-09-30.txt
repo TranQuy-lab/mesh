@@ -1,0 +1,10 @@
+# Kiểm tra trạm laptop — Pixel 6 Pro
+
+- Ngày: 2026-09-30
+- Trạm: laptop noble-tran-XiaoXin-14-AHP9, Bluetooth C0:35:32:40:77:30
+- Điện thoại: Google Pixel 6 Pro, USB/ADB `1A051FDEE00AGX`
+- Trạng thái laptop: Bluetooth đã bật, Bleak 3.0.2, bộ thu chạy bình thường
+- Trạng thái điện thoại: app RescueMesh chạy foreground, `advertising=true`, `scanning=true`
+- Thời gian nghe: khoảng 30 giây
+- Kết quả: **chưa nhận được SOS**; không thấy quảng cáo manufacturer `0xFFFF` từ Pixel trên laptop
+- Diễn giải: chưa thể kết luận codec sai. Đây là phép thử đầu tiên của chiều Pixel → laptop; cần thử thêm với USB Bluetooth khác/điện thoại thứ hai và kiểm tra driver BlueZ.
