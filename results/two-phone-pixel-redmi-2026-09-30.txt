@@ -14,3 +14,12 @@
 
 Đường **Pixel → Redmi qua BLE** đã được xác nhận. Laptop vẫn chưa nhận BLE;
 vấn đề laptop độc lập với codec và đường truyền giữa hai điện thoại.
+
+## Kiểm tra lại sau khi dọn advertising slot
+
+- Đã gỡ/cài sạch APK và khởi động lại Redmi để xóa instance cũ.
+- Redmi chạy lại với đúng **1 advertising instance**.
+- Log Redmi: `advertising=true`, `scanning=true`, `valid_frames=29`,
+  `unique_messages=2`, `unique_devices=1`.
+- Kết luận: lỗi hết slot đã được sửa ở cấp ứng dụng; nguyên nhân trước đó là
+  instance cũ bị tạo lặp khi mở app nhiều lần.
