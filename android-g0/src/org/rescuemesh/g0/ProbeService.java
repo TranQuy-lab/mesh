@@ -8,6 +8,8 @@ import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.AdvertiseData;
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseSettings;
 import android.bluetooth.le.AdvertisingSet;
 import android.bluetooth.le.AdvertisingSetCallback;
 import android.bluetooth.le.AdvertisingSetParameters;
@@ -66,6 +68,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private boolean advertisingStarted;
     private boolean scanningStarted;
     private long localSourceId = 0x89abcdefL;
+    private boolean legacyAdvertising;
 
     private BluetoothLeAdvertiser advertiser;
     private AdvertisingSet advertisingSet;
@@ -97,14 +100,29 @@ public final class ProbeService extends Service implements SensorEventListener {
         }
     };
 
+    private final AdvertiseCallback legacyAdvertiseCallback = new AdvertiseCallback() {
+        @Override public void onStartSuccess(AdvertiseSettings settingsInEffect) {
+            advertisingStarted = true;
+            messagesIssued = 1;
+            log("advertise_start", "ok=true,legacy=true,api=legacy,tx_mode="
+                    + settingsInEffect.getTxPowerLevel() + ",connectable=false,payload_bytes="
+                    + initialFrame().length + ",messages_issued=" + messagesIssued);
+            handler.postDelayed(rotateMessage, 1_000L);
+        }
+
+        @Override public void onStartFailure(int errorCode) {
+            advertisingStarted = false;
+            log("advertise_start", "ok=false,api=legacy,error=" + errorCode);
+        }
+    };
+
     private final Runnable rotateMessage = new Runnable() {
         @Override public void run() {
-            if (advertisingSet == null) return;
             int seq = (42 + (int) messagesIssued) & 0xff;
             long minute = 12345 + messagesIssued / 60;
             byte[] frame = SosCodec.packSos(localSourceId, minute, 21.028511, 105.804817,
                     1, 2, 3, 11, 3, 0, 7, 15, seq, DEVICE_KEY);
-            advertisingSet.setAdvertisingData(advertiseData(frame));
+            setAdvertisingFrame(frame);
             messagesIssued++;
             handler.postDelayed(this, 1_000L);
         }
@@ -210,7 +228,9 @@ public final class ProbeService extends Service implements SensorEventListener {
 
     @Override public void onDestroy() {
         handler.removeCallbacksAndMessages(null);
-        if (advertiser != null && advertisingSet != null) {
+        if (advertiser != null && legacyAdvertising) {
+            try { advertiser.stopAdvertising(legacyAdvertiseCallback); } catch (Exception ignored) {}
+        } else if (advertiser != null && advertisingSet != null) {
             try { advertiser.stopAdvertisingSet(advertiseCallback); } catch (Exception ignored) {}
         }
         if (scanner != null) {
@@ -280,24 +300,21 @@ public final class ProbeService extends Service implements SensorEventListener {
         if (advertiser == null) {
             log("advertise_start", "ok=false,error=advertiser_null");
         } else {
-            int interval = "balanced".equals(advertiseMode)
-                    ? AdvertisingSetParameters.INTERVAL_MEDIUM
-                    : AdvertisingSetParameters.INTERVAL_LOW;
-            AdvertisingSetParameters parameters = new AdvertisingSetParameters.Builder()
-                    .setLegacyMode(true)
-                    .setInterval(interval)
-                    .setTxPowerLevel(AdvertisingSetParameters.TX_POWER_HIGH)
+            int mode = "balanced".equals(advertiseMode)
+                    ? AdvertiseSettings.ADVERTISE_MODE_BALANCED
+                    : AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY;
+            AdvertiseSettings settings = new AdvertiseSettings.Builder()
+                    .setAdvertiseMode(mode)
+                    .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
                     .setConnectable(false)
-                    // A scannable legacy packet is received more consistently by
-                    // BlueZ laptop adapters while the SOS payload remains in the
-                    // primary advertisement; no GATT connection is required.
-                    .setScannable(true)
+                    .setTimeout(0)
                     .build();
-            log("advertise_config", "mode=" + advertiseMode + ",interval_units=" + interval);
+            log("advertise_config", "mode=" + advertiseMode + ",api=legacy,connectable=false");
             try {
-                advertiser.startAdvertisingSet(parameters, advertiseData(initialFrame()),
-                        null, null, null, advertiseCallback);
+                legacyAdvertising = true;
+                advertiser.startAdvertising(settings, advertiseData(initialFrame()), legacyAdvertiseCallback);
             } catch (IllegalArgumentException error) {
+                legacyAdvertising = false;
                 log("advertise_start", "ok=false,error=callback_busy");
             }
         }
@@ -326,15 +343,28 @@ public final class ProbeService extends Service implements SensorEventListener {
 
     /** Relay keeps the end-to-end MAC valid because byte 1 is route metadata. */
     private void relay(byte[] received) {
-        if (advertisingSet == null || received.length != SosCodec.SIZE) return;
+        if (!advertisingStarted || received.length != SosCodec.SIZE) return;
         int route = received[1] & 0xff;
         int ttl = (route >>> 4) & 0x0f;
         int hop = route & 0x0f;
         if (ttl == 0) return;
         byte[] forwarded = received.clone();
         forwarded[1] = (byte) (((ttl - 1) << 4) | Math.min(15, hop == 15 ? 0 : hop + 1));
-        try { advertisingSet.setAdvertisingData(advertiseData(forwarded)); }
+        try { setAdvertisingFrame(forwarded); }
         catch (Exception error) { log("relay", "ok=false,error=" + error.getClass().getSimpleName()); }
+    }
+
+    private void setAdvertisingFrame(byte[] frame) {
+        if (legacyAdvertising) {
+            advertiser.stopAdvertising(legacyAdvertiseCallback);
+            AdvertiseSettings settings = new AdvertiseSettings.Builder()
+                    .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
+                    .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+                    .setConnectable(false).setTimeout(0).build();
+            advertiser.startAdvertising(settings, advertiseData(frame), legacyAdvertiseCallback);
+        } else if (advertisingSet != null) {
+            advertisingSet.setAdvertisingData(advertiseData(frame));
+        }
     }
 
     private long localSourceId() {

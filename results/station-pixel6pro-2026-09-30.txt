@@ -15,3 +15,4 @@
 - Đã thử tạm quảng cáo legacy **connectable**: không nhận.
 - Quét BLE tổng quát bằng Bleak và `bluetoothctl scan le`: đều không thấy thiết bị.
 - Kết luận cập nhật: lỗi xảy ra trước lớp lọc `0xFFFF` và trước lớp giải mã SOS; ưu tiên kiểm tra adapter/driver hoặc thay USB Bluetooth.
+- Đã thử thêm Android `BluetoothLeAdvertiser.startAdvertising` (API legacy, không kết nối): Pixel báo phát thành công nhưng laptop vẫn nhận 0 quảng cáo trong 20 giây.
