@@ -7,16 +7,16 @@
 > SOS v1 dài 24 byte với ID 32 bit và HMAC 64 bit. Kế hoạch thí nghiệm và các RQ
 > vẫn có hiệu lực, nhưng mọi con số gói 20/21 byte bên dưới chỉ còn giá trị lịch sử.
 
-**Tên làm việc:** RescueMesh-AI — Mạng BLE mesh ngoại tuyến có phát hiện té ngã/bất động trên thiết bị và định tuyến theo gradient cho cứu hộ thảm họa
+**Tên làm việc:** RescueMesh-AI — Mạng liên lạc cứu hộ BLE ngoại tuyến cho vùng bão lũ mất sóng, có AI hỗ trợ tạo SOS khi người dùng không thể thao tác
 **Tài liệu liên quan:** [Cấu trúc đề tài](cau-truc-de-tai-rescuemesh-ai.md) · [Xác minh nguồn & tài liệu tham khảo](xac-minh-nguon-va-tai-lieu-tham-khao.md)
-**Ngày lập:** 2026-09-28 · **Trạng thái:** bản nháp 1, chưa chạy thí nghiệm nào
+**Ngày lập:** 2026-09-28 · **Cập nhật:** 2026-09-29 · **Trạng thái:** v1.0 đã có codec và G0 sơ bộ; mesh nhiều hop, collision và tải nhiều SOS còn phải đo
 
 ---
 
 ## 0. Kết luận ngắn gọn
 
-1. **Định vị phải đổi.** "App BLE mesh + AI cứu hộ" đã có nhiều dự án công khai và phần lớn là bản demo hackathon. Đóng góp bảo vệ được không nằm ở ý tưởng, mà ở **vòng lặp khép kín có số đo**: sự kiện ngã → gói SOS ≤ 20 byte → định tuyến → trạm dựng lại bản đồ, kèm **ngân sách độ trễ, tỉ lệ báo động giả và chi phí pin được đo**, và kèm **các kết quả phủ định có giá trị thiết kế**.
-2. **Hướng đã chốt:** giữ *Hướng 1* (AI cảm biến, tự động SOS), bỏ nén dữ liệu bằng ML, bỏ AI định tuyến. Đây là kết luận đúng và nên đóng băng thành phi mục tiêu có văn bản.
+1. **Định vị phải đổi.** Đóng góp trung tâm là **vòng lặp cứu hộ trong bão lũ mất sóng**: người dân tạo SOS → điện thoại chuyển tiếp → trạm xác nhận; AI cảm biến chỉ là phương án phụ khi người dùng không thể thao tác.
+2. **Hướng đã chốt:** ưu tiên managed flooding có kiểm soát, gradient theo trạm và store-carry-forward; không dùng AI định tuyến. Phần phát hiện ngã/bất động là work package phụ, chạy sau khi đường SOS cốt lõi được kiểm chứng.
 3. **Ba lỗi thiết kế trong bản nháp gói tin phải sửa trước khi code** (đã kiểm tra số học, §8): SOS 21 byte vượt payload 20 byte của ATT MTU mặc định; ACK định danh nạn nhân bằng `srcID_low16` (16 bit) sụp đổ khi n ≥ 1000 nút; và cơ chế khóa riêng "cấp khi còn mạng" mâu thuẫn với mục tiêu offline hoàn toàn — cả ba đều là **đóng góp thiết kế** nếu xử lý và đo tử tế.
 4. **Trình tự đúng:** khóa phạm vi và sổ bằng chứng trước → codec + simulator chạy được (WP1) → mô hình phát hiện ngã (WP2) → thí nghiệm mesh có hiệu chuẩn với đo thực (WP3) → tích hợp và đo đầu-cuối (WP4) → viết (WP5). Không viết bài trước khi có cổng G2 và G3.
 5. **Điểm chết về phương pháp luận phải tránh:** chia tập theo cửa sổ ngẫu nhiên (rò rỉ dữ liệu cùng người), tuyên bố "gradient tốt hơn flooding" chỉ từ mô phỏng chưa hiệu chuẩn, và coi kết quả mô phỏng là kết quả thực địa.
@@ -29,14 +29,14 @@ Phân loại theo khung hypothesis-generation: mỗi mục ghi rõ **loại tuy�
 
 | # | Đóng góp dự kiến | Loại tuyên bố | Bằng chứng tối thiểu để được nói |
 |---|---|---|---|
-| C1 | Đường ống 3 tầng (ngưỡng → ML → luật xác nhận) đạt recall cao ở ngân sách báo động giả đặt trước, trên dữ liệu IMU công khai, chia tập theo người, có kiểm tra chuyển miền **và một lần chạy trên ngã thực** | Dự đoán (predictive) | Bảng recall/F1 và FP/giờ trên SisFall / MobiFall / UP-Fall (staged) **và** FARSEEING (thực); LOSO; ≥ 5 seed; CI bootstrap |
-| C2 | Chi phí thật của tầng ML so với chỉ dùng ngưỡng + luật bất động (ablation) | So sánh | Cùng tập test, cùng ngân sách FAR; kiểm định ghép cặp theo người |
-| C3 | Định tuyến gradient (kiểu RPL/Trickle) so với flooding có kiểm soát: tỉ lệ giao, độ trễ, số lần phát trên mỗi gói tới trạm, và thời gian tái hội tụ sau khi trạm sập | So sánh (mô phỏng) | Simulator đã hiệu chuẩn theo PDR BLE đo thực; ≥ 30 seed; bảng theo mật độ/độ động |
+| C1 (phụ) | Đường ống 3 tầng (ngưỡng → ML → luật xác nhận) có thể hỗ trợ tạo SOS khi người dùng không thể thao tác hay không | Dự đoán (predictive) | Bảng recall/FAR trên dữ liệu IMU công khai, chia tập theo người; không dùng để thay thế đánh giá mạng |
+| C2 (phụ) | Chi phí thật của tầng ML so với chỉ dùng ngưỡng + luật bất động | So sánh | Cùng tập test, cùng ngân sách FAR; chỉ báo cáo như tính năng hỗ trợ |
+| C3 | Managed flooding có kiểm soát + gradient theo trạm + store-carry-forward so với flooding/Trickle: tỉ lệ giao, độ trễ, số lần phát, fairness giữa nhiều SOS và thời gian tái hội tụ sau khi trạm sập | So sánh (mô phỏng + đo nhỏ) | Simulator đã hiệu chuẩn theo PDR/collision BLE đo thực; ≥ 30 seed; tải 1/5/20/50/100 SOS; bảng theo mật độ/độ động |
 | C4 | Ngân sách bit của gói SOS ≤ 20 byte: đánh đổi giữa độ phân giải vị trí, kích thước ID, MAC cắt ngắn và khả năng xác thực | Mô tả/đo lường | Bảng ngân sách bit + Monte Carlo đụng độ ID + thí nghiệm MTU trên máy thật |
 | C5 | Giao thức ACK gắn trong beacon có chấm dứt được phát lại ở quy mô thực tế hay không (kết quả có thể phủ định) | Đo lường | Phân bố số lần phát lại theo n; phân tích không gian khóa ACK 16 bit |
-| C6 | Ngân sách độ trễ đầu-cuối (sự kiện ngã → SOS hiện trên bản đồ trạm), tách theo từng chặng | Đo lường | Nhật ký có mốc thời gian; P50/P95; tách độ trễ xác nhận, mã hóa, hàng đợi, truyền, xử lý trạm |
+| C6 | Ngân sách độ trễ đầu-cuối (người dân tạo SOS hoặc AI kích hoạt → SOS hiện trên bản đồ trạm), tách theo từng chặng | Đo lường | Nhật ký có mốc thời gian; P50/P95; tách độ trễ xác nhận, mã hóa, hàng đợi, truyền, xử lý trạm |
 
-**Câu định vị một dòng (dùng cho phần mở đầu):** *các hệ thống hiện có chứng minh rằng chat BLE mesh ngoại tuyến chạy được; câu hỏi còn bỏ ngỏ là một SOS tự động do cảm biến kích hoạt có tới được trạm một cách đáng tin, trong bao lâu, với bao nhiêu báo động giả và tốn bao nhiêu pin.*
+**Câu định vị một dòng (dùng cho phần mở đầu):** *khi bão lũ làm mất Internet và sóng di động, RescueMesh-AI nghiên cứu cách đưa SOS của người dân tới trạm cứu hộ qua các điện thoại ở gần, với relay có kiểm soát, lưu-chuyển-tiếp và đo được PDR, độ trễ, công bằng hàng đợi và pin; AI chỉ là lớp hỗ trợ khi người dùng không thể bấm SOS.*
 
 ---
 
@@ -68,7 +68,7 @@ Từ khảo sát ở tài liệu kèm theo, bốn khoảng trống mà dự án 
 - **G1 — Thiếu vòng lặp khép kín có đo, và thiếu hẳn SOS tự động.** Kết quả xác minh 11 dự án so sánh được (bitchat, bitchat-android, Meshtastic, MeshCore, Briar, Serval, qaul.net, Sideband/Reticulum, Bridgefy, disaster.radio, ATAK-CIV — xem [Xác minh nguồn](xac-minh-nguon-va-tai-lieu-tham-khao.md) §2.2) cho thấy **không dự án nào phát SOS tự động do cảm biến kích hoạt**; tất cả đều cần người dùng còn tỉnh để thao tác. Các dự án có AI dừng ở "phân loại ưu tiên trong app", và ít nhất hai dự án được nêu trong hội thoại thực chất chỉ **mô phỏng** mesh. Chưa nơi nào công bố ngân sách độ trễ đầu-cuối của một SOS do cảm biến kích hoạt.
 - **G2 — Thiếu đánh giá phát hiện ngã theo chuẩn, và khoảng cách staged ↔ thực đời rất lớn.** Bằng chứng đã kiểm: **không tồn tại meta-analysis kiểu PRISMA** gộp sensitivity/specificity/F1 cho phát hiện ngã bằng IMU; các bản demo dùng ngưỡng đơn giản và báo "chính xác cao" mà không nói chia tập theo người, không nói báo động giả/giờ. Quan trọng hơn: khi chuyển từ ngã staged sang **ngã thực**, sensitivity tụt còn **57,0 %** (Bagalà 2012, 29 ca thực) và báo động giả lên tới **3–85 ca/ngày**; ngay cả mô hình sâu tốt nhất cũng chỉ đạt **~8 báo động giả/ngày trên 7 ngày thực địa** (Villa & Casilari 2025). Đây là chỗ tầng xác nhận của đề tài có đất đóng góp. Chi tiết: [Xác minh nguồn](xac-minh-nguon-va-tai-lieu-tham-khao.md) §4.1.
 - **G3 — Định tuyến được khẳng định, không được đo.** Trong phạm vi tìm kiếm đã ghi lại **không tìm thấy nguồn nào so sánh flooding với gradient/tree trong mạng không dây công suất thấp có kèm cả tỉ lệ giao và năng lượng**, cũng **không có nghiên cứu đo BLE mesh trên điện thoại thật** công bố PDR/độ trễ/năng lượng theo số nút và độ di động (hai khoảng trống #3 và #4 ở tài liệu xác minh §4.7). Đây là khoảng trống thật, không phải kết quả phủ định.
-- **G4 — Ngân sách bit và an ninh dưới ràng buộc MTU BLE.** Các thiết kế gói thường bỏ qua mức 20 byte payload mặc định và bỏ qua hệ quả của ID ngắn tới cơ chế ACK.
+- **G4 — Ngân sách bit và an ninh dưới ràng buộc BLE legacy advertising.** Thiết kế v1.0 dùng ngân sách ứng dụng bảo thủ 24 byte, giữ ID 32 bit và HMAC 64 bit; không dùng ATT/GATT MTU cho đường SOS.
 
 Giới hạn của tuyên bố "khoảng trống": đây là "không tìm thấy trong phạm vi tìm kiếm đã ghi lại", **không** phải "chưa từng có ai làm". Sổ tìm kiếm (ngày, CSDL, truy vấn) là một phần của tài liệu kèm theo.
 
@@ -82,7 +82,7 @@ Giới hạn của tuyên bố "khoảng trống": đây là "không tìm thấy
 |---|---|---|
 | **RQ1** | Với dữ liệu IMU công khai, đường ống 3 tầng đạt recall bao nhiêu ở một ngân sách báo động giả đặt trước, khi chia tập theo người và khi chuyển sang kho dữ liệu khác? | Dự đoán |
 | **RQ2** | Trong điều kiện thảm họa (mất gói, di động, mật độ thay đổi, trạm sập), định tuyến gradient cải thiện tỉ lệ giao và chi phí phát so với flooding có kiểm soát ở mức nào, và đến mật độ nào thì khác biệt biến mất? | So sánh |
-| **RQ3** | Một gói SOS có xác thực trong ≤ 20 byte mang được những trường nào, và mỗi lựa chọn ngân sách bit gây mất mát gì về độ chính xác vị trí, khả năng xác thực và quyền riêng tư? | Mô tả + đo |
+| **RQ3** | Một gói SOS có xác thực trong ≤ 24 byte mang được những trường nào, và mỗi lựa chọn ngân sách bit gây mất mát gì về độ chính xác vị trí, khả năng xác thực và quyền riêng tư? | Mô tả + đo |
 | **RQ4** | Độ trễ đầu-cuối từ lúc va đập đến lúc SOS hiện trên bản đồ trạm là bao nhiêu và phân bố ra sao; ACK gắn trong beacon có chấm dứt được phát lại ở quy mô thực tế không? | Đo |
 
 ### 4.2 Giả thuyết, đối thủ cạnh tranh và dự đoán phân biệt
@@ -135,7 +135,7 @@ flowchart LR
     A["Cảm biến IMU<br/>luôn bật"] --> B["T1 Ngưỡng<br/>rơi tự do / va đập"]
     B --> C["T2 ML<br/>RF hoặc 1D-CNN int8"]
     C --> D["T3 Luật xác nhận<br/>bất động + đếm ngược 30s"]
-    D --> E["Codec SOS ≤20B"]
+    D --> E["Codec SOS ≤24B"]
   end
   E --> F["Hàng đợi ưu tiên<br/>SOS &gt; ACK/BEACON &gt; HEARTBEAT"]
   F --> G["Định tuyến<br/>gradient hop + store-and-forward"]
@@ -150,7 +150,9 @@ Bốn quyết định kiến trúc kèm lý do và cách kiểm chứng:
 | Quyết định | Lý do | Cách kiểm chứng |
 |---|---|---|
 | Giao thức tùy biến trên BLE (không dùng IP) | BLE mesh không có định tuyến IP sẵn; gói phải tự mô tả | Gói nhỏ nhất có thể; test round-trip và MTU |
-| Gradient theo hop + store-and-forward | Không cần bảng định tuyến đầy đủ; chịu được đứt kết nối | So sánh với flooding ở WP3 |
+| Managed flooding có cache/TTL + relay suppression | Phù hợp BLE broadcast, giảm storm mà vẫn giữ đa đường | So sánh số relay, PDR và fairness ở WP3 |
+| Gradient theo hop kiểu RPL tối giản | Hướng SOS về một trạm, tránh phát ra mọi hướng | So sánh với flooding có kiểm soát ở WP3 |
+| Store-carry-forward kiểu DTN | Giữ tin khi không có đường liên tục hoặc chỉ có node di động | Đo delivery theo thời gian tiếp xúc ở WP3 |
 | ACK gắn trong beacon (không có đường xuống riêng) | Tiết kiệm băng thông và pin | Đo số lần phát lại và tỉ lệ ACK khớp (H4) |
 | Khóa theo từng máy + MAC cắt ngắn | Chữ ký Ed25519 (64 B) lớn gấp 3 lần cả gói | Bảng ngân sách bit + mô hình mối đe dọa (§9.3) |
 
@@ -208,7 +210,7 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 
 ### WP1 — Codec và simulator (tuần 1–3)
 - Viết codec Python (đóng/gói, kiểm thử thuộc tính, fuzz) theo thiết kế đã sửa ở §8; sinh vector test cố định.
-- Viết simulator rời rạc: nút, hàng xóm theo khoảng cách + mô hình PDR, hàng đợi ưu tiên, khử trùng lặp, jitter 10–220 ms, gradient theo hop, store-and-forward, trạm sập theo lịch.
+- Nâng simulator: nút, hàng xóm theo khoảng cách, PDR/collision theo trace BLE, hàng đợi ưu tiên, fairness, cache, jitter, gradient theo hop, relay suppression, store-and-forward, trạm sập theo lịch.
 - **Sản phẩm:** `codec.py`, `sim/`, bộ test, một hình động minh họa lan truyền; tất cả kèm seed.
 
 ### WP2 — Phát hiện ngã 3 tầng (tuần 2–6)
@@ -218,7 +220,8 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 - **Bắt buộc:** chia tập theo người (leave-subject-out) và kiểm tra chuyển miền giữa các kho dữ liệu; lớp ca khó tách riêng.
 
 ### WP3 — Thí nghiệm mesh (tuần 5–9)
-- Ma trận: định tuyến (flooding, flooding có kiểm soát/Trickle, gradient) × mật độ (10/50/200) × độ động (tĩnh, bước đi ngẫu nhiên) × mất gói (theo PDR đo được) × trạng thái trạm (ổn định, sập tại t = T, hai trạm).
+- Ma trận: thuật toán (flooding, Trickle, managed flooding + suppression, gradient + managed flooding, gradient + store-carry-forward) × mật độ (10/50/100/200 nút) × tải (1/5/20/50/100 SOS đồng thời) × độ động (tĩnh, đi bộ, node courier) × mất gói/collision × trạng thái trạm (ổn định, sập, khôi phục, hai trạm).
+- Với tải nhiều SOS, báo thêm: tỷ lệ nguồn được giao, P50/P95/P99 latency, số gói bị drop theo nguyên nhân, số bản sao trên mỗi SOS, Jain fairness giữa nguồn, queue occupancy và thời gian dọn hàng đợi.
 - ≥ 30 seed mỗi ô; so sánh ghép cặp theo seed; báo cáo trung bình ± SD và CI.
 - **Cổng:** nếu chưa hiệu chuẩn được PDR thì **không** được tuyên bố so sánh định tuyến.
 
@@ -255,14 +258,14 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 |---|---|
 | Công cụ | Simulator rời rạc tự viết (networkx cho topology) + đo thực để hiệu chuẩn |
 | Hiệu chuẩn | Mô hình PDR theo khoảng cách khớp số đo WP4 (báo cáo RMSE) |
-| Yếu tố | 3 định tuyến × 3 mật độ × 2 độ động × 3 mức mất gói × 3 trạng thái trạm |
+| Yếu tố | 5 thuật toán × 4 mật độ × 5 mức tải SOS × 3 độ động × 3 mức mất gói/collision × 4 trạng thái trạm |
 | Lặp | ≥ 30 seed/ô; kiểm định Wilcoxon ghép cặp theo seed |
-| Thước đo | PDR, P95 trễ, chi phí phát/gói tới trạm, tỉ lệ trùng lặp, thời gian tái hội tụ |
+| Thước đo | PDR theo nguồn, P50/P95/P99 trễ, chi phí phát/gói tới trạm, tỉ lệ trùng lặp, fairness, queue occupancy, thời gian tái hội tụ |
 | Kiểm soát âm | Kịch bản không có trạm (PDR phải ~0) và kịch bản TTL = 1 (không chuyển tiếp) — xác nhận simulator không "tự giao gói" |
 
 ### 10.3 Phần gói tin/an ninh
 
-Bảng ngân sách bit cho mỗi biến thể: **20 byte** (srcID 24 bit, vừa payload ATT mặc định nhưng trần quy mô ~1.000 nút) và **21 byte** (srcID 32 bit, phải thương lượng MTU, dùng được tới 10.000 nút) — cộng các biến thể nén chỉ khi thực sự cần (bỏ 1 bit dự trữ, nén `state`). Mỗi dòng ghi kèm: độ phân giải vị trí (24 bit offset nhị phân cho vĩ độ 1,19 m / kinh độ 2,39 m — xem §8.3; còn 20 bit cho ~19 m), kích thước MAC (2/3/4 byte), xác suất đụng ID, và **trần số nút** suy ra từ xác suất đó. Đây là bảng "kỹ sư cần" và là một trong những đóng góp dễ được trích dẫn nhất.
+**Ghi chú lịch sử:** bảng 20/21 byte dưới đây là phân tích của bản nháp cũ, giữ lại để truy vết quyết định. Không dùng nó làm thông số v1.0. Bản v1.0 đã chốt SOS 24 byte trên BLE legacy advertising, ID 32 bit và HMAC 64 bit. Nếu cần so sánh biến thể cũ, phải gắn nhãn `HISTORICAL` và không trộn với kết quả v1.0.
 
 ### 10.4 Phân tích thống kê và cỡ mẫu
 
@@ -302,7 +305,7 @@ gantt
 | Cổng | Điều kiện qua cổng | Nếu không qua |
 |---|---|---|
 | **G0 — Khóa phạm vi** | Sổ bằng chứng có ngày; phi mục tiêu đã ghi; mô hình mối đe dọa đã chọn | Chưa code |
-| **G1 — Codec** | Round-trip 100 %; có biến thể ≤ 20 byte; test thuộc tính + fuzz qua | Sửa thiết kế, không đi tiếp |
+| **G1 — Codec** | Round-trip 100 %; khung mặc định ≤ 24 byte; test thuộc tính + fuzz qua | Sửa thiết kế, không đi tiếp |
 | **G2 — Phát hiện** | Recall ≥ mục tiêu ở ngân sách FAR đặt trước, chia LOSO; có kết quả chuyển miền | Thu hẹp về "ngưỡng + luật" và nói rõ, hoặc đổi kho dữ liệu |
 | **G3 — Hiệu chuẩn** | Sai số mô hình PDR so với đo thực trong ngưỡng đã đặt trước | Không tuyên bố so sánh định tuyến |
 | **G4 — Tính hợp lệ của khẳng định** | Mỗi câu khẳng định ánh xạ tới một bảng/hình + run + seed | Không nộp |

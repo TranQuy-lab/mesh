@@ -262,6 +262,24 @@ Các giá trị `Imin`, `Imax`, `k`, beacon interval và jitter là biến thí 
 
 Backoff ban đầu: 5, 10, 20, 40, 60 giây, sau đó 60 giây cho tới ACK hoặc 60 phút. Mỗi “lần phát” trong mô phỏng phải ánh xạ tới số advertising events thật sau hiệu chuẩn G0/WP4; không được giả định một API call bằng một gói on-air.
 
+### 6.4 Rà soát thuật toán và quyết định v1.0
+
+Rà soát tài liệu chuẩn và nghiên cứu về mạng quảng bá cho thấy không có một thuật toán duy nhất giải quyết đồng thời mạng dày có nhiều SOS, mạng thưa mất đường liên tục và mạng có một trạm đích. v1.0 dùng một tổ hợp có vai trò rõ ràng:
+
+1. **Managed flooding có kiểm soát** là lớp truyền cơ sở. Bluetooth Mesh dùng message cache và TTL để ngăn gói lặp vô hạn, đồng thời chỉ cho các relay được chọn phát lại. RescueMesh mượn nguyên lý, không sao chép Bluetooth Mesh Profile: cache là `tag` SOS, TTL nằm trong header, và relay được chọn theo rank/khả năng pin. Xem [Bluetooth Mesh Managed Flooding](https://www.bluetooth.com/mesh-directed-forwarding/) và [Mesh Protocol Specification](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/MshPRT_v1.1/out/en/index-en.html).
+
+2. **Gradient theo trạm** là lớp định hướng. Trạm phát beacon, mỗi nút tính `rank`/hop tới trạm và giữ tối đa hai candidate relay có rank thấp hơn. Đây là phiên bản tối giản lấy cảm hứng từ DODAG/rank của RPL; không triển khai toàn bộ RPL vì BLE advertising-only không có kênh unicast ổn định. Xem [RFC 6550](https://www.rfc-editor.org/info/rfc6550/) và [RFC 6552](https://www.rfc-editor.org/info/rfc6552/).
+
+3. **Trickle** chỉ dùng cho beacon và thông tin điều khiển: mạng ổn định thì giảm phát, topology thay đổi thì tăng phát. Trickle không thay thế hàng đợi SOS vì không có chính sách ưu tiên cứu hộ. Nguồn nền là [RFC 6206](https://datatracker.ietf.org/doc/rfc6206/).
+
+4. **Store-carry-forward** là đường dự phòng khi không có candidate relay. Nút giữ SOS trong hàng đợi và chuyển khi gặp thiết bị mới hoặc khi một thiết bị di động tiến gần trạm. Đây là nguyên lý DTN/Bundle Protocol, xem [RFC 9171](https://www.rfc-editor.org/rfc/rfc9171.html). PRoPHET chỉ là hướng nghiên cứu sau; nó cần lịch sử gặp nhau và trao đổi thông tin giữa các node, không phù hợp làm đường tối thiểu v1.
+
+5. **Chống broadcast storm khi nhiều nguồn cùng phát:** mỗi relay chỉ giữ một candidate chính và một candidate dự phòng; cả hai chờ jitter, relay nghe thấy bản sao cùng `tag` thì hủy lượt phát. Hàng đợi dùng ưu tiên SOS nhưng phải phục vụ lần lượt các nguồn khác nhau để một nguồn không chiếm toàn bộ kênh. Đây là biến thể có hướng của các cơ chế counter/distance-based broadcast, không phải flooding tự do.
+
+**Quyết định v1.0:** không dùng RIP/OLSR/AODV đầy đủ; giữ `gradient + managed flooding + store-carry-forward`, với Trickle cho control plane. Đường phát vẫn là broadcast ở radio layer, nhưng số relay được phép phát lại bị giới hạn ở logic ứng dụng.
+
+**Giới hạn phải ghi rõ:** cơ chế trên chưa chứng minh được 100 SOS đồng thời. Thí nghiệm phải bổ sung tải 1/5/20/50/100 SOS, mô hình collision, radio queue, fairness và tail latency. Không được dùng SIM-SMOKE hiện tại để tuyên bố khả năng chịu tải; simulator hiện chưa có collision, mobility, beacon overhead hoặc pin.
+
 ---
 
 ## 7. Mô hình an ninh

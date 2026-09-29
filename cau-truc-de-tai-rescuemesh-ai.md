@@ -18,17 +18,17 @@ Ba phương án, xếp theo mức độ "bảo vệ được" khi phản biện:
 
 | # | Tên tiếng Việt | Tên tiếng Anh | Nhận xét |
 |---|---|---|---|
-| **A (khuyến nghị)** | Phát hiện té ngã trên thiết bị và định tuyến gradient trong mạng BLE mesh ngoại tuyến phục vụ cứu hộ thảm họa: thiết kế, mô phỏng có hiệu chuẩn và đánh giá đầu-cuối | On-device Fall Detection and Gradient Routing in an Offline BLE Mesh for Disaster Response: Design, Calibrated Simulation, and End-to-End Evaluation | Nêu rõ cả ba trụ cột và cả phương pháp; ít bị hiểu là "làm app" |
+| **A (khuyến nghị)** | RescueMesh-AI: Mạng liên lạc cứu hộ BLE ngoại tuyến cho vùng bão lũ mất sóng — thiết kế, mô phỏng và đánh giá đầu-cuối | RescueMesh-AI: An Offline BLE Emergency Network for Flood and Storm Communication Outages | Đặt bài toán mất sóng và chuyển SOS làm trọng tâm; AI là lớp hỗ trợ |
 | B | RescueMesh-AI: hệ thống SOS tự động qua mạng BLE mesh ngoại tuyến | RescueMesh-AI: Automatic SOS over an Offline BLE Mesh | Ngắn, dễ nhớ, nhưng dễ bị hỏi "mới ở đâu" |
 | C | Ngân sách bit và độ tin cậy của gói SOS tự động trong mạng BLE mesh cứu hộ | Bit Budget and Reliability of Automatic SOS Packets in a Rescue BLE Mesh | Hẹp, an toàn cho bài báo ngắn; bỏ mất phần học máy |
 
-**Phạm vi một câu:** thiết kế và đánh giá một hệ SOS tự động chạy hoàn toàn ngoại tuyến trên điện thoại Android, trong đó cảm biến IMU kích hoạt gói SOS ≤ 20 byte, gói được chuyển tiếp theo gradient về trạm cứu hộ, và mọi khẳng định về độ tin cậy, độ trễ, báo động giả và chi phí pin đều có số đo hoặc mô phỏng đã hiệu chuẩn.
+**Phạm vi một câu:** thiết kế và đánh giá một hệ SOS chạy hoàn toàn ngoại tuyến trên điện thoại Android cho vùng bão lũ mất sóng, trong đó người dân chủ động tạo SOS, các điện thoại chuyển tiếp có kiểm soát về trạm, và AI chỉ hỗ trợ tạo SOS khi người dùng không thể thao tác.
 
 ---
 
 ## 2. Tóm tắt định vị (bản nháp 200 từ, viết lại sau khi có kết quả)
 
-> Sau thảm họa, hạ tầng viễn thông thường mất trước khi công tác cứu hộ bắt đầu. Các hệ thống BLE mesh ngoại tuyến hiện có đã chứng minh rằng tin nhắn văn bản có thể đi qua nhiều chặng mà không cần Internet, nhưng chúng dựa vào việc nạn nhân còn tỉnh và còn thao tác được, và phần lớn chỉ mô tả cơ chế định tuyến mà không đo chi phí. Báo cáo này trình bày một đường ống ba tầng chạy trên thiết bị — ngưỡng cảm biến, bộ phân loại học máy nhỏ, và luật xác nhận có đếm ngược — để tự động sinh gói SOS ngắn, cùng một giao thức gói 17–21 byte được thiết kế theo ràng buộc MTU của BLE và một cơ chế ACK gắn trong beacon. Chúng tôi đánh giá phần phát hiện trên các kho dữ liệu IMU công khai với chia tập theo người và kiểm tra chuyển miền, và đánh giá định tuyến gradient so với flooding có kiểm soát bằng mô phỏng rời rạc đã hiệu chuẩn theo phép đo PDR thực trên điện thoại. Kết quả cho thấy [điền], và chúng tôi báo cáo một giới hạn thiết kế có thể chứng minh: khóa ACK 16 bit mất khả năng định danh nạn nhân ở quy mô hàng nghìn nút.
+> Sau bão lũ, hạ tầng viễn thông có thể mất hoặc quá tải trong lúc người dân cần gửi vị trí và nhu cầu cứu hộ. Báo cáo này trình bày một đường liên lạc BLE ngoại tuyến: người dân tạo SOS 24 byte, điện thoại xung quanh chuyển tiếp theo hướng về trạm, và node di động có thể lưu rồi mang tin ra khỏi vùng cô lập. Thiết kế kết hợp managed flooding có kiểm soát, gradient theo trạm, cơ chế chống bản tin trùng và store-carry-forward. Chúng tôi đánh giá PDR, độ trễ, số lần phát, công bằng hàng đợi, pin và khả năng chịu nhiều SOS đồng thời trên mô phỏng được hiệu chuẩn bằng đo điện thoại. AI phát hiện ngã/bất động là tính năng hỗ trợ phụ cho trường hợp người dùng không thể bấm SOS; nó không phải đường chính của hệ thống.
 
 ---
 
@@ -36,21 +36,21 @@ Ba phương án, xếp theo mức độ "bảo vệ được" khi phản biện:
 
 ```mermaid
 flowchart TB
-  R["RescueMesh-AI<br/>SOS tự động qua BLE mesh ngoại tuyến"]
-  R --> P1["Trụ cột 1<br/>Phát hiện trên thiết bị"]
-  R --> P2["Trụ cột 2<br/>Gói tin &amp; ngân sách bit"]
-  R --> P3["Trụ cột 3<br/>Định tuyến &amp; độ tin cậy"]
+  R["RescueMesh-AI<br/>SOS khi bão lũ mất sóng"]
+  R --> P1["Trụ cột 1<br/>Gửi và chuyển tiếp SOS"]
+  R --> P2["Trụ cột 2<br/>Định tuyến và chống nghẽn"]
+  R --> P3["Trụ cột 3<br/>Gói tin, ACK, an ninh"]
   R --> P4["Trụ cột 4<br/>Đánh giá đầu-cuối"]
-  P1 --> P1a["T1 ngưỡng luôn bật"]
-  P1 --> P1b["T2 RF/GBDT, 20 đặc trưng"]
-  P1 --> P1c["T3 luật bất động + đếm ngược"]
+  P1 --> P1a["SOS thủ công"]
+  P1 --> P1b["Managed flooding có hướng"]
+  P1 --> P1c["Lưu-chuyển-tiếp"]
   P2 --> P2a["SOS/HEARTBEAT/BEACON"]
-  P2 --> P2b["MTU 20 byte &amp; phân mảnh"]
+  P2 --> P2b["SOS 24 byte BLE legacy"]
   P2 --> P2c["Xác thực &amp; ID xoay"]
-  P3 --> P3a["Gradient theo hop + store-and-forward"]
+  P3 --> P3a["Gradient + relay suppression"]
   P3 --> P3b["Beacon, bseq, hết hạn tuyến"]
   P3 --> P3c["ACK gắn beacon"]
-  P4 --> P4a["Kho dữ liệu IMU công khai"]
+  P4 --> P4a["PDR, latency, fairness"]
   P4 --> P4b["Simulator đã hiệu chuẩn"]
   P4 --> P4c["Đo thực: PDR, pin, MTU"]
 ```
@@ -77,9 +77,9 @@ flowchart TB
 
 | Mục | Nội dung | Bảng/hình |
 |---|---|---|
-| 2.1 BLE và giới hạn của nó | Quảng cáo/kết nối, MTU mặc định 23 byte (payload 20 byte), thương lượng MTU, tầm xa, giới hạn chạy nền của Android | Bảng 2.1 ràng buộc nền tảng |
+| 2.1 BLE và giới hạn của nó | Quảng bá/kết nối, ngân sách ứng dụng bảo thủ 24 byte trong BLE legacy advertising, tầm xa, giới hạn chạy nền của Android | Bảng 2.1 ràng buộc nền tảng |
 | 2.2 Mạng tùy cơ và DTN | Store-and-forward, khử trùng lặp, TTL, jitter; Trickle và RPL ở mức khái niệm, không sao chép | Hình 2.1 vòng đời một gói SOS |
-| 2.3 Phát hiện ngã từ IMU | Đặc trưng thời gian, cửa sổ 4 giây giữa đỉnh 2 g, 20–50 Hz; **mô hình sâu vs cổ điển trên cùng dữ liệu** (Villa & Casilari 2025: CNN-LSTM @20 Hz = 98,9 % acc, và sâu luôn hơn cổ điển); **khoảng cách staged ↔ ngã thực** (SE thực đời 57–82 %; báo động giả 3–85 ca/ngày); các kho dữ liệu công khai | Bảng 2.2 kho dữ liệu (số người, số ca, tần số lấy mẫu, giấy phép, staged/thực) |
+| 2.3 AI hỗ trợ tại thiết bị | Cảm biến chuyển động, phát hiện ngã/bất động và đếm ngược; nhấn mạnh đây là nhánh phụ sau đường SOS | Bảng 2.2 kho dữ liệu và giới hạn |
 | 2.4 An ninh và quyền riêng tư | Mô hình mối đe dọa; so sánh MAC cắt ngắn vs Ed25519; ID xoay theo ngày; điều kiện cấp khóa | Bảng 2.3 ngân sách an ninh |
 | 2.5 Yêu cầu hệ thống | Yêu cầu chức năng/phi chức năng, truy vết về RQ | Bảng 2.4 |
 
@@ -90,8 +90,8 @@ flowchart TB
 | Mục | Nội dung | Bảng/hình |
 |---|---|---|
 | 3.1 Kiến trúc tổng thể | Sơ đồ 3 tầng + mesh + trạm | **Hình 3.1** kiến trúc |
-| 3.2 Đường ống phát hiện | T1 ngưỡng; T2 đặc trưng (~20) và RF/GBDT (30 cây, sâu ≤ 6) hoặc 1D-CNN int8; T3 luật xác nhận; đường lui và tham số người dùng chỉnh | Hình 3.2 máy trạng thái 3 tầng; Bảng 3.1 danh sách đặc trưng |
-| 3.3 Đặc tả gói tin | Header 3 byte; SOS/HEARTBEAT/BEACON; **bảng ngân sách bit cho biến thể 17–21 byte**; khử trùng lặp (srcID, type, seq) 5 phút | **Bảng 3.2** đặc tả gói; **Bảng 3.3** ngân sách bit (đóng góp C4) |
+| 3.2 AI hỗ trợ | T1/T2/T3 chỉ tạo SOS thay cho người dùng khi không thể thao tác; không được chặn SOS thủ công | Hình 3.2 máy trạng thái phụ |
+| 3.3 Đặc tả gói tin | Header 3 byte; SOS/HEARTBEAT/BEACON; SOS 24 byte; khử trùng lặp bằng tag; ACK gắn trong beacon | **Bảng 3.2** đặc tả gói; **Bảng 3.3** ngân sách v1.0 |
 | 3.4 Sửa lỗi thiết kế | SOS vượt MTU; khóa ACK 16 bit; khóa online vs offline — trình bày như quyết định thiết kế có phân tích, kèm Monte Carlo đụng độ | **Bảng 3.4** xác suất đụng độ ID; Hình 3.3 đồ thị đụng độ theo n |
 | 3.5 Định tuyến | Gradient theo hop, quy tắc chuyển tiếp, lưu tạm, jitter 10–220 ms, hàng đợi ưu tiên, hết hạn tuyến theo bseq | Hình 3.4 ví dụ gradient; Bảng 3.5 tham số |
 | 3.6 Trạm cứu hộ | Kiểm MAC, khử trùng lặp, dựng lại bản đồ, phát beacon ACK | Hình 3.5 giao diện bản đồ (minh họa) |
@@ -104,7 +104,7 @@ flowchart TB
 | Mục | Nội dung | Bảng/hình |
 |---|---|---|
 | 4.1 Giao thức và giao thức mạng | Kiểm thử round-trip, MTU thật, chi phí mỗi gói | Bảng 4.1 độ dài & thời gian |
-| 4.2 Phát hiện ngã | Recall/F1 ở hai ngân sách FAR đặt trước (≤ 1/24 giờ trên dữ liệu thực; ≤ 0,2/giờ trên ADL staged); LOSO; chuyển miền SisFall → FARSEEING; **một lần chạy trên ngã thực** đối chiếu các mốc đã công bố (Bagalà, Kangas, Harari, Villa); ca khó | **Bảng 4.2** kết quả chính; Hình 4.1 đường cong recall–FAR; Hình 4.2 ma trận nhầm lẫn ca khó |
+| 4.2 AI hỗ trợ | Chỉ báo cáo như nhánh phụ: recall/FAR, thời gian tạo SOS và tỷ lệ người dùng hủy; không gộp với PDR mạng | **Bảng 4.2** kết quả phụ |
 | 4.3 Ablation 3 tầng | B0–B3, có/không tầng 3 | **Bảng 4.3** ablation (đóng góp C2) |
 | 4.4 Định tuyến | PDR, P95 trễ, chi phí phát, trùng lặp theo mật độ/độ động; sau khi trạm sập | **Bảng 4.4** so sánh định tuyến; Hình 4.3 PDR theo mật độ; Hình 4.4 tái hội tụ |
 | 4.5 ACK và phát lại | Phân bố số lần phát lại; tỉ lệ sai khớp ACK theo khóa 16/24/32 bit | **Bảng 4.5** (đóng góp C5, có thể là kết quả phủ định) |

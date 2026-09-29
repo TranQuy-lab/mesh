@@ -143,7 +143,76 @@ Raw data: `results/sim-smoke.csv`.
 - xác nhận đạo đức cho phép đo người đi bộ cầm điện thoại;
 - company/service identifier hợp lệ nếu vượt khỏi thử nghiệm lab.
 
-## 8. Nguồn chính
+## 8. Rà soát lại thuật toán và các thí nghiệm đã làm
+
+### 8.1 Kết luận ngắn
+
+Các thí nghiệm đã làm **không cần xóa**. Chúng vẫn có giá trị, nhưng phải hạ
+đúng mức kết luận:
+
+| Thí nghiệm | Giữ lại được | Không được kết luận | Việc cần bổ sung |
+|---|---|---|---|
+| Codec Python/Java, golden vector, fuzz | Gói SOS 24 B nhất quán và HMAC/tamper hoạt động | Chưa chứng minh relay hoặc mesh | Giữ nguyên; thêm test nhiều SOS có mã khác nhau và hết hạn cache |
+| G0 Pixel/Redmi | Hai model có thể phát/scan legacy khi màn hình tắt trong phiên thử | Chưa chứng minh PDR hai chiều, multi-hop hoặc chịu tải | Chạy hai máy đồng thời, đảo chiều phát/thu, đo PDR/latency/pin |
+| SIM-SMOKE 270 lượt | Logic TTL, dedup, jitter và khác biệt sơ bộ giữa flood/Trickle/gradient | Không được nói gradient tốt hơn trên điện thoại; chưa có collision | Nâng simulator với collision, queue, mobility, nhiều SOS và mô hình relay suppression |
+| Nghiên cứu phát hiện ngã | Có thể là tính năng phụ hỗ trợ khi người dùng không bấm SOS | Không được đặt làm câu hỏi trung tâm của mạng bão lũ | Tách thành work package phụ, chỉ chạy sau đường SOS cốt lõi |
+
+### 8.2 Thuật toán được bổ sung vào thiết kế
+
+Qua đối chiếu các chuẩn và nghiên cứu, v1.0 nên được mô tả là **managed flooding
+có hướng**, không phải flooding tự do và cũng chưa phải router IP hoàn chỉnh.
+
+- Bluetooth Mesh cung cấp nguyên lý message cache + TTL + relay có kiểm soát để
+  giảm broadcast storm; xem [Bluetooth Mesh Managed Flooding](https://www.bluetooth.com/mesh-directed-forwarding/).
+- RPL cung cấp ý tưởng rank/DODAG hướng dữ liệu về một root; RescueMesh chỉ lấy
+  phần rank và nhiều parent dự phòng, không triển khai toàn bộ RPL; xem [RFC 6550](https://www.rfc-editor.org/info/rfc6550/).
+- Trickle dùng cho beacon/control plane, không dùng để quyết định bỏ SOS; xem [RFC 6206](https://datatracker.ietf.org/doc/rfc6206/).
+- Store-carry-forward của DTN xử lý trường hợp không tồn tại đường liên tục; xem [RFC 9171](https://www.rfc-editor.org/rfc/rfc9171.html).
+
+Luật relay đề xuất cho thí nghiệm kế tiếp:
+
+1. Mỗi nút giữ tối đa một relay chính và một relay dự phòng có rank thấp hơn.
+2. Nút nhận SOS đặt vào hàng đợi, kiểm tra `tag` đã thấy chưa và chờ jitter.
+3. Nếu nghe candidate khác đã chuyển cùng SOS, nút hủy lượt phát.
+4. Nếu không nghe thấy, nút phát một lần, giảm TTL và ghi lại event.
+5. Nhiều nguồn được phục vụ theo ưu tiên SOS nhưng phải luân phiên theo nguồn để
+   tránh một nguồn chiếm toàn bộ hàng đợi.
+6. Không có relay tốt hơn thì chuyển sang store-carry-forward; không được âm thầm
+   bỏ SOS chỉ vì hiện tại chưa có route.
+
+### 8.3 Ma trận thực nghiệm bắt buộc phải sửa
+
+Ma trận hiện tại có tải 1/5/20 SOS nhưng chưa có 50/100 SOS và chưa mô phỏng
+collision. Cần bổ sung:
+
+| Nhóm biến | Mức tối thiểu mới |
+|---|---|
+| Số nút | 10, 50, 100, 200 |
+| SOS đồng thời | 1, 5, 20, 50, 100 |
+| Thuật toán | flooding, Trickle, managed flooding + suppression, gradient + managed flooding, gradient + store-carry-forward |
+| Trạng thái | trạm ổn định, trạm sập, trạm khôi phục, hai trạm |
+| Độ động | đứng yên, đi bộ, một node courier mang tin |
+| Radio | mất gói, collision, scan duty, Bluetooth audio/Wi-Fi interference |
+
+Ngoài PDR và độ trễ, phải báo:
+
+- P50/P95/P99 latency;
+- tỷ lệ nguồn được giao, không chỉ tỷ lệ gói tổng;
+- số bản sao trên mỗi SOS;
+- số gói bị bỏ theo nguyên nhân;
+- độ công bằng giữa các nguồn (Jain fairness);
+- độ dài hàng đợi và thời gian dọn hàng đợi;
+- năng lượng tiêu thụ trên mỗi SOS tới trạm.
+
+### 8.4 Phán quyết sau rà soát
+
+Thiết kế hiện tại **đủ cơ sở để tiếp tục**, nhưng các tuyên bố về mạng phải sửa
+thành: “đã kiểm chứng codec và khả năng BLE nền trên hai model; logic relay đã có
+trong thiết kế/simulator; hiệu năng mesh nhiều hop và tải đồng thời vẫn đang chờ
+đo”. Không được dùng 270 lượt SIM-SMOKE hoặc phép nhận một chiều trên Pixel để
+tuyên bố hệ thống chịu được 100 người phát cùng lúc.
+
+## 9. Nguồn chính
 
 - Android Developers, `BluetoothLeAdvertiser`: https://developer.android.com/reference/android/bluetooth/le/BluetoothLeAdvertiser
 - Android Developers, `BluetoothLeScanner`: https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner
