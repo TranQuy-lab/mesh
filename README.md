@@ -31,7 +31,7 @@ Bộ tài liệu kế hoạch cho đề tài **RescueMesh-AI**: mạng liên l�
 | [android-g0/](android-g0/) | APK nút mạng Android: phát SOS, quét BLE và chuyển tiếp gói mới |
 | [station/](station/) | Trạm thu trên laptop: nhận BLE, kiểm tra HMAC, chống trùng và lưu SOS |
 | [releases/rescuemesh-g0.apk](releases/rescuemesh-g0.apk) | APK cài trực tiếp lên điện thoại |
-| [assets/rescuemesh-ai-icon.png](assets/rescuemesh-ai-icon.png) | Biểu tượng nhận diện của dự án |
+| [assets/rescuemesh-ai-icon.png](assets/rescuemesh-ai-icon.png) | Biểu tượng nhận diện của dự án và APK |
 | [android-g0/src/org/rescuemesh/g0/SosCodec.java](android-g0/src/org/rescuemesh/g0/SosCodec.java) | Codec SOS Java đối chiếu byte-for-byte với golden vector Python |
 | [ket-qua-ra-soat-va-nghien-cuu-ban-dau.md](ket-qua-ra-soat-va-nghien-cuu-ban-dau.md) | Phán quyết thiết kế, SIM-SMOKE và kết quả G0 trên Pixel 6 Pro |
 | [nghien-cuu-ble-mesh-va-ke-hoach-g0.md](nghien-cuu-ble-mesh-va-ke-hoach-g0.md) | Bằng chứng BLE/DTN trên smartphone và factorial screening G0-S |
