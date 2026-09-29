@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 public final class MainActivity extends Activity {
     private static final int REQUEST = 71;
     private TextView status;
+    private Button sosButton;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -25,18 +28,19 @@ public final class MainActivity extends Activity {
         title.setText("RescueMesh v1.0\nĐiện thoại cứu hộ ngoại tuyến");
         title.setTextSize(22);
         status = new TextView(this);
-        status.setText("Nhấn Bật nút mạng để bắt đầu.");
+        status.setText("Nhấn SOS để bật nút mạng cứu hộ.");
         status.setPadding(0, 30, 0, 30);
-        Button start = new Button(this);
-        start.setText("Bật nút mạng");
-        start.setOnClickListener(v -> startNode());
+        sosButton = new Button(this);
+        sosButton.setText("SOS");
+        sosButton.setOnClickListener(v -> startNode());
         Button stop = new Button(this);
-        stop.setText("Tắt nút mạng");
+        stop.setText("Hủy SOS / tắt nút mạng");
         stop.setOnClickListener(v -> {
             stopService(new Intent(this, ProbeService.class));
-            status.setText("Đã tắt.");
+            setSosInactive();
+            status.setText("Đã hủy SOS và tắt nút mạng.");
         });
-        box.addView(title); box.addView(status); box.addView(start); box.addView(stop);
+        box.addView(title); box.addView(status); box.addView(sosButton); box.addView(stop);
         setContentView(box);
         // Opening the app is the normal start action. The button remains available
         // for restarting the node after it has been stopped.
@@ -65,7 +69,22 @@ public final class MainActivity extends Activity {
     private void launchService() {
         Intent i = new Intent(this, ProbeService.class);
         if (Build.VERSION.SDK_INT >= 26) startForegroundService(i); else startService(i);
-        status.setText("Đang phát SOS, quét và chuyển tiếp gói BLE…\nCó thể khóa màn hình.");
+        setSosActive();
+        status.setText("SOS đang hoạt động, đang quét và chuyển tiếp gói BLE…\nCó thể khóa màn hình.");
+    }
+
+    private void setSosActive() {
+        if (sosButton == null) return;
+        sosButton.setText("SOS đang hoạt động");
+        sosButton.setTextColor(Color.WHITE);
+        sosButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(198, 40, 40)));
+    }
+
+    private void setSosInactive() {
+        if (sosButton == null) return;
+        sosButton.setText("SOS");
+        sosButton.setTextColor(Color.BLACK);
+        sosButton.setBackgroundTintList(null);
     }
 
     @Override public void onRequestPermissionsResult(int request, String[] permissions, int[] grants) {
