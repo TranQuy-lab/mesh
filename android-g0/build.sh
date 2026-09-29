@@ -22,6 +22,7 @@ mkdir -p "$build_dir/classes" "$build_dir/dex"
 javac -source 11 -target 11 \
   -cp "$android_jar" \
   -d "$build_dir/classes" \
+  "$project_dir/src/org/rescuemesh/g0/MainActivity.java" \
   "$project_dir/src/org/rescuemesh/g0/SosCodec.java" \
   "$project_dir/src/org/rescuemesh/g0/ProbeService.java"
 

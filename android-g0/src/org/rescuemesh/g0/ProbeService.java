@@ -46,7 +46,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private static final byte[] DEVICE_KEY =
             "device-key-for-tests".getBytes(StandardCharsets.UTF_8);
     private static final String SOS_GOLDEN_HEX =
-            "46f32a89abcdef399de83fcb3d2d53bc4c1ba811078a6028";
+            "46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028";
     private static final byte[] SOS_GOLDEN = SosCodec.packSos(
             0x89abcdefL, 12345, 21.028511, 105.804817,
             1, 2, 3, 11, 3, 0, 7, 15, 42, DEVICE_KEY);
@@ -194,7 +194,8 @@ public final class ProbeService extends Service implements SensorEventListener {
         startedElapsedMs = SystemClock.elapsedRealtime();
         localSourceId = localSourceId();
         log("codec_selftest", "golden=" + SOS_GOLDEN_HEX.equals(SosCodec.toHex(SOS_GOLDEN))
-                + ",verify=" + SosCodec.verify(SOS_GOLDEN, DEVICE_KEY));
+                + ",verify=" + SosCodec.verify(SOS_GOLDEN, DEVICE_KEY)
+                + ",actual=" + SosCodec.toHex(SOS_GOLDEN));
         logCapabilities();
         startSensorProbe();
         handler.post(ticker);
@@ -290,8 +291,12 @@ public final class ProbeService extends Service implements SensorEventListener {
                     .setScannable(false)
                     .build();
             log("advertise_config", "mode=" + advertiseMode + ",interval_units=" + interval);
-            advertiser.startAdvertisingSet(parameters, advertiseData(initialFrame()),
-                    null, null, null, advertiseCallback);
+            try {
+                advertiser.startAdvertisingSet(parameters, advertiseData(initialFrame()),
+                        null, null, null, advertiseCallback);
+            } catch (IllegalArgumentException error) {
+                log("advertise_start", "ok=false,error=callback_busy");
+            }
         }
 
         if (scanner == null) {
@@ -306,9 +311,13 @@ public final class ProbeService extends Service implements SensorEventListener {
                     .setManufacturerData(COMPANY_ID_LAB,
                             new byte[] {0x40}, new byte[] {(byte) 0xc0})
                     .build());
-            scanner.startScan(filters, settings, scanCallback);
-            scanningStarted = true;
-            log("scan_start", "ok=true,mode=" + scanMode + ",filtered=true");
+            try {
+                scanner.startScan(filters, settings, scanCallback);
+                scanningStarted = true;
+                log("scan_start", "ok=true,mode=" + scanMode + ",filtered=true");
+            } catch (IllegalArgumentException error) {
+                log("scan_start", "ok=false,error=callback_busy");
+            }
         }
     }
 
