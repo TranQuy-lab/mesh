@@ -69,6 +69,7 @@ public final class ProbeService extends Service implements SensorEventListener {
     private boolean scanningStarted;
     private long localSourceId = 0x89abcdefL;
     private boolean legacyAdvertising;
+    private boolean bluetoothProbeStarting;
 
     private BluetoothLeAdvertiser advertiser;
     private AdvertisingSet advertisingSet;
@@ -238,6 +239,12 @@ public final class ProbeService extends Service implements SensorEventListener {
             try { scanner.stopScan(scanCallback); } catch (Exception ignored) {}
         }
         if (sensorManager != null) sensorManager.unregisterListener(this);
+        advertiser = null;
+        advertisingSet = null;
+        scanner = null;
+        advertisingStarted = false;
+        scanningStarted = false;
+        bluetoothProbeStarting = false;
         log("stop", "elapsed_ms=" + (SystemClock.elapsedRealtime() - startedElapsedMs));
         super.onDestroy();
     }
@@ -280,14 +287,21 @@ public final class ProbeService extends Service implements SensorEventListener {
     }
 
     private void startBluetoothProbe(String requestedAdvertiseMode, String requestedScanMode) {
+        if (bluetoothProbeStarting || advertiser != null || scanner != null) {
+            log("bluetooth", "already_running=true");
+            return;
+        }
+        bluetoothProbeStarting = true;
         if (!hasBluetoothPermissions()) {
             log("permission", "bluetooth=false");
+            bluetoothProbeStarting = false;
             return;
         }
         BluetoothManager manager = getSystemService(BluetoothManager.class);
         BluetoothAdapter adapter = manager == null ? null : manager.getAdapter();
         if (adapter == null || !adapter.isEnabled()) {
             log("bluetooth", "ready=false,reason=adapter_disabled");
+            bluetoothProbeStarting = false;
             return;
         }
         advertiser = adapter.getBluetoothLeAdvertiser();
@@ -346,6 +360,7 @@ public final class ProbeService extends Service implements SensorEventListener {
                 }
             }, 1_200L);
         }
+        bluetoothProbeStarting = false;
     }
 
     /** Relay keeps the end-to-end MAC valid because byte 1 is route metadata. */
