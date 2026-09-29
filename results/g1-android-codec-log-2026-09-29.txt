@@ -1,0 +1,9 @@
+--------- beginning of main
+09-29 08:16:11.133 29670 29670 I RescueMeshG0: event=codec_selftest,golden=true,verify=true
+09-29 08:16:11.140 29670 29670 I RescueMeshG0: event=capability,model=Google Pixel 6 Pro,sdk=36,adapter=true,enabled=true,multi_adv=true,offloaded_filter=true,offloaded_batch=true,extended_adv=true,max_adv_data=1650
+09-29 08:16:11.144 29670 29670 I RescueMeshG0: event=accelerometer,name=LSM6DSR Accelerometer,vendor=STMicro,min_delay_us=5000,max_delay_us=615385,fifo_max=3000,fifo_reserved=3000,power_ma=0.001,wakeup=false
+09-29 08:16:11.154 29670 29670 I RescueMeshG0: event=scan_start,ok=true,mode=low_latency,filtered=true
+09-29 08:16:11.156 29670 29670 I RescueMeshG0: event=sensor_start,ok=true,period_us=50000,max_latency_us=2000000
+09-29 08:16:11.158 29670 29670 I RescueMeshG0: event=tick,elapsed_ms=27,screen_interactive=true,advertising=false,scanning=true,scan_callbacks=0,golden_matches=0,unique_devices=0,sensor_events=0,sensor_hz=0.000
+09-29 08:16:11.169 29670 29670 I RescueMeshG0: event=advertise_start,ok=true,mode=2,tx=3,connectable=false,payload_bytes=24
+09-29 08:16:14.153 29670 29670 I RescueMeshG0: event=stop,elapsed_ms=3023

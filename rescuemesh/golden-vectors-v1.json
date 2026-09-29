@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "encoding": "hex",
+  "keys": {
+    "device_utf8": "device-key-for-tests",
+    "network_utf8": "network-key-for-tests"
+  },
+  "vectors": {
+    "sos": "46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028",
+    "heartbeat": "4af40912345678abcdc187654321c9a6ca07915a349947",
+    "beacon": "54f01700070f01024c1ba8117778797ad84f481e90c03499"
+  }
+}

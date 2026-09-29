@@ -1,0 +1,1125 @@
+Bluetooth Status:
+  State:         ON
+  Address:       XX:XX:XX:XX:A9:9E
+  Name:          Pixel 6 Pro
+  Inner app:     com.google.android.bluetooth
+  Uptime:        18h 56m 49.47131s
+
+Bluetooth Activity History:
+  TIMESTAMP          ACTION/STATE     DETAILS                                    
+  ------------------ ---------------- -------------------------------------------
+  09-28 13:03:35.572 EnableBle        APPLICATION_REQUEST (android/NearbyService)
+        +    0ms     BLE_TURNING_ON                                              
+        + 2044ms     BLE_ON                                                      
+  09-29 00:08:21.062 Enable           APPLICATION_REQUEST (android/ShellCommand) 
+        +    2ms     TURNING_ON                                                  
+        +  694ms     ON
+
+Bluetooth crashed 0 times
+
+Ble app registered: {android/NearbyService}
+
+BluetoothManagerService:
+  mEnable:true
+  mQuietEnable:Optional[false]
+  mEnableExternal:true
+
+
+BluetoothAdapterProperties
+  Name: Pixel 6 Pro
+  Address: XX:XX:XX:XX:A9:9E
+  ConnectionState: STATE_DISCONNECTED
+  MaxConnectedAudioDevices: 5
+  A2dpOffloadEnabled: true
+BluetoothDeviceDiscovery
+  Discovering: false
+  DiscoveryEndMs: 0
+
+BluetoothRemoteDevices
+  Bonded devices: 4
+    XX:XX:XX:XX:F6:D6(Public) => XX:XX:XX:XX:F6:D6(Public) [BR/EDR] [0x240404] [Pairing Algorithm BR/EDR:N/A LE:N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR):N/A LE:N/A] XG33
+        [BR/EDR UUIDs]: 00001101-0000-1000-8000-00805f9b34fb 0000110b-0000-1000-8000-00805f9b34fb 0000110e-0000-1000-8000-00805f9b34fb 0000111e-0000-1000-8000-00805f9b34fb
+    XX:XX:XX:XX:C8:60(Public) => XX:XX:XX:XX:C8:60(Public) [ DUAL ] [0x240404] [Pairing Algorithm BR/EDR:N/A LE:N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR):N/A LE:N/A] AirPods Pro 2
+        [BR/EDR UUIDs]: 0000110b-0000-1000-8000-00805f9b34fb 0000110e-0000-1000-8000-00805f9b34fb 0000111e-0000-1000-8000-00805f9b34fb 74ec2172-0bad-4d01-8f77-997b2be0722a
+    XX:XX:XX:XX:04:B6(Public) => XX:XX:XX:XX:04:B6(Public) [BR/EDR] [0x240418] [Pairing Algorithm BR/EDR:N/A LE:N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR):N/A LE:N/A] BT-SPEAKER
+        [BR/EDR UUIDs]: 0000110b-0000-1000-8000-00805f9b34fb 0000110e-0000-1000-8000-00805f9b34fb
+    XX:XX:XX:XX:08:10(Public) => XX:XX:XX:XX:08:10(Public) [BR/EDR] [0x002540] [Pairing Algorithm BR/EDR:BREDR_SSP LE:N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR):N/A LE:N/A] Bluetooth 3.0 Keyboard
+        [BR/EDR UUIDs]: 00001124-0000-1000-8000-00805f9b34fb
+
+  Other devices: 1
+    XX:XX:XX:XX:94:4B(Public) => XX:XX:XX:XX:XX:XX(Unknown) [  LE  ] [0x001F00] [Pairing Algorithm BR/EDR:N/A LE:N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR):N/A LE:N/A] ACTON III [LE]
+
+  Connected devices: 0
+
+Connection Events:
+
+BluetoothActiveDeviceManager
+  Audio mode: 0
+  Dual mode audio: false
+  Broadcasting: false
+  Pending active device: NULL
+  Pending classic active device: NULL
+  Classic device to be activated: NULL
+  Classic device not to be activated: NULL
+  A2DP:
+    Connected count: 0
+    Active: NULL
+    Fallback: NULL
+    Most recent: NULL
+  HFP:
+    Connected count: 0
+    Active: NULL
+    Fallback: NULL
+    Most recent: NULL
+  HA:
+    Connected count: 0
+    Active: 0
+    Most recent: NULL
+  LE Audio:
+    Connected count: 0
+    Active: NULL
+    Most recent: NULL
+  LE HA:
+    Connected count: 0
+    Active: NULL
+    Most recent: NULL
+
+
+BluetoothActiveDeviceManager event log:
+
+
+ScanMode: SCAN_MODE_CONNECTABLE
+Scan Mode Changes:
+  09-29 00:08:21.751 processProfileServiceStateChanged: SCAN_MODE_CONNECTABLE
+Device Discovery Events:
+Bonding Events:
+
+Enabled Profile Services:
+  GATT
+  A2DP
+  AVRCP
+  BATTERY
+  HEADSET
+  HEARING_AID
+  HID_DEVICE
+  HID_HOST
+  MAP
+  OPP
+  PAN
+  PBAP
+  SAP
+
+LE Gatt clients controlling AutoActiveMode:
+
+BluetoothAdapterState:
+ total records=4
+  rec[0]: time=09-28 13:03:37.421 processed=Off org=Off dest=TurningBleOn what=3(0x3) BLE_TURN_ON
+  rec[1]: time=09-28 13:03:37.613 processed=TurningBleOn org=TurningBleOn dest=BleOn what=7(0x7) BLE_STARTED
+  rec[2]: time=09-29 00:08:21.064 processed=BleOn org=BleOn dest=TurningOn what=1(0x1) USER_TURN_ON
+  rec[3]: time=09-29 00:08:21.755 processed=TurningOn org=TurningOn dest=On what=5(0x5) BREDR_STARTED
+ curState=On
+
+SilenceDeviceManager:
+  Address            | Is silenced?
+
+BluetoothStorageManager.EventLog:
+
+BluetoothStorageManager.Database:
+  is_tethering_on: false
+  active_a2dp_devices: []
+  active_hfp_devices: []
+  Device: XX:XX:XX:XX:04:B6 [Persist on Disk] {
+    connection_counter: 0
+    Profile Connection Policies:
+      a2dp: ALLOWED
+    Permissions:
+      phonebook: false
+    A2DP Settings:
+      optional_codecs_supported: false
+    AVRCP Settings:
+      volume: 7
+    HFP Settings:
+
+    LEAudio Settings:
+
+    microphone_preferred_for_calls: true
+    Custom Metadata:
+      Key  Value                                                                                                                                                                                                                                                                                                                                                       
+      ---- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      25   <DEVICE_SETTINGS_CONFIG_PACKAGE_NAME>com.google.android.gms</DEVICE_SETTINGS_CONFIG_PACKAGE_NAME><DEVICE_SETTINGS_CONFIG_CLASS>com.google.android.gms.chimera.GmsBoundBrokerService</DEVICE_SETTINGS_CONFIG_CLASS><DEVICE_SETTINGS_CONFIG_ACTION>com.google.android.gms.fastpair.ACTION_BIND_DEVICE_SETTINGS_CONFIG_PROVIDER</DEVICE_SETTINGS_CONFIG_ACTION>
+  }
+  Device: XX:XX:XX:XX:F6:D6 [Persist on Disk] {
+    connection_counter: 0
+    Profile Connection Policies:
+      a2dp: ALLOWED
+      hfp: ALLOWED
+    Permissions:
+      phonebook: true
+    A2DP Settings:
+      optional_codecs_enabled: true
+      optional_codecs_supported: true
+    AVRCP Settings:
+      volume: 17
+    HFP Settings:
+
+    LEAudio Settings:
+
+    microphone_preferred_for_calls: true
+    Custom Metadata:
+      Key  Value                                                                                                                                                                                                                                                                                                                                                       
+      ---- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      25   <DEVICE_SETTINGS_CONFIG_PACKAGE_NAME>com.google.android.gms</DEVICE_SETTINGS_CONFIG_PACKAGE_NAME><DEVICE_SETTINGS_CONFIG_CLASS>com.google.android.gms.chimera.GmsBoundBrokerService</DEVICE_SETTINGS_CONFIG_CLASS><DEVICE_SETTINGS_CONFIG_ACTION>com.google.android.gms.fastpair.ACTION_BIND_DEVICE_SETTINGS_CONFIG_PROVIDER</DEVICE_SETTINGS_CONFIG_ACTION>
+  }
+  Device: XX:XX:XX:XX:C8:60 [Persist on Disk] {
+    connection_counter: 0
+    Profile Connection Policies:
+      a2dp: ALLOWED
+      hfp: ALLOWED
+    Permissions:
+      phonebook: true
+    A2DP Settings:
+      optional_codecs_enabled: true
+      optional_codecs_supported: true
+    AVRCP Settings:
+      volume: 16
+    HFP Settings:
+
+    LEAudio Settings:
+
+    microphone_preferred_for_calls: true
+    Custom Metadata:
+      Key  Value                                                                                                                                                                                                                                                                                                                                                       
+      ---- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      25   <DEVICE_SETTINGS_CONFIG_PACKAGE_NAME>com.google.android.gms</DEVICE_SETTINGS_CONFIG_PACKAGE_NAME><DEVICE_SETTINGS_CONFIG_CLASS>com.google.android.gms.chimera.GmsBoundBrokerService</DEVICE_SETTINGS_CONFIG_CLASS><DEVICE_SETTINGS_CONFIG_ACTION>com.google.android.gms.fastpair.ACTION_BIND_DEVICE_SETTINGS_CONFIG_PROVIDER</DEVICE_SETTINGS_CONFIG_ACTION>
+  }
+  Device: XX:XX:XX:XX:08:10 [Persist on Disk] {
+    connection_counter: 1
+    Profile Connection Policies:
+      hid_host: ALLOWED
+    Permissions:
+      phonebook: true
+    Custom Metadata:
+      Key  Value                                                                                                                                                                                                                                                                                                                                                       
+      ---- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      25   <DEVICE_SETTINGS_CONFIG_PACKAGE_NAME>com.google.android.gms</DEVICE_SETTINGS_CONFIG_PACKAGE_NAME><DEVICE_SETTINGS_CONFIG_CLASS>com.google.android.gms.chimera.GmsBoundBrokerService</DEVICE_SETTINGS_CONFIG_CLASS><DEVICE_SETTINGS_CONFIG_ACTION>com.google.android.gms.fastpair.ACTION_BIND_DEVICE_SETTINGS_CONFIG_PROVIDER</DEVICE_SETTINGS_CONFIG_ACTION>
+  }
+
+Profile: GattService
+  Registered App:
+    Client:
+    Server:
+      app_if: 48, appName: com.google.android.gms, transport: AUTO, tag: nearby_connections
+
+  GATT Advertiser Map:
+    Last Advertising:
+      09-29 07:50:55.784 
+      org.rescuemesh.g0
+       Advertising ID                                     : 0
+        1:
+          └Start time                                     : 09-29 00:08:22.550
+          └Stop time                                      : 09-29 07:50:55.782
+          └Duration(10ms unit)                            : 0
+          └Maximum number of extended advertising events  : 0
+          └App Importance                                 : Foreground Service
+        └Advertising:
+          └Interval(0.625ms)                              : 160
+          └TX POWER(dbm)                                  : 1
+          └Primary Phy                                    : LE_1M
+          └Secondary Phy                                  : LE_1M
+          └Legacy                                         : true
+          └Anonymous                                      : false
+          └Connectable                                    : false
+          └Scannable                                      : true
+          └Discoverable                                   : true
+          └Advertise Data:
+            └Include Device Name                          : false
+            └Include Tx Power Level                       : false
+            └Manufacturer Data (length of data)           : 1
+
+      09-29 07:56:20.507 
+      org.rescuemesh.g0
+       Advertising ID                                     : 0
+        1:
+          └Start time                                     : 09-29 07:50:55.821
+          └Stop time                                      : 09-29 07:56:20.507
+          └Duration(10ms unit)                            : 0
+          └Maximum number of extended advertising events  : 0
+          └App Importance                                 : Foreground Service
+        └Advertising:
+          └Interval(0.625ms)                              : 160
+          └TX POWER(dbm)                                  : 1
+          └Primary Phy                                    : LE_1M
+          └Secondary Phy                                  : LE_1M
+          └Legacy                                         : true
+          └Anonymous                                      : false
+          └Connectable                                    : false
+          └Scannable                                      : true
+          └Discoverable                                   : true
+          └Advertise Data:
+            └Include Device Name                          : false
+            └Include Tx Power Level                       : false
+            └Manufacturer Data (length of data)           : 1
+
+      09-29 07:58:58.796 
+      org.rescuemesh.g0
+       Advertising ID                                     : 0
+        1:
+          └Start time                                     : 09-29 07:56:21.168
+          └Stop time                                      : 09-29 07:58:58.796
+          └Duration(10ms unit)                            : 0
+          └Maximum number of extended advertising events  : 0
+          └App Importance                                 : Foreground Service
+        └Advertising:
+          └Interval(0.625ms)                              : 160
+          └TX POWER(dbm)                                  : 1
+          └Primary Phy                                    : LE_1M
+          └Secondary Phy                                  : LE_1M
+          └Legacy                                         : true
+          └Anonymous                                      : false
+          └Connectable                                    : false
+          └Scannable                                      : true
+          └Discoverable                                   : true
+          └Advertise Data:
+            └Include Device Name                          : false
+            └Include Tx Power Level                       : false
+            └Manufacturer Data (length of data)           : 1
+
+    Total number of ongoing advertising                   : 1
+    Ongoing advertising:
+      org.rescuemesh.g0
+       Advertising ID                                     : 0
+        1:
+          └Start time                                     : 09-29 07:58:59.198
+          └Elapsed time                                   : 85862ms
+          └Duration(10ms unit)                            : 0
+          └Maximum number of extended advertising events  : 0
+          └App Importance                                 : Foreground Service
+        └Advertising:
+          └Interval(0.625ms)                              : 160
+          └TX POWER(dbm)                                  : 1
+          └Primary Phy                                    : LE_1M
+          └Secondary Phy                                  : LE_1M
+          └Legacy                                         : true
+          └Anonymous                                      : false
+          └Connectable                                    : false
+          └Scannable                                      : true
+          └Discoverable                                   : true
+          └Advertise Data:
+            └Include Device Name                          : false
+            └Include Tx Power Level                       : false
+            └Manufacturer Data (length of data)           : 1
+
+  GATT Client Map:
+    Entries: 0
+    Last apps:
+
+  GATT Server Map:
+    Entries: 1
+    Last apps:
+         AppRecord(09-29 00:08:23 ~ 09-29 01:16:37, id=47, appName=com.google.android.gms, AUTO, tag=nearby_connections, reason=REASON_UNREGISTER_SERVER)
+
+  GATT Handle Map:
+    Entries: 4
+      48: [147] Service 0000fef3-0000-1000-8000-00805f9b34fb
+      48: [149]   Characteristic 00000100-0004-1000-8000-001a11000102
+      48: [150]     Descriptor 00002902-0000-1000-8000-00805f9b34fb
+      48: [152]   Characteristic 00000100-0004-1000-8000-001a11000101
+    Requests: 0
+Profile: A2dpService
+  mActiveDevice: null
+  mMaxConnectedAudioDevices: 5
+  codecConfigPriorities:
+    SBC: 1001
+    AAC: 2001
+    aptX: 3001
+    aptX HD: 4001
+    LDAC: 5001
+    Opus: 1501
+    UNKNOWN CODEC(7): -1
+  mA2dpOffloadEnabled: true
+  codecConfigOffloading:
+    {codecName:SBC,mCodecType:0,mCodecPriority:0,mSampleRate:0x0(NONE),mBitsPerSample:0x0(NONE),mChannelMode:0x0(NONE),mCodecSpecific1:0,mCodecSpecific2:0,mCodecSpecific3:0,mCodecSpecific4:0}
+    {codecName:AAC,mCodecType:1,mCodecPriority:0,mSampleRate:0x0(NONE),mBitsPerSample:0x0(NONE),mChannelMode:0x0(NONE),mCodecSpecific1:0,mCodecSpecific2:0,mCodecSpecific3:0,mCodecSpecific4:0}
+    {codecName:Opus,mCodecType:6,mCodecPriority:0,mSampleRate:0x0(NONE),mBitsPerSample:0x0(NONE),mChannelMode:0x0(NONE),mCodecSpecific1:0,mCodecSpecific2:0,mCodecSpecific3:0,mCodecSpecific4:0}
+
+Profile: AvrcpTargetService
+  AVRCP version: 1.6
+  List of MediaControllers: size=2
+    Media Player 6: com.spotify.music
+    MediaController (com.spotify.music@190421e) null
+    Current Data:
+      Song: { mediaId="currsong" title="Not Provided" artist="" album="" genre="" duration=0 trackPosition=1/1 image=null }
+      PlayState: PlaybackState {state=CONNECTING(8), position=-1, buffered position=0, speed=0.0, updated=49018005, actions=141312, custom actions=[], active item id=-1, error=null}
+      Queue: size=0
+    BTAudio Playback State change Event:
+
+  <Active>   Media Player 8: com.ttscv.trudio
+    MediaController (com.ttscv.trudio@e80c81b) 📚 Dịch Tiếng Hoa, Chương 134: Tiên Tôn thức tỉnh, tuyệt địa thiên thông! - Toàn Dân Kim Thủ Chỉ, Từ Hài Nhi Bắt Đầu Chuẩn Bị Kiểm Tra, null
+    Current Data:
+      Song: { mediaId="currsong" title="📚 Dịch Tiếng Hoa" artist="Chương 134: Tiên Tôn thức tỉnh, tuyệt địa thiên thông! - Toàn Dân Kim Thủ Chỉ, Từ Hài Nhi Bắt Đầu Chuẩn Bị Kiểm Tra" album="" genre="" duration=300000 trackPosition=1/1 image=<Image source=2> }
+      PlayState: PlaybackState {state=PLAYING(3), position=185119, buffered position=237900, speed=1.0, updated=68235021, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+      Queue: size=1
+        { mediaId="NowPlayingId0" title="📚 Dịch Tiếng Hoa" artist="Chương 134: Tiên Tôn thức tỉnh, tuyệt địa thiên thông! - Toàn Dân Kim Thủ Chỉ, Từ Hài Nhi Bắt Đầu Chuẩn Bị Kiểm Tra" album="" genre="" duration=0 trackPosition=1/1 image=null }
+    BTAudio Playback State change Event:
+      09-29 08:00:12.198 onPlaybackStateChanged(): com.ttscv.trudio : PlaybackState {state=PLAYING(3), position=173119, buffered position=237900, speed=1.0, updated=68223014, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+      09-29 08:00:15.200 onPlaybackStateChanged(): com.ttscv.trudio : PlaybackState {state=PLAYING(3), position=176112, buffered position=237900, speed=1.0, updated=68226014, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+      09-29 08:00:18.202 onPlaybackStateChanged(): com.ttscv.trudio : PlaybackState {state=PLAYING(3), position=179119, buffered position=237900, speed=1.0, updated=68229016, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+      09-29 08:00:21.200 onPlaybackStateChanged(): com.ttscv.trudio : PlaybackState {state=PLAYING(3), position=182121, buffered position=237900, speed=1.0, updated=68232016, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+      09-29 08:00:24.204 onPlaybackStateChanged(): com.ttscv.trudio : PlaybackState {state=PLAYING(3), position=185115, buffered position=237900, speed=1.0, updated=68235017, actions=262018, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+
+  List of Browsers: size=9
+    Browsable Package & Class Name: com.google.android.apps.youtube.music com.google.android.apps.youtube.music.mediabrowser.MusicBrowserService
+
+    Browsable Package & Class Name: com.google.android.youtube com.google.android.apps.youtube.app.extensions.mediabrowser.impl.MainAppMediaBrowserService
+
+    Browsable Package & Class Name: com.google.android.apps.labs.language.tailwind com.ryanheise.audioservice.AudioService
+
+    Browsable Package & Class Name: com.misu.newaudiotruyen id.flutter.flutter_background_service.BackgroundService
+
+    Browsable Package & Class Name: com.novelfever.app.android com.ryanheise.audioservice.AudioService
+
+    Browsable Package & Class Name: com.spotify.music com.spotify.mediabrowserservice.mediabrowserservice.SpotifyMediaBrowserService
+
+    Browsable Package & Class Name: com.ss.android.ugc.trill com.ss.android.ugc.aweme.dsp.playerservice.plugin.mediasession.common.MediaSessionService
+
+    Browsable Package & Class Name: com.ttscv.trudio com.doublesymmetry.trackplayer.service.MusicService
+
+    Browsable Package & Class Name: org.telegram.messenger org.telegram.messenger.MusicBrowserService
+
+  BTAudio Active Player Events:
+    09-29 00:22:23.480 setActivePlayer(): setting player to com.ttscv.trudio
+    09-29 06:01:15.461 setActivePlayer(): setting player to com.ttscv.trudio
+
+  BTAudio Audio Playback State Events:
+    09-29 06:01:43.402 onPlaybackConfigChanged: active config: AudioPlaybackConfiguration piid:12447 deviceIds:[3] type:AAudio u/pid:10347/18544 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_UNKNOWN source=DEFAULT flags=0x0 tags= bundle=null sessionId:-1 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x1, sampleRate=44100}
+    09-29 06:01:43.405 updateMediaForAudioPlayback: update state=PlaybackState {state=PLAYING(3), position=0, buffered position=0, speed=1.0, updated=61114222, actions=0, custom actions=[], active item id=-1, error=null}
+    09-29 06:01:44.725 onPlaybackConfigChanged: Active -> Non-active
+    09-29 06:01:44.729 updateMediaForAudioPlayback: update state=PlaybackState {state=PAUSED(2), position=0, buffered position=100, speed=0.0, updated=61086602, actions=262020, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+    09-29 06:01:47.484 onPlaybackConfigChanged: Non-active -> Active
+    09-29 06:01:47.485 onPlaybackConfigChanged: active config: AudioPlaybackConfiguration piid:12447 deviceIds:[3] type:AAudio u/pid:10347/18544 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_UNKNOWN source=DEFAULT flags=0x0 tags= bundle=null sessionId:-1 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x1, sampleRate=44100}
+    09-29 06:01:47.489 updateMediaForAudioPlayback: update state=PlaybackState {state=PLAYING(3), position=0, buffered position=0, speed=1.0, updated=61118306, actions=0, custom actions=[], active item id=-1, error=null}
+    09-29 06:01:49.293 onPlaybackConfigChanged: Active -> Non-active
+    09-29 06:01:49.295 updateMediaForAudioPlayback: update state=PlaybackState {state=PAUSED(2), position=0, buffered position=100, speed=0.0, updated=61086602, actions=262020, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+    09-29 06:02:15.367 onPlaybackConfigChanged: Non-active -> Active
+    09-29 06:02:15.368 onPlaybackConfigChanged: active config: AudioPlaybackConfiguration piid:12431 deviceIds:[] type:android.media.AudioTrack u/pid:10347/18544 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_MUSIC flags=0xA00(FLAG_DEEP_BUFFER+FLAG_MUTE_HAPTIC)  tags= bundle=null sessionId:11985 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x0, sampleRate=0}
+    09-29 07:06:33.215 onPlaybackConfigChanged: Active -> Non-active
+    09-29 07:06:33.218 updateMediaForAudioPlayback: update state=PlaybackState {state=PAUSED(2), position=257719, buffered position=300000, speed=0.0, updated=65004031, actions=262020, custom actions=[Action:mName='Previous, mIcon=2131231069, mExtras=Bundle[EMPTY_PARCEL], Action:mName='Next, mIcon=2131231053, mExtras=Bundle[EMPTY_PARCEL]], active item id=0, error=null}
+    09-29 07:06:36.853 onPlaybackConfigChanged: Non-active -> Active
+    09-29 07:06:36.854 onPlaybackConfigChanged: active config: AudioPlaybackConfiguration piid:12431 deviceIds:[] type:android.media.AudioTrack u/pid:10347/18544 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_MUSIC flags=0xA00(FLAG_DEEP_BUFFER+FLAG_MUTE_HAPTIC)  tags= bundle=null sessionId:11985 mutedState:none  FormatInfo{isSpatialized=false, channelMask=0x1, sampleRate=22050}
+
+  BTAudio Media Key Events:
+
+  AvrcpVolumeManager:
+    mCurrentDevice: null
+    Current System Volume: -1
+    Device Absolute Volume Map:
+    BTAudio Volume Events:
+
+
+  AvrcpCoverArtService:
+    psm = 4097
+    timages (0 / 32):
+      Handle   : Hash                              : CoverArt
+    Image bytes: 0
+    clients = []
+Profile: BatteryService
+
+Profile: HeadsetService
+  mMaxHeadsetConnections: 5
+  DefaultMaxHeadsetConnections: 5
+  mActiveDevice: null
+  isInbandRingingEnabled: true
+  isInbandRingingSupported: true
+  mInbandRingingRuntimeDisable: false
+  mAudioRouteAllowed: true
+  mVoiceRecognitionStarted: false
+  mVoiceRecognitionTimeoutEvent: null
+  mVirtualCallStarted: false
+  mDialingOutTimeoutEvent: null
+  AudioManager.isBluetoothScoOn(): false
+  Telecom.isInCall(): false
+  Telecom.isRinging(): false
+
+Profile: HearingAidService
+
+Profile: HidDeviceService
+
+Profile: HidHostService
+  mInputDevices:
+ XX:XX:XX:XX:08:10 : Selected transport=1 HID connection state=0 HOGP connection state=0
+
+Profile: BluetoothMapService
+  mRemoteDevice: null
+  mState: 0
+  mAppObserver: com.android.bluetooth.map.BluetoothMapAppObserver@9af9db8
+  mIsWaitingAuthorization: false
+  mRemoveTimeoutMsg: false
+  mPermission: 0
+  mAccountChanged: false
+  mBluetoothMnsObexClient: null
+  mMasInstanceMap:
+    null : MasId: 0 Uri:null SMS/MMS:true
+  mEnabledAccounts:
+
+Profile: BluetoothOppService
+
+Profile: PanService
+  mMaxPanDevices: 5
+  mPanIfName: bt-pan
+  mTetherOn: false
+  mPanDevices:
+
+Profile: BluetoothPbapService
+
+Profile: SapService
+
+LE Scanner:
+  UID   PID   SCANNER_ID PACKAGE          
+  ----- ----- ---------- -----------------
+  10294 31994 1          org.rescuemesh.g0
+  10294 31994 2          org.rescuemesh.g0
+
+LE Scanner Map:
+  Entries: 2
+  [1/2] com.google.android.gms:
+    Scans:
+      STARTED STOPPED ACTIVE                  SUSPEND  TOTAL                   WEIGHTED_TOTAL_COST
+      ------- ------- ----------------------- -------- ----------------------- -------------------
+      88      88      7h 34m 27s (27267696ms) 0s (0ms) 7h 34m 27s (27267696ms) 6816924
+    Scans per mode:
+               OPPORTUNISTIC LOW_POWER BALANCED               LOW_LATENCY AMBIENT_DISCOVERY  
+      -------- ------------- --------- ---------------------- ----------- -------------------
+      COUNTER  0             0         80                     0           8                  
+      DURATION 0s (0ms)      0s (0ms)  7h 7m 29s (25649766ms) 0s (0ms)    26m 57s (1617930ms)
+    Number of results:
+      CALLBACK_TYPE SCREEN_OFF SCREEN_ON TOTAL
+      ------------- ---------- --------- -----
+      ALL_MATCHES   1          2533      2534
+    Current Consumption Severities:
+      WINDOW(H) SEVERITY AVG/HR TOTAL
+      --------- -------- ------ -----
+      1         NORMAL   0      0    
+      4         NORMAL   0      0    
+      8         NORMAL   0      1
+    Last 5 scans:
+      [09-29 00:14:08.082 --> 09-29 00:23:03.644] Duration: 8m 55s (535562ms)
+        └ Info: (Forced) (Filter) Results: (0 / 0 / 0) | ScannerId(3) | [nearby_connections] | CB Regular Scan
+        └ App Importance: Foreground Service
+          SCAN_MODE         CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          AMBIENT_DISCOVERY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         false  1M  -128 ACTIVE
+        └ Filter: [ ServiceUuid=0000fef3-0000-1000-8000-00805f9b34fb ]
+        └ Filter: [ ServiceDataUuid=0000fc73-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+        └ Filter: [ ServiceDataUuid=0000fef3-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+      [09-29 06:00:13.409 --> 09-29 06:02:19.550] Duration: 2m 6s (126141ms)
+        └ Info: (Filter) Results: (0 / 0 / 0) | ScannerId(1) | [nearby_connections] | CB Regular Scan
+        └ App Importance: Higher than Foreground Service
+          SCAN_MODE         CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          AMBIENT_DISCOVERY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         false  1M  -128 ACTIVE
+        └ Filter: [ ServiceUuid=0000fef3-0000-1000-8000-00805f9b34fb ]
+        └ Filter: [ ServiceDataUuid=0000fc73-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+        └ Filter: [ ServiceDataUuid=0000fef3-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+      [09-29 07:06:33.122 --> 09-29 07:06:41.770] Duration: 8s (8648ms)
+        └ Info: (Filter) Results: (0 / 0 / 0) | ScannerId(1) | [nearby_connections] | CB Regular Scan
+        └ App Importance: Higher than Foreground Service
+          SCAN_MODE         CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          AMBIENT_DISCOVERY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         false  1M  -128 ACTIVE
+        └ Filter: [ ServiceUuid=0000fef3-0000-1000-8000-00805f9b34fb ]
+        └ Filter: [ ServiceDataUuid=0000fc73-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+        └ Filter: [ ServiceDataUuid=0000fef3-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+      [09-29 07:38:49.138 --> 09-29 07:52:13.793] Duration: 13m 24s (804655ms)
+        └ Info: (Forced) (Filter) Results: (0 / 0 / 0) | ScannerId(1) | [nearby_connections] | CB Regular Scan
+        └ App Importance: Higher than Foreground Service
+          SCAN_MODE         CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          AMBIENT_DISCOVERY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         false  1M  -128 ACTIVE
+        └ Filter: [ ServiceUuid=0000fef3-0000-1000-8000-00805f9b34fb ]
+        └ Filter: [ ServiceDataUuid=0000fc73-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+        └ Filter: [ ServiceDataUuid=0000fef3-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+      [09-29 07:52:19.262 --> 09-29 07:52:33.363] Duration: 14s (14101ms)
+        └ Info: (Filter) Results: (0 / 0 / 0) | ScannerId(1) | [nearby_connections] | CB Regular Scan
+        └ App Importance: Foreground Service
+          SCAN_MODE         CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          AMBIENT_DISCOVERY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         false  1M  -128 ACTIVE
+        └ Filter: [ ServiceUuid=0000fef3-0000-1000-8000-00805f9b34fb ]
+        └ Filter: [ ServiceDataUuid=0000fc73-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+        └ Filter: [ ServiceDataUuid=0000fef3-0000-1000-8000-00805f9b34fb ServiceData=[0] ServiceDataMask=[0] ]
+  [2/2] org.rescuemesh.g0 (Registered):
+    Scanner ID: ScannerId(1), UUID: 3635466a-8267-4ef0-a066-c9527fa02c22
+    Scanner ID: ScannerId(2), UUID: acd95135-dd7a-4dc2-a5b9-fa057fa43946
+    Scans:
+      STARTED STOPPED ACTIVE                  SUSPEND           TOTAL                  WEIGHTED_TOTAL_COST
+      ------- ------- ----------------------- ----------------- ---------------------- -------------------
+      4       2       7h 44m 49s (27889899ms) 9m 10s (550153ms) 7h 54m 0s (28440052ms) 27889899
+    Scans per mode:
+               OPPORTUNISTIC LOW_POWER BALANCED LOW_LATENCY             AMBIENT_DISCOVERY
+      -------- ------------- --------- -------- ----------------------- -----------------
+      COUNTER  0             0         0        4                       0                
+      DURATION 0s (0ms)      0s (0ms)  0s (0ms) 7h 44m 49s (27889899ms) 0s (0ms)
+    Number of results:
+      CALLBACK_TYPE SCREEN_OFF SCREEN_ON TOTAL
+      ------------- ---------- --------- -----
+      ALL_MATCHES   234        5214      5448
+    Current Consumption Severities:
+      WINDOW(H) SEVERITY AVG/HR TOTAL
+      --------- -------- ------ -----
+      1         NORMAL   4      4    
+      4         NORMAL   1      4    
+      8         NORMAL   29     234
+    Last 2 scans:
+      [09-29 00:08:22.603 --> 09-29 07:50:55.768] Duration: 7h 42m 33s (27753165ms)
+        └ Info: (Forced) Results: (230 / 5207 / 5437) | ScannerId(2) | CB Regular Scan
+        └ App Importance: Foreground Service
+        └ Active Time: 27591879ms, Suspended Time: 161286ms
+          SCAN_MODE   CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          LOW_LATENCY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         true   1M  -128 ACTIVE
+      [09-29 07:50:55.841 --> 09-29 07:56:53.020] Duration: 5m 57s (357179ms)
+        └ Info: Results: (0 / 3 / 3) | ScannerId(2) | CB Regular Scan
+        └ App Importance: Foreground Service
+        └ Active Time: 161028ms, Suspended Time: 196151ms
+          SCAN_MODE   CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          LOW_LATENCY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         true   1M  -128 ACTIVE
+    Ongoing 2 scans:
+      [09-29 07:56:21.207] Elapsed: 4m 3s (243861ms)
+        └ Info: (Suspended) Results: (0 / 4 / 4) | ScannerId(1) | CB Regular Scan
+        └ Active Time: 51145ms, Suspended Time: 192716ms
+          SCAN_MODE   CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          LOW_LATENCY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         true   1M  -128 ACTIVE
+      [09-29 07:58:59.221] Elapsed: 1m 25s (85847ms)
+        └ Info: (Filter) Results: (4 / 0 / 4) | ScannerId(2) | CB Regular Scan
+          SCAN_MODE   CALLBACK_TYPE RESULT_TYPE DELAY_MS MATCH_MODE NUM_MATCHES LEGACY PHY RSSI SCAN_TYPE
+          ----------- ------------- ----------- -------- ---------- ----------- ------ --- ---- ---------
+          LOW_LATENCY ALL_MATCHES   FULL        0        AGGRESSIVE FEW         true   1M  -128 ACTIVE
+        └ Filter: [ ManufacturerId=65535 ManufacturerData=[70, -9, 42, -119, -85, -51, -17, 57, -99, -24, 63, -53, 61, 45, 83, -68, 76, 27, -88, 17, 7, -118, 96, 40] ]
+
+Native:
+  hci_instance_name: default
+
+Connection Events:
+  None
+
+Bond Events:
+  Total Number of events: 0
+
+Link Key Types:
+  xx:xx:xx:xx:f6:d6
+    BR: UNAUTH_COMB
+    LE:
+  xx:xx:xx:xx:c8:60
+    BR: UNAUTH_COMB
+    LE:
+  xx:xx:xx:xx:04:b6
+    BR: UNAUTH_COMB
+    LE:
+  xx:xx:xx:xx:08:10
+    BR: UNAUTH_COMB
+    LE:
+
+AVRCP Controller Native State:
+  Devices (0 / 5):
+
+A2DP State:
+  TxQueue:
+  Counts (enqueue/dequeue/readbuf)                        : 0 / 0 / 0
+  Last update time ago in ms (enqueue/dequeue/readbuf)    : 0 / 0 / 0
+  Frames per packet (total/max/ave)                       : 0 / 0 / 0
+  Counts (flushed/dropped/dropouts)                       : 0 / 0 / 0
+  Counts (max dropped)                                    : 0
+  Last update time ago in ms (flushed/dropped)            : 0 / 0
+  Counts (underflow)                                      : 0
+  Bytes (underflow)                                       : 0
+  Last update time ago in ms (underflow)                  : 0
+  Enqueue deviation counts (overdue/premature)            : 0 / 0
+  Enqueue overdue scheduling time in ms (total/max/ave)   : 0 / 0 / 0
+  Enqueue premature scheduling time in ms (total/max/ave) : 0 / 0 / 0
+  Dequeue deviation counts (overdue/premature)            : 0 / 0
+  Dequeue overdue scheduling time in ms (total/max/ave)   : 0 / 0 / 0
+  Dequeue premature scheduling time in ms (total/max/ave) : 0 / 0 / 0
+
+A2DP Peers State:
+  Source: active peer: null
+  Sink: active peer: null
+
+A2DP Peer Cache:
+Optional codecs disabled for devices: []
+
+A2DP Source State: Enabled
+  Active peer: 00:00:00:00:00:00
+  Peers:
+
+A2DP Sink State: Disabled
+
+BTA AV State:
+  State Machine State: INIT
+  SDP A2DP source handle: 65539
+  SDP A2DP sink handle: 0
+  Features: 0x865b
+  SDP handle: 0
+  Disabling: false
+  SCO occupied: false
+  Connected audio channels: 0
+  Connected audio channels mask: 0x0
+  Registered audio channels mask: 0x3f
+  Connected LCBs mask: 0x0
+  Offload start pending handle: 0
+  Offload started handle: 0
+
+AVDTP Stack State:
+  AVDTP signalling L2CAP channel MTU: 672
+
+Socket Events:
+  Time        	Address          	State             	Role              	Channel   	Type     	ServerName
+  00:08:21.856	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-2         	RFCOMM	
+  00:08:21.857	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	7         	RFCOMM	
+  00:08:21.857	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-2         	L2CAP	
+  00:08:21.857	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	4103         	L2CAP	
+  00:08:21.859	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-2         	RFCOMM	
+  00:08:21.859	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	8         	RFCOMM	
+  00:08:23.068	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-1         	RFCOMM	NearbySharing
+  00:08:23.069	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	9         	RFCOMM	NearbySharing
+  00:08:23.101	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-2         	L2CAP_LE	
+  00:08:23.102	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	128         	L2CAP_LE	
+  01:16:37.546	00:00:00:00:00:00	STATE_DISCONNECTED   	ROLE_LISTEN      	9         	RFCOMM	NearbySharing
+  01:16:37.558	00:00:00:00:00:00	STATE_DISCONNECTED   	ROLE_LISTEN      	128         	L2CAP_LE	
+  01:16:40.462	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-1         	RFCOMM	NearbySharing
+  01:16:40.465	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	10         	RFCOMM	NearbySharing
+  01:16:40.532	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	-2         	L2CAP_LE	
+  01:16:40.532	00:00:00:00:00:00	STATE_LISTENING   	ROLE_LISTEN      	129         	L2CAP_LE	
+
+
+AVRCP Target Native Service: 0 devices
+  Absolute Volume Enabled: true
+
+stack::gatt    last 0 tcb state transitions:
+TCB (GATT_MAX_PHY_CHANNEL: 8) in_use: 0
+
+GATT offload sessions
+Number of active offload sessions: 0
+
+BTA_GATTC_CB state BTA_GATTC_STATE_ENABLED
+ ->conn_track (GATT_MAX_PHY_CHANNEL=16)
+  -- used: 0
+ ->bg_track (BTA_GATTC_KNOWN_SR_MAX=255)
+  -- used: 0
+ ->cl_rcb (dynamic)
+  app_id: 46  app uuids: fbd3760b-5b8a-5e6b-2ce8-7b11d8e6db67  clcb_num: 0
+  app_id: 45  app uuids: bee23647-13be-ce23-c6ca-2035e6842c14  clcb_num: 0
+  app_id: 44  app uuids: 7107d2b1-d598-f481-4efb-c349e0641812  clcb_num: 0
+  -- used: 3
+ ->clcb (dynamic)
+  -- used: 0
+ ->known_server (BTA_GATTC_KNOWN_SR_MAX=255)
+  -- used: 0
+
+
+Bluetooth Iot Config:
+  Config Source: Original file
+  Devices loaded: 7
+  File created/tagged: 2025-10-24 01:18:39
+
+Bluetooth HF Client BTA Statistics
+
+Bluetooth Wakelock Statistics:
+  Is acquired                    : false
+  Acquired/released count        : 0 / 0
+  Acquired/released error count  : 0 / 0
+  Last acquire/release error code: 0 / 0
+  Last acquired time (ms)        : 0
+  Acquired time min/max/avg (ms) : 0 / 0 / 0
+  Total acquired time (ms)       : 0
+  Total run time (ms)            : 68235889
+
+Bluetooth Alarms Statistics:
+  Total Alarms: 0
+
+Coordinated Set Service Client:
+
+Hearing Access Service Client:
+  no instance
+
+Hearing Aid Manager:
+  Hearing Aid Audio HAL:
+    Counts (underflow)                                      : 0
+    Bytes (underflow)                                       : 0
+    Last update time ago in ms (underflow)                  : 0
+
+Device Groups Manager:
+  Not initialized 
+GmapServer is enabled: 0
+LeAudio Manager:
+  Not initialized
+  LE AudioHalClient:
+    Counts (underflow)                                      : 0
+    Bytes (underflow)                                       : 0
+    Last update time ago in ms (underflow)                  : 0
+  ----------------
+  ISO Manager:
+    Available credits: 24
+    Controller buffer size: 1021
+    CIGs:
+    BIGs (Source):
+    BIGs (Sink):
+  ----------------
+
+Le Audio Broadcaster:
+
+Volume Control Manager:
+
+Volume Control Profile (VCP) Renderer:
+  Not initialized
+
+VAP Server Manager:
+    VA Name: 
+    Active VA Group ID: -1
+    Active VA Device: 00:00:00:00:00:00
+    VAP CCID: 0
+    VA Supported Features: 0
+    VAP GATT Server IF: 0
+
+
+connection_manager state:
+    no Low Energy connection attempts
+
+BT Quality Report Events:
+Event queue is empty.
+ ----- stack::avct -----
+stack::avct  Id: 0 profile_uuid:0x110e role:AVCT_ROLE_ACCEPTOR control:0x 7
+stack::avct   Link  : No link channel
+stack::avct   Browse: No browse channel
+ ----- shim::legacy::pan -----
+shim::legacy::pan Connections:0 roles configured:C.N[0x5] current:...[0x0] previous:...[0x0]
+shim::legacy::pan service_name_user:"Android Network User"
+shim::legacy::pan service_name_nap:"Android Network Access Point"
+ ----- shim::legacy::hid -----
+shim::legacy::hid status:BTIF_HH_ENABLED num_devices:0
+shim::legacy::hid status:BTIF_HH_ENABLED
+shim::legacy::hid   0: addr:xx:xx:xx:xx:08:10[public][BT_TRANSPORT_BR_EDR] reconnect:T
+shim::legacy::hid [0] Device:xx:xx:xx:xx:08:10[public][BT_TRANSPORT_BR_EDR], handle:0, state:BTA_HH_IDLE_ST, sub class:128, 
+ ----- BR/EDR HID host -----
+BR/EDR HID host Registered:true, SDP busy:false
+BR/EDR HID host Device:xx:xx:xx:xx:08:10, handle:0, state:HIDH_DEV_NO_CONN, conn_state:HID_CONN_STATE_UNUSED, conn_flags:0x00, control_cid:0x0000, intr_cid:0x0000
+ ----- shim::legacy::bta::dm -----
+shim::legacy::bta::dm  last 0 discovery state transitions
+shim::legacy::bta::dm  current bta_dm_discovery_state:BTA_DM_DISCOVER_IDLE
+shim::legacy::bta::dm  last 0 search state transitions
+shim::legacy::bta::dm  current bta_dm_search_state:BTA_DM_SEARCH_IDLE
+shim::legacy::bta::dm  last 0 gatt history entries
+shim::legacy::bta::dm::sniff_offload  sniff offload started state: is_started:false status_code:0
+shim::legacy::bta::dm::sniff_offload  last 0 sniff offload parameters writes
+ ----- shim::legacy::sdp -----
+shim::legacy::sdp max_attribute_list_size:1008 max_records_per_search:21
+shim::record 001 xx:xx:xx:xx:f6:d6 BR_EDR cod:2400-4-4 remote_info:UNKNOWN        sm4:0x00 SecureConn:F name:"XG33" sec_prop:bredr_linkkey_known:T,le_linkkey_known:F,bond_type:BOND_TYPE_PERSISTENT,bredr_linkkey_type:UNAUTH_COMB,ble_enc_key_size:0,le_enc_key_size:0,bredr_authenticated:F,le_authenticated:F,16_digit_key_authenticated:F,bredr_encrypted:F,le_encrypted:F, pairing_algorithm:PairingAlgorithm::NONE(0x0), ble_pairing_algorithm:PairingAlgorithm::NONE(0x0), in_resolving_list: F
+shim::record 002 xx:xx:xx:xx:c8:60 BR_EDR cod:2400-4-4 remote_info:UNKNOWN        sm4:0x00 SecureConn:F name:"AirPods Pro 2" sec_prop:bredr_linkkey_known:T,le_linkkey_known:F,bond_type:BOND_TYPE_PERSISTENT,bredr_linkkey_type:UNAUTH_COMB,ble_enc_key_size:0,le_enc_key_size:0,bredr_authenticated:F,le_authenticated:F,16_digit_key_authenticated:F,bredr_encrypted:F,le_encrypted:F, pairing_algorithm:PairingAlgorithm::NONE(0x0), ble_pairing_algorithm:PairingAlgorithm::NONE(0x0), in_resolving_list: F
+shim::record 003 xx:xx:xx:xx:04:b6 BR_EDR cod:2400-4-18 remote_info:UNKNOWN        sm4:0x00 SecureConn:F name:"BT-SPEAKER" sec_prop:bredr_linkkey_known:T,le_linkkey_known:F,bond_type:BOND_TYPE_PERSISTENT,bredr_linkkey_type:UNAUTH_COMB,ble_enc_key_size:0,le_enc_key_size:0,bredr_authenticated:F,le_authenticated:F,16_digit_key_authenticated:F,bredr_encrypted:F,le_encrypted:F, pairing_algorithm:PairingAlgorithm::NONE(0x0), ble_pairing_algorithm:PairingAlgorithm::NONE(0x0), in_resolving_list: F
+shim::record 004 xx:xx:xx:xx:08:10 BR_EDR cod:20-5-40 remote_info:UNKNOWN        sm4:0x00 SecureConn:F name:"Bluetooth 3.0 Keyboard" sec_prop:bredr_linkkey_known:T,le_linkkey_known:F,bond_type:BOND_TYPE_PERSISTENT,bredr_linkkey_type:UNAUTH_COMB,ble_enc_key_size:0,le_enc_key_size:0,bredr_authenticated:F,le_authenticated:F,16_digit_key_authenticated:F,bredr_encrypted:F,le_encrypted:F, pairing_algorithm:PairingAlgorithm::SSP(0x3), ble_pairing_algorithm:PairingAlgorithm::NONE(0x0), in_resolving_list: F
+ ----- shim::legacy::l2cap -----
+ ----- shim::btm -----
+shim::btm  2026-09-28 21:02:34.773 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:02:35.531 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.758 results:0  
+shim::btm  2026-09-28 21:02:35.531 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:02:50.470 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:14.939 results:0  
+shim::btm  2026-09-28 21:04:52.955 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:04:52.955 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 21:04:52.956 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:04:54.485 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 1.529 results:0  
+shim::btm  2026-09-28 21:04:54.485 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:09:53.058 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:298.573 results:0  
+shim::btm  2026-09-28 21:09:53.059 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:14:54.043 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:300.984 results:0  
+shim::btm  2026-09-28 21:16:18.665 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:16:18.665 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 21:16:18.666 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:16:24.668 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 6.002 results:0  
+shim::btm  2026-09-28 21:16:24.668 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:20:17.855 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:233.187 results:0  
+shim::btm  2026-09-28 21:20:29.777 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:20:29.777 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 21:20:29.777 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:25:29.783 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:300.006 results:0  
+shim::btm  2026-09-28 21:25:29.784 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:28:41.322 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:191.538 results:0  
+shim::btm  2026-09-28 21:49:47.034 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:49:47.034 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 21:49:47.034 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:49:50.853 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 3.819 results:0  
+shim::btm  2026-09-28 21:49:50.853 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 21:54:47.134 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:296.281 results:0  
+shim::btm  2026-09-28 21:54:47.134 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:09:00.446 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:4453.312 results:0  
+shim::btm  2026-09-28 23:18:05.959 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:18:05.959 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:18:05.959 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:18:10.306 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 4.347 results:0  
+shim::btm  2026-09-28 23:18:10.306 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:23:05.963 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:295.657 results:2  
+shim::btm  2026-09-28 23:23:05.963 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:42:52.042 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:1186.079 results:1156
+shim::btm  2026-09-28 23:43:00.947 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:43:00.947 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:43:00.947 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:43:20.904 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:19.957 results:45 
+shim::btm  2026-09-28 23:44:58.854 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:44:58.854 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:44:58.854 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:45:04.845 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 5.991 results:49 
+shim::btm  2026-09-28 23:45:04.845 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:45:09.208 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 4.363 results:9  
+shim::btm  2026-09-28 23:45:19.020 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:45:19.020 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:45:19.021 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:45:33.860 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:14.839 results:40 
+shim::btm  2026-09-28 23:48:10.991 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:48:10.991 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:48:10.991 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:48:16.991 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 6.000 results:43 
+shim::btm  2026-09-28 23:48:16.991 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:48:28.490 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:11.499 results:31 
+shim::btm  2026-09-28 23:58:26.719 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:58:26.719 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-28 23:58:26.719 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:58:28.712 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 1.993 results:21 
+shim::btm  2026-09-28 23:58:28.712 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-28 23:59:33.983 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:65.271 results:193
+shim::btm  2026-09-29 00:01:34.271 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:01:34.271 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:01:34.271 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:01:40.268 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 5.997 results:47 
+shim::btm  2026-09-29 00:01:40.269 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:06:34.271 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:294.002 results:671
+shim::btm  2026-09-29 00:06:34.271 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:21.270 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:2 scn:2 dlci:4 mtu:990
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:3 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:4 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:5 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:6 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:7 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:8 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:9 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:10 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.339 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:11 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.340 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:12 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.340 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:13 scn:3 dlci:6 mtu:256
+shim::btm  2026-09-29 00:08:21.340 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:14 scn:4 dlci:8 mtu:256
+shim::btm  2026-09-29 00:08:21.561 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:15 scn:5 dlci:10 mtu:990
+shim::btm  2026-09-29 00:08:21.717 PAN    Registered               : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:21.717 PAN    Role change              : 00:00:00:00:00:00 role:0x5
+shim::btm  2026-09-29 00:08:21.751 SCAN   Classic updated          : 00:00:00:00:00:00 inquiry_scan_enable:F page_scan_enable:F
+shim::btm  2026-09-29 00:08:21.751 SCAN   Classic updated          : 00:00:00:00:00:00 inquiry_scan_enable:F page_scan_enable:T
+shim::btm  2026-09-29 00:08:21.754 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:16 scn:6 dlci:12 mtu:990
+shim::btm  2026-09-29 00:08:21.857 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:17 scn:7 dlci:14 mtu:990
+shim::btm  2026-09-29 00:08:21.859 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:18 scn:8 dlci:16 mtu:990
+shim::btm  2026-09-29 00:08:22.318 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:108.047 results:130
+shim::btm  2026-09-29 00:08:22.484 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:22.484 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:08:22.484 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:22.550 ADV    Le advert started        : 00:00:00:00:00:00 reg_id:-2
+shim::btm  2026-09-29 00:08:22.611 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.127 results:0  
+shim::btm  2026-09-29 00:08:22.611 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:23.069 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:19 scn:9 dlci:18 mtu:990
+shim::btm  2026-09-29 00:08:48.761 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:26.150 results:735
+shim::btm  2026-09-29 00:08:49.344 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:08:49.345 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.001 results:0  
+shim::btm  2026-09-29 00:08:49.345 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:09:44.210 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:54.865 results:1604
+shim::btm  2026-09-29 00:09:54.686 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:09:54.686 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:09:54.686 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:10:07.153 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:12.467 results:393
+shim::btm  2026-09-29 00:12:22.645 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:12:22.645 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:12:22.645 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:13:38.404 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:75.759 results:2584
+shim::btm  2026-09-29 00:13:43.644 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:13:43.644 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:13:43.644 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:13:56.117 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:12.473 results:483
+shim::btm  2026-09-29 00:13:56.117 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:13:56.118 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.001 results:0  
+shim::btm  2026-09-29 00:14:05.640 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:14:05.640 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 00:14:05.640 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:14:05.691 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.051 results:1  
+shim::btm  2026-09-29 00:14:05.691 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:19:05.693 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:300.002 results:2463
+shim::btm  2026-09-29 00:19:05.693 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:19:08.086 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 2.393 results:4  
+shim::btm  2026-09-29 00:19:08.086 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 00:23:03.681 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:235.574 results:331
+shim::btm  2026-09-29 01:16:37.562 RFCOMM Server stopped           : 00:00:00:00:00:00 handle:19 scn:9 dlci:18 is_server:true
+shim::btm  2026-09-29 01:16:40.465 RFCOMM Server started           : ff:ff:ff:ff:ff:ff handle:20 scn:10 dlci:20 mtu:990
+shim::btm  2026-09-29 06:00:13.542 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 06:00:13.551 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.017 results:0  
+shim::btm  2026-09-29 06:00:13.551 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 06:00:19.437 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 5.886 results:0  
+shim::btm  2026-09-29 06:00:19.438 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 06:02:19.550 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:120.112 results:0  
+shim::btm  2026-09-29 07:06:33.127 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:06:33.127 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:06:33.127 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:06:39.129 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 6.002 results:0  
+shim::btm  2026-09-29 07:06:39.129 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:06:41.770 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 2.641 results:0  
+shim::btm  2026-09-29 07:38:49.149 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:38:49.153 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.003 results:0  
+shim::btm  2026-09-29 07:38:49.153 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:38:55.150 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 5.997 results:0  
+shim::btm  2026-09-29 07:38:55.151 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:43:49.253 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:294.102 results:0  
+shim::btm  2026-09-29 07:43:49.253 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:50:55.782 ADV    Le advert stopped        : 00:00:00:00:00:00 advert_id:0
+shim::btm  2026-09-29 07:50:55.825 ADV    Le advert started        : 00:00:00:00:00:00 reg_id:-3
+shim::btm  2026-09-29 07:52:13.794 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:504.541 results:0  
+shim::btm  2026-09-29 07:52:13.794 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:52:16.232 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 2.438 results:0  
+shim::btm  2026-09-29 07:52:16.576 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:52:16.576 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:52:16.577 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:52:19.264 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 2.687 results:0  
+shim::btm  2026-09-29 07:52:19.265 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:52:33.364 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:14.099 results:0  
+shim::btm  2026-09-29 07:52:33.364 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:52:35.808 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 2.444 results:0  
+shim::btm  2026-09-29 07:53:04.292 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:53:04.292 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:53:04.292 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:53:16.795 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:12.503 results:0  
+shim::btm  2026-09-29 07:54:03.323 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:54:03.324 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.001 results:0  
+shim::btm  2026-09-29 07:54:03.324 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:54:17.317 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:13.993 results:2  
+shim::btm  2026-09-29 07:54:36.657 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:54:36.657 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:54:36.657 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:54:50.383 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:13.726 results:0  
+shim::btm  2026-09-29 07:55:25.232 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:55:25.232 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:55:25.232 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:55:37.750 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:12.518 results:3  
+shim::btm  2026-09-29 07:56:20.501 ADV    Le advert stopped        : 00:00:00:00:00:00 advert_id:0
+shim::btm  2026-09-29 07:56:21.169 ADV    Le advert started        : 00:00:00:00:00:00 reg_id:-4
+shim::btm  2026-09-29 07:56:31.268 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:56:31.269 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:56:31.269 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:56:39.268 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 7.999 results:0  
+shim::btm  2026-09-29 07:56:52.396 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:56:52.396 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:56:52.396 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:57:04.877 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:12.481 results:6  
+shim::btm  2026-09-29 07:58:07.176 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:58:07.176 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:58:07.176 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:58:29.818 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s:22.642 results:2  
+shim::btm  2026-09-29 07:58:58.795 ADV    Le advert stopped        : 00:00:00:00:00:00 advert_id:0
+shim::btm  2026-09-29 07:58:59.198 ADV    Le advert started        : 00:00:00:00:00:00 reg_id:-5
+shim::btm  2026-09-29 07:58:59.223 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::btm  2026-09-29 07:58:59.223 SCAN   Le scan stopped          : 00:00:00:00:00:00 duration_s: 0.000 results:0  
+shim::btm  2026-09-29 07:58:59.223 SCAN   Le scan started          : 00:00:00:00:00:00 
+shim::legacy::dumpsys Dumping shim legacy targets:1
+shim::stack Stack information ᛒᚼ
+shim::stack Classic inquiry:disabled
+shim::stack Le scan:enabled duration_s:85.850 results:8
+shim::stack Last 0 inquiry scans:
+ ----- shim::acl -----
+
+HCI ControllerImpl Dumpsys:
+    local_version_information:
+        hci_version: V_5_2(0x0b)
+        hci_revision: 0x20cb
+        lmp_version: V_5_2(0x0b)
+        lmp_subversion: 0x6209
+        manufacturer_name: 15
+    buffer_size:
+        acl_data_packet_length: 1021
+        total_num_acl_data_packets: 12
+        sco_data_packet_length: 254
+        total_num_sco_data_packets: 1
+    le_buffer_size:
+        le_acl_data_packet_length: 251
+        total_num_le_acl_data_packets: 15
+        iso_data_packet_length: 1021
+        total_num_iso_data_packets: 24
+    le_maximum_data_length:
+        supported_max_tx_octets: 251
+        supported_max_tx_time: 17040
+        supported_max_rx_octets: 251
+        supported_max_rx_time: 17040
+    le_accept_list_size: 128
+    le_resolving_list_size: 128
+    le_maximum_advertising_data_length: 1650
+    le_suggested_default_data_length: 27
+    le_suggested_default_data_length_v2: 0
+    le_number_supported_advertising_sets: 16
+    le_periodic_advertiser_list_size: 6
+    le_supported_states: 0x000003ffffffffff
+    local_supported_features:
+        page0: 0x877bffdbfe8ffebf
+        page1: 0x0000000000000002
+        page2: 0x0000000000000f33
+    le_local_supported_features:
+        page0: 0x0000000e1f01f9ef
+    local_supported_commands: [
+        0xff, 0xff, 0xff, 0x03, 0xcc, 0xff, 0xef, 0xff,
+        0xff, 0xff, 0xfc, 0x1f, 0xf2, 0x0f, 0xe8, 0xfe,
+        0x3f, 0xf7, 0x8f, 0xff, 0x1c, 0x00, 0x04, 0x00,
+        0x61, 0xf7, 0xff, 0xff, 0x7f, 0xf8, 0xff, 0xff,
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xe7,
+        0xe0, 0xff, 0xff, 0xff, 0xff, 0xad, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    ]
+    vendor_capabilities:
+        is_supported: 1
+        max_adv_instances: 16
+        offloaded_resolution_of_private_addresses: 1
+        total_scan_result_storage: 10240
+        max_irk_list_size: 0
+        filtering_support: 1
+        max_filter: 64
+        activity_energy_info_support: 1
+        version_supported: 257
+        total_num_of_advt_tracked: 20
+        extended_scan_support: 1
+        debug_logging_supported: 1
+        le_address_generation_offloading_support: 0
+        a2dp_source_offload_capability_mask: 35
+        bluetooth_quality_report_support: 1
+        dynamic_audio_buffer_support: 35
+        a2dp_offload_v2_support: 0
+        iso_link_feedback_support: 0
+        sniff_offload_support: 0
+        big_set_channel_map_classification_support: 0
+        vendor_connection_handle_min: 0
+        vendor_connection_handle_max: 0
+
+ACL Manager Dumpsys:
+    le_connectability_state: "ConnectabilityState::DISARMED"
+    le_filter_accept_list_count: 0
+    le_filter_accept_list: [
+    ]
+
+LE Advertising Manager Dumpsys:
+    id: 0 address: xx:xx:xx:xx:47:32[RANDOM_DEVICE_ADDRESS(0x01)] duration: 0 in_use: true started: true connectable: false discoverable: true directed: false periodic: false
+
+Wakelock Dumpsys:
+    is_acquired: false
+    is_native: true
+    acquired_count: 1
+    released_count: 1
+    acquired_error_count: 0
+    released_error_count: 0
+    last_acquired_error_code: 0
+    last_released_error_code: 0
+    last_acquired_timestamp_ms: 150
+    last_released_timestamp_ms: 17329
+    last_interval_ms: 150
+    max_interval_ms: 150
+    min_interval_ms: 150
+    avg_interval_ms: 150
+    total_interval_ms: 150
+    total_time_since_reset_ms: 68218721

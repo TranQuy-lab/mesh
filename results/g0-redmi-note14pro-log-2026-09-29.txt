@@ -1,0 +1,35 @@
+Device: Xiaomi Redmi Note 14 Pro global
+Model/device: 24116RACCG / obsidian
+Android/API: 15 / 35
+Build: AP3A.240905.015.A2 / OS2.0.213.0.VOFMIXM
+SoC: MediaTek MT6789
+Security patch: 2026-02-01
+APK SHA-256: e11012e76106a18d329e5e03d74d28d1137c172c1818c3bd3f7c549bf678ba5a
+
+Static Bluetooth observations:
+- android.hardware.bluetooth_le present
+- le_maximum_advertising_data_length: 304
+- le_number_supported_advertising_sets: 10
+- le_periodic_advertiser_list_size: 16
+
+Foreground probe, balanced advertising and balanced filtered scan:
+09-29 08:39:58.979 I RescueMeshG0: event=codec_selftest,golden=true,verify=true
+09-29 08:39:58.997 I RescueMeshG0: event=capability,model=Xiaomi 24116RACCG,sdk=35,adapter=true,enabled=true,multi_adv=true,offloaded_filter=true,offloaded_batch=true,extended_adv=true,max_adv_data=304
+09-29 08:39:59.019 I RescueMeshG0: event=accelerometer,name=lsm6dsv_acc,vendor=st,min_delay_us=5000,max_delay_us=133333,fifo_max=4500,fifo_reserved=3000,power_ma=0.001,wakeup=false
+09-29 08:39:59.029 I RescueMeshG0: event=sensor_start,ok=true,period_us=50000,max_latency_us=2000000
+09-29 08:39:59.038 I RescueMeshG0: event=advertise_config,mode=balanced,interval_units=400
+09-29 08:39:59.089 I RescueMeshG0: event=scan_start,ok=true,mode=balanced,filtered=true
+09-29 08:39:59.127 I RescueMeshG0: event=advertise_start,ok=true,legacy=true,tx_dbm=-2,connectable=false,payload_bytes=24,messages_issued=1
+09-29 08:40:09.127 I RescueMeshG0: event=tick,elapsed_ms=10150,screen_interactive=true,advertising=true,scanning=true,scan_callbacks=0,golden_matches=0,valid_frames=0,unique_messages=0,messages_issued=10,unique_devices=0,sensor_events=584,sensor_hz=57.819
+
+Dozing probe:
+09-29 08:40:26.004 I RescueMeshG0: event=tick,elapsed_ms=60,screen_interactive=false,advertising=false,scanning=true,scan_callbacks=0,golden_matches=0,valid_frames=0,unique_messages=0,messages_issued=0,unique_devices=0,sensor_events=2,sensor_hz=57.817
+09-29 08:40:26.005 I RescueMeshG0: event=advertise_start,ok=true,legacy=true,tx_dbm=-2,connectable=false,payload_bytes=24,messages_issued=1
+09-29 08:40:36.005 I RescueMeshG0: event=tick,elapsed_ms=10062,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=0,golden_matches=0,valid_frames=0,unique_messages=0,messages_issued=10,unique_devices=0,sensor_events=578,sensor_hz=57.820
+09-29 08:40:46.007 I RescueMeshG0: event=tick,elapsed_ms=20064,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=0,golden_matches=0,valid_frames=0,unique_messages=0,messages_issued=20,unique_devices=0,sensor_events=1157,sensor_hz=57.820
+09-29 08:40:56.010 I RescueMeshG0: event=tick,elapsed_ms=30067,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=0,golden_matches=0,valid_frames=0,unique_messages=0,messages_issued=30,unique_devices=0,sensor_events=1735,sensor_hz=57.821
+
+Interpretation boundary:
+- No independent receiver participated, so zero scan callbacks does not estimate PDR.
+- The phone cannot be used to validate reception of its own advertisement.
+- This run establishes API/controller startup and 30-second Dozing continuity only.

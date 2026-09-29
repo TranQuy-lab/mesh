@@ -1,0 +1,29 @@
+--------- beginning of main
+09-29 07:57:11.218 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=50067,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=1335,sensor_hz=27.222
+09-29 07:57:21.220 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=60072,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=1612,sensor_hz=27.301
+09-29 07:57:31.222 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=70073,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=1890,sensor_hz=27.357
+09-29 07:57:41.223 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=80075,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=2168,sensor_hz=27.400
+09-29 07:57:51.224 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=90076,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=2446,sensor_hz=27.434
+09-29 07:58:01.226 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=100077,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=2723,sensor_hz=27.460
+09-29 07:58:11.228 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=110079,screen_interactive=true,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=2999,sensor_hz=27.483
+09-29 07:58:21.230 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=120082,screen_interactive=true,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=3272,sensor_hz=27.495
+09-29 07:58:31.232 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=130083,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=3545,sensor_hz=27.506
+09-29 07:58:41.234 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=140085,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=3821,sensor_hz=27.518
+09-29 07:58:51.234 27818 27818 I RescueMeshG0: event=tick,elapsed_ms=150086,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=4098,sensor_hz=27.529
+09-29 07:58:59.187 28275 28275 I RescueMeshG0: event=capability,model=Google Pixel 6 Pro,sdk=36,adapter=true,enabled=true,multi_adv=true,offloaded_filter=true,offloaded_batch=true,extended_adv=true,max_adv_data=1650
+09-29 07:58:59.190 28275 28275 I RescueMeshG0: event=accelerometer,name=LSM6DSR Accelerometer,vendor=STMicro,min_delay_us=5000,max_delay_us=615385,fifo_max=3000,fifo_reserved=3000,power_ma=0.001,wakeup=false
+09-29 07:58:59.214 28275 28275 I RescueMeshG0: event=scan_start,ok=true,mode=low_latency,filtered=true
+09-29 07:58:59.225 28275 28275 I RescueMeshG0: event=sensor_start,ok=true,period_us=50000,max_latency_us=2000000
+09-29 07:58:59.227 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=43,screen_interactive=false,advertising=false,scanning=true,scan_callbacks=0,golden_matches=0,unique_devices=0,sensor_events=0,sensor_hz=0.000
+09-29 07:58:59.227 28275 28275 I RescueMeshG0: event=advertise_start,ok=true,mode=2,tx=3,connectable=false,payload_bytes=24
+09-29 07:59:09.228 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=10044,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=0,golden_matches=0,unique_devices=0,sensor_events=212,sensor_hz=26.201
+09-29 07:59:14.389 28275 28275 I RescueMeshG0: event=golden_rx,match=1,payload_bytes=24
+09-29 07:59:19.229 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=20045,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=1,golden_matches=1,unique_devices=1,sensor_events=481,sensor_hz=26.768
+09-29 07:59:22.096 28275 28275 I RescueMeshG0: event=golden_rx,match=2,payload_bytes=24
+09-29 07:59:29.231 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=30047,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=2,golden_matches=2,unique_devices=1,sensor_events=757,sensor_hz=27.038
+09-29 07:59:38.777 28275 28275 I RescueMeshG0: event=golden_rx,match=3,payload_bytes=24
+09-29 07:59:39.233 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=40049,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=1033,sensor_hz=27.141
+09-29 07:59:49.236 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=50053,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=3,golden_matches=3,unique_devices=1,sensor_events=1287,sensor_hz=26.739
+09-29 07:59:59.237 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=60053,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=1558,sensor_hz=26.746
+09-29 08:00:09.239 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=70056,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=1828,sensor_hz=26.753
+09-29 08:00:19.242 28275 28275 I RescueMeshG0: event=tick,elapsed_ms=80056,screen_interactive=false,advertising=true,scanning=true,scan_callbacks=4,golden_matches=4,unique_devices=1,sensor_events=2098,sensor_hz=26.799

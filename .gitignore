@@ -1,0 +1,23 @@
+# Local toolchains and environments
+.android-sdk/
+.venv/
+.toolcache/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Android build intermediates and signing material
+android-g0/build/*
+!android-g0/build/rescuemesh-g0.apk
+*.keystore
+*.jks
+*.idsig
+local.properties
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+*~
