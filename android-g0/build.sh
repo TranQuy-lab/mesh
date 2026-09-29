@@ -9,9 +9,12 @@ build_dir="$project_dir/build"
 
 mkdir -p "$build_dir/classes" "$build_dir/dex"
 
+"$tools_dir/aapt2" compile --dir "$project_dir/res" -o "$build_dir/resources.flata"
+
 "$tools_dir/aapt2" link \
   -o "$build_dir/resources.apk" \
   -I "$android_jar" \
+  -R "$build_dir/resources.flata" \
   --manifest "$project_dir/AndroidManifest.xml" \
   --min-sdk-version 26 \
   --target-sdk-version 36

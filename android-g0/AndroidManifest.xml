@@ -16,7 +16,9 @@
     <application
         android:allowBackup="false"
         android:debuggable="true"
-        android:label="RescueMesh G0 Probe"
+        android:label="RescueMesh"
+        android:icon="@drawable/ic_rescuemesh"
+        android:roundIcon="@drawable/ic_rescuemesh"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <service

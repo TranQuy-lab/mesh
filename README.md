@@ -60,8 +60,8 @@ cd rescuemesh && python3 packets.py
 
 1. Trên laptop cài thư viện Bluetooth một lần: `python3 -m pip install -r station/requirements.txt`.
 2. Cắm hoặc bật Bluetooth trên laptop rồi chạy `./station/run.sh`. Cửa sổ này là trạm; SOS hợp lệ được in ra và lưu vào `results/station-events.jsonl`.
-3. Cài file [rescuemesh-g0.apk](releases/rescuemesh-g0.apk) lên từng điện thoại, mở ứng dụng và cấp các quyền Bluetooth/thông báo.
-4. Nhấn **Bật nút mạng** trên cả hai máy. Một máy phát SOS, cả hai máy đều quét; gói mới được chuyển tiếp với số bước tăng lên và thời gian sống giảm đi.
+3. Cài file [rescuemesh-g0.apk](releases/rescuemesh-g0.apk) lên từng điện thoại, mở biểu tượng **RescueMesh** và cấp các quyền Bluetooth/thông báo.
+4. Sau khi cấp quyền, ứng dụng tự chạy: một máy phát SOS, cả hai máy đều quét; gói mới được chuyển tiếp với số bước tăng lên và thời gian sống giảm đi. Nút **Bật nút mạng** chỉ cần dùng để bật lại sau khi đã tắt.
 
 Bản hiện tại dùng khóa thử nghiệm có sẵn trong mã để trình diễn trong phòng lab. Khi chuyển sang triển khai thật, thay khóa bằng khóa riêng của mạng cứu hộ.
 - WP2–WP5: chưa bắt đầu. Mọi con số trong tài liệu hiện là **phân tích thiết kế**, chưa phải kết quả thực nghiệm.

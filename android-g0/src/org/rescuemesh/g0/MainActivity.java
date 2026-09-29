@@ -38,16 +38,26 @@ public final class MainActivity extends Activity {
         });
         box.addView(title); box.addView(status); box.addView(start); box.addView(stop);
         setContentView(box);
+        // Opening the app is the normal start action. The button remains available
+        // for restarting the node after it has been stopped.
+        startNode();
     }
 
     private void startNode() {
         if (Build.VERSION.SDK_INT >= 31) {
-            requestPermissions(new String[]{Manifest.permission.BLUETOOTH_SCAN,
+            String[] needed = new String[]{Manifest.permission.BLUETOOTH_SCAN,
                     Manifest.permission.BLUETOOTH_ADVERTISE,
                     Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.POST_NOTIFICATIONS}, REQUEST);
-            status.setText("Hãy chấp nhận các quyền Bluetooth và thông báo.");
-            return;
+                    Manifest.permission.POST_NOTIFICATIONS};
+            boolean allGranted = true;
+            for (String permission : needed) {
+                allGranted &= checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+            }
+            if (!allGranted) {
+                requestPermissions(needed, REQUEST);
+                status.setText("Hãy chấp nhận các quyền Bluetooth và thông báo.");
+                return;
+            }
         }
         launchService();
     }

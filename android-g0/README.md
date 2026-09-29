@@ -40,6 +40,11 @@ adb shell am start-foreground-service -n org.rescuemesh.g0/.ProbeService
 adb logcat -s RescueMeshG0:I '*:S'
 ```
 
+Hoặc mở biểu tượng **RescueMesh** trên điện thoại. Lần đầu ứng dụng sẽ xin
+quyền Bluetooth/thông báo; sau khi chấp nhận, nút mạng tự chạy. Những lần mở
+tiếp theo cũng tự khởi động. Nút **Tắt nút mạng** chỉ dùng khi muốn dừng thủ
+công.
+
 Chọn cấu hình G0-S (mặc định đều là `low_latency`):
 
 ```bash
