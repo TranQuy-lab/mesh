@@ -94,8 +94,9 @@ python3 analyze_sim_lora.py     # ghép cặp + Pareto + theo ô
 
 ## Trạng thái
 
-- **Cổng G6 (khung v2.0): ĐẠT.** Codec 36/36 test xanh; mọi khung đúng kích thước;
-  tamper bị chặn; đã có bảng airtime và bảng va chạm token.
+- **Cổng G6 (khung v2.0 **và v2.1**): ĐẠT.** Codec **43/43 test xanh**; mọi khung đúng
+  kích thước; tamper bị chặn; đã có bảng airtime và bảng va chạm token; **v2.1** bổ sung
+  trường ánh xạ CAP + lớp độ chính xác vị trí mà vẫn tương thích ngược với v2.0.
 - **Mã thiết kế tái lập được:** `lora.py` 32/32 và `node_power.py` 19/19. Ba con số
   thiết kế chốt: SOS 36 B ở SF9 tốn **≈ 267 ms** airtime; một gateway đơn kênh ở
   SF9 phục vụ **≈ 242 nút** (beacon 60 s) tới **≈ 952 nút** (beacon 300 s) ở mức

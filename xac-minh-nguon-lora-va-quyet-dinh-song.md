@@ -33,7 +33,7 @@ DOI dưới đây đã được đối chiếu tự động, không lấy từ t
 
 | Nội dung | Quyết định | Cách tôi đã xử lý |
 |---|---|---|
-| Ngày hiệu lực Thông tư 08/2021 (18/11 hay 28/11/2021) | "kệ nó đi" — **không theo đuổi** | Ghi nhận mâu thuẫn nguồn, **bỏ** khỏi danh sách việc cần làm, không chặn tiến độ. Các **giới hạn kỹ thuật** của QCVN 122:2020 (14 dBm e.r.p., duty cycle 1 %/10 %) vẫn giữ vì chúng ảnh hưởng trực tiếp tới thiết kế |
+| Ngày hiệu lực Thông tư 08/2021 | Người dùng nói "kệ nó đi" — **không theo đuổi**; sau đó **đã tự giải quyết được bằng nguồn gốc: 28/11/2021** (Điều 8 bản công báo), nên việc này nay không còn tồn tại | Giữ nguyên các **giới hạn kỹ thuật** của QCVN 122:2020 (14 dBm e.r.p., duty cycle 1 %/10 %) vì chúng ảnh hưởng trực tiếp tới thiết kế |
 | Giá linh kiện | Dùng **mức giá tham khảo** do người dùng cung cấp | Đã đưa vào BOM, ghi rõ **"do người dùng cung cấp 2026-10-01, chưa xác minh độc lập"**, kèm cảnh báo **sai băng** cho hai module SX1278 433 MHz |
 
 Nguyên tắc áp dụng: **mỗi quyết định phải hoặc có bằng chứng mở được, hoặc được
@@ -85,7 +85,7 @@ nhỏ và nên đưa vào phụ lục.
 
 | Nội dung | Kết luận | Nguồn |
 |---|---|---|
-| Thiết bị LPWAN ở băng 920–923 MHz (và 433,05–434,79 MHz) có phải xin giấy phép tần số? | **Không** — được bổ sung vào **danh mục thiết bị vô tuyến điện được miễn giấy phép sử dụng tần số**, kèm điều kiện kỹ thuật và khai thác | Thông tư **08/2021/TT-BTTTT** ngày 14/10/2021; cổng thông tin pháp luật (nay thuộc Bộ KH&CN), `cspl.mic.gov.vn` bản tin 19/10/2021. **Ngày hiệu lực mâu thuẫn giữa hai nguồn: 18/11/2021** (trang Cục Tần số VTĐ `rfd.gov.vn`) **so với 28/11/2021** (bản tin cổng pháp luật) — phải tra bản công báo gốc trước khi trích |
+| Thiết bị LPWAN ở băng 920–923 MHz (và 433,05–434,79 MHz) có phải xin giấy phép tần số? | **Không** — được bổ sung vào **danh mục thiết bị vô tuyến điện được miễn giấy phép sử dụng tần số**, kèm điều kiện kỹ thuật và khai thác | Thông tư **08/2021/TT-BTTTT** ngày 14/10/2021, **hiệu lực 28/11/2021** (Điều 8 bản công báo gốc). Bao gồm **cả băng 433,05–434,79 MHz** với điều kiện giống hệt băng 920–923 |
 | Điều kiện kỹ thuật là gì? | **QCVN 122:2020/BTTTT** quy định chỉ tiêu phổ tần, điều kiện kỹ thuật và phương pháp đo cho thiết bị LPWAN 920–923 MHz; xây dựng trên ITU-R SM.2423-0/SM.329-12, ETSI EN 300 220-1/-2 và tiêu chuẩn ASEAN | Thông tư **38/2020/TT-BTTTT** ngày 16/11/2020, hiệu lực 01/07/2021; cùng cổng, bản tin 17/11/2020 |
 | **Giới hạn công suất** | **≤ 14 dBm e.r.p.** (≈ 25 mW e.r.p.; ≈ 16,2 dBm EIRP) | **Đã đọc bản công báo gốc 61 trang** — QCVN 122:2020/BTTTT mục 2.4.3.2 (`congbaocdn.chinhphu.vn/.../33409-1-20201115-111638-2020-tt-btttt.pdf`) |
 | **Giới hạn duty cycle** | Đầu cuối/cảm biến **≤ 1 %**; gateway/access station **≤ 10 %**; chu kỳ quan sát `Tobs` = 1 giờ | Đã đọc bản công báo gốc — QCVN 122:2020/BTTTT mục 2.4.4.2 |
@@ -96,6 +96,7 @@ nhỏ và nên đưa vào phụ lục.
 | **Rủi ro pháp lý mới** | "Miễn giấy phép tần số" **≠** miễn mọi nghĩa vụ: vẫn phải **chứng nhận/công bố hợp quy nhóm 2** (TT 11/2020/TT-BTTTT); và **Luật Viễn thông 24/2023/QH15 Điều 19.5** có thể buộc **giấy phép thiết lập mạng viễn thông dùng riêng** cho mesh liên xã (Điều 42.4 miễn nếu cùng một tổ chức và không tự xây đường truyền) | Luật Viễn thông 24/2023/QH15 |
 | Nghĩa vụ kèm theo | Thiết bị miễn giấy phép **phải dừng sử dụng** nếu gây nhiễu có hại cho thiết bị được cấp phép | Thông tư 08/2021/TT-BTTTT |
 | Cơ quan quản lý | Hai thông tư trên do **Bộ TT&TT** ban hành; từ 2025 đầu mối tần số/viễn thông chuyển về **Bộ KH&CN** (Cục Tần số VTĐ, Cục Viễn thông). **Không** gán văn bản 2026 cho Bộ TT&TT | Cổng pháp luật hiện thuộc Bộ KH&CN; văn bản cấp phép vệ tinh 2026 |
+| **Văn bản neo cho định hướng đề tài** | **Thông tư 14/2025/TT-BKHCN** (08-8-2025, hiệu lực **22-9-2025**, thay TT 17/2012 và 17/2019) — **Điều 4.1 "ưu tiên sử dụng mạng lưới tại chỗ"**; Điều 6.2: khi mất mạng công cộng, liên lạc cấp xã dựa chủ yếu vào **vệ tinh + vô tuyến điện**; Điều 12.6: mỗi xã vùng thiên tai phải có ≥ 01 trạm BTS kiên cố cấp 4 | Thông tư 14/2025/TT-BKHCN |
 
 ### 3.2 Các lý do kỹ thuật, kèm mức tin cậy
 

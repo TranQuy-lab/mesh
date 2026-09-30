@@ -451,4 +451,4 @@ này phải được ghi vào phụ lục tái lập.
 
 **Còn thiếu phải đọc trước khi trích:** datasheet **SX1262** (bảng độ nhạy — datashsheet
 Semtech bị login-gate; bảng hiện tại chỉ đúng cho SX1276); **giá linh kiện** có ngày +
-nguồn; ngày hiệu lực chính xác của Thông tư 08/2021 (hai nguồn ghi 18/11 và 28/11/2021).
+nguồn. ~~Ngày hiệu lực Thông tư 08/2021~~ → **đã chốt: 28/11/2021** (Điều 8 bản công báo gốc).
