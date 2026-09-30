@@ -27,6 +27,7 @@ DOI dưới đây đã được đối chiếu tự động, không lấy từ t
 | **D4** | Nút cầu **không cần GNSS/IMU/màn hình** (điện thoại đã có) → BOM thấp hơn nút đầy đủ | Hệ quả của D3; xem thiết kế §2 |
 | **D5** | Loại WiFi mesh, WiFi HaLow và vệ tinh khỏi đường chuẩn | Có nguồn cho cả ba (§4–§6) |
 | **D6** | Link cá nhân mặc định **BLE**, dự phòng **dây USB-C** | Cự ly 1–2 m nên lý do "tầm ngắn" đã loại BLE khỏi vai trò mạng **không áp dụng**; đây là điểm cần nói thẳng trong phần giới hạn (§1.3 kế hoạch) |
+| **D7** | **Băng chuẩn: 920–923 MHz** (module SX1262, ví dụ Ra-01SH ~135.000 ₫); **băng 433,05–434,79 MHz là nhánh so sánh**, mua thêm nếu ngân sách cho phép | Người dùng giao toàn quyền 2026-10-01. Lý do: QCVN 122:2020 viết rõ cho 920–923 MHz (đã đọc bản công báo gốc), anten nhỏ gọn, băng ít nhiễu hơn; module SX1278 433 MHz trong danh sách giá **không phát được ở 920–923 MHz** nên không thể dùng cho đường chuẩn. Nhánh 433 dùng để trả lời câu hỏi "băng nào tốt hơn ở Việt Nam" bằng đo thực (đây cũng là một khoảng trống: chưa có đo LoRa tại VN) |
 
 **Ba quyết định khác của người dùng trong cùng ngày 2026-10-01:**
 

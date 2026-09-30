@@ -140,6 +140,10 @@ Bốn quy tắc bắt buộc:
 | Trải nghiệm người dùng | Nút cầu đeo trong túi, không cần thao tác | Vướng dây, dễ tuột khi chạy/ngã |
 | Nguồn | Nút cầu tự có pin | Có thể lấy điện từ điện thoại (tốn pin điện thoại) |
 | Rủi ro | Mất kết nối khi tắt màn hình, đông thiết bị BLE → **RQ6 đo** | Hỏng cổng/đứt dây khi va đập |
+| Thông số AOSP (`NC`) | Connection interval (bội số 1,25 ms): HIGH **11,25–15 ms**, BALANCED 30–50 ms, LOW_POWER 100–125 ms; supervision timeout 5 s | Host mode cấp nguồn bus (khó sạc đồng thời); FTDI latency timer mặc định 16 ms |
+| Độ trễ suy ra (`SUY`) | Một trao đổi ATT đo được **676,7 µs** (Gomez 2012); nếu thương lượng MTU lớn → 1 connection event ≈ **12–15 ms**; nếu MTU mặc định 23 B thì 36 B cần 2–3 gói ⇒ **≈ 25–45 ms** | USB-C: chưa có bài bình duyệt đo độ trễ/độ tin cậy trên Android |
+| Ràng buộc chạy nền (`NC`) | Scan duty cycle 10 % (LOW_POWER) và **5 % khi tắt màn hình**; quota 5 lần startScan/30 s; scan timeout 30 phút (A13) → **10 phút (A14/15)**; FGS type `connectedDevice` (A14+) **không** bị timeout 6h/24h; kết nối **đóng khi process bị kill** | Phải dùng foreground service + nút cầu đệm bền |
+| Đuôi trễ khi đông (`NC`) | Cấu hình 44 peripheral/4 master: **140–160 ms ở CCDF 10⁻⁴** (IEEE VTC2023) — dùng làm kịch bản xấu, không phải giá trị điển hình | Ảnh hưởng p95/p99 chứ không phải p50 |
 
 **Khuyến nghị `TK`:** mặc định **BLE**, vì cự ly cần thiết chỉ 1–2 m nên lý do "tầm
 ngắn" đã loại BLE khỏi vai trò mạng **không áp dụng**; đồng thời giữ đường USB-C như
@@ -159,6 +163,14 @@ phải được cài và đo:
 
 **Quyết định `TK`:** mặc định là `windowed`; `continuous` chỉ dùng ở gateway và ở
 nút trung gian cắm điện; `tx_only` là nhánh đối chứng trong thí nghiệm.
+
+**Hệ quả đã kiểm bằng `SIM` (E1) — phải đọc trước khi chốt chính sách:** `windowed`
+chỉ thức 1,5–7,4 % thời gian nhưng **PDR rơi từ 0,762 xuống 0,029**, còn `tx_only`
+cho **PDR = 0**. Nguyên nhân không chỉ là bỏ lỡ ACK/beacon: **nút ngủ không chuyển
+tiếp được dữ liệu của người khác**, nên mạng mất luôn các đường relay. Vì vậy cửa sổ
+nghe phải đủ để **tham gia chuyển tiếp**, không chỉ để nhận lệnh xuống. Việc phải làm
+ở WP9/WP10: quét `rx_window_s` × `sync_window_s` × chu kỳ đồng bộ để tìm **cửa sổ nghe
+tối thiểu** giữ được PDR chấp nhận được, rồi đo dòng thật để đổi thành tuổi thọ pin.
 
 ### 2.5 Ngân sách năng lượng của **nút cầu** (nhãn `SUY`, từ `rescuemesh/node_power.py`)
 
@@ -283,6 +295,47 @@ nên kết luận về hết hạn tuyến không đủ tin cậy; v2.0 bắt bu
 cho thấy nó sụp ở quy mô ≥ 1.000 nút. v2.0 dùng 24 bit; xác suất va chạm theo số
 nút phải được in ra từ Monte Carlo trong `packets_lora.py` và đưa vào báo cáo (H4).
 
+### 4.6 Khung v2.1 — bổ sung để ánh xạ được sang CAP (**đề xuất**, có nguồn chuẩn)
+
+**Vì sao phải sửa:** khung v2.0 dành 2 byte dự trữ (offset 26–27) và **không mang
+thông tin bất định của vị trí**, trong khi cả ba chuẩn liên quan đều mô tả sai số kèm
+điểm: CAP v1.2 (`<circle>` có bán kính), PIDF-LO RFC 5491 (`gs:radius`, khuyến nghị
+95 %) và 3GPP TS 23.032 (`uncertainty shape` + `confidence`). Ngoài ra CAP yêu cầu
+`sender` **định danh toàn cầu**, còn `src_id` của đề tài **xoay theo ngày** nên không
+thoả. Đây là **lỗ hổng thật**, không phải chi tiết nhỏ.
+
+**Điểm được xác nhận bởi chuẩn (không cần sửa):** 3GPP **TS 23.032 V19.0.0 (2025-09)**
+mã hoá **24 bit cho vĩ độ và 24 bit cho kinh độ** và công bố *"uncertainty of less
+than 3 metres"*. Bước lượng tử hoá của chuẩn trùng với codec đề tài (vĩ độ ≈ 1,19 m;
+kinh độ ≈ 2,39 m ở xích đạo) và **vượt xa** ngưỡng sai số mà cơ quan cứu hộ yêu cầu
+(WEA: overshoot ≤ 0,1 dặm ≈ 161 m, phủ 100 % vùng đích — 47 CFR §10.450; E911 trong
+nhà ≤ 50 m cho 80 % cuộc gọi — 3GPP TS 22.071 Annex A). ⇒ **giữ 24 bit/trục.**
+
+**Đề xuất dùng trọn 2 byte dự trữ (big-endian uint16 tại offset 26):**
+
+| Bit | Trường | Giá trị |
+|---|---|---|
+| 15–12 | `net_id` (4 bit) | Mã miền/triển khai, để ghép với `src_id` thành định danh toàn cầu theo yêu cầu CAP |
+| 11–9 | `cap_severity` (3 bit) | 0 = Unknown · 1 = Extreme · 2 = Severe · 3 = Moderate · 4 = Minor |
+| 8–6 | `cap_urgency` (3 bit) | 0 = Unknown · 1 = Immediate · 2 = Expected · 3 = Future · 4 = Past |
+| 5–3 | `cap_certainty` (3 bit) | 0 = Unknown · 1 = Observed · 2 = Likely · 3 = Possible · 4 = Unlikely |
+| 2–0 | `pos_accuracy_class` (3 bit) | 0 = không biết · 1 = < 10 m · 2 = < 30 m · 3 = < 100 m · 4 = < 300 m · 5 = < 1 km · 6 = < 3 km · 7 = không có fix |
+
+**Không nhồi vào khung 36 byte:** văn bản tự do (WEA cho 360/90 ký tự), URL, đa ngôn
+ngữ, đỉnh polygon, chữ ký 64 byte đầy đủ, phong bì EDXL, `hop_count`/`ttl`. Những thứ
+đó thuộc **trạm** khi dựng thông điệp CAP đầy đủ.
+
+**Trạng thái:** codec `packets_lora.py` hiện **đóng băng ở v2.0** (36/36 test xanh).
+Việc chuyển sang v2.1 là **hạng mục WP6 mở rộng** với cổng riêng (cập nhật codec +
+test + golden vector), **không** làm giữa chừng để tránh phá vỡ bộ test đang xanh.
+
+**Ánh xạ đích khi lên trạm:** CAP v1.2 (OASIS Standard 01-07-2010; CAP 1.1 = ITU-T
+X.1303), bọc trong EDXL-DE v2.0 nếu vào hệ thống EDXL. Cell Broadcast/PWS/ETWS chỉ là
+**kênh phát cuối** (mạng → thiết bị), **không** phải kênh nút → trạm. Bản rút gọn
+chính thức (không có "CAP-lite" — không tồn tại): ASN.1 + PER (CAP v1.2 §3.5), profile
+WEA 5 phần tử (47 CFR §10.420), nén CBS (3GPP TS 23.042), ETWS Primary Notification
+6 octet.
+
 ---
 
 ## 5. Định tuyến trên một kênh
@@ -290,6 +343,14 @@ nút phải được in ra từ Monte Carlo trong `packets_lora.py` và đưa v�
 ### 5.1 Gradient tới gateway
 
 - Gateway phát BEACON định kỳ; nút ghi `hop_to_gw = 1 + beacon.hop_count` và `bseq`.
+- **Chế độ mặt phẳng điều khiển — quyết định `TK` có bằng chứng `SIM`:** mặc định v1
+  dùng **chỉ gateway phát BEACON, KHÔNG relay**. Lý do: mô hình cho thấy relay beacon
+  tốn **~17 lần airtime điều khiển** (1,9 % → 31,8 %) mà giao **ít hơn** (PDR 0,762 →
+  0,719) ở vùng 1 km/100 nút, và ở vùng 3 km vẫn thua (0,597 so với 0,547). Hệ quả
+  phải chấp nhận: nút ngoài tầm gateway có thể **không học được hop count** (chỉ 21 %
+  ở vùng 3 km), nên gradient thoái hoá ở vùng xa. **Việc phải làm ở WP9:** tìm cấu
+  hình mà relay trở nên cần thiết (vùng > 5 km, mật độ thấp, nhiều hop); nếu không
+  tìm được thì **bỏ relay beacon** khỏi thiết kế v1.
 - Nút chuyển tiếp SOS nếu `my_hop < sender_hop` (đang tiến gần gateway hơn).
 - **Hết hạn tuyến:** nếu không nhận beacon mới trong `K` chu kỳ (mặc định 3), nút
   xoá `hop_to_gw` và quay về flooding cho tới khi đồng bộ lại.

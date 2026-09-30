@@ -99,6 +99,39 @@ class LoraSimConfig:
     # GIẢ ĐỊNH: cửa sổ backoff cỡ vài lần airtime để tránh đồng bộ tuyệt đối.
     flood_jitter_s: float = 2.0
     relay_jitter_s: float = 4.0
+
+    # --- Mở rộng v2.1: kiến trúc điện thoại + nút cầu ---------------------
+    #: Chế độ mặt phẳng điều khiển (cơ sở của H3/R3b):
+    #:  - "node_hello": mỗi nút tự phát hello định kỳ (mô hình gốc).
+    #:  - "gateway_beacon": chỉ gateway phát; **không** relay ⇒ nút xa không
+    #:    học được hop count (gradient thoái hoá), nhưng điều khiển rất rẻ.
+    #:  - "gateway_beacon_relay": gateway phát và mỗi nút relay một lần ⇒
+    #:    hop count lan ra, đổi lại tốn một khung điều khiển mỗi nút mỗi chu kỳ.
+    #:  - "adaptive_gateway": như `gateway_beacon` nhưng chu kỳ giãn theo số nút
+    #:    theo công thức đã dùng trong Meshtastic ≥ 2.4.0:
+    #:    `T = T0 × (1 + max(0, N − 40) × 0,075)` (firmware `Default.cpp`,
+    #:    `congestionScalingCoefficient`; tài liệu mesh-algo). Đây là mô hình
+    #:    **trạng thái dừng** cho một quy mô mạng, không phải thích ứng động.
+    control_plane_mode: str = "node_hello"
+    #: Chính sách nghe của nút (cơ sở của H5): continuous | windowed | tx_only.
+    rx_policy: str = "continuous"
+    #: GIẢ ĐỊNH: nghe thêm một cửa sổ ngắn ngay sau khi tự phát.
+    rx_window_s: float = 3.0
+    #: None ⇒ dùng `beacon_interval_s` làm chu kỳ đồng bộ.
+    sync_period_s: float | None = None
+    #: GIẢ ĐỊNH: cửa sổ đồng bộ định kỳ để học hop count.
+    sync_window_s: float = 0.5
+    #: Link cá nhân điện thoại → nút cầu, mô hình hoá thô (RQ6).
+    #: Mặc định TẮT (0/0) để baseline chỉ còn động học mạng; các ô thí nghiệm
+    #: RQ6 sẽ bật tường minh, nhờ vậy link cá nhân là **nhân tố tường minh**
+    #: chứ không lẫn vào mọi kết quả.
+    link_delay_s: float = 0.0  # GIẢ ĐỊNH khi bật: connection event BLE + truyền khung
+    link_drop_prob: float = 0.0  # GIẢ ĐỊNH khi bật: mất khung trên link cá nhân
+    link_retry_max: int = 5  # GIẢ ĐỊNH: nút cầu đệm bền và thử lại
+    #: Nhãn ô thí nghiệm (chỉ để ghi CSV/khối summary, không ảnh hưởng mô phỏng).
+    cell_label: str = ""
+    #: Pha beacon xác định (giây) cho thí nghiệm chu kỳ dài; None ⇒ ngẫu nhiên.
+    beacon_phase_s: float | None = None
     seed: int = 0
 
     def __post_init__(self) -> None:
@@ -132,6 +165,20 @@ class LoraSimConfig:
             t0, t1 = self.gateway_outage
             if t0 < 0 or t1 <= t0:
                 raise ValueError("gateway_outage phải là (bắt đầu, kết thúc) hợp lệ")
+        if self.control_plane_mode not in (
+            "node_hello", "gateway_beacon", "gateway_beacon_relay", "adaptive_gateway"
+        ):
+            raise ValueError(f"control_plane_mode không hợp lệ: {self.control_plane_mode}")
+        if self.rx_policy not in ("continuous", "windowed", "tx_only"):
+            raise ValueError(f"rx_policy không hợp lệ: {self.rx_policy}")
+        if not (0.0 <= self.link_drop_prob <= 1.0):
+            raise ValueError("link_drop_prob phải trong [0, 1]")
+        if self.link_delay_s < 0 or self.link_retry_max < 0:
+            raise ValueError("link_delay_s và link_retry_max không âm")
+        if self.rx_window_s < 0 or self.sync_window_s < 0:
+            raise ValueError("rx_window_s và sync_window_s không âm")
+        if self.sync_period_s is not None and self.sync_period_s <= 0:
+            raise ValueError("sync_period_s phải dương hoặc None")
 
 
 #: Bộ cột số của kết quả, dùng chung cho `as_row` và thống kê summary.
@@ -142,6 +189,10 @@ RESULT_FIELDS = (
     "deferred_count", "collisions", "reconvergence_s", "total_transmissions",
     "data_transmissions", "control_transmissions", "total_sos", "n_nodes",
     "strategy", "seed", "duration_s",
+    # Mở rộng v2.1 (đều là số, để summary tính được mean/std).
+    "beacon_receptions", "data_receptions", "missed_due_to_sleep",
+    "hop_learned_fraction", "mean_awake_fraction", "link_failures",
+    "mean_link_delay_s",
 )
 
 
@@ -172,10 +223,22 @@ class LoraSimResult:
     strategy: str
     seed: int
     duration_s: float
+    # Mở rộng v2.1.
+    beacon_receptions: int = 0
+    data_receptions: int = 0
+    missed_due_to_sleep: int = 0
+    hop_learned_fraction: float = 0.0
+    mean_awake_fraction: float = 1.0
+    link_failures: int = 0
+    mean_link_delay_s: float = 0.0
+    control_mode: str = "node_hello"
+    rx_policy: str = "continuous"
 
     def as_row(self) -> dict:
         """Bản phẳng để ghi CSV (đã kèm nhãn bằng chứng)."""
         row = {name: getattr(self, name) for name in RESULT_FIELDS}
+        row["control_mode"] = self.control_mode
+        row["rx_policy"] = self.rx_policy
         row["per_source_delivered"] = ";".join(
             f"{k}:{v}" for k, v in sorted(self.per_source_delivered.items())
         )
@@ -232,6 +295,10 @@ class _Node:
     hop_to_gateway: float = math.inf
     waypoint_x: float = 0.0
     waypoint_y: float = 0.0
+    # Mở rộng v2.1.
+    awake_until: float = 0.0  # hạn cửa sổ nghe sau khi tự phát (chính sách `windowed`)
+    tx_count: int = 0
+    hop_learned_at: float = math.inf  # thời điểm đầu tiên biết hop count hữu hạn
 
 
 @dataclass
@@ -308,6 +375,13 @@ class _Simulation:
         self.airtime_data = self.airtime_control = 0.0
         self.deferred = self.collisions = 0
         self.duplicate_receptions = self.data_receptions = self.suppressed = 0
+        # Mở rộng v2.1.
+        self.beacon_receptions = 0
+        self.missed_due_to_sleep = 0
+        self.link_failures = 0
+        self.link_delays: list[float] = []
+        self._beacon_seq = 0
+        self._beacon_phase = 0.0
         self.deliveries: list[tuple[float, int, tuple]] = []
         self.delivered_msgs: set = set()
         self.msg_gen: dict[tuple, float] = {}
@@ -392,16 +466,52 @@ class _Simulation:
         outage = self.cfg.gateway_outage
         return outage is not None and outage[0] <= t <= outage[1]
 
+    def _control_interval(self) -> float | None:
+        """Chu kỳ điều khiển hiệu dụng (giây), `None` nếu không phát beacon.
+
+        Với `adaptive_gateway`, áp công thức giãn chu kỳ theo số nút của Meshtastic
+        (≥ 2.4.0, firmware `Default.cpp`): ``T = T0 × (1 + max(0, N − 40) × 0,075)``.
+        Đây là mô hình **trạng thái dừng** cho một quy mô mạng, không phải thích ứng động.
+        """
+        cfg = self.cfg
+        if cfg.beacon_interval_s is None:
+            return None
+        if cfg.control_plane_mode == "adaptive_gateway":
+            return cfg.beacon_interval_s * (1.0 + max(0, cfg.n_nodes - 40) * 0.075)
+        return cfg.beacon_interval_s
+
     def _seed_events(self) -> None:
         """Xếp lịch beacon, SOS, courier cho cả kịch bản."""
         cfg = self.cfg
-        if cfg.beacon_interval_s is not None:
-            # GIẢ ĐỊNH: lệch pha ngẫu nhiên ban đầu để tránh bão beacon ở t=0.
-            for node in self.nodes:
-                t = self.rng.uniform(0.0, cfg.beacon_interval_s)
-                while t <= cfg.duration_s:
-                    self._schedule(t, "beacon", node.idx)
-                    t += cfg.beacon_interval_s
+        interval = self._control_interval()
+        if interval is not None:
+            # GIẢ ĐỊNH: nếu `beacon_phase_s` được đặt thì dùng pha xác định (cần cho
+            # thí nghiệm chu kỳ dài như 3–12 h, nơi pha ngẫu nhiên có thể rơi ngoài
+            # thời lượng mô phỏng); nếu không thì lệch pha ngẫu nhiên để tránh bão beacon.
+            if cfg.beacon_phase_s is not None:
+                phase = cfg.beacon_phase_s % interval
+            else:
+                phase = self.rng.uniform(0.0, interval)
+            self._beacon_phase = phase
+            if cfg.control_plane_mode == "node_hello":
+                # Mỗi nút tự phát hello định kỳ (mô hình gốc v2.0).
+                for node in self.nodes:
+                    t = phase + self.rng.uniform(0.0, min(interval, 1.0))
+                    while t <= cfg.duration_s:
+                        self._schedule(t, "beacon", node.idx)
+                        t += interval
+            else:
+                # Chỉ gateway phát gốc; nút xa học hop qua relay (nếu bật).
+                for node in self.nodes:
+                    if not node.is_gateway:
+                        continue
+                    t = phase
+                    while t <= cfg.duration_s:
+                        self._beacon_seq += 1
+                        self._schedule(
+                            t, "beacon", ("bcn", node.idx, self._beacon_seq)
+                        )
+                        t += interval
         k = cfg.n_sos
         if k > 0:
             self.sources = (sorted(self.rng.sample(range(cfg.n_nodes), k)) if k <= cfg.n_nodes
@@ -410,10 +520,13 @@ class _Simulation:
         for i, src in enumerate(self.sources):
             gen_t = t0 + i * cfg.sos_interval_s
             msg_id = ("sos", src, i)
+            # `msg_gen` là thời điểm ĐIỆN THOẠI tạo SOS (mốc đo độ trễ đầu-cuối).
             self.msg_gen[msg_id] = gen_t
             self.msg_source[msg_id] = src
-            if gen_t <= cfg.duration_s:
-                self._schedule(gen_t, "sos_gen", msg_id)
+            # Nút cầu chỉ phát sau khi nhận được qua link cá nhân.
+            sched_t = gen_t + self._sample_link_delay()
+            if sched_t <= cfg.duration_s:
+                self._schedule(sched_t, "sos_gen", msg_id)
         for idx in self.couriers:
             t = 0.0
             while t <= cfg.duration_s:
@@ -483,7 +596,52 @@ class _Simulation:
         else:
             self.data_transmissions += 1
             self.airtime_data += airtime
+        node.tx_count += 1
+        if cfg.rx_policy == "windowed":
+            # GIẢ ĐỊNH: nút nghe thêm một cửa sổ ngắn sau khi phát để bắt ACK/beacon.
+            node.awake_until = max(node.awake_until, frame.t_end + cfg.rx_window_s)
         return True
+
+    def _sample_link_delay(self) -> float:
+        """Mô hình thô link cá nhân: thử lại tới khi qua (RQ6).
+
+        GIẢ ĐỊNH: nút cầu đệm bền nên khung không mất, chỉ **trễ thêm** mỗi lần
+        mất; số lần mất bị chặn bởi `link_retry_max`. Đây là xấp xỉ — muốn con số
+        thật phải đo BLE trên máy (RQ6/WP10).
+        """
+        cfg = self.cfg
+        trials = 0
+        while trials < cfg.link_retry_max:
+            if self.rng.random() >= cfg.link_drop_prob:
+                break
+            trials += 1
+            self.link_failures += 1
+        delay = cfg.link_delay_s * (1 + trials)
+        self.link_delays.append(delay)
+        return delay
+
+    def _is_awake(self, node_idx: int, t: float) -> bool:
+        """Nút có đang nghe kênh tại thời điểm `t`? (cơ sở của H5).
+
+        - `continuous`: luôn nghe.
+        - `tx_only`: không bao giờ nghe (chỉ phát) ⇒ không nhận beacon/ACK.
+        - `windowed`: nghe trong cửa sổ ngắn sau khi tự phát, cộng cửa sổ đồng bộ
+          định kỳ (GIẢ ĐỊNH về hành vi ngủ theo lịch của nút cầu).
+        """
+        cfg = self.cfg
+        if cfg.rx_policy == "continuous":
+            return True
+        if cfg.rx_policy == "tx_only":
+            return False
+        node = self.nodes[node_idx]
+        if t <= node.awake_until:
+            return True
+        period = cfg.sync_period_s or self._control_interval() or 60.0
+        # GIẢ ĐỊNH: nút biết pha beacon nên thức đúng cửa sổ đồng bộ, thay vì
+        # thức lệch pha rồi bỏ lỡ gần hết beacon (mô hình "ngủ theo lịch").
+        if period > 0 and ((t - self._beacon_phase) % period) < cfg.sync_window_s:
+            return True
+        return False
 
     def _on_rx(self, frame: _Frame, t: float) -> None:
         """Xử lý khung đã phát xong: mất do va chạm hoặc giao cho từng nút thu."""
@@ -491,6 +649,10 @@ class _Simulation:
             return
         for r in self.neighbors[frame.sender]:
             if self.nodes[r].is_gateway and self._in_outage(t):
+                continue
+            if not self._is_awake(r, t):
+                # Nút ngủ nên bỏ lỡ khung — hệ quả trực tiếp của chính sách nghe.
+                self.missed_due_to_sleep += 1
                 continue
             p = self.pdr[frame.sender][r]
             if p < 1.0 and self.rng.random() >= p:
@@ -500,9 +662,27 @@ class _Simulation:
     def _deliver(self, frame: _Frame, r: int, t: float) -> None:
         """Giao khung cho nút thu r, hoặc ghi nhận nếu r là gateway."""
         if frame.kind == "beacon":
+            node_r = self.nodes[r]
+            self.beacon_receptions += 1
             cand = frame.sender_hop + 1.0
-            if cand < self.nodes[r].hop_to_gateway:
-                self.nodes[r].hop_to_gateway = cand
+            if cand < node_r.hop_to_gateway:
+                node_r.hop_to_gateway = cand
+                if node_r.hop_learned_at == math.inf:
+                    node_r.hop_learned_at = t
+            # Relay beacon để lan hop count — chỉ ở chế độ `gateway_beacon_relay`.
+            # Ở `gateway_beacon` không relay ⇒ nút ngoài tầm gateway không học được
+            # hướng (gradient thoái hoá), nhưng điều khiển rất rẻ. Đây là R3b.
+            if (self.cfg.control_plane_mode == "gateway_beacon_relay"
+                    and not node_r.is_gateway and frame.ttl_left > 1):
+                state_r = self.states[r]
+                if frame.msg_id not in state_r.cache:
+                    state_r.cache[frame.msg_id] = t
+                    self._schedule(
+                        t + self.rng.uniform(0.0, self.cfg.relay_jitter_s),
+                        "beacon_relay",
+                        (r, frame.msg_id, frame.ttl_left - 1,
+                         frame.hop_count + 1, node_r.hop_to_gateway),
+                    )
             return
         if self.nodes[r].is_gateway:
             if frame.msg_id not in self.delivered_msgs:
@@ -603,8 +783,19 @@ class _Simulation:
                 self._start_tx(msg_id[1], msg_id, "sos", t, cfg.ttl, 0,
                                self.nodes[msg_id[1]].hop_to_gateway)
             elif kind == "beacon":
-                self._start_tx(payload, ("beacon", payload, 0), "beacon", t, 1, 0,
-                               self.nodes[payload].hop_to_gateway)
+                # payload: int (chế độ node_hello) hoặc ("bcn", gw, seq).
+                if isinstance(payload, tuple):
+                    _tag, gw_idx, seq = payload
+                    # Ở chế độ relay, beacon phải còn TTL để nút relay được (R3b).
+                    bttl = cfg.ttl if cfg.control_plane_mode == "gateway_beacon_relay" else 1
+                    self._start_tx(gw_idx, ("bcn", gw_idx, seq), "beacon", t, bttl, 0, 0.0)
+                else:
+                    self._start_tx(payload, ("beacon", payload, 0), "beacon", t, 1, 0,
+                                   self.nodes[payload].hop_to_gateway)
+            elif kind == "beacon_relay":
+                node_idx, msg_id, ttl_left, hop_count, sender_hop = payload
+                self._start_tx(node_idx, msg_id, "beacon", t, ttl_left, hop_count,
+                               sender_hop)
             elif kind == "relay":
                 node_idx, msg_id, ttl_left, hop_count, sender_hop = payload
                 self._start_tx(node_idx, msg_id, "sos", t, ttl_left, hop_count, sender_hop)
@@ -632,6 +823,24 @@ class _Simulation:
                 reconvergence = min(after) - oend
             elif oend < cfg.duration_s:
                 reconvergence = cfg.duration_s - oend
+        # --- Chỉ số mở rộng v2.1 (H3-R3b, H5, RQ6) ---
+        first_sos = min(self.msg_gen.values()) if self.msg_gen else 0.0
+        non_gateways = [n for n in self.nodes if not n.is_gateway]
+        learned = sum(1 for n in non_gateways if n.hop_learned_at <= first_sos)
+        hop_fraction = learned / len(non_gateways) if non_gateways else 0.0
+        if cfg.rx_policy == "continuous":
+            awake_fraction = 1.0
+        elif cfg.rx_policy == "tx_only":
+            awake_fraction = 0.0
+        else:
+            period = cfg.sync_period_s or self._control_interval() or 60.0
+            sync_share = min(1.0, cfg.sync_window_s / period) if period > 0 else 0.0
+            n_nodes = max(1, len(self.nodes))
+            tx_share = (sum(n.tx_count for n in self.nodes) * cfg.rx_window_s
+                        / (cfg.duration_s * n_nodes))
+            awake_fraction = min(1.0, sync_share + tx_share)
+        mean_link_delay = (sum(self.link_delays) / len(self.link_delays)
+                           if self.link_delays else cfg.link_delay_s)
         return LoraSimResult(
             delivered=delivered,
             pdr=delivered / cfg.n_sos if cfg.n_sos else 0.0,
@@ -659,6 +868,15 @@ class _Simulation:
             strategy=self.strategy,
             seed=self.seed,
             duration_s=cfg.duration_s,
+            beacon_receptions=self.beacon_receptions,
+            data_receptions=self.data_receptions,
+            missed_due_to_sleep=self.missed_due_to_sleep,
+            hop_learned_fraction=hop_fraction,
+            mean_awake_fraction=awake_fraction,
+            link_failures=self.link_failures,
+            mean_link_delay_s=mean_link_delay,
+            control_mode=cfg.control_plane_mode,
+            rx_policy=cfg.rx_policy,
         )
 
 
@@ -682,7 +900,11 @@ SUMMARY_METRICS = ("delivered", "pdr", "latency_p50", "latency_p95",
                    "airtime_control_s", "airtime_data_s", "control_airtime_ratio",
                    "duplicate_ratio", "jain_fairness", "deferred_count",
                    "collisions", "reconvergence_s", "total_transmissions",
-                   "data_transmissions", "control_transmissions")
+                   "data_transmissions", "control_transmissions",
+                   # Mở rộng v2.1.
+                   "beacon_receptions", "data_receptions", "missed_due_to_sleep",
+                   "hop_learned_fraction", "mean_awake_fraction", "link_failures",
+                   "mean_link_delay_s")
 
 
 def _default_cells() -> list[dict]:
@@ -721,7 +943,13 @@ def run_matrix(seeds: Iterable[int] = range(20), cells: list[dict] | None = None
     for cell in (_default_cells() if cells is None else list(cells)):
         cfg, strategy = _cell_config(cell)
         label = {"strategy": strategy, "n_nodes": cfg.n_nodes, "n_sos": cfg.n_sos,
-                 "sf": cfg.sf, "start_mode": "warm" if cfg.warm_start else "cold"}
+                 "sf": cfg.sf, "start_mode": "warm" if cfg.warm_start else "cold",
+                 "duration_s": cfg.duration_s,
+                 "beacon_interval_s": cfg.beacon_interval_s,
+                 "control_plane_mode": cfg.control_plane_mode,
+                 "rx_policy": cfg.rx_policy}
+        if cfg.cell_label:
+            label["cell_label"] = cfg.cell_label
         results = [simulate_once(cfg, strategy, seed=seed) for seed in seed_list]
         for seed, res in zip(seed_list, results):
             row = dict(label)

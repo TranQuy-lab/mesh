@@ -304,5 +304,110 @@ class TestCaptureAndFeatures(unittest.TestCase):
         self.assertEqual(summary[0]["n_seeds"], 2)
 
 
+class TestControlPlaneModes(unittest.TestCase):
+    """H3/R3b — chi phí và hệ quả của ba chế độ mặt phẳng điều khiển."""
+
+    def _run(self, mode: str, policy: str = "continuous", **kw):
+        cfg = _cfg(control_plane_mode=mode, rx_policy=policy, **kw)
+        return simulate_once(cfg, "gradient", seed=3)
+
+    def test_chi_gateway_phat_thi_dieu_khien_re_hon_hang_chuc_lan(self) -> None:
+        hello = self._run("node_hello")
+        gw_only = self._run("gateway_beacon")
+        self.assertGreater(hello.control_transmissions, 5 * gw_only.control_transmissions)
+
+    def test_relay_beacon_ton_kem_hon_khong_relay(self) -> None:
+        no_relay = self._run("gateway_beacon")
+        relay = self._run("gateway_beacon_relay")
+        self.assertGreater(relay.control_transmissions, no_relay.control_transmissions)
+        self.assertGreater(relay.beacon_receptions, no_relay.beacon_receptions)
+
+    def test_relay_lan_duoc_hop_count_xa_hon(self) -> None:
+        no_relay = self._run("gateway_beacon")
+        relay = self._run("gateway_beacon_relay")
+        self.assertGreaterEqual(relay.hop_learned_fraction, no_relay.hop_learned_fraction)
+
+    def test_kiem_tra_loi_che_do_khong_hop_le(self) -> None:
+        for bad in ("hello", "relay", ""):
+            with self.assertRaises(ValueError):
+                LoraSimConfig(control_plane_mode=bad)
+        for bad in ("sleep", "always", ""):
+            with self.assertRaises(ValueError):
+                LoraSimConfig(rx_policy=bad)
+
+
+class TestRxPolicies(unittest.TestCase):
+    """H5 — đánh đổi giữa ngủ tiết kiệm pin và khả năng nhận/ chuyển tiếp."""
+
+    def _run(self, policy: str, **kw):
+        return simulate_once(
+            _cfg(rx_policy=policy, control_plane_mode="gateway_beacon_relay", **kw),
+            "flood", seed=5,
+        )
+
+    def test_nghe_lien_tuc_thuc_100_phan_tram(self) -> None:
+        self.assertEqual(self._run("continuous").mean_awake_fraction, 1.0)
+
+    def test_chi_phat_thi_khong_nhan_duoc_gi(self) -> None:
+        r = self._run("tx_only")
+        self.assertEqual(r.mean_awake_fraction, 0.0)
+        self.assertEqual(r.beacon_receptions, 0)
+        self.assertEqual(r.data_receptions, 0)
+        self.assertEqual(r.pdr, 0.0)
+
+    def test_ngu_theo_lich_thuc_rat_it_va_bo_lo_nhieu(self) -> None:
+        windowed = self._run("windowed")
+        continuous = self._run("continuous")
+        self.assertLess(windowed.mean_awake_fraction, 0.2)
+        self.assertGreater(windowed.missed_due_to_sleep, 0)
+        self.assertGreater(continuous.missed_due_to_sleep, 0 - 1)  # luôn >= 0
+
+    def test_ngu_theo_lich_van_hoc_duoc_hop_nho_cua_so_dong_bo(self) -> None:
+        """Nhờ căn pha beacon, nút ngủ theo lịch vẫn học được hop count."""
+        windowed = self._run("windowed")
+        self.assertGreater(windowed.hop_learned_fraction, 0.0)
+
+    def test_ngu_theo_lich_lam_giam_giao_hang(self) -> None:
+        """Hệ quả then chốt: nút ngủ không chỉ bỏ ACK mà còn bỏ cả chuyển tiếp."""
+        windowed = self._run("windowed")
+        continuous = self._run("continuous")
+        self.assertLessEqual(windowed.pdr, continuous.pdr)
+
+
+class TestPersonalLink(unittest.TestCase):
+    """RQ6 — link cá nhân điện thoại → nút cầu."""
+
+    def test_mac_dinh_tat_link_ca_nhan(self) -> None:
+        cfg = _cfg()
+        self.assertEqual(cfg.link_delay_s, 0.0)
+        self.assertEqual(cfg.link_drop_prob, 0.0)
+
+    def test_bat_link_lam_tang_do_tre_dau_cuoi(self) -> None:
+        base = simulate_once(_cfg(), "flood", seed=7)
+        linked = simulate_once(
+            _cfg(link_delay_s=0.1, link_drop_prob=0.3), "flood", seed=7
+        )
+        self.assertGreater(linked.mean_link_delay_s, 0.0)
+        self.assertGreaterEqual(linked.latency_p50, base.latency_p50)
+        self.assertGreater(linked.link_failures, 0)
+
+    def test_mat_link_khong_lam_mat_sos_nho_dem_ben(self) -> None:
+        """Nút cầu đệm bền: mất link chỉ gây trễ, không mất tin."""
+        lossy = simulate_once(
+            _cfg(link_delay_s=0.05, link_drop_prob=0.5, link_retry_max=10),
+            "flood", seed=11,
+        )
+        clean = simulate_once(
+            _cfg(link_delay_s=0.0, link_drop_prob=0.0), "flood", seed=11
+        )
+        self.assertEqual(lossy.delivered, clean.delivered)
+
+    def test_kiem_tra_loi_tham_so_link(self) -> None:
+        with self.assertRaises(ValueError):
+            LoraSimConfig(link_drop_prob=1.5)
+        with self.assertRaises(ValueError):
+            LoraSimConfig(link_delay_s=-0.1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

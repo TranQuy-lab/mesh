@@ -31,8 +31,11 @@ tiếp có kiểm soát về trạm cứu hộ.
 | 4 | [xac-minh-nguon-lora-va-quyet-dinh-song.md](xac-minh-nguon-lora-va-quyet-dinh-song.md) | **Nhật ký quyết định & sổ nguồn đã xác minh:** vì sao bỏ BLE, vì sao chọn LoRa, vì sao loại WiFi mesh / WiFi HaLow / vệ tinh, kèm DOI đã đối chiếu và danh sách số liệu **bị cấm dùng** |
 | 5 | [nghien-cuu-ve-tinh-rescuemesh-ai.md](nghien-cuu-ve-tinh-rescuemesh-ai.md) | Phụ lục nghiên cứu vệ tinh (76 bằng chứng): Starlink tại Việt Nam, spec sheet, 3GPP NTN, rain fade nhiệt đới |
 | 6 | [ket-qua-tong-hop-lora-mesh-2026-09-30.md](ket-qua-tong-hop-lora-mesh-2026-09-30.md) | Phụ lục định tuyến/DTN/hiệu chuẩn (đã xác minh DOI): dung lượng LoRaWAN có đo, DTN-over-LoRa thực địa, data mule, cạm bẫy mô phỏng |
-| 7 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
-| 8 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
+| 7 | [nghien-cuu-beacon-suc-chua-2026-10-01.md](nghien-cuu-beacon-suc-chua-2026-10-01.md) | Phụ lục beacon & sức chứa: chu kỳ quảng bá thật (Meshtastic 3 h, MeshCore 12 h), Trickle RFC 6206, bản Bor đã sửa, hiệu chuẩn LoRaWANSim, đo năng lượng relay |
+| 8 | [nghien-cuu-link-ca-nhan-ble-2026-10-01.md](nghien-cuu-link-ca-nhan-ble-2026-10-01.md) | Phụ lục link cá nhân BLE: connection interval AOSP, ràng buộc chạy nền định lượng, số đo độ trễ, khuyến nghị PHY 2M |
+| 9 | [nghien-cuu-chuan-khan-cap-2026-10-01.md](nghien-cuu-chuan-khan-cap-2026-10-01.md) | Phụ lục chuẩn khẩn cấp: CAP v1.2, trường tối thiểu, 3GPP TS 23.032 xác nhận 24 bit/trục, khuyến nghị khung v2.1 |
+| 10 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
+| 11 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
 
 ### Tài liệu lịch sử (hướng BLE đã loại)
 
@@ -54,9 +57,11 @@ tiếp có kiểm soát về trạm cứu hộ.
 | [rescuemesh/test_node_power.py](rescuemesh/test_node_power.py) | Kiểm thử kế toán năng lượng và các bất biến | — |
 | [rescuemesh/packets_lora.py](rescuemesh/packets_lora.py) | Codec **khung v2.0**: SOS 36 B, HEARTBEAT 14 B, BEACON 18 B, ACK 12 B; HMAC cắt ngắn; token ACK 24 bit; bảng airtime và va chạm token | 36/36 test xanh |
 | [rescuemesh/test_packets_lora.py](rescuemesh/test_packets_lora.py) | Round-trip, tamper, biên, fuzz, Monte Carlo va chạm token 16/24 bit | — |
-| [rescuemesh/sim_lora.py](rescuemesh/sim_lora.py) | Simulator mesh LoRa: thời gian liên tục, airtime, collision, capture, duty cycle, 5 thuật toán, cold/warm start, courier | 28/28 test xanh |
-| [rescuemesh/test_sim_lora.py](rescuemesh/test_sim_lora.py) | Kiểm soát âm bắt buộc, tái lập, kế toán airtime | — |
-| [rescuemesh/analyze_sim_lora.py](rescuemesh/analyze_sim_lora.py) | Phân tích **ghép cặp theo seed** cho H2 (thuật toán nào thắng ở mức tải nào) → `results/sim-lora-h2-paired.csv` | — |
+| [rescuemesh/sim_lora.py](rescuemesh/sim_lora.py) | Simulator mesh LoRa: thời gian liên tục, airtime, collision, capture, duty cycle, 5 thuật toán, cold/warm start, courier, **3 chế độ mặt phẳng điều khiển**, **3 chính sách nghe**, **mô hình link cá nhân** | 41/41 test xanh |
+| [rescuemesh/test_sim_lora.py](rescuemesh/test_sim_lora.py) | Kiểm soát âm bắt buộc, tái lập, kế toán airtime, và test cho các tính năng v2.1 | — |
+| [rescuemesh/run_lora_experiments.py](rescuemesh/run_lora_experiments.py) | Năm thí nghiệm trọng tâm E1/E1b (H3-R3b, H5), E2/E2b (H6), E3 (RQ6) → `results/sim-lora-e*.csv` | — |
+| [rescuemesh/analyze_sim_lora.py](rescuemesh/analyze_sim_lora.py) | Phân tích **ghép cặp theo seed**, **đường Pareto**, và **bảng theo ô** (chỗ sửa lại H2) | — |
+| [rescuemesh/reproduce_all.sh](rescuemesh/reproduce_all.sh) | **Một lệnh tái lập (cổng G11):** mọi test + mọi bảng + mọi CSV + `results/REPRODUCE-REPORT.md` kèm hash | — |
 | [rescuemesh/packets.py](rescuemesh/packets.py) | Codec BLE v1 (24 B) — **lịch sử**; helper mã hoá toạ độ 24 bit vẫn được v2.0 tái dùng | 15/15 test xanh |
 | [rescuemesh/sim_v2.py](rescuemesh/sim_v2.py) · [run_wp3_matrix.py](rescuemesh/run_wp3_matrix.py) · [run_h3_experiment.py](rescuemesh/run_h3_experiment.py) · [run_r2a_beacon_sweep.py](rescuemesh/run_r2a_beacon_sweep.py) | Simulator và thí nghiệm BLE — **lịch sử**; kết quả `SIM` cũ **không được trích** cho hướng LoRa | — |
 | [rescuemesh/generate_g0_schedule.py](rescuemesh/generate_g0_schedule.py) | Sinh lịch factorial có block và random hoá (tái dùng cho sàng lọc G0-S mới) | 4/4 test xanh |
@@ -69,14 +74,20 @@ Chạy kiểm thử (không cần thư viện ngoài):
 
 ```bash
 cd rescuemesh
-python3 test_lora.py            # 31/31
+./reproduce_all.sh              # MỘT lệnh: mọi test + mọi bảng + mọi CSV + báo cáo hash
+
+python3 test_lora.py            # 32/32
 python3 test_node_power.py      # 19/19
 python3 test_packets_lora.py    # 36/36
+python3 test_sim_lora.py        # 41/41 (gồm 3 chế độ điều khiển, 3 chính sách nghe, link cá nhân)
 python3 test_packets.py         # 15/15 (codec BLE lịch sử)
 
 python3 lora.py                 # bảng đánh đổi SF + sức chứa gateway
 python3 node_power.py           # tuổi thọ pin và chi phí mỗi SOS
 python3 packets_lora.py         # bảng khung + airtime + va chạm token
+python3 sim_lora.py             # ma trận chính
+python3 run_lora_experiments.py all   # E1/E1b/E2/E2b/E3
+python3 analyze_sim_lora.py     # ghép cặp + Pareto + theo ô
 ```
 
 ## Trạng thái
@@ -88,17 +99,33 @@ python3 packets_lora.py         # bảng khung + airtime + va chạm token
   SF9 phục vụ **≈ 242 nút** (beacon 60 s) tới **≈ 952 nút** (beacon 300 s) ở mức
   dùng 80 % kênh; nút cầu ngủ theo lịch sống **≈ 765 ngày** so với **≈ 9,6 ngày** khi
   nghe kênh liên tục.
-- **Phát hiện định hình đề tài:** beacon chiếm **73–93 %** airtime của mỗi nút
-  (SF9/beacon 60 s: **93,3 %**) — điều khiển, không phải dữ liệu, là chi phí trội.
-  Đây là giả thuyết H3 và là dự đoán có thể bị bác ở WP9.
-- **Kết quả `SIM` đầu tiên (chưa hiệu chuẩn, không được trích như kết quả):**
-  2.400 lượt mô phỏng, 5 thuật toán × 3 mật độ × 2 tải × 2 SF × cold/warm, 20 seed
-  mỗi ô. Ghép cặp theo seed cho thấy **gradient thua flooding về PDR ở cả hai mức
-  tải** (−0,141 và −0,126) nhưng chỉ tốn ≈ **8 lần phát** mỗi SOS giao được thay vì
-  ≈ 60; **`store_carry_forward` vừa giao nhiều hơn vừa tốn ít hơn flooding**. Nghĩa
-  là đánh đổi thật trên LoRa là **PDR ↔ airtime**, không phải "gradient thắng khi
-  tải cao" như quan sát trên BLE. Xem §7.5 của kế hoạch và
-  [results/sim-lora-h2-paired.csv](results/sim-lora-h2-paired.csv).
+- **Điều khiển là ĐÒN THIẾT KẾ, không phải hằng số của mạng** (đã tự sửa sau khảo sát
+  hệ thống thật): ở chu kỳ 60–300 s thì beacon chiếm **73–95 %** airtime, nhưng
+  Meshtastic NodeInfo mặc định **10.800 s** và MeshCore advert **12 h**, ở đó chi phí
+  điều khiển rơi còn **0,32–1,36 khung/nút/giờ**. Vì vậy câu hỏi nghiên cứu là
+  **"chu kỳ thưa nhất nào vẫn giữ được gradient"**, không phải "điều khiển có chiếm ưu
+  thế không". Chế độ `adaptive_gateway` đã cài công thức giãn chu kỳ thật của Meshtastic
+  `T×(1+0,075·(N−40))`. ⚠️ Không tìm thấy nguồn nào **đo** tỉ lệ beacon trong mesh LoRa
+  một kênh — con số 73–95 % là **mô hình của đề tài**, không được trích như phát hiện
+  về LoRa nói chung.
+- **Kết quả `SIM` v2.1 (chưa hiệu chuẩn, không được trích như kết quả):** ma trận
+  chính 2.400 lượt + **năm thí nghiệm trọng tâm**. Năm phát hiện đáng chú ý:
+  1. **H2 sửa lại:** biến quyết định là **airtime mỗi khung**, không phải tải SOS.
+     Ở SF7 gradient thắng **0/12 ô** (ΔPDR −0,246); ở SF9 gradient thắng **6/12 ô**
+     (ΔPDR −0,020) và rẻ hơn ~8 lần về số lần phát. Trên biên Pareto chỉ còn
+     `store_carry_forward` (0,741 PDR) và `gradient` (7,13 lần phát mỗi SOS giao được).
+  2. **H3/R3b — kết quả phủ định:** **relay beacon tốn ~17 lần airtime điều khiển
+     (1,9 % → 31,8 %) mà giao ít hơn** (0,762 → 0,719) ở vùng 1 km, và vẫn thua ở
+     vùng 3 km ⇒ mặc định v1 là **chỉ gateway phát, không relay**.
+  3. **H5 nặng hơn dự kiến:** `windowed` chỉ thức 1,5–7,4 % thời gian nhưng PDR rơi
+     0,762 → 0,029; `tx_only` cho PDR = 0 — vì nút ngủ **không chuyển tiếp được dữ
+     liệu của người khác**, không chỉ bỏ lỡ ACK.
+  4. **H6 phụ thuộc kịch bản:** ở vùng 1 km/240 s courier gần như không giúp gì
+     (0,463 → 0,500), nhưng ở 3 km/900 s với xe 10 m/s thì **+0,058 PDR và −25 %
+     lần phát** ⇒ phải phát biểu H6 **có điều kiện kịch bản**, nếu không sẽ bác bỏ sai.
+  5. **RQ6:** mất khung trên link cá nhân **chỉ làm tăng độ trễ, không làm mất SOS**
+     (nhờ nút cầu đệm bền) — giả thuyết thiết kế được mô hình xác nhận.
+  Xem §7.5 của kế hoạch và [results/](results/).
 - **Chưa có kết quả `ĐO` nào.** Mọi số hiện tại là `SUY` (từ mô hình) hoặc `SIM`
   (từ mô phỏng chưa hiệu chuẩn). Không được viết như kết quả thực nghiệm.
 - **Pháp lý và thông số đã xác minh từ bản gốc:** băng **920–923 MHz được miễn giấy

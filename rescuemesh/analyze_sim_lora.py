@@ -132,11 +132,88 @@ def write_paired(paired: list[dict]) -> None:
     print(f"\nĐã ghi {OUT} ({len(paired)} dòng, mọi dòng suy ra từ dữ liệu evidence=SIM)")
 
 
+def pareto_summary(rows: dict[tuple, dict]) -> None:
+    """Đường Pareto PDR ↔ số lần phát mỗi SOS giao được (từ ma trận chính).
+
+    Không có "người thắng duy nhất": trên LoRa, thuật toán giao nhiều hơn thường
+    tốn nhiều airtime hơn. Hàm này in từng thuật toán kèm dấu `*` cho những thuật
+    toán **không bị trội** (không có thuật toán nào vừa giao ≥ vừa rẻ hơn).
+    """
+    agg: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    for (strategy, *_rest, _seed), vals in rows.items():
+        agg[strategy].append((vals["pdr"], vals["tx_per_delivered"]))
+    stats = {
+        s: (statistics.fmean(p for p, _ in v), statistics.fmean(t for _, t in v))
+        for s, v in agg.items()
+    }
+    print()
+    print("=" * 92)
+    print("ĐƯỜNG PARETO — PDR vs số lần phát mỗi SOS giao được (nhãn SIM, CHƯA hiệu chuẩn)")
+    print("=" * 92)
+    print(f"{'thuật toán':>20} | {'PDR':>7} | {'phát/giao':>10} | {'trên biên Pareto':>17}")
+    print("-" * 92)
+    for s, (pdr, tx) in sorted(stats.items(), key=lambda kv: -kv[1][0]):
+        dominated = any(
+            (p2 >= pdr and t2 <= tx and (p2 > pdr or t2 < tx))
+            for o, (p2, t2) in stats.items() if o != s
+        )
+        print(f"{s:>20} | {pdr:7.3f} | {tx:10.2f} | {'KHÔNG' if dominated else 'CÓ *':>17}")
+    print()
+    print("Đọc bảng: đây là đánh đổi, không phải xếp hạng. Mọi số là `SIM` chưa hiệu")
+    print("chuẩn; cổng G9 phải đạt trước khi dùng để kết luận.")
+
+
+def per_cell_and_sf_table(rows: dict[tuple, dict]) -> None:
+    """Bảng theo ô (mật độ × tải × SF × khởi động) và tổng hợp theo SF.
+
+    Đây là chỗ **sửa lại H2**: biến quyết định không phải tải mà là **airtime mỗi
+    khung** (tức SF). Ở SF7 (airtime ngắn) flooding thắng ở mọi ô; ở SF9 (airtime
+    dài gấp ~3,5 lần) gradient ngang bằng hoặc nhỉnh hơn.
+    """
+    agg: dict[tuple, list[float]] = defaultdict(list)
+    for (strategy, n_nodes, n_sos, sf, mode, _seed), vals in rows.items():
+        agg[(strategy, n_nodes, n_sos, sf, mode)].append(vals["pdr"])
+    print()
+    print("=" * 92)
+    print("H2 SỬA LẠI — PDR theo ô: flood vs gradient (nhãn SIM, CHƯA hiệu chuẩn)")
+    print("=" * 92)
+    header = (f"{'n':>4} {'tải':>4} {'SF':>3} {'start':>5} | {'flood':>7} "
+              f"{'gradient':>9} {'ΔPDR':>8}")
+    print(header)
+    print("-" * len(header))
+    by_sf: dict[str, list[float]] = defaultdict(list)
+    for n_nodes in ("25", "50", "100"):
+        for n_sos in ("5", "20"):
+            for sf in ("7", "9"):
+                for mode in ("warm", "cold"):
+                    f_key = ("flood", n_nodes, n_sos, sf, mode)
+                    g_key = ("gradient", n_nodes, n_sos, sf, mode)
+                    if f_key not in agg or g_key not in agg:
+                        continue
+                    f = statistics.fmean(agg[f_key])
+                    g = statistics.fmean(agg[g_key])
+                    by_sf[sf].append(g - f)
+                    print(f"{n_nodes:>4} {n_sos:>4} {sf:>3} {mode:>5} | {f:7.3f} "
+                          f"{g:9.3f} {g - f:+8.3f}")
+    print()
+    print("Tổng hợp theo SF (ΔPDR = gradient − flood, trung bình mọi ô cùng SF):")
+    for sf in sorted(by_sf):
+        deltas = by_sf[sf]
+        wins = sum(1 for d in deltas if d > 0)
+        print(f"  SF{sf}: ΔPDR = {statistics.fmean(deltas):+.3f} | "
+              f"gradient thắng {wins}/{len(deltas)} ô")
+    print()
+    print("Kết luận SIM (chưa hiệu chuẩn): biến quyết định là AIRTIME MỖI KHUNG, không")
+    print("phải tải SOS. Muốn phát biểu H2 phải nêu rõ SF/BW.")
+
+
 def main() -> None:
     rows = load_raw()
     paired = paired_differences(rows)
     summarise(paired)
     write_paired(paired)
+    pareto_summary(rows)
+    per_cell_and_sf_table(rows)
 
 
 if __name__ == "__main__":

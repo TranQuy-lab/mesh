@@ -153,9 +153,9 @@ rõ một trường hợp chỉ số không được phép trích.
 |---|---|---|
 | 4.1 Phát hiện ngã trên IMU điện thoại | Recall ở ngân sách FAR đặt trước, LOSO; **kết quả trên ngã thực** (đây là nơi mọi công trình tụt) | **Bảng 4.1**; Hình 4.1 recall–FAR |
 | 4.2 Sức chứa một gateway | Số nút theo SF/chu kỳ beacon; điểm sụp; kiểm chứng bằng đo thực | **Bảng 4.2** (RQ3) |
-| 4.3 So sánh định tuyến | Flooding vs managed flooding vs gradient vs DTN: PDR, P95 trễ, **airtime mỗi SOS giao được** | **Bảng 4.3**; Hình 4.2 PDR theo tải |
-| 4.4 Điều khiển chiếm kênh | Tỉ lệ airtime beacon/ACK; có/không beacon thích ứng | **Bảng 4.4** (H3) |
-| 4.5 Chính sách ngủ/nghe | Tỉ lệ nhận ACK, độ trễ nhận lệnh xuống, tuổi thọ pin cho ba chính sách | **Bảng 4.5** (H5); Hình 4.3 đánh đổi pin ↔ nhận ACK |
+| 4.3 So sánh định tuyến | Flooding vs managed flooding vs gradient vs DTN: PDR, P95 trễ, **airtime mỗi SOS giao được**; trình bày **đường Pareto**, và **phân tích theo ô** cho thấy biến quyết định là airtime mỗi khung (SF), không phải tải | **Bảng 4.3**; Hình 4.2 PDR theo SF |
+| 4.4 Điều khiển chiếm kênh | Ba chế độ mặt phẳng điều khiển × ba chính sách nghe; **kết quả phủ định: relay beacon tốn ~17 lần airtime mà giao ít hơn** | **Bảng 4.4** (H3, R3b) |
+| 4.5 Chính sách ngủ/nghe | Tỉ lệ thức, tỉ lệ học được hop, tỉ lệ bỏ lỡ vì ngủ, PDR cho ba chính sách; **nút ngủ mất luôn vai trò chuyển tiếp** | **Bảng 4.5** (H5); Hình 4.3 đánh đổi pin ↔ nhận ACK |
 | 4.6 ACK và phát lại | Tỉ lệ khớp sai token 16/24 bit; số lần phát lại tăng thêm | **Bảng 4.6** (H4, ứng viên kết quả phủ định) |
 | 4.7 Đầu-cuối | P50/P95 và phân rã ngân sách độ trễ **tách theo từng chặng, gồm chặng link cá nhân**; năng lượng mỗi SOS giao được | **Bảng 4.7** (RQ4); Hình 4.4 phân rã độ trễ |
 | 4.8 Link cá nhân | Độ trễ thiết lập/phát lại, mất kết nối khi tắt màn hình, hành vi khi đông thiết bị BLE | **Bảng 4.8** (RQ6) |

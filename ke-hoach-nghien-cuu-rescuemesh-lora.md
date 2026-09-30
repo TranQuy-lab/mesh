@@ -35,10 +35,14 @@
    (hệ số chuyển tiếp 3); nút cầu ngủ theo lịch sống **≈ 765 ngày** nhưng
    **nghe kênh liên tục chỉ sống ≈ 9,6 ngày** trên cùng viên pin (dòng Rx/Tx lấy
    từ **datasheet SX1276 đã xác minh**).
-5. **Phát hiện cũ về điều khiển (control plane) trở thành giả thuyết trung tâm.**
-   Trên BLE, beacon chiếm 60–98 % lưu lượng. Trên LoRa, mô hình tái lập dự đoán
-   **beacon chiếm 73–93 % airtime của mỗi nút** ở chu kỳ 60–300 s — ở SF9/beacon
-   60 s là **93,3 %**. Đây là **dự đoán có thể bị bác** ở WP9.
+5. **Điều khiển là ĐÒN THIẾT KẾ, không phải hằng số của mạng** (đã tự sửa sau khi
+   khảo sát hệ thống thật). Ở chu kỳ quảng bá 60–300 s, beacon chiếm **73–95 %**
+   airtime; nhưng các hệ thống thật dùng chu kỳ **3–12 giờ** — Meshtastic NodeInfo
+   mặc định **10.800 s**, MeshCore flood advert **12 h** — và ở đó chi phí điều khiển
+   rơi từ 60,6 khung/nút/giờ (60 s) xuống **0,32 khung/nút/giờ** (10.800 s). Vì vậy
+   câu hỏi nghiên cứu **không** phải "beacon có chiếm ưu thế không" mà là **"chu kỳ
+   thưa nhất nào vẫn giữ được gradient"**, và có nên giãn theo quy mô như công thức
+   Meshtastic `T×(1+0,075·(N−40))` hay không.
 6. **Nghịch lý một sóng: ngủ để giữ pin thì không nghe được lệnh xuống.** Nút chỉ
    phát (không nghe) sống rất lâu nhưng không nhận được ACK/beacon; nút nghe liên
    tục nhận đủ nhưng mất khoảng 80 lần tuổi thọ. Đây là **giả thuyết H5**, và là
@@ -197,7 +201,22 @@ DOI/URL; nguồn chi tiết ở [bản tổng hợp định tuyến LoRa](ket-qu
 | Cạm bẫy đo năng lượng WSN | Sai số hệ thống khi đo dòng nút cảm biến | Pullwitt et al., WONS 2023, `10.23919/WONS57325.2023.10062282` |
 | Duty cycle theo luật (tham chiếu quốc tế) | ETSI EN 300 220-2: 868,0–868,6 MHz ≤ 1 %; 868,7–869,2 ≤ 0,1 %; 869,4–869,65 ≤ 10 %. FCC 15.247: dwell 0,4 s/20 s | `etsi.org/.../en_30022002v030201p.pdf`; 47 CFR 15.247(a)(1)(i) |
 
+**Bằng chứng bổ sung từ các nhánh khảo sát mới (2026-10-01, DOI đã đối chiếu Crossref):**
 
+| Nhóm | Kết quả đã xác minh | Nguồn |
+|---|---|---|
+| **Dung lượng (bản Bor đã sửa, đọc PDF)** | LoRaWAN mặc định: **64 nút / 3,8 ha** với DER > 0,9; **"well over N = 1100"** khi tối ưu airtime; capture **0,51 → 0,64** ở N = 200; cần **≥ 5 ký tự preamble**; DER = e^(−2N·T·λ). **Cảnh báo:** PDF sửa vẫn sót "120" ở chú thích Figure 4 — **chỉ dùng 64** | `eprints.lancs.ac.uk/81674/13` |
+| **Trickle — nền lý thuyết cho beacon thích ứng** | RFC 6206: `I_min`, `I_max`, `k`, suppression khi `c < k`; NSDI 2004: vài gói/giờ, tăng O(log n); **testbed thật 43 nút** (WSN430/IoT-Lab) | `10.17487/rfc6206`; `10.1109/wowmom.2015.7158134` |
+| **Khoảng trống Trickle** | **Không tìm thấy nguồn** nào áp Trickle lên LoRa rồi đo ⇒ khoảng trống khai thác được cho beacon hop-count | — |
+| **Chu kỳ quảng bá trong hệ thống thật** | Meshtastic **NodeInfo mặc định 10.800 s (3 h)** (fw `Default.h`; dải 3.600 s→MAX), Position 15 min, Telemetry 30 min, NeighborInfo 6 h; **từ fw 2.4.0 giãn theo quy mô** `T×(1+0,075·(N−40))`; MeshCore repeater **flood advert 12 h** (3–168 h). ⚠️ `config.proto` ghi 900 s — **trái** tài liệu/firmware, **không dùng** | `meshtastic.org/docs/...`; firmware `Default.cpp` |
+| **Hiệu chuẩn mô phỏng ↔ đo thực** | LoRaWANSim Table 10 (5 nút thật ở 50 m): SF7 **0,968 đo vs 0,997 mô phỏng (+2,9 điểm %)**; SF10 **0,914 vs 0,978 (+6,4 điểm %)** ⇒ **mô phỏng đánh giá cao hơn thực tế** | `10.3390/s21030695` |
+| **Năng lượng relay (ĐO THỰC)** | 6 nút Meshtastic 2.7 đo bằng Otii Arc, NLOS 4 tầng: Tx/Rx/**RELAY** gần như giống nhau **125–126 mA, 467–470 mJ/gói, ~25–26 h trên pin 3200 mAh** ⇒ **không có bằng chứng đo** rằng relay tốn pin hơn khi always-on | `10.1049/cmu2.70221` |
+| **Vị trí: chuẩn xác nhận 24 bit/trục** | 3GPP **TS 23.032 V19.0.0 (2025-09)** mã hoá vĩ độ 24 bit và kinh độ 24 bit, công bố *"uncertainty of less than 3 metres"*; bước lượng tử hoá trùng codec đề tài | 3GPP TS 23.032 |
+| **Ngưỡng sai số của cơ quan cứu hộ** | WEA: overshoot ≤ 0,1 dặm (≈ 161 m), phủ 100 % vùng đích; E911 trong nhà ≤ 50 m cho 80 % cuộc gọi, TTFF ≤ 30 s | 47 CFR §10.450; 3GPP TS 22.071 Annex A |
+| **Đích ánh xạ chuẩn** | **CAP v1.2** (OASIS Standard 01-07-2010; CAP 1.1 = ITU-T X.1303); bọc **EDXL-DE v2.0** nếu vào EDXL; Cell Broadcast/PWS chỉ là kênh phát cuối; **không tồn tại "CAP-lite"** | OASIS EMTC; 47 CFR §10.420 |
+| **Link cá nhân BLE (AOSP)** | Connection interval là bội số 1,25 ms: HIGH **11,25–15 ms**, BALANCED 30–50 ms, LOW_POWER 100–125 ms, companion **7,5–10 ms**; supervision timeout 5 s; scan duty cycle **5 % khi tắt màn hình**; quota **5 startScan/30 s**; scan timeout **30 → 10 phút (A14/15)**; FGS `connectedDevice` **không** bị timeout 6 h; **kết nối đóng khi process bị kill** | AOSP `Bluetooth/.../config.xml`, `ScanManager`, tài liệu background |
+
+### 3.2 Năm khoảng trống
 
 - **G1 — SOS tự động qua mesh LoRa *một sóng* trong bối cảnh bão lũ.** Đã có tiền lệ
   **điểm-điểm**: cảm biến **rung + nghiêng** phát hiện va chạm/lật xe rồi gửi qua LoRa
@@ -231,6 +250,14 @@ DOI/URL; nguồn chi tiết ở [bản tổng hợp định tuyến LoRa](ket-qu
 - **G5 — Ngân sách byte/khung dưới ràng buộc airtime.** Trên LoRa mỗi byte tăng
   thêm đều làm tăng airtime và giảm số nút một gateway phục vụ được; thiết kế
   khung có xác thực dưới ràng buộc này chưa có tiền lệ công bố cho bài toán SOS.
+- **G7 — Ánh xạ sang CAP và trường bất định vị trí.** Không tìm thấy nguồn nào về việc
+  ánh xạ một khung SOS byte-cố-định từ mesh LoRa sang **CAP/EDXL**, cũng không có ngân
+  sách độ trễ **mesh → PSAP**. Về kỹ thuật, khung v2.0 **thiếu trường bất định/độ tin
+  cậy của vị trí**, trong khi CAP (`<circle>` bán kính), PIDF-LO RFC 5491 (`gs:radius`,
+  95 %) và TS 23.032 đều mô tả sai số kèm điểm; và CAP yêu cầu `sender` định danh toàn
+  cầu trong khi `src_id` xoay theo ngày. **Đã xử lý một phần:** khung v2.1 đề xuất dùng
+  2 byte dự trữ cho `net_id` + ba trục CAP + lớp độ chính xác (thiết kế §4.6);
+  **việc còn lại** là cài codec v2.1 và đo ngân sách độ trễ tới trạm.
 - **G6 — Nút ẩn và Listen-Before-Talk trong mesh *có nút ngủ*.** Đã có nghiên cứu
   xác suất nút ẩn cho LoRa có LBT (IEEE WCL 2024, `10.1109/LWC.2024.3453788`), nhưng
   **chưa ai nối nó vào mesh một kênh có nút ngủ theo lịch** — nơi nút ngủ không nghe
@@ -292,6 +319,25 @@ Mỗi giả thuyết phải có **đối thủ** và một **kết quả không 
   airtime điều khiển. → **ĐÃ QUAN SÁT ĐÚNG ĐIỀU NÀY ở kết quả `SIM` đầu tiên**;
   xem §7.5. Dự đoán "gradient thắng ngay từ tải thấp" **hiện không được ủng hộ**,
   nhưng chưa đủ để bác vì mô hình chưa hiệu chuẩn (cổng G9).
+- **KẾT QUẢ `SIM` v2.1 (phân tích theo ô) — SỬA LẠI H2: biến quyết định là AIRTIME
+  MỖI KHUNG, không phải tải SOS.** Trên 24 ô (3 mật độ × 2 tải × 2 SF × cold/warm,
+  mỗi ô 20 seed):
+
+  | SF (BW125) | Airtime SOS 36 B | ΔPDR (gradient − flood) | Số ô gradient thắng |
+  |---:|---:|---:|---:|
+  | 7 | ≈ 77 ms | **−0,246** | **0/12** |
+  | 9 | ≈ 267 ms | −0,020 | **6/12** |
+
+  Nghĩa là: **khi airtime mỗi khung còn rẻ (SF7), flooding thắng ở MỌI mật độ và
+  MỌI mức tải** — độ dự trữ đa đường đáng giá hơn chi phí va chạm. **Khi airtime
+  đắt (SF9), hai thuật toán gần như ngang nhau về PDR** (gradient thắng 6/12 ô) và
+  gradient rẻ hơn ~8 lần về số lần phát. Ở vùng rộng 3 km (E1b, SF9), gradient
+  **thắng rõ** flooding (0,597 so với 0,352).
+- **Phát biểu H2 đúng phải là:** *"Gradient chỉ cạnh tranh được về PDR khi airtime
+  mỗi khung đủ đắt (SF ≥ 9 ở BW125) và mạng đủ thưa/rộng; ở SF7 nó thua flooding ở
+  mọi tải, và ở mọi cấu hình nó rẻ hơn khoảng một bậc độ lớn về số lần phát."*
+  Đây là bản sửa có thể bị bác bằng thực nghiệm: chỉ cần một bộ tham số hiệu chuẩn
+  khác làm đảo dấu ở SF9 là H2 sai.
 
 **H3 — Điều khiển (beacon) là chi phí trội của mesh LoRa, gần như độc lập mật độ.**
 - *Phát biểu:* ở chu kỳ beacon 60–300 s, beacon chiếm **73–93 %** airtime của mỗi
@@ -305,6 +351,16 @@ Mỗi giả thuyết phải có **đối thủ** và một **kết quả không 
 - *Đối thủ R3c:* tăng tần suất SOS (sự kiện lớn) sẽ đảo tỉ lệ. → **Thử:** quét tải
   SOS 1/5/20/50 khung mỗi nút mỗi giờ và tìm điểm đảo chiều.
 - *Không tương thích:* ở 200 nút với beacon 60 s, tỉ lệ airtime điều khiển dưới 30 %.
+- **KẾT QUẢ `SIM` v2.1 (E1/E1b) — H3 đúng về chi phí, nhưng đối thủ mới R3d thắng:**
+  ba chế độ điều khiển cho kết quả rất khác nhau ở vùng 1 km, 100 nút (PDR | điều khiển):
+  `node_hello` 0,523 | 46,6 %; `gateway_beacon` **0,762 | 1,9 %**; `gateway_beacon_relay`
+  0,719 | 31,8 %. Nghĩa là **relay beacon tốn 17 lần airtime điều khiển mà giao ít
+  hơn** (dù học hop tốt hơn: 92,8 % so với 69,3 %). Ở vùng 3 km (E1b) hướng này giữ
+  nguyên: `gateway_beacon`+gradient 0,597 | 3,5 % so với có relay 0,547 | 49,9 %.
+- *Đối thủ R3d (mới, đang thắng):* chỉ gateway phát, **không relay**, là đủ cho gradient
+  trong các kịch bản đã thử. → **Thử tiếp:** tăng số hop (vùng >5 km, 1 gateway ở rìa)
+  và giảm mật độ để tìm điểm mà hop count lan qua relay trở nên cần thiết. Nếu không
+  tìm được điểm đó, kết luận phải là **bỏ relay beacon** trong thiết kế v1.
 
 **H4 — Token ACK 24 bit là ngưỡng tối thiểu dùng được; 16 bit sụp ở quy mô thật.**
 - *Phát biểu:* với token 16 bit, xác suất khớp sai đủ lớn để ACK chấm dứt sai phát
@@ -327,6 +383,15 @@ Mỗi giả thuyết phải có **đối thủ** và một **kết quả không 
   R5a thắng và H5 bị bác.
 - *Không tương thích:* ba chính sách cho tỉ lệ nhận ACK như nhau → bài toán không
   tồn tại, và thiết kế có thể bỏ ACK hoàn toàn.
+- **KẾT QUẢ `SIM` v2.1 (E1) — H5 được xác nhận, và hệ quả còn NẶNG HƠN phát biểu:**
+  `continuous` giữ 100 % thời gian thức; `windowed` chỉ 1,5–7,4 % nhưng **PDR rơi từ
+  0,762 xuống 0,029**; `tx_only` cho **PDR = 0** ở mọi chế độ điều khiển. Nguyên nhân
+  không chỉ là bỏ lỡ ACK/beacon: **nút ngủ thì không chuyển tiếp được dữ liệu của
+  người khác**, nên mạng mất luôn các đường relay. Đây là phát biểu đúng phải đưa vào
+  báo cáo: *"chính sách ngủ quyết định cả tuổi thọ pin lẫn khả năng chuyển tiếp, và
+  đánh đổi này khắc nghiệt hơn dự kiến ban đầu"*. Việc phải làm ở WP9/WP10 là tìm
+  **cửa sổ nghe tối thiểu** giữ được PDR chấp nhận được (quét `sync_window_s`,
+  `rx_window_s`, chu kỳ đồng bộ) — chưa làm ở đợt này.
 
 **H6 — Lợi ích của lưu-chuyển-tiếp đến từ nút di động, không từ flooding bên trong cụm.**
 - *Phát biểu:* `store_carry_forward` giao nhiều hơn flooding **nhờ courier tạo tiếp
@@ -340,6 +405,15 @@ Mỗi giả thuyết phải có **đối thủ** và một **kết quả không 
   1,4 m/s). → **Thử:** quét tốc độ và mẫu di động; đối chiếu biên với tiền lệ Theissen.
 - *Không tương thích:* PDR của `store_carry_forward` không khác `managed_flood` khi
   `n_couriers = 0`.
+- **KẾT QUẢ `SIM` v2.1 (E2/E2b) — phát biểu phải có ĐIỀU KIỆN KỊCH BẢN:**
+  - 1 km, 240 s, người đi bộ 1,4 m/s: PDR 0,463 (0 courier) → 0,500 (10 courier) ở
+    100 nút, và 0,573 → 0,568 ở 50 nút ⇒ **courier gần như không đóng góp**.
+  - 3 km, 900 s, **xe 10 m/s**, 100 nút: PDR 0,267 → **0,325**, và **phát/giao giảm
+    25 %** (45,78 → 34,24) ⇒ **courier có đóng góp thật nhưng nhỏ**.
+  - **Bài học phương pháp:** nếu chỉ chạy kịch bản nhỏ thì sẽ **bác bỏ H6 một cách sai
+    lầm**. Vì vậy H6 phải được phát biểu là *"lưu-chuyển-tiếp chỉ có lợi khi vùng đủ
+    rộng, thời gian đủ dài và có phương tiện di chuyển nhanh"*, kèm con số ngưỡng cần
+    tìm ở WP9 (quét `area_m` × `duration_s` × tốc độ courier).
 
 ---
 
@@ -455,13 +529,27 @@ dùng**. Muốn dùng SF12 thì chu kỳ beacon phải thưa đi (≥ ~150 s m�
 
 ### 7.3 Dự đoán về điều khiển (cơ sở của H3)
 
-Beacon chiếm **73–93 %** airtime của mỗi nút ở chu kỳ 60–300 s, vì với 1 SOS/giờ
-thì số khung beacon (60 hoặc 12 mỗi giờ) áp đảo số khung SOS (3 mỗi giờ sau khi
-nhân hệ số chuyển tiếp). Ở SF9/beacon 60 s, chỉ riêng beacon đã là **93,3 %**.
-Nghĩa là **điều khiển, không phải dữ liệu, là chi phí trội của hệ thống** — cùng
-kết luận với phát hiện `SIM` trên BLE, nhưng cơ chế khác: ở BLE là do phát quá
-dày, ở LoRa là do beacon áp đảo tương quan với tần suất SOS. Hệ quả thiết kế:
-**beacon phải thích ứng hoặc theo yêu cầu**, không phát chu kỳ cố định.
+Beacon chiếm **73–95 %** airtime ở chu kỳ 60–300 s, vì với 1 SOS/giờ thì số khung
+beacon (60 hoặc 12 mỗi giờ) áp đảo số khung SOS (3 mỗi giờ sau khi nhân hệ số
+chuyển tiếp). **Nhưng đây KHÔNG phải thuộc tính của mạng — nó là hệ quả của việc
+chọn chu kỳ quá dày.**
+
+**Tự sửa sau khi khảo sát hệ thống thật (E4 + nhánh khảo sát beacon):** các hệ thống
+triển khai thật dùng chu kỳ thưa hơn rất nhiều — **Meshtastic NodeInfo mặc định
+10.800 s (3 h)** (firmware `Default.h`), **MeshCore flood advert mặc định 12 h**
+(dải 3–168 h); LoRaWAN Class B có beacon 128 s nhưng do **gateway** phát trong hình
+sao, không phải nút. Với chu kỳ 3–12 h, chi phí điều khiển mỗi nút rơi còn
+**0,32–1,36 khung/giờ** — không đáng kể so với 3 khung dữ liệu/giờ. Meshtastic còn
+**tự giãn chu kỳ khi mạng > 40 nút** theo `T×(1+0,075·(N−40))` (fw ≥ 2.4.0) — đây là
+cơ chế thích ứng thật, và đề tài đã cài nó làm chế độ `adaptive_gateway` để so sánh.
+
+**Kết luận đúng:** điều khiển là **đòn thiết kế**, và câu hỏi nghiên cứu là **chu kỳ
+thưa nhất nào vẫn giữ được gradient** (và có nên giãn theo quy mô không), chứ không
+phải "điều khiển có chiếm ưu thế không". **Cảnh báo:** không tìm thấy nguồn nào **đo**
+tỉ lệ airtime beacon trong mesh LoRa một kênh có relay — con số 73–95 % là **mô hình
+của đề tài**, không phải số đo, và không được trích như một phát hiện về LoRa nói chung.
+Mâu thuẫn nguồn cần tránh: `meshtastic/config.proto` ghi mặc định 900 s, **trái** với
+tài liệu và firmware (10.800 s) — **không dùng 900 s**.
 
 **Giả định then chốt phải nói rõ (nếu không sẽ bị coi là mâu thuẫn với thiết kế):**
 mô hình tính **một khung beacon cho mỗi nút mỗi chu kỳ**, nghĩa là giả định **mỗi nút
@@ -509,23 +597,133 @@ theo seed**. Bảng dưới là số thô, **nhãn `SIM`**, chưa qua cổng G9:
 Bảng này được **chạy lại sau khi thay bảng độ nhạy bằng giá trị datasheet SX1276 đã
 xác minh** (SF7 −123, SF9 −129, SF12 −136 dBm), nên khác bản trước ở mức ±0,015 PDR.
 
-Ba đọc hiểu quan trọng (đều là `SIM`, phải kiểm lại sau hiệu chuẩn):
+**Ba đọc hiểu từ bảng ghép cặp (đều là `SIM`):**
 
 1. **Gradient thua flooding về PDR ở *cả hai* mức tải** (−0,141 và −0,126) nhưng
-   chỉ tốn **≈ 8 lần phát mỗi SOS giao được** thay vì ≈ 60. Nghĩa là đánh đổi thật
-   trên LoRa là **PDR ↔ airtime**, không phải "gradient thắng khi tải cao" như quan
-   sát trên BLE. Kết quả so sánh phải trình bày như một **đường Pareto**, không phải
-   một người thắng duy nhất.
+   chỉ tốn **≈ 8 lần phát mỗi SOS giao được** thay vì ≈ 60. Đánh đổi thật trên LoRa
+   là **PDR ↔ airtime**, không phải "gradient thắng khi tải cao" như trên BLE.
 2. **`store_carry_forward` vừa giao nhiều hơn vừa tốn ít hơn flooding** ở cả hai
-   mức tải — ứng viên mạnh nhất cho thiết kế cuối, và là chỗ đáng đầu tư thí nghiệm.
+   mức tải.
 3. **Tỉ lệ airtime điều khiển tăng khi dữ liệu ít đi** (gradient 76–80 % so với
-   flooding 31 %): càng tiết kiệm dữ liệu thì beacon càng chiếm ưu thế — củng cố H3
-   và cho thấy tối ưu định tuyến mà không tối ưu beacon thì không đi tới đâu.
+   flooding 31 %) — củng cố H3: tối ưu định tuyến mà không tối ưu điều khiển thì
+   không đi tới đâu.
+
+#### Biên Pareto trên ma trận chính (thay cho "ai thắng")
+
+| Thuật toán | PDR | phát/giao | Trên biên Pareto |
+|---|---:|---:|---|
+| `store_carry_forward` | **0,741** | 29,77 | **CÓ** |
+| `managed_flood` | 0,721 | 29,93 | bị trội |
+| `flood` | 0,702 | 58,20 | bị trội |
+| `trickle` | 0,621 | 34,23 | bị trội |
+| `gradient` | 0,569 | **7,13** | **CÓ** |
+
+**Kết quả so sánh định tuyến phải trình bày như một đường Pareto, không phải một
+người thắng duy nhất.** Chỉ `store_carry_forward` (giao nhiều nhất) và `gradient`
+(rẻ nhất) là không bị trội.
+
+#### Phân tích theo ô — chỗ H2 được sửa lại
+
+Số gộp ở trên che mất biến thật. Khi tách theo ô (3 mật độ × 2 tải × 2 SF × cold/warm,
+20 seed mỗi ô):
+
+| SF | Airtime SOS | ΔPDR (gradient − flood) | Ô gradient thắng | Kết luận |
+|---:|---:|---:|---:|---|
+| 7 | ≈ 77 ms | **−0,246** | **0/12** | Flooding thắng ở mọi ô |
+| 9 | ≈ 267 ms | −0,020 | **6/12** | Ngang nhau về PDR; gradient rẻ hơn ~8 lần |
+
+Ở SF7, ΔPDR xấu nhất là **−0,430** (25 nút, tải 5, cold start) — cold start vẫn là
+điều kiện bất lợi nhất cho gradient, đúng như phát hiện trên BLE. Ở SF9, các ô
+gradient thắng đều là mật độ ≥ 50 nút và tải ≥ 5 SOS.
+
+**Vì sao quan trọng:** phát hiện trên BLE nói "biến quyết định là **tải**"; phát hiện
+trên LoRa nói "biến quyết định là **airtime mỗi khung**". Hai kết luận khác nhau, và
+bản LoRa có cơ chế rõ ràng hơn: airtime dài làm mỗi lần phát đắt và dễ va chạm, nên
+đa đường trở thành gánh nặng thay vì bảo hiểm.
+
+#### E1 — mặt phẳng điều khiển × chính sách nghe (H3/R3b, H5)
+
+Vùng 1 km, 100 nút, 20 SOS, SF9, warm start, 20 seed; ô = trung bình trên hai thuật
+toán (flood, gradient) và ba mật độ.
+
+| Chế độ điều khiển | Chính sách nghe | PDR | Điều khiển | Học được hop | Thức | Bỏ lỡ vì ngủ |
+|---|---|---:|---:|---:|---:|---:|
+| `node_hello` (mỗi nút tự phát) | continuous | 0,523 | 46,6 % | 73,8 % | 100 % | 0 |
+| `gateway_beacon` (chỉ gateway) | continuous | **0,762** | **1,9 %** | 69,3 % | 100 % | 0 |
+| `gateway_beacon_relay` (có relay) | continuous | 0,719 | 31,8 % | **92,8 %** | 100 % | 0 |
+| `node_hello` | windowed | 0,069 | 72,4 % | 4,4 % | 7,4 % | 10.903 |
+| `gateway_beacon` | windowed | 0,029 | 12,2 % | 69,3 % | 1,5 % | 1.152 |
+| `gateway_beacon_relay` | windowed | 0,003 | 78,0 % | 72,5 % | 5,0 % | 1.370 |
+| mọi chế độ | `tx_only` | **0,000** | 12,2–86,4 % | 0 % | 0 % | 1.380–11.610 |
+
+**Phát hiện phủ định quan trọng (R3b thắng):** trong kịch bản này, **relay beacon làm
+tốn 17 lần airtime điều khiển (1,9 % → 31,8 %) và giao *ít hơn* (0,762 → 0,719)** dù
+học được hop tốt hơn (69,3 % → 92,8 %). Nghĩa là **cơ chế "mỗi nút chuyển tiếp beacon"
+mà H3 giả định là cần thiết thì ở đây lại có hại**: chi phí va chạm lớn hơn lợi ích
+định tuyến. Đây là ứng viên kết quả phủ định thứ hai của đề tài, bên cạnh H4.
+
+**E1b — kiểm tra phụ thuộc kịch bản (vùng 3 km, 100 nút):**
+
+| Ô | PDR | Điều khiển | Học hop | phát/giao |
+|---|---:|---:|---:|---:|
+| `gateway_beacon` + gradient | **0,597** | **3,5 %** | 21,0 % | **6,69** |
+| `gateway_beacon_relay` + gradient | 0,547 | 49,9 % | 66,8 % | 13,88 |
+| `node_hello` + gradient | 0,275 | 83,8 % | 44,5 % | 11,21 |
+| `gateway_beacon` + flood | 0,352 | 0,5 % | 21,0 % | 87,32 |
+| `flood` với `node_hello` | 0,182 | 49,2 % | 44,5 % | 90,75 |
+
+Kết luận **vẫn giữ hướng cũ ở vùng rộng** (chỉ gateway phát là tốt nhất và rẻ nhất),
+nên phát hiện không phải sản phẩm của một kịch bản hẹp. Đồng thời **flood tệ hơn
+gradient ở mọi chế độ** — trái với kỳ vọng thông thường, và là điều phải giải thích
+bằng va chạm trong phần thảo luận.
+
+#### E2/E2b — lưu-chuyển-tiếp có thật sự nhờ nút di động? (H6)
+
+| Kịch bản | 0 courier | 1 | 3 | 10 | Kết luận |
+|---|---:|---:|---:|---:|---|
+| 1 km, 240 s, người đi bộ 1,4 m/s, 100 nút (PDR) | 0,463 | 0,470 | 0,463 | 0,500 | Gần như không khác |
+| 1 km, 240 s, người đi bộ 1,4 m/s, 50 nút (PDR) | 0,573 | 0,588 | 0,578 | 0,568 | **Không khác** |
+| 3 km, 900 s, **xe 10 m/s**, 100 nút (PDR) | 0,267 | 0,297 | 0,283 | **0,325** | **+0,058 PDR** |
+| 3 km, 900 s, xe 10 m/s (phát/giao) | 45,78 | 41,49 | 37,37 | **34,24** | **−25 % lần phát** |
+
+**Bài học phương pháp quan trọng:** nếu chỉ chạy kịch bản 1 km/240 s thì kết luận là
+"courier không đóng góp" — tức **bác bỏ H6 một cách sai lầm**. Khi cho cơ chế một
+kịch bản công bằng (vùng rộng, thời gian dài, tốc độ xe), **H6 được ủng hộ một phần**:
+lợi ích thật nhưng **nhỏ** (+0,058 PDR) và thể hiện rõ hơn ở **chi phí** (−25 % lần
+phát mỗi SOS giao được). Đối thủ R6a thắng ở kịch bản nhỏ và thua ở kịch bản rộng.
+Đây là lý do H6 phải được phát biểu **có điều kiện kịch bản**, không phải "courier
+luôn giúp".
+
+#### E3 — link cá nhân điện thoại → nút cầu (RQ6)
+
+| Độ trễ link | Tỉ lệ mất | PDR | p50 (s) | Trễ link TB (s) | Số lần mất link |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 0 | 0,685 | 0,267 | 0 | 0,00 |
+| 0 | 0,01 | 0,685 | 0,267 | 0 | 0,20 |
+| 0 | 0,10 | 0,662 | 0,267 | 0 | 2,35 |
+| **0,015** (1 connection event, MTU lớn) | 0 | 0,685 | **0,282** | 0,015 | 0,00 |
+| **0,045** (3 gói ATT, MTU 23 B) | 0,01 | 0,685 | **0,312** | 0,045 | 0,20 |
+| **0,160** (đuôi trễ đám đông, CCDF 10⁻⁴) | 0,10 | 0,667 | **0,427** | 0,179 | 2,35 |
+
+Ba giá trị độ trễ ở trên **không phải số đoán**, chúng suy ra từ nguồn: một connection
+event ở mức HIGH của AOSP là **11,25–15 ms** (AOSP `Bluetooth/.../config.xml`, bội số
+1,25 ms); một trao đổi ATT đo được **676,7 µs** (Gomez 2012, `10.3390/s120911734`);
+khung 36 B cần **2–3 gói** ATT khi MTU mặc định 23 B; và đuôi trễ trong cấu hình đông
+(44 piconet) là **140–160 ms ở CCDF 10⁻⁴** (`10.1109/vtc2023-spring57618.2023.10200332`).
+Mất khung 1 % là mức **đo được** khi có nhiễu (`10.3390/bios11100350`); 10 % là kịch bản xấu.
+
+**Kết quả then chốt cho thiết kế:** mất khung trên link cá nhân **chỉ làm tăng độ trễ
+và giảm PDR chút ít (0,685 → 0,662 ở mức 10 %), không làm mất SOS** — đúng như thiết
+kế "nút cầu đệm bền" (§2.2 quy tắc 4 của thiết kế). Độ trễ link cộng thẳng vào p50
+(0,267 → 0,282 → 0,312 → 0,427 s). Nghĩa là **link cá nhân đóng góp một lượng trễ bị
+chặn trên rõ ràng (15–160 ms)**, nhỏ so với ngân sách đầu-cuối, và **không phải nút
+thắt**. Việc còn lại: **đo BLE thật** ở WP10 để thay ba giá trị suy ra này.
+
 
 **Cảnh báo bắt buộc:** mô hình chưa mô phỏng hidden terminal, fading, năng lượng,
 CSMA thật hay capture theo từng nút thu; các tham số PDR logistic, suy hao n=4,
-duty cycle 1 % đều là `GIẢ ĐỊNH`. **Không câu nào ở trên được vào phần kết luận
-của báo cáo trước khi G9 đạt.**
+duty cycle 1 %, độ trễ/mất link cá nhân đều là `GIẢ ĐỊNH`. **Không câu nào ở trên
+được vào phần kết luận của báo cáo trước khi G9 đạt.**
 
 ---
 
@@ -601,11 +799,16 @@ mở, phải cân với chi phí airtime.
   cycle, thời gian tái hội tụ.
 - Kiểm soát âm: không gateway → PDR 0; TTL = 1 → không chuyển tiếp; duty cycle 0 →
   không phát được.
-- **Trạng thái: simulator XONG (2026-10-01)** — `sim_lora.py` 810 dòng,
-  `test_sim_lora.py` 28/28 test xanh, đã chạy ma trận 2.400 lượt và sinh
-  `results/sim-lora-raw.csv`, `results/sim-lora-summary.csv`;
-  `analyze_sim_lora.py` sinh phân tích ghép cặp `results/sim-lora-h2-paired.csv`.
-  Kết quả sơ bộ ở §7.5. **Chưa hiệu chuẩn.**
+- **Trạng thái: simulator XONG và đã mở rộng v2.1 (2026-10-01)** — `sim_lora.py` có
+  thêm **ba chế độ mặt phẳng điều khiển**, **ba chính sách nghe**, **mô hình link cá
+  nhân** và các chỉ số mới (học hop, tỉ lệ thức, bỏ lỡ vì ngủ, mất link);
+  `test_sim_lora.py` **41/41 test xanh**; đã chạy ma trận chính 2.400 lượt và **năm
+  thí nghiệm trọng tâm** E1/E1b/E2/E2b/E3 (`run_lora_experiments.py`), sinh CSV trong
+  `results/`; `analyze_sim_lora.py` cho **ghép cặp theo seed, đường Pareto và phân
+  tích theo ô**. Kết quả ở §7.5. **Chưa hiệu chuẩn — mọi số là `SIM`.**
+- **Một lệnh tái lập (cổng G11):** `cd rescuemesh && ./reproduce_all.sh` chạy mọi test,
+  sinh mọi bảng thiết kế, ma trận, thí nghiệm, phân tích và ghi
+  `results/REPRODUCE-REPORT.md` kèm hash tệp.
 - **Cổng G8:** mô hình airtime khớp số đo airtime thực trong sai số đặt trước.
 
 ### WP10 — Đo thực (tuần 8–12)
@@ -856,12 +1059,18 @@ log đồng bộ thời gian; hiệu chuẩn airtime và PDR đầy đủ; phát
 
 ```bash
 cd rescuemesh
-python3 test_lora.py           # 25 test vật lý LoRa
+./reproduce_all.sh             # MỘT lệnh: mọi test + mọi bảng + mọi CSV + báo cáo hash
+
+python3 test_lora.py           # 32 test vật lý LoRa
 python3 test_node_power.py     # 19 test ngân sách năng lượng
+python3 test_packets_lora.py   # 36 test codec khung v2.0
+python3 test_sim_lora.py       # 41 test simulator (gồm 3 chế độ điều khiển, 3 chính sách nghe, link cá nhân)
 python3 lora.py                # bảng đánh đổi SF + sức chứa gateway
 python3 node_power.py          # tuổi thọ pin và chi phí mỗi SOS
 python3 packets_lora.py        # bảng khung + airtime + va chạm token
-python3 sim_lora.py            # ma trận mô phỏng → results/sim-lora-*.csv
+python3 sim_lora.py            # ma trận chính → results/sim-lora-*.csv
+python3 run_lora_experiments.py all   # E1/E1b/E2/E2b/E3 → results/sim-lora-e*.csv
+python3 analyze_sim_lora.py    # ghép cặp + Pareto + theo ô
 python3 -m pytest -q           # nếu có pytest
 ```
 
@@ -869,6 +1078,9 @@ python3 -m pytest -q           # nếu có pytest
 
 | Thuật ngữ | Nghĩa trong tài liệu này |
 |---|---|
+| Mặt phẳng điều khiển | Lưu lượng giúp nút học hop count tới gateway. Ba chế độ đã cài trong simulator: `node_hello` (mỗi nút tự phát), `gateway_beacon` (chỉ gateway, **không** relay), `gateway_beacon_relay` (gateway phát + mỗi nút relay một lần) |
+| Chính sách nghe | Cách nút ngủ/nghe kênh: `continuous` (luôn nghe), `windowed` (cửa sổ sau khi phát + cửa sổ đồng bộ theo pha beacon), `tx_only` (chỉ phát, không nghe). Quyết định **cả** tuổi thọ pin **lẫn** khả năng chuyển tiếp |
+| Biên Pareto | Tập thuật toán không bị trội về hai mục tiêu PDR và số lần phát mỗi SOS giao được |
 | Đầu cuối | Thiết bị của người dân: **điện thoại** (cảm biến + giao diện) cộng **nút cầu LoRa** đeo kèm |
 | Nút cầu (bridge node) | Thiết bị nhỏ gồm MCU + chip LoRa + pin, nhận khung SOS từ điện thoại qua link cá nhân rồi phát vào mesh LoRa; cũng làm nút chuyển tiếp |
 | Link cá nhân | Đường 1–2 m giữa điện thoại và nút cầu của chính nó (mặc định BLE; dự phòng dây USB-C). **Không** tham gia chuyển tiếp trong mạng |
