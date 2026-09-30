@@ -1,7 +1,19 @@
 # Cấu trúc đề tài (bản chốt) — RescueMesh-AI
 
-> **Cập nhật thiết kế 2026-09-28:** đặc tả gói 17–21 byte/ATT MTU trong tài liệu
-> này đã được thay bởi [Thiết kế hệ thống v1.0](thiet-ke-he-thong-chi-tiet.md):
+> ## ⚠️ TÀI LIỆU LỊCH SỬ — ĐÃ CHUYỂN HƯỚNG NGÀY 2026-10-01
+>
+> Cấu trúc chương mục dưới đây gắn với hướng **BLE**. BLE đã bị loại vì tầm quá
+> ngắn; đề tài nay dùng **một loại sóng duy nhất là LoRa** và không còn điện thoại
+> trong vòng lặp.
+>
+> - Cấu trúc đề tài hiện hành: [cau-truc-de-tai-rescuemesh-lora.md](cau-truc-de-tai-rescuemesh-lora.md)
+> - Kế hoạch hiện hành: [ke-hoach-nghien-cuu-rescuemesh-lora.md](ke-hoach-nghien-cuu-rescuemesh-lora.md)
+>
+> Giữ lại để truy vết: cách đặt tên đề tài, bản đồ RQ → chương → bằng chứng → cổng,
+> và quy tắc "không câu kết luận nào thiếu dòng trong bảng ánh xạ".
+
+> **Cập nhật thiết kế 2026-09-28:** (lịch sử) đặc tả gói 17–21 byte/ATT MTU trong
+> tài liệu này đã được thay bởi [Thiết kế hệ thống v1.0](thiet-ke-he-thong-chi-tiet.md):
 > BLE legacy advertising, payload ứng dụng tối đa 24 byte, SOS 24 byte, ID 32 bit,
 > HMAC 64 bit. Khi viết báo cáo, dùng đặc tả v1.0 làm nguồn chuẩn.
 

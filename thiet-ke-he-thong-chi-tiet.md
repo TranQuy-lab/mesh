@@ -1,5 +1,21 @@
 # Thiết kế hệ thống chi tiết — RescueMesh-AI v1.0
 
+> ## ⚠️ TÀI LIỆU LỊCH SỬ — ĐÃ CHUYỂN HƯỚNG NGÀY 2026-10-01
+>
+> Thiết kế v1.0 dưới đây dùng **BLE legacy advertising**. BLE đã bị loại vì tầm
+> quá ngắn; dự án nay dùng **một loại sóng duy nhất là LoRa** và không còn điện
+> thoại trong vòng lặp. Đặc tả khung, lớp liên kết và kiến trúc dưới đây **không
+> còn là đường chuẩn**.
+>
+> - Thiết kế hiện hành: [thiet-ke-he-thong-lora-v2.md](thiet-ke-he-thong-lora-v2.md)
+> - Kế hoạch hiện hành: [ke-hoach-nghien-cuu-rescuemesh-lora.md](ke-hoach-nghien-cuu-rescuemesh-lora.md)
+> - Nhật ký quyết định: [xac-minh-nguon-lora-va-quyet-dinh-song.md](xac-minh-nguon-lora-va-quyet-dinh-song.md)
+>
+> **Còn hiệu lực và được kế thừa:** thiết kế phát hiện ngã T1→T2→T3 (§5), mô hình
+> an ninh và ngân sách khoá (§7), mô hình mối đe dọa, kỷ luật bằng chứng.
+> **Không còn hiệu lực:** codec 24 byte, giả định ATT/MTU, quy tắc chuyển tiếp
+> trên BLE advertising, cấu hình quét nền Android.
+
 **Ngày chốt:** 2026-09-28  
 **Trạng thái:** **đã chốt để bắt đầu nghiên cứu**; G0 đạt một phần trên Pixel 6 Pro ngày 2026-09-29, chưa có kết quả phát hiện ngã hoặc đo pin.  
 **Codec tham chiếu:** [`rescuemesh/packets.py`](rescuemesh/packets.py)  
@@ -247,6 +263,77 @@ ngược lại:
 ```
 
 Store-and-forward có hàng đợi hữu hạn. Khi đầy: bỏ HEARTBEAT trước, rồi BEACON cũ; không bỏ SOS mới để giữ heartbeat.
+
+#### 6.1.1 Phát hiện từ mô phỏng WP1 (2026-09-30)
+
+Mô hình `rescuemesh/sim_v2.py` chỉ ra **bốn điểm đặc tả phải bổ sung**, vì nếu không thì gradient không chạy được như thiết kế. Cả bốn đều đã kiểm chứng bằng test tự động.
+
+**a. Beacon phải được relay — và phải relay ĐỊNH KỲ, nhưng chỉ bởi relay được chọn.** Đây là chuỗi phát hiện tốn nhiều vòng sửa nhất, và mỗi bước đều có số đo:
+
+| Cách làm | PDR (n=100, 5 SOS) | Beacon phát | Kết luận |
+|---|---:|---:|---|
+| Không relay beacon (chỉ trạm phát) | 0,05 | 2 | Sai: chỉ hàng xóm trạm có tuyến |
+| Relay chỉ khi hop **được cải thiện** | 0,00 | 166 | Sai: mỗi nút chỉ phát beacon **một lần trong đời**, nút xa không bao giờ có tuyến |
+| Relay **mọi nút, mọi chu kỳ** | — | bùng nổ | Sai: chi phí O(n²), mô phỏng không kết thúc |
+| Relay chọn theo `hop % stride` | 0,00 | 30 | Sai: hop lẻ bị bỏ, beacon đứt ngay tầng đầu (nút hop 1 không relay) |
+| **Relay chọn theo `node % stride`, mỗi chu kỳ** | **1,00** | **1.050** | **Đúng** |
+
+Ba kết luận phải đưa vào đặc tả:
+
+1. **Beacon phải được relay**, nếu không thì gradient không tồn tại ngoài vùng phủ của trạm.
+2. **Relay theo chu kỳ, không phải một lần.** Điều kiện "chỉ relay khi hop tốt hơn" nghe hợp lý nhưng sai: nó làm mỗi nút phát beacon đúng một lần, nên nút vào mạng muộn hoặc ở xa vĩnh viễn không có tuyến.
+3. **Chọn relay theo chỉ số nút, KHÔNG theo hop.** Đây là bẫy tinh vi: chọn `hop % stride == 0` khiến các tầng hop lẻ không có relay nào, và beacon đứt ngay từ tầng 1. Đúng như §6.4 điểm 1 nói "chỉ cho các relay **được chọn** phát lại" — nhưng tiêu chí chọn phải độc lập với chính giá trị đang lan truyền.
+
+Sau khi sửa cả ba, gradient lần đầu **thắng flooding trên cả hai chỉ số** cùng lúc:
+
+| Chiến lược | PDR | Beacon phát | Phát/SOS | Jain |
+|---|---:|---:|---:|---:|
+| flood / trickle / managed | 0,600 | 2.616 | 956,0 | 0,600 |
+| **gradient** | **0,800** | 2.624 | **674,0** | **0,714** |
+| gradient + store-carry-forward | 0,600 | 2.616 | 956,0 | 0,600 |
+
+Gradient giao **nhiều hơn 33 %** số nguồn với **29 % ít lần phát hơn**. Đây là bằng chứng ủng hộ H2 mạnh nhất tính tới nay — nhưng vẫn là `SIM` chưa hiệu chuẩn, và vẫn chỉ đúng ở warm start.
+
+**Chi phí beacon là vấn đề mở.** 2.624 lần phát beacon so với ~674 lần phát dữ liệu nghĩa là **control plane chiếm gần 80 % tổng lưu lượng**. Đối thủ R2a của H2 ("khác biệt chỉ do beacon overhead bị tính sai") vì thế trở nên rất đáng lo: nếu beacon interval được nới từ 2 s lên giá trị thực tế hơn (30 s theo §4.4), toàn bộ kết luận có thể đảo. **Phải quét beacon interval** như một biến thí nghiệm riêng trước khi kết luận H2.
+
+**Hạn chế của luật chọn relay theo chỉ số nút — phải ghi rõ.** Chọn relay bằng `node % stride` giữ chi phí tuyến tính, nhưng nó **phụ thuộc topology**: vì stride bỏ qua một số nút, có vùng không còn relay nào và bị cô lập khỏi gradient. Đo được trực tiếp: với cùng một topology và cùng `hop = 4`, nguồn 5 giao được (PDR 1,0) nhưng nguồn 10 và 15 thì không (PDR 0,0). Tính chất **cùng hop, khác kết quả** này là điều không được phép xảy ra trong một thiết kế gradient đúng nghĩa — nó có nghĩa là "khoảng cách tới trạm" không còn là yếu tố duy nhất quyết định khả năng giao.
+
+Ba lựa chọn, phải chọn có ý thức và đo:
+
+| Lựa chọn | Ưu | Nhược |
+|---|---|---|
+| `stride = 1` (mọi nút relay) | Mọi nguồn reachable đều giao được; gradient đúng nghĩa | Chi phí beacon O(n²) |
+| `stride` theo chỉ số nút | Chi phí tuyến tính | Phụ thuộc topology; cô lập một số vùng |
+| Chọn theo **pin/rank** như §6.4 nói | Đúng thiết kế; không phụ thuộc topology | Cần mô hình pin, chưa có |
+
+**Khuyến nghị:** v1.0 nên chọn relay theo **rank + pin** (đúng §6.4 điểm 1) thay vì theo chỉ số nút. Trong mô phỏng hiện tại, `stride` chỉ là xấp xỉ tạm, và **phải là biến thí nghiệm** — không được cố định giá trị rồi báo cáo như thể đó là thiết kế.
+
+**Test bảo vệ:** `rescuemesh/test_sim_v2.py` có ba test ghi lại toàn bộ chuỗi phát hiện này (`test_beacon_is_relayed_periodically_not_once`, `test_relay_stride_can_isolate_some_regions`, `test_relay_stride_one_reaches_all_reachable_sources`), để các lỗi đã sửa không tái phát.
+
+**b. Nguồn phát SOS với `hop = HOP_UNKNOWN (15)`, không phải hop thật của nó.** Nếu nguồn phát bằng hop thật, quy tắc `my_hop < packet_hop` sẽ chặn oan các hàng xóm **xa trạm hơn** nguồn. Xét nguồn ở hop 2 có hàng xóm hop 1 và hop 3: hàng xóm hop 1 relay được, nhưng gói không bao giờ tới được nhánh hop 3. Nguồn phải phát với `hop = 15` để **mọi** hàng xóm gần trạm hơn đều đủ điều kiện. APK hiện phát `hop = 7` — nằm giữa hai cực, nên chặn một phần mà không rõ lý do.
+
+**c. Phải phân biệt cold start và warm start.** Đây là phát hiện quan trọng nhất. Nếu SOS được phát ở `t = 0` cùng lúc beacon bắt đầu, các nút **chưa có tuyến** và gradient gần như vô dụng. Kết quả mô phỏng (100 nút, 20 SOS, PDR liên kết 0,95):
+
+| Chế độ | Flood PDR | Gradient PDR | Gradient phát/SOS |
+|---|---:|---:|---:|
+| Cold start (SOS ở t=0) | 0,250 | **0,050** | 179,0 |
+| Warm start (SOS sau 10 s) | 0,250 | **0,250** | **35,0** |
+
+Ở cold start, gradient **tệ hơn flooding 5 lần** về PDR. Ở warm start, gradient **ngang PDR và rẻ hơn 2,8 lần** về số lần phát. Nghĩa là: câu hỏi "gradient có tốt hơn flooding không" **không có câu trả lời duy nhất** — nó phụ thuộc hoàn toàn vào việc mạng đã hội tụ chưa. Mọi bảng so sánh từ nay **phải ghi rõ chế độ khởi động**. Đây cũng là một kịch bản thực tế quan trọng: trong bão lũ, sự cố xảy ra ngay khi mạng vừa dựng, tức cold start là trường hợp **thường gặp**, không phải ngoại lệ.
+
+**d. Hàng đợi ưu tiên thuần theo `prio` không đủ — cần round-robin theo `srcID`.** Đặc tả §6.4 điểm 5 đã yêu cầu điều này, nhưng chưa có ở đâu trong code. Mô phỏng cho thấy fairness Jain giảm mạnh theo tải ở mọi chiến lược:
+
+| n nút | SOS đồng thời | Jain (flood) | Jain (gradient) |
+|---:|---:|---:|---:|
+| 100 | 5 | 0,888 | 0,663 |
+| 100 | 50 | 0,129 | 0,284 |
+| 200 | 100 | **0,054** | 0,121 |
+
+Ở 200 nút với 100 SOS đồng thời, Jain = 0,054 nghĩa là tình trạng gần như **một nguồn chiếm gần hết** kênh — đúng cái mà §6.4 điểm 5 lo ngại. Hàng đợi ưu tiên theo `prio` một mình **không** sửa được, vì mọi SOS đều cùng `prio = 3`.
+
+**Hệ quả cho H2:** dự đoán "gradient tiết kiệm phát ở mật độ trung bình và cao" **được xác nhận**, nhưng chỉ trong chế độ warm start. Ở cold start, dự đoán **bị bác** — và đây là kết quả phủ định có giá trị, đúng loại mà §14 gọi là "ít nhất một kết quả phủ định được kiểm chứng độc lập".
+
+**Hệ quả cho H3:** cơ chế route expiry đã hiện thực trong `sim_v2.py`, nhưng ma trận chưa tách được hiệu ứng "bóng ma đường" khỏi hiệu ứng "trạm sập ngừng nhận". Cần thiết kế lại ô thí nghiệm cho H3 trước khi kết luận.
 
 ### 6.2 Dự phòng khi không có gradient
 

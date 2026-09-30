@@ -1,5 +1,25 @@
 # Kế hoạch nghiên cứu — RescueMesh-AI
 
+> ## ⚠️ TÀI LIỆU LỊCH SỬ — ĐÃ CHUYỂN HƯỚNG NGÀY 2026-10-01
+>
+> **BLE đã bị loại bỏ** vì tầm gửi gói quá ngắn, không đủ hiệu quả cho vùng bão
+> lũ. Dự án nay dùng **một loại sóng duy nhất là LoRa** và **không còn điện thoại
+> trong vòng lặp** (điện thoại không có LoRa).
+>
+> - Kế hoạch hiện hành: [ke-hoach-nghien-cuu-rescuemesh-lora.md](ke-hoach-nghien-cuu-rescuemesh-lora.md)
+> - Nhật ký quyết định và nguồn đã xác minh: [xac-minh-nguon-lora-va-quyet-dinh-song.md](xac-minh-nguon-lora-va-quyet-dinh-song.md)
+> - Thiết kế hệ thống hiện hành: [thiet-ke-he-thong-lora-v2.md](thiet-ke-he-thong-lora-v2.md)
+> - Cấu trúc đề tài hiện hành: [cau-truc-de-tai-rescuemesh-lora.md](cau-truc-de-tai-rescuemesh-lora.md)
+>
+> **Đảo ngược phạm vi:** bảng phi mục tiêu ở §5 của tài liệu này ghi "phần cứng
+> riêng (LoRa, gateway)" là *không làm*; nay điều đó **trở thành trọng tâm**. Mọi
+> quy tắc phương pháp luận, thang bằng chứng `ĐO`/`DS`/`SIM`/`SUY`/`GIẢ ĐỊNH`,
+> thiết kế phát hiện ngã, cổng quyết định và kỷ luật hiệu chuẩn vẫn **còn hiệu
+> lực** và được kế thừa nguyên vẹn. Các kết quả `SIM` về BLE (H2 đảo chiều theo
+> tải, beacon chiếm 60–98 % lưu lượng, cold start tệ hơn 5 lần, H3 không xác
+> nhận) được chuyển thành **giả thuyết cần kiểm lại trên LoRa**, không được trích
+> như kết quả của hướng mới.
+
 > **Cập nhật thiết kế 2026-09-28:** lớp liên kết và codec trong các mục §6, §8,
 > §9 của bản kế hoạch này đã được thay thế bởi
 > [Thiết kế hệ thống v1.0](thiet-ke-he-thong-chi-tiet.md). Đường chuẩn hiện dùng
@@ -95,13 +115,42 @@ Mỗi giả thuyết phải có **đối thủ** (rival) và một **kết quả
 - Kết quả không tương thích: FAR giảm nhưng recall giảm theo tỉ lệ lớn hơn (mất > 10 điểm phần trăm) ở cùng ngân sách.
 
 **H2 — Gradient tiết kiệm phát ở mật độ trung bình và cao, nhưng không ở mật độ thấp.** *Phát biểu:* ở cùng tỉ lệ giao, gradient dùng ít lần phát trên mỗi gói tới trạm hơn flooding, và khoảng cách thu hẹp khi mật độ giảm hoặc độ động tăng.
-- Đối thủ R2a: khác biệt chỉ do beacon overhead bị tính sai (beacon được tính là miễn phí). → **Phép thử:** đếm cả beacon trong tổng phát; quét tần suất beacon.
-- Đối thủ R2b: lợi ích là do mô hình mất gói thuận lợi nhân tạo. → **Phép thử:** hiệu chuẩn PDR theo đo BLE thực; chạy lại trên nhiều bộ tham số mất gói.
-- Kết quả không tương thích: sau khi tính beacon, gradient không còn ít phát hơn, hoặc tỉ lệ giao thấp hơn flooding ở mật độ trung bình.
+
+- **KẾT QUẢ WP1 (2026-09-30): H2 bị ĐẢO CHIỀU — biến quyết định là TẢI, không phải mật độ.** Quét beacon interval × mật độ × tải với 30 seed (`results/r2a-beacon-sweep-advantage.csv`) cho kết quả nhất quán tuyệt đối:
+
+| Tải | Số ô gradient thắng | Số ô gradient thua | ΔPDR trung bình |
+|---|---:|---:|---:|
+| 5 SOS đồng thời | **0** | **12** | **−0,119** |
+| 20 SOS đồng thời | **12** | **0** | **+0,044** |
+
+  Ở tải thấp gradient **thua flooding ở mọi mật độ và mọi beacon interval** (ΔPDR từ −0,067 tới −0,180). Ở tải cao gradient **thắng ở mọi ô** (+0,030 tới +0,060). Đây không phải nhiễu: 24/24 ô phân loại đúng theo tải.
+
+- **Cơ chế giải thích:** ở tải thấp, gradient chặn relay ở các nút không "tốt hơn người gửi" (`my_hop < sender_hop`), nên mất các đường vòng mà flooding dùng để bù mất gói — **không có gì bù lại** vì kênh còn rỗi. Ở tải cao, chính việc chặn đó lại giảm collision và tranh chấp, nên gradient vừa giao nhiều hơn vừa rẻ hơn.
+- **Hệ quả cho giả thuyết:** phát biểu đúng phải là *"gradient chỉ có lợi ở tải cao; ở tải thấp nó mất mát ròng về tỉ lệ giao"*, không phải "ở mật độ trung bình và cao". Biến điều khiển là **số SOS đồng thời**, không phải số nút.
+- **Đối thủ R2a ("khác biệt chỉ do beacon overhead bị tính sai") — đã kiểm chứng và bị bác:** lợi thế và bất lợi **giữ nguyên dấu ở mọi beacon interval** từ 1 s tới 30 s. Nghĩa là kết luận không phải sản phẩm của việc beacon phát quá dày. Tuy vậy R2a **để lại một phát hiện riêng rất quan trọng**: beacon chiếm **59,7 %** tổng lưu lượng ngay cả ở interval 30 s (chính sách rỗi theo §4.4), và tới **97,6 %** ở interval 1 s. Control plane vì thế là **chi phí trội** của toàn hệ thống, không phải chi tiết phụ.
+- **Đối thủ R2b:** lợi ích là do mô hình mất gói thuận lợi nhân tạo. → **Phép thử:** hiệu chuẩn PDR theo đo BLE thực; chạy lại trên nhiều bộ tham số mất gói. *Chờ WP4/G3 — đây là đối thủ mạnh nhất còn lại.*
+- **Đối thủ R2c (mới):** lợi ích chỉ là hệ quả của việc mạng đã chạy ổn định trước khi có SOS. → **Phép thử:** chạy cả cold và warm start với cùng seed. *Cold start xác nhận gradient tệ hơn hẳn — xem dòng dưới.*
+- **Kết quả cold start (đã chạy):** SOS phát ngay khi beacon bắt đầu → gradient PDR 0,050 so với flooding 0,250, tức **tệ hơn 5 lần**. Vì trong bão lũ mạng thường vừa dựng lại, cold start là trường hợp **thường gặp**, không phải ngoại lệ. Mọi bảng so sánh **phải ghi rõ chế độ khởi động**.
+- Kết quả không tương thích: sau khi tính beacon, gradient không còn ít phát hơn, hoặc tỉ lệ giao thấp hơn flooding ở mật độ trung bình. → **Đã quan sát đúng điều này ở tải thấp**, nên phần "gradient tốt hơn" của H2 **bị bác một phần**.
 
 **H3 — TTL và gradient cũ gây ra "bóng ma đường" sau khi trạm sập.** *Phát biểu:* sau khi trạm ngừng phát beacon, các nút vẫn chuyển tiếp theo hop cũ trong một khoảng; cần hết hạn tuyến (ví dụ 3 chu kỳ beacon) và bseq để hội tụ lại.
-- Đối thủ R3a: mất mát sau khi trạm sập chủ yếu do mất gói, không do định tuyến cũ. → **Phép thử:** so sánh có/không hết hạn tuyến ở cùng mô hình mất gói.
-- Kết quả không tương thích: thời gian tái hội tụ không khác nhau có ý nghĩa khi bật/tắt hết hạn tuyến.
+- **KẾT QUẢ WP1 (2026-09-30): H3 gần như KHÔNG được xác nhận — đối thủ R3a thắng.** Sau ba lần thiết kế lại ô thí nghiệm, kết quả cuối (`results/h3-ghost-effect.csv`, 30 seed/ô):
+
+| n nút | A: trạm khỏe, expiry bật | B: trạm khỏe, expiry tắt | C: hồi phục, expiry bật | D: hồi phục, expiry tắt | **C − D** |
+|---:|---:|---:|---:|---:|---:|
+| 50 | 6,533 | 6,383 | 6,433 | 6,367 | **+0,066** |
+| 100 | 6,522 | 6,278 | 6,522 | 6,278 | **+0,244** |
+| 200 | 5,200 | 4,944 | 5,100 | 4,978 | **+0,122** |
+
+  Hiệu ứng **rất nhỏ**: 1–4 % số nguồn được giao trong cửa sổ hồi phục. Trên 5–50 SOS, chênh lệch chưa tới **1/4 gói**. Kết luận trung thực: **hết hạn tuyến không phải yếu tố quyết định** trong mô hình hiện tại. Đối thủ R3a ("mất mát sau khi trạm sập chủ yếu do mất gói, không do định tuyến cũ") **thắng**.
+- **Ba lần thiết kế lại ô thí nghiệm — ghi lại để không tái phạm:**
+  1. *So PDR giữa trạm sập + expiry bật/tắt* → PDR = 0 ở **cả hai** nhánh, vì trạm sập thì không gói nào tới đích bất kể tuyến còn hay mất. Phép đo không phân biệt được gì.
+  2. *Cho trạm hồi phục, phát SOS ở t=40, đo ở t=60* → giao xảy ra **trước** mốc đo nên mọi nhánh đều 0.
+  3. *Phát SOS ở t=70 sau khi hồi phục ở t=60* → đo được, và cho kết quả ở bảng trên.
+  Bài học phương pháp: **khi trạm sập, PDR không phải thước đo của định tuyến**; phải đo trong cửa sổ phục hồi, và mốc đo phải cố định cho mọi nhánh (kể cả nhánh trạm không sập) mới so sánh được.
+- **Kết quả có thể phủ định:** đây là ứng viên cho "ít nhất một kết quả phủ định" mà §14 yêu cầu — H3 dự đoán một hiệu ứng mà mô hình **không** tìm thấy. Nhưng phải hết sức thận trọng: mô hình chưa hiệu chuẩn, và cơ chế route expiry trong mô phỏng chỉ là xấp xỉ (quên tuyến theo thời gian), chưa có `bseq` so sánh modulo như đặc tả §6.1. **Không được tuyên bố H3 bị bác cho tới khi có `bseq` thật và hiệu chuẩn PDR.**
+- Đối thủ R3a: mất mát sau khi trạm sập chủ yếu do mất gói, không do định tuyến cũ. → **Phép thử:** so sánh có/không hết hạn tuyến ở cùng mô hình mất gói. *Đã chạy đủ 4 nhánh; R3a thắng ở mọi mật độ.*
+- Kết quả không tương thích: thời gian tái hội tụ không khác nhau có ý nghĩa khi bật/tắt hết hạn tuyến. → **Đã quan sát đúng điều này**, nhưng chưa đủ để kết luận vì thiếu `bseq`.
 
 **H4 — Khóa ACK 16 bit không định danh được nạn nhân ở quy mô thực tế.** *Phát biểu:* `ack[srcID_low16:16]` va chạm với xác suất ~7% ở 100 nút và ~100% ở 1.000 nút, nên ACK không thể dùng để chấm dứt phát lại một cách đáng tin ở mạng lớn.
 - Đối thủ R4a: va chạm khóa không quan trọng vì ACK còn kèm `seq` và `time`. → **Phép thử:** mô phỏng trạm với ngân sách ACK thật (số ACK mỗi beacon có hạn), đo tỉ lệ ACK khớp sai và số lần phát lại tăng thêm.
@@ -176,7 +225,16 @@ Bốn quyết định kiến trúc kèm lý do và cách kiểm chứng:
 
 ## 8. Sửa lỗi thiết kế gói tin đã phát hiện (kiểm tra số học + codec)
 
-Các mục dưới đây **đã được kiểm chứng bằng code**, không còn là nhận xét trên giấy: codec tham chiếu `rescuemesh/packets.py` và 21 test (`rescuemesh/test_packets.py`, tất cả qua) mã hoá thiết kế đã sửa và tái tạo đúng các con số này.
+> **CHỐT WIRE FORMAT v1.0 (2026-09-30):** đường truyền chuẩn là **BLE legacy
+> advertising**, ngân sách dữ liệu ứng dụng **24 byte** trong manufacturer AD
+> `0xFFFF`. SOS v1 = **24 byte**, `srcID` 32 bit, HMAC-SHA256 cắt 64 bit. Thiết kế
+> 20/21 byte và thương lượng ATT MTU trong §8.1–8.5 dưới đây là **lịch sử thiết
+> kế**, giữ lại để truy vết quyết định — **không** dùng làm thông số triển khai và
+> không được trộn với kết quả v1.0. Lý do đổi: ATT/GATT cần kết nối, còn kịch bản
+> bão lũ cần broadcast không kết nối; và 24 byte đã được chứng minh phát và nhận
+> thực tế (xem §8.9).
+
+Các mục dưới đây **đã được kiểm chứng bằng code**, không còn là nhận xét trên giấy: codec tham chiếu `rescuemesh/packets.py` và test (`rescuemesh/test_packets.py`, tất cả qua) mã hoá thiết kế đã sửa và tái tạo đúng các con số này.
 
 **8.1 SOS 21 byte vượt payload mặc định 20 byte.** ATT MTU mặc định 23 byte → 20 byte payload. SOS = 3 + 4 + 2 + 3 + 3 + 1 + 1 + 4 = **21 byte**, dư đúng 1 byte (khớp nhận định trong hội thoại).
 
@@ -202,7 +260,15 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 
 **8.7 Trôi ID theo ngày phá vỡ liên kết lịch sử.** `srcID = HMAC(khóa máy, ngày)` cắt ngắn là ý tưởng tốt cho quyền riêng tư, nhưng trạm không ghép được HEARTBEAT của cùng một nút qua nhiều ngày, và nút trung gian chỉ khử trùng lặp được trong ngày. Ghi rõ: (i) cửa sổ khử trùng lặp 5 phút nằm trong ngày nên an toàn; (ii) phân tích dài hạn nối bằng khóa máy ở phía trạm, không bằng `srcID`; (iii) đo chi phí HMAC mỗi lần xoay ID trên thiết bị.
 
-**8.8 Trạng thái cổng G1.** Codec và test đã có, chạy xanh: `python3 rescuemesh/test_packets.py` → 21/21 test qua. Việc còn lại của G1: chốt biến thể byte mặc định (đề xuất: 32-bit ID + thương lượng MTU), thêm vector test cố định cho hồ sơ nộp bài, và kiểm thử MTU trên máy thật ở WP4.
+**8.8 Trạng thái cổng G1.** Codec và test đã có, chạy xanh: `python3 rescuemesh/test_packets.py` → **15/15 test qua** (số test hiện tại; con số 21 trong bản trước là của thiết kế 20/21 byte đã bỏ). Java: 4/4 qua `android-g0/test-codec.sh`. Vector cố định đã đóng băng ở `rescuemesh/golden-vectors-v1.json`. **Đã xong:** chốt biến thể byte mặc định (24 byte legacy advertising, xem §8.9). **Còn lại của G1:** kiểm thử MTU/phân mảnh trên máy thật ở WP4 — nay chỉ còn ý nghĩa cho các gói tùy chọn (HEARTBEAT nhiều hàng xóm, BEACON nhiều ACK), không còn là điều kiện sống còn của SOS.
+
+**8.9 Bằng chứng chốt wire format 24 byte (2026-09-30).** Quyết định §8.1–8.3 được thay bằng chứng thực nghiệm, không phải lập luận trên giấy:
+
+1. **Khung 24 byte tồn tại vật lý trên sóng.** `results/g0-pixel6pro-bluetooth-dumpsys-2026-09-29.txt` dòng 599 ghi bộ lọc scan đang hoạt động với dữ liệu thô mà controller Pixel đã nhận, khớp **byte-for-byte** với golden vector `46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028`. Bóc bit cho đúng header thiết kế: byte 0 `0x46` → `ver=1, type=SOS, prio=3`; byte 1 `0xf7` → `ttl=15, hop=7`.
+2. **Máy thu độc lập giải mã được.** Trạm trên máy gaming nhận SOS từ Pixel; laptop XiaoXin (adapter Realtek) không nhận được do lỗi **máy thu**, không phải codec. Xem `ket-qua-ra-soat-va-nghien-cuu-ban-dau.md` §4.3.
+3. **Không cần ATT MTU cho đường SOS.** Vì toàn bộ SOS nằm trong 24 byte advertising data, ràng buộc ATT MTU 23 byte (nguồn gốc của cả nhánh thiết kế 20/21 byte) **không áp dụng** cho đường này.
+
+**Hệ quả cho C4:** bảng ngân sách bit vẫn phải có, nhưng câu hỏi nghiên cứu đổi từ "vừa 20 byte ATT thế nào" sang "**trong 24 byte advertising, phân bổ bit giữa định danh, vị trí, thời gian, trạng thái và xác thực ra sao**". RQ3 ở §4.1 giữ nguyên hiệu lực; phần "thương lượng MTU" trong RQ3 chỉ còn là so sánh tùy chọn.
 
 ---
 
@@ -214,9 +280,12 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 - Việc còn thiếu của WP0: kiểm tra chiều điện thoại → trạm trên ít nhất hai máy, đo khoảng cách và xác nhận ACK/beacon.
 
 ### WP1 — Codec và simulator (tuần 1–3)
-- Viết codec Python (đóng/gói, kiểm thử thuộc tính, fuzz) theo thiết kế đã sửa ở §8; sinh vector test cố định.
+- Viết codec Python (đóng/gói, kiểm thử thuộc tính, fuzz) theo thiết kế đã sửa ở §8; sinh vector test cố định. **Trạng thái: xong** (15/15 Python, 4/4 Java, golden vector đóng băng).
 - Nâng simulator: nút, hàng xóm theo khoảng cách, PDR/collision theo trace BLE, hàng đợi ưu tiên, fairness, cache, jitter, gradient theo hop, relay suppression, store-and-forward, trạm sập theo lịch.
+  **Trạng thái: xong phần cơ chế** (`rescuemesh/sim_v2.py`, 26 test qua). Đã có: cache TTL, nhiều SOS, hàng đợi ưu tiên + round-robin theo nguồn, collision/radio busy, beacon relay, route expiry, store-carry-forward, warmup. **Còn thiếu:** mobility liên tục (hiện xấp xỉ bằng hệ số PDR), mô hình pin, và hiệu chuẩn PDR theo đo thực (chờ WP4).
 - **Sản phẩm:** `codec.py`, `sim/`, bộ test, một hình động minh họa lan truyền; tất cả kèm seed.
+  **Trạng thái:** codec + test + seed xong. **Còn thiếu: hình động minh họa lan truyền.**
+- **Phát hiện mới cần đưa vào đặc tả:** bốn điểm ở §6.1.1 của `thiet-ke-he-thong-chi-tiet.md` (beacon phải được relay; nguồn phát với `HOP_UNKNOWN`; cold vs warm start; round-robin theo nguồn). Trong đó **cold vs warm start** đảo chiều kết luận H2 và phải được ghi rõ trong mọi bảng so sánh.
 
 ### WP2 — Phát hiện ngã 3 tầng (tuần 2–6)
 - Tầng 1: ngưỡng rơi tự do (|a| < 0,4 g) / va đập (|a| > 2,5–3 g); đo tỉ lệ đánh thức sai.
@@ -225,10 +294,27 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 - **Bắt buộc:** chia tập theo người (leave-subject-out) và kiểm tra chuyển miền giữa các kho dữ liệu; lớp ca khó tách riêng.
 
 ### WP3 — Thí nghiệm mesh (tuần 5–9)
+
 - Ma trận: thuật toán (flooding, Trickle, managed flooding + suppression, gradient + managed flooding, gradient + store-carry-forward) × mật độ (10/50/100/200 nút) × tải (1/5/20/50/100 SOS đồng thời) × độ động (tĩnh, đi bộ, node courier) × mất gói/collision × trạng thái trạm (ổn định, sập, khôi phục, hai trạm).
 - Với tải nhiều SOS, báo thêm: tỷ lệ nguồn được giao, P50/P95/P99 latency, số gói bị drop theo nguyên nhân, số bản sao trên mỗi SOS, Jain fairness giữa nguồn, queue occupancy và thời gian dọn hàng đợi.
 - ≥ 30 seed mỗi ô; so sánh ghép cặp theo seed; báo cáo trung bình ± SD và CI.
 - **Cổng:** nếu chưa hiệu chuẩn được PDR thì **không** được tuyên bố so sánh định tuyến.
+
+**Trạng thái sau WP1 (2026-09-30):** ma trận đã chạy được đầu-cuối (`run_wp3_matrix.py`, 113.400 dòng thô / 3.780 ô tổng hợp) nhưng **kết quả phải gắn nhãn `SIM` và không được dùng để kết luận** cho tới khi qua G3. Ba thí nghiệm bổ sung đã có và đã cho kết quả:
+
+| Thí nghiệm | Tệp | Kết quả chính |
+|---|---|---|
+| Ma trận WP3 đầy đủ | `results/wp3-matrix-*.csv` | Có đủ 5 thuật toán × 4 mật độ × 5 tải × 3 độ động × 3 trạng thái trạm × 3 mức PDR × cold/warm |
+| H3 bốn nhánh | `results/h3-ghost-*.csv` | Hết hạn tuyến chỉ giúp 1–4 %; **đối thủ R3a thắng** |
+| Quét beacon interval (R2a) | `results/r2a-beacon-sweep-*.csv` | **H2 đảo chiều theo tải**; beacon chiếm 60–98 % lưu lượng |
+
+**Việc còn thiếu của WP3:**
+1. `bseq` so sánh modulo 8 bit cho beacon — hiện chưa có, nên H3 chưa kết luận được.
+2. Mô hình di động thật — hiện xấp xỉ bằng hệ số PDR, phải thay bằng chuyển động liên tục.
+3. Chọn relay theo rank/pin thay vì theo chỉ số nút (xem §6.1.1 của thiết kế).
+4. Hiệu chuẩn PDR theo đo WP4 — **điều kiện tiên quyết của G3**, hiện chưa có.
+5. Hình động minh họa lan truyền (sản phẩm WP1 đã hứa).
+6. Mô hình pin.
 
 ### WP4 — Tích hợp và đo thực (tuần 9–12)
 - Đo PDR BLE theo khoảng cách/độ cao/túi xách (hiệu chuẩn cho WP3) bằng 2–5 điện thoại Android.
@@ -270,7 +356,9 @@ Các mục dưới đây **đã được kiểm chứng bằng code**, không c�
 
 ### 10.3 Phần gói tin/an ninh
 
-**Ghi chú lịch sử:** bảng 20/21 byte dưới đây là phân tích của bản nháp cũ, giữ lại để truy vết quyết định. Không dùng nó làm thông số v1.0. Bản v1.0 đã chốt SOS 24 byte trên BLE legacy advertising, ID 32 bit và HMAC 64 bit. Nếu cần so sánh biến thể cũ, phải gắn nhãn `HISTORICAL` và không trộn với kết quả v1.0.
+**Thông số v1.0 đã chốt:** SOS **24 byte** trên BLE legacy advertising, `srcID` 32 bit, HMAC-SHA256 cắt 64 bit, toạ độ 24 bit/trục. Bảng 20/21 byte và phương án thương lượng ATT MTU trong §8.1–8.5 là **phân tích lịch sử của bản nháp cũ** — giữ lại để truy vết quyết định, gắn nhãn `HISTORICAL`, **không** dùng làm thông số v1.0 và không trộn với kết quả v1.0.
+
+Bảng ngân sách bit cần nộp (C4) phải trình bày **phân bổ 24 byte thực tế** kèm đánh đổi từng trường, và một cột `HISTORICAL` cho biến thể 20/21 byte để cho thấy vì sao đã bỏ. Lý do bỏ đã có bằng chứng ở §8.9.
 
 ### 10.4 Phân tích thống kê và cỡ mẫu
 
@@ -359,7 +447,7 @@ Cần kiểm tra lại điều kiện dự tuyển, hạn nộp và định dạ
 
 | # | Việc | Kết quả kiểm tra được |
 |---|---|---|
-| 1 | Chốt thiết kế gói đã sửa §8 (chọn biến thể byte) | Một trang spec + bảng ngân sách bit có số |
+| 1 | Chốt thiết kế gói đã sửa §8 (chọn biến thể byte) | ✅ **Xong 2026-09-30**: 24 byte legacy advertising, có bằng chứng trên sóng (§8.9). Còn lại: viết bảng ngân sách bit 24 B cho C4 |
 | 2 | Mở và xác minh toàn bộ nguồn trong đoạn hội thoại | Sổ bằng chứng có cột "đã mở / đã đối chiếu" |
 | 3 | Tải và kiểm kê giấy phép các kho dữ liệu IMU | Danh sách kho + điều khoản truy cập |
 | 3b | ~~Lấy nguồn sơ cấp cho ATT MTU 23/517 và giới hạn quét nền Android~~ → **đã xong** (BlueZ `att-types.h:28`; AOSP `GattService.java:145`, `AppScanStats.java`). Việc còn lại: Mesh Profile spec cho cụm "managed flooding", và LE privacy/RPA | Trích dẫn sơ cấp trong Ch. 2.1; bỏ hai nhãn `SUY` |
