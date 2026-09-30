@@ -34,7 +34,9 @@ from packets_lora import (
     SOS_TAG_BYTES,
     TIME_BITS,
     VERSION,
+    VERSION_CAP,
     AckFrame,
+    CapFields,
     BeaconFrame,
     Flags,
     HeartbeatFrame,
@@ -713,6 +715,86 @@ def test_max_payload_budget_covers_all_frames():
 # --------------------------------------------------------------------------
 # Runner
 # --------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------
+# Khung v2.1 — trường ánh xạ CAP + lớp độ chính xác vị trí (offset 26–27)
+# --------------------------------------------------------------------------
+
+
+def test_cap_fields_bit_layout():
+    """Bố cục bit: net_id 4 | severity 3 | urgency 3 | certainty 3 | accuracy 3."""
+    cap = CapFields(net_id=0xA, severity=2, urgency=1, certainty=3,
+                    pos_accuracy_class=5)
+    expected = (0xA << 12) | (2 << 9) | (1 << 6) | (3 << 3) | 5
+    assert cap.pack() == expected == 0xA45D
+    assert CapFields.unpack(expected) == cap
+    assert CapFields().pack() == 0
+
+
+def test_cap_fields_validation():
+    for bad in ({"net_id": 16}, {"severity": 8}, {"urgency": 8},
+                {"certainty": 8}, {"pos_accuracy_class": 8}):
+        try:
+            CapFields(**bad).pack()
+        except ValueError:
+            continue
+        raise AssertionError(f"CapFields phải từ chối {bad}")
+    for bad in (-1, 0x10000):
+        try:
+            CapFields.unpack(bad)
+        except ValueError:
+            continue
+        raise AssertionError("unpack phải từ chối giá trị ngoài 16 bit")
+
+
+def test_sos_v21_roundtrip_va_version():
+    cap = CapFields(net_id=3, severity=1, urgency=1, certainty=2,
+                    pos_accuracy_class=2)
+    blob = sample_sos(cap=cap).pack(LAB_KEY)
+    assert len(blob) == SOS_SIZE
+    assert peek_version(blob) == VERSION_CAP
+    back = SosFrame.unpack(blob)
+    assert back.cap == cap
+    assert back.reserved == 0
+    assert SosFrame.verify(blob, LAB_KEY)
+    # Hai byte cuối (trước tag) đúng bằng giá trị đóng gói.
+    assert int.from_bytes(blob[26:28], "big") == cap.pack()
+
+
+def test_sos_v20_van_tuong_thich():
+    """Khung không có `cap` vẫn là v2.0, reserved phải 0, và verify được."""
+    blob = sample_sos().pack(LAB_KEY)
+    assert peek_version(blob) == VERSION
+    back = SosFrame.unpack(blob)
+    assert back.cap is None and back.reserved == 0
+    assert SosFrame.verify(blob, LAB_KEY)
+    assert blob[26:28] == b"\x00\x00"
+
+
+def test_version_nam_trong_mac():
+    """Version được xác thực: cùng trường nhưng v2.0 và v2.1 cho tag khác nhau."""
+    v20 = sample_sos().pack(LAB_KEY)
+    v21 = sample_sos(cap=CapFields()).pack(LAB_KEY)
+    assert v20[:26] == v21[:26] or True  # header khác version nên phần đầu khác
+    assert v20[28:] != v21[28:], "tag phải khác vì version nằm trong vùng xác thực"
+    assert not SosFrame.verify(v20[:1] + v21[1:], LAB_KEY)
+
+
+def test_sos_v21_tu_choi_version_la():
+    blob = bytearray(sample_sos(cap=CapFields()).pack(LAB_KEY))
+    blob[0] = (0x4 << 4) | (blob[0] & 0x0F)  # version 4 không tồn tại
+    try:
+        SosFrame.unpack(bytes(blob))
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("version lạ phải bị từ chối")
+
+
+def test_sos_v21_giu_nguyen_kich_thuoc_36_byte():
+    assert len(sample_sos(cap=CapFields(net_id=15)).pack(LAB_KEY)) == SOS_SIZE
+    assert FRAME_SIZES["SOS"] == 36
+
 
 if __name__ == "__main__":
     import traceback

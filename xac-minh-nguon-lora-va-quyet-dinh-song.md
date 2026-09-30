@@ -27,7 +27,7 @@ DOI dưới đây đã được đối chiếu tự động, không lấy từ t
 | **D4** | Nút cầu **không cần GNSS/IMU/màn hình** (điện thoại đã có) → BOM thấp hơn nút đầy đủ | Hệ quả của D3; xem thiết kế §2 |
 | **D5** | Loại WiFi mesh, WiFi HaLow và vệ tinh khỏi đường chuẩn | Có nguồn cho cả ba (§4–§6) |
 | **D6** | Link cá nhân mặc định **BLE**, dự phòng **dây USB-C** | Cự ly 1–2 m nên lý do "tầm ngắn" đã loại BLE khỏi vai trò mạng **không áp dụng**; đây là điểm cần nói thẳng trong phần giới hạn (§1.3 kế hoạch) |
-| **D7** | **Băng chuẩn: 920–923 MHz** (module SX1262, ví dụ Ra-01SH ~135.000 ₫); **băng 433,05–434,79 MHz là nhánh so sánh**, mua thêm nếu ngân sách cho phép | Người dùng giao toàn quyền 2026-10-01. Lý do: QCVN 122:2020 viết rõ cho 920–923 MHz (đã đọc bản công báo gốc), anten nhỏ gọn, băng ít nhiễu hơn; module SX1278 433 MHz trong danh sách giá **không phát được ở 920–923 MHz** nên không thể dùng cho đường chuẩn. Nhánh 433 dùng để trả lời câu hỏi "băng nào tốt hơn ở Việt Nam" bằng đo thực (đây cũng là một khoảng trống: chưa có đo LoRa tại VN) |
+| **D7** | **Băng chuẩn: 920–923 MHz** (module SX1262, ví dụ Ra-01SH ~135.000 ₫); **băng 433,05–434,79 MHz là nhánh so sánh**, mua thêm nếu ngân sách cho phép | Người dùng giao toàn quyền 2026-10-01. **Lý do đã sửa sau khảo sát pháp lý:** hai băng có **điều kiện pháp lý giống hệt nhau** (≤ 25 mW ERP; duty cycle 10 %/1 % — Thông tư 08/2021 Phụ lục 19), nên **không phải vì 433 chặt hơn**. Khác biệt thật là: (i) **chỉ 920–923 MHz mới có QCVN loại hình** (QCVN 122:2020) để thiết kế và kiểm nghiệm đối chiếu, còn 433 chỉ có quy chuẩn phát xạ giả; (ii) anten 920 nhỏ gọn hơn (λ/4 ≈ 8 cm so với ≈ 17 cm); (iii) băng 433 đông đúc hơn. Nhánh 433 vẫn nên mua để trả lời bằng đo thực câu "băng nào tốt hơn ở Việt Nam" — một khoảng trống, vì **chưa có đo LoRa nào tại VN** |
 
 **Ba quyết định khác của người dùng trong cùng ngày 2026-10-01:**
 
@@ -91,6 +91,9 @@ nhỏ và nên đưa vào phụ lục.
 | **Giới hạn duty cycle** | Đầu cuối/cảm biến **≤ 1 %**; gateway/access station **≤ 10 %**; chu kỳ quan sát `Tobs` = 1 giờ | Đã đọc bản công báo gốc — QCVN 122:2020/BTTTT mục 2.4.4.2 |
 | **Hệ quả bắt buộc cho thiết kế** | Board Meshtastic/Heltec bán sẵn phát **+20/+22 dBm → vượt QCVN**; cấu hình **SF12 + beacon 60 s (2,36 %) không hợp quy** (vượt 1 %). Phải hạ công suất phát và giãn beacon | QCVN 122:2020 + mô hình `SUY` của đề tài |
 | Phổ tần dùng chung? | Có — quy chuẩn nêu rõ thiết bị LPWAN **dùng chung phổ tần** 920–923 MHz với các thiết bị vô tuyến cự ly ngắn khác | Thông tư 38/2020/TT-BTTTT |
+| **Băng 433,05–434,79 MHz thì sao?** | **Điều kiện GIỐNG HỆT 920–923**: ≤ 25 mW ERP; duty cycle **≤ 10 % gateway / ≤ 1 % đầu cuối** — do chính Thông tư 08/2021 đặt tại **Phụ lục 19**, không đổi trong bản hợp nhất 2025 (sửa bởi Thông tư 01/2025/TT-BKHCN). **Không có QCVN loại hình cho 433**; QCVN 122:2020 **chỉ** áp cho 920–923 | Bản công báo gốc TT 08/2021 + bản hợp nhất 2025 |
+| **Ngày hiệu lực TT 08/2021** | **28/11/2021** (Điều 8 bản công báo gốc) — **mâu thuẫn 18/11 vs 28/11 nay đã hết** | Bản công báo gốc |
+| **Rủi ro pháp lý mới** | "Miễn giấy phép tần số" **≠** miễn mọi nghĩa vụ: vẫn phải **chứng nhận/công bố hợp quy nhóm 2** (TT 11/2020/TT-BTTTT); và **Luật Viễn thông 24/2023/QH15 Điều 19.5** có thể buộc **giấy phép thiết lập mạng viễn thông dùng riêng** cho mesh liên xã (Điều 42.4 miễn nếu cùng một tổ chức và không tự xây đường truyền) | Luật Viễn thông 24/2023/QH15 |
 | Nghĩa vụ kèm theo | Thiết bị miễn giấy phép **phải dừng sử dụng** nếu gây nhiễu có hại cho thiết bị được cấp phép | Thông tư 08/2021/TT-BTTTT |
 | Cơ quan quản lý | Hai thông tư trên do **Bộ TT&TT** ban hành; từ 2025 đầu mối tần số/viễn thông chuyển về **Bộ KH&CN** (Cục Tần số VTĐ, Cục Viễn thông). **Không** gán văn bản 2026 cho Bộ TT&TT | Cổng pháp luật hiện thuộc Bộ KH&CN; văn bản cấp phép vệ tinh 2026 |
 
@@ -311,7 +314,19 @@ truy vấn; trang `thuvienphapluat.vn` và một số trang MDPI chặn `curl` (
 | Số sao GitHub | **Không phải thước đo khoa học**; chỉ dùng như chỉ dấu mức hoạt động |
 | "LBT vô dụng" | Phóng đại. Bằng chứng chỉ nói **không đáng tin khi có nút ẩn** |
 | DOI `10.1109/90.929850` cho Floyd & Paxson | **Sai** — đó là bài khác (Feldmann et al. về traffic demands). Đúng là `10.1109/90.944338` |
-| Giá trị mặc định `Node Info Broadcast Seconds` của Meshtastic | **Chưa xác minh** — không trích |
+| Giá trị mặc định `Node Info Broadcast Seconds` của Meshtastic | **Chưa xác minh** — không trích. *(Giá trị **đã** xác minh sau đó: 10.800 s — xem kế hoạch §7.3)* |
+| **"QCVN 122:2020 áp cho băng 433"** | **Sai** — QCVN 122 chỉ áp cho 920–923 MHz; điều kiện 433 nằm ở Phụ lục 19 Thông tư 08/2021 |
+| **"Băng 433 thoáng hơn 920 về pháp lý"** | **Sai** — hai băng có điều kiện **giống hệt nhau** (25 mW ERP; 10 %/1 %) |
+| **"Thông tư 08/2021 hiệu lực 18/11/2021"** | **Sai** — Điều 8 bản công báo gốc ghi **28/11/2021** |
+| **"'4 tại chỗ' gồm thông tin liên lạc"** | **Sai** — Điều 4.3 Luật PCTT chỉ gồm chỉ huy / lực lượng / phương tiện-vật tư / hậu cần; liên lạc ở Điều 7.2 và 26 |
+| **Thời lượng mất liên lạc (giờ) của một xã trong Yagi 2024 / lũ 11/2025** | **Không tìm thấy nguồn** |
+| **Năm DOI kho dữ liệu ngã đang lưu hành** (UMAFall, KFall, FARSEEING, MobiFall, UniMiB-SHAR) | **Sai** — Crossref trỏ sang bài khác. DOI đúng: UMAFall `10.1016/j.procs.2017.06.110`; KFall `10.3389/fnagi.2021.692865`; FARSEEING `10.1186/s11556-016-0168-9`; MobiFall `10.4018/ijmstr.2014010103`; UniMiB-SHAR `10.3390/app7101101` |
+| **Kho "SafeFall"** | **Không tìm thấy nguồn** mô tả kho này — **không được bịa DOI** |
+| **"Bagalà 2012: 3–85 báo động giả/ngày"** | **Sai** — đúng là **22–85/24 h** và **27–84/24 h** (hai nghiên cứu con), Kangas **< 9/24 h** |
+| **"Kangas 2015"** | **Không tồn tại** — bài đúng là **Kangas 2012**, `10.1016/j.gaitpost.2011.11.016` |
+| **"FARSEEING có 143 ca ngã thực"** | **Sai nguồn** — FARSEEING (Klenk 2016) có 347 ghi / **208 xác minh**; **143 ca** thuộc **Palmerini 2020**, `10.3390/s20226479` |
+| **Villa & Casilari 2025 như bằng chứng "on-device"** | **Không được trích** — 7 ngày thực địa có **0 ca ngã thật**, và bài **tự mâu thuẫn** về nơi chạy mô hình |
+| Kaggle "Fall Detection Dataset" như dữ liệu IMU | **Sai** — đó là kho **ảnh**; và bản re-upload "KFall" trên Kaggle ghi MIT **trái giấy phép gốc** |
 | "Meshtastic dùng duty cycle 1 %" | **Sai**: cấu hình EU của Meshtastic dùng **10 %/giờ**. Mức **1 %** trong tài liệu này là của **QCVN 122:2020 cho đầu cuối Việt Nam** — không lẫn hai nguồn |
 
 ---
@@ -321,9 +336,8 @@ truy vấn; trang `thuvienphapluat.vn` và một số trang MDPI chặn `curl` (
 1. ~~**Đọc bản gốc QCVN 122:2020/BTTTT**~~ → **ĐÃ XONG (2026-10-01)**: giới hạn
    **14 dBm e.r.p.** và **duty cycle 1 % (đầu cuối) / 10 % (gateway)** đã lấy từ
    bản công báo gốc và đã đưa vào kế hoạch + thiết kế.
-   **Ngày hiệu lực của Thông tư 08/2021: người dùng quyết định KHÔNG theo đuổi**
-   (2026-10-01) — tài liệu chỉ ghi nhận mâu thuẫn giữa hai nguồn (18/11 vs
-   28/11/2021) và đi tiếp, không coi là việc chặn tiến độ.
+   ~~Ngày hiệu lực của Thông tư 08/2021~~ → **ĐÃ GIẢI QUYẾT: 28/11/2021** (Điều 8 bản
+   công báo gốc, đọc ngày 2026-10-01). Mâu thuẫn trước đây đã hết.
 2. **Đối chiếu datasheet SX1276** → **ĐÃ XONG**: bảng độ nhạy SF6–SF12 và dòng
    Rx/Tx đã thay bằng giá trị datasheet, nhãn `GIẢ ĐỊNH` được gỡ khỏi `lora.py` và
    `node_power.py`. **Việc còn lại:** lấy datasheet **SX1262** (bị login-gate) nếu

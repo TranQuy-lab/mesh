@@ -64,6 +64,8 @@ from packets import (
 
 #: Phiên bản giao thức nhét vào 4 bit cao của byte 0. ĐÓNG BĂNG.
 VERSION = 2
+#: Version cho khung SOS v2.1 (dùng 2 byte dự trữ cho trường ánh xạ CAP).
+VERSION_CAP = 3
 
 #: Ngân sách payload thiết kế cho LoRa (byte).
 #: GIẢ ĐỊNH — kế thừa trần payload lớn nhất kiểu LoRaWAN (242 B), nhỏ hơn trần
@@ -237,29 +239,37 @@ class Flags:
         )
 
 
-def _pack_header(frame_type: int, flags: Flags) -> bytes:
+def _pack_header(frame_type: int, flags: Flags, version: int = VERSION) -> bytes:
     """Byte 0 = version 4 bit cao | frame_type 4 bit thấp; byte 1 = flags."""
     if not isinstance(flags, Flags):
         raise TypeError("flags phải là Flags")
-    b0 = ((_check(VERSION, 4, "version") << 4)
+    b0 = ((_check(version, 4, "version") << 4)
           | _check(frame_type, 4, "frame_type"))
     return bytes((b0, flags.pack()))
 
 
-def _parse_header(data: bytes, expected_type: int) -> tuple[int, Flags]:
-    """Đọc và kiểm tra header; ném ValueError nếu sai version/type."""
+def _parse_header_any(
+    data: bytes, expected_type: int, allowed_versions: tuple[int, ...]
+) -> tuple[int, Flags]:
+    """Đọc header, chấp nhận danh sách version; trả `(version, flags)`."""
     if len(data) < HEADER_SIZE:
         raise ValueError(f"cần ít nhất {HEADER_SIZE} byte header")
     ver = data[0] >> 4
     ftype = data[0] & 0x0F
-    if ver != VERSION:
-        raise ValueError(f"version={ver} không phải {VERSION}")
+    if ver not in allowed_versions:
+        raise ValueError(f"version={ver} không thuộc {allowed_versions}")
     if ftype != expected_type:
         raise ValueError(
             f"frame_type={ftype} không phải {expected_type} "
             f"({FRAME_NAMES.get(expected_type, '?')})"
         )
-    return ftype, Flags.unpack(data[1])
+    return ver, Flags.unpack(data[1])
+
+
+def _parse_header(data: bytes, expected_type: int) -> tuple[int, Flags]:
+    """Đọc và kiểm tra header cho các khung chỉ có một version."""
+    _ver, flags = _parse_header_any(data, expected_type, (VERSION,))
+    return expected_type, flags
 
 
 def peek_type(data: bytes) -> int:
@@ -289,10 +299,14 @@ def frame_size(frame_type: int | str) -> int:
     return _SIZE_BY_TYPE[ftype]
 
 
-def _valid_header(data: bytes, expected_type: int) -> bool:
+def _valid_header(
+    data: bytes, expected_type: int,
+    allowed_versions: tuple[int, ...] = (VERSION,),
+) -> bool:
+    """Kiểm tra nhanh header (không ném lỗi) cho vùng xác thực."""
     return (
         len(data) >= HEADER_SIZE
-        and (data[0] >> 4) == VERSION
+        and (data[0] >> 4) in allowed_versions
         and (data[0] & 0x0F) == expected_type
     )
 
@@ -374,6 +388,53 @@ class _FlagView:
 # --------------------------------------------------------------------------
 
 
+@dataclass(frozen=True)
+class CapFields:
+    """Trường ánh xạ CAP + lớp độ chính xác vị trí — khung SOS **v2.1**.
+
+    16 bit tại offset 26–27 của SOS (trước đây là `reserved`)::
+
+        bit 15–12  net_id              4 bit  (mã miền/triển khai)
+        bit 11–9   cap_severity        3 bit  (0 Unknown, 1 Extreme, 2 Severe, 3 Moderate, 4 Minor)
+        bit  8–6   cap_urgency         3 bit  (0 Unknown, 1 Immediate, 2 Expected, 3 Future, 4 Past)
+        bit  5–3   cap_certainty       3 bit  (0 Unknown, 1 Observed, 2 Likely, 3 Possible, 4 Unlikely)
+        bit  2–0   pos_accuracy_class  3 bit  (0 không biết … 6 < 3 km, 7 không có fix)
+
+    Giá trị 5–7 của ba trục CAP được để dự trữ cho tương lai. Nguồn: CAP v1.2
+    (OASIS Standard 01-07-2010) yêu cầu `sender` định danh toàn cầu (⇒ `net_id`),
+    và 3GPP TS 23.032 yêu cầu mô tả sai số kèm điểm (⇒ `pos_accuracy_class`).
+    """
+
+    net_id: int = 0
+    severity: int = 0
+    urgency: int = 0
+    certainty: int = 0
+    pos_accuracy_class: int = 0
+
+    def pack(self) -> int:
+        """Đóng gói thành số nguyên 16 bit."""
+        _check(self.net_id, 4, "net_id")
+        _check(self.severity, 3, "cap_severity")
+        _check(self.urgency, 3, "cap_urgency")
+        _check(self.certainty, 3, "cap_certainty")
+        _check(self.pos_accuracy_class, 3, "pos_accuracy_class")
+        return ((self.net_id << 12) | (self.severity << 9) | (self.urgency << 6)
+                | (self.certainty << 3) | self.pos_accuracy_class)
+
+    @staticmethod
+    def unpack(value: int) -> "CapFields":
+        """Giải mã số nguyên 16 bit thành `CapFields`."""
+        if not (0 <= value <= 0xFFFF):
+            raise ValueError("CapFields phải nằm trong 16 bit")
+        return CapFields(
+            net_id=(value >> 12) & 0x0F,
+            severity=(value >> 9) & 0x07,
+            urgency=(value >> 6) & 0x07,
+            certainty=(value >> 3) & 0x07,
+            pos_accuracy_class=value & 0x07,
+        )
+
+
 @dataclass
 class SosFrame(_FlagView):
     """SOS v2.0 (36 byte).
@@ -397,6 +458,7 @@ class SosFrame(_FlagView):
     node_temp_c_x10: int
     flags: Flags = field(default_factory=Flags)
     reserved: int = 0
+    cap: "CapFields | None" = None
     tag: bytes = b""
 
     SIZE = SOS_SIZE
@@ -407,8 +469,11 @@ class SosFrame(_FlagView):
             raise ValueError("SOS reserved là trường dự trữ và phải bằng 0")
         if len(self.tag) and len(self.tag) != SOS_TAG_BYTES:
             raise ValueError(f"tag SOS phải đúng {SOS_TAG_BYTES} byte")
+        # `cap` khác None ⇒ khung v2.1: 2 byte cuối mang trường CAP.
+        version = VERSION_CAP if self.cap is not None else VERSION
+        tail = (self.cap.pack() if self.cap is not None else self.reserved)
         return (
-            _pack_header(self.TYPE, self.flags)
+            _pack_header(self.TYPE, self.flags, version)
             + _check(self.src_id, 32, "src_id").to_bytes(4, "big")
             + _check(self.seq, 16, "seq").to_bytes(2, "big")
             + bytes((_check(self.hop_count, 8, "hop_count"),
@@ -422,7 +487,7 @@ class SosFrame(_FlagView):
             + _check(self.immobility_s, 16, "immobility_s").to_bytes(2, "big")
             + _check_i16(self.node_temp_c_x10, "node_temp_c_x10").to_bytes(
                 2, "big", signed=True)
-            + _check(self.reserved, 16, "reserved").to_bytes(2, "big")
+            + _check(tail, 16, "cap/reserved").to_bytes(2, "big")
         )
 
     def pack(self, key: bytes | None = None) -> bytes:
@@ -442,7 +507,8 @@ class SosFrame(_FlagView):
         """Giải mã SOS đúng 36 byte; reserved khác 0 bị coi là lỗi."""
         if len(data) != SOS_SIZE:
             raise ValueError(f"SOS phải đúng {SOS_SIZE} byte, nhận {len(data)}")
-        _ftype, flags = _parse_header(data, FRAME_TYPES["SOS"])
+        ver, flags = _parse_header_any(
+            data, FRAME_TYPES["SOS"], (VERSION, VERSION_CAP))
         off = HEADER_SIZE
         src_id = int.from_bytes(data[off : off + 4], "big"); off += 4
         seq = int.from_bytes(data[off : off + 2], "big"); off += 2
@@ -457,16 +523,22 @@ class SosFrame(_FlagView):
         immobility_s = int.from_bytes(data[off : off + 2], "big"); off += 2
         node_temp_c_x10 = int.from_bytes(data[off : off + 2], "big", signed=True)
         off += 2
-        reserved = int.from_bytes(data[off : off + 2], "big"); off += 2
-        if reserved != 0:
-            raise ValueError(f"SOS reserved phải bằng 0, nhận {reserved}")
+        tail = int.from_bytes(data[off : off + 2], "big"); off += 2
+        cap: CapFields | None = None
+        reserved = 0
+        if ver == VERSION_CAP:
+            # v2.1: hai byte cuối là trường CAP + lớp độ chính xác vị trí.
+            cap = CapFields.unpack(tail)
+        elif tail != 0:
+            raise ValueError(f"SOS reserved phải bằng 0, nhận {tail}")
         return SosFrame(
             src_id=src_id, seq=seq, hop_count=hop_count, ttl=ttl,
             lat=decode_lat(lat_raw), lon=decode_lon(lon_raw),
             battery_pct=battery_pct, severity=severity,
             time_offset_min=time_offset_min, impact_g_x100=impact_g_x100,
             immobility_s=immobility_s, node_temp_c_x10=node_temp_c_x10,
-            flags=flags, reserved=reserved, tag=data[off : off + SOS_TAG_BYTES],
+            flags=flags, reserved=reserved, cap=cap,
+            tag=data[off : off + SOS_TAG_BYTES],
         )
 
     @staticmethod
@@ -474,10 +546,11 @@ class SosFrame(_FlagView):
         """Kiểm tra HMAC 64 bit. Khoá rỗng ⇒ False (không ném lỗi)."""
         if not key or len(data) != SOS_SIZE:
             return False
-        if not _valid_header(data, FRAME_TYPES["SOS"]):
+        if not _valid_header(data, FRAME_TYPES["SOS"], (VERSION, VERSION_CAP)):
             return False
         prefix = data[:-SOS_TAG_BYTES]
-        if int.from_bytes(prefix[26:28], "big") != 0:
+        # Ở v2.0 hai byte cuối là `reserved` (phải 0); ở v2.1 chúng mang trường CAP.
+        if data[0] >> 4 == VERSION and int.from_bytes(prefix[26:28], "big") != 0:
             return False
         expected = _tag(key, _sos_authenticated(prefix), SOS_TAG_BYTES)
         return hmac.compare_digest(data[-SOS_TAG_BYTES:], expected)

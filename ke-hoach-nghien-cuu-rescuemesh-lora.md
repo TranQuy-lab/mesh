@@ -230,10 +230,16 @@ DOI/URL; nguồn chi tiết ở [bản tổng hợp định tuyến LoRa](ket-qu
   đã kiểm: **không tồn tại meta-analysis kiểu PRISMA** gộp sensitivity/specificity/F1
   cho phát hiện ngã bằng IMU; nhiều bản demo dùng ngưỡng đơn giản và báo "chính xác
   cao" mà không nói chia tập theo người, không nói báo động giả mỗi giờ. Quan trọng
-  hơn: khi chuyển từ ngã **staged** sang ngã **thực**, sensitivity tụt còn **57,0 %**
-  (Bagalà 2012, 29 ca thực) và báo động giả lên tới **3–85 ca/ngày**; ngay cả mô
-  hình sâu tốt nhất cũng chỉ đạt **~8 báo động giả/ngày trên 7 ngày thực địa**
-  (Villa & Casilari 2025). Tầng xác nhận T3 của đề tài có đất đóng góp chính ở đây.
+  hơn, khi chuyển từ ngã **staged** sang ngã **thực**: SE tụt còn **57,0 % ± 27,3 %**
+  với PPV chỉ **24,4 %** trên **29 ca ngã thực** (Bagalà 2012); báo động giả trải **bốn
+  bậc độ lớn** giữa các nghiên cứu (**0,022 → 8,3 → 13,4 → 85 ca/ngày**) và **không có
+  chuẩn chung**; chuyển miền sạch nhất đạt SE **73,0 %** với **1 báo động giả/46 ngày**
+  (Harari 2021), còn Villa & Casilari 2025 cho thấy mức sụt **phụ thuộc kho đích**
+  (−14,9 điểm trên FARSEEING, nhưng chỉ −1,0 điểm trên kho đa xơ cứng).
+  **Phát hiện phương pháp luận quan trọng:** SisFall dùng **10-fold CV trộn cửa sổ,
+  KHÔNG LOSO** (nguyên văn trong bài), và Villa & Casilari cũng **không mô tả chia theo
+  người** ⇒ **các baseline 96–99 % đang được trích dẫn KHÔNG so sánh được với kết quả
+  LOSO của đề tài**. Tầng xác nhận T3 của đề tài có đất đóng góp chính ở đây.
 - **G3 — Kinh tế airtime của mesh một kênh *có điều khiển*, cho bài toán SOS.**
   Dung lượng LoRaWAN hình sao đã được nghiên cứu kỹ và **có số đo** (Bor 2016 mặc
   định chỉ 64 nút/3,8 ha với DER > 0,9; Haxhibeqiri 2017: 1.000 nút/gateway mất tới
@@ -294,13 +300,31 @@ Mỗi giả thuyết phải có **đối thủ** và một **kết quả không 
 - *Đối thủ R1a:* lợi ích đến từ lọc ngưỡng đơn thuần, không cần ML. → **Thử:**
   thang (ngưỡng) → (ngưỡng + luật) → (ML + luật); nếu bậc hai đã gần bằng bậc ba
   thì ML không đóng góp.
-- *Đối thủ R1b:* lợi ích chỉ xuất hiện trên dữ liệu **staged** (người thử nằm yên
-  theo kịch bản); trên **ngã thực** tầng xác nhận không giúp được gì. → **Thử bắt
-  buộc:** chạy thêm trên **ngã thực** (FARSEEING: 143 ca; "Free From Falls": 690
-  cửa sổ 4 giây) và so với các mốc đã công bố: SE thực đời tụt còn **57,0 %**
-  (Bagalà 2012, 29 ca thực), báo động giả **3–85 ca/ngày**, và mô hình sâu tốt nhất
-  chỉ đạt **~8 báo động giả/ngày trên 7 ngày thực địa** (Villa & Casilari 2025).
-  Nếu tầng 3 không kéo được báo động giả xuống dưới ~8 ca/ngày trên dữ liệu thực
+- *Đối thủ R1b:* lợi ích chỉ xuất hiện trên dữ liệu **staged**; trên **ngã thực** tầng
+  xác nhận không giúp được gì. → **Thử bắt buộc:** chạy thêm trên **ngã thực** và so
+  với các mốc đã công bố **đã sửa lại cho đúng nguồn**:
+  - Bagalà 2012 trên **29 ca ngã THỰC**: SE **57,0 % ± 27,3 %** (cao nhất 82,8 %), PPV
+    chỉ **24,4 %** (dù ACC 93,7 %); số báo động giả theo từng nghiên cứu con là
+    **22–85/24 h** và **27–84/24 h**, còn Kangas **< 9/24 h**; ngưỡng *"> 2 báo động
+    giả mỗi giờ là không chấp nhận được"*. **Sửa lỗi cũ:** con số "3–85 ca/ngày" là
+    **SAI**.
+  - **FARSEEING (Klenk 2016)** có 347 ca ghi nhận / **208 ca đã xác minh**, không phải
+    "143 ca". Con số **143 ca** thuộc **Palmerini 2020** (`10.3390/s20226479`): SE
+    > 80 %, **FAR 0,56/giờ ≈ 13,4/ngày**, F 64,6 %.
+  - **Harari 2021** (`10.1186/s12984-021-00918-z`) là chuyển staged→thực sạch nhất:
+    huấn luyện trên ngã staged của 17 người, tiền cứu 90 ngày → SE **73,0 %** (27/37
+    ca ngã thực), **1 báo động giả mỗi 46 ngày**, SP > 99,2 %.
+  - **Villa & Casilari 2025 = `10.3390/s26010162`**: staged 20 Hz SE 96,7 % → trên
+    **FARSEEING (ngã thực) SE 81,8 %** (**sụt −14,9 điểm**), SP 96,3 %; trên kho đa xơ
+    cứng (FFF) SE 97,9 % ⇒ **độ sụt phụ thuộc mức đồng nhất của kho đích**; 7 ngày
+    thực địa có 58/1.147 cửa sổ nhầm (≈ **8,3 báo động giả/ngày**).
+    ⚠️ **Cảnh báo bắt buộc:** 7 ngày đó có **0 ca ngã thật**, và bài **tự mâu thuẫn**
+    về nơi chạy mô hình (Methods nói phân tích *externally*, §3.4 nói *implemented on
+    the wearable prototype*) ⇒ **không được trích bài này như bằng chứng on-device hay
+    ngân sách độ trễ**.
+  - **Sửa lỗi cũ thứ hai:** "Kangas 2015" **không tồn tại**; bài đúng là **Kangas 2012**
+    (`10.1016/j.gaitpost.2011.11.016`).
+  Nếu tầng 3 không kéo được báo động giả xuống mức chấp nhận được trên dữ liệu thực
   thì H1 bị bác.
 - *Không tương thích:* FAR giảm nhưng recall giảm nhiều hơn ở cùng ngân sách.
 
@@ -425,7 +449,8 @@ hình) nối với điện thoại bằng **link cá nhân** BLE — dự phòng
 mesh LoRa 920–923 MHz (SF7–SF12, BW125) **một kênh** tới 200 nút trong mô phỏng và
 10–30 nút trong đo thực; nút chuyển tiếp thuần LoRa và nút courier; một tới hai
 gateway; mô phỏng rời rạc có mô hình airtime; dữ liệu IMU công khai; phân tích độ
-trễ, airtime, năng lượng; khung v2.0 có xác thực.
+trễ, airtime, năng lượng; khung v2.0 có xác thực **và v2.1 tương thích ngược có trường
+ánh xạ CAP + độ chính xác vị trí**.
 
 **Phi mục tiêu (đóng băng, ghi vào bài):**
 
@@ -734,7 +759,7 @@ codec `rescuemesh/packets_lora.py`):
 
 | Khung | Kích thước | Trường chính | Airtime SF9 (`SUY`) |
 |---|---:|---|---:|
-| SOS | 36 B | srcID 32 bit, seq 16 bit, hop, TTL, lat/lon 24 bit, pin, mức độ, thời gian, gia tốc va đập, số giây bất động, tag 64 bit | ≈ 267 ms |
+| SOS | 36 B | srcID 32 bit, seq 16 bit, hop, TTL, lat/lon 24 bit, pin, mức độ, thời gian, gia tốc va đập, số giây bất động, **2 byte cuối: `reserved` (v2.0) hoặc trường CAP + độ chính xác vị trí (v2.1)**, tag 64 bit | ≈ 267 ms |
 | HEARTBEAT | 14 B | srcID, pin, hop, thời gian, tag 32 bit | ≈ 165 ms |
 | BEACON | 18 B | gwID, bseq 8 bit, hop limit, thời gian, tải, tag 64 bit | ≈ 185 ms |
 | ACK | 12 B | bseq, **token 24 bit**, tag 40 bit | ≈ 144 ms |
@@ -783,8 +808,21 @@ mở, phải cân với chi phí airtime.
   ngã thực**.
 - Tầng 1: ngưỡng rơi tự do/va đập. Tầng 2: RF/GBDT hoặc CNN int8. Tầng 3: bất động
   + đếm ngược 30 giây có còi/rung để người dùng huỷ.
-- Android: foreground service đọc IMU 20–50 Hz (**kế thừa mã G0 đã chạy trên Pixel 6
-  Pro và Redmi Note 14 Pro**) rồi gửi khung SOS sang nút cầu qua link cá nhân.
+- Android: foreground service đọc **chỉ accelerometer ở 20 Hz** (**kế thừa mã G0 đã
+  chạy trên Pixel 6 Pro và Redmi Note 14 Pro**) rồi gửi khung SOS sang nút cầu qua
+  link cá nhân. **Vì sao bỏ gyroscope:** ADXL345 chỉ tốn **30–140 µA** còn gyroscope
+  **> 10× accelerometer** (Sucerquia 2018) — đây là quyết định năng lượng.
+- **Tiêu chí chọn kho dữ liệu (bắt buộc ghi trong bài):** phải báo cáo **tầm đo** của
+  từng kho, vì nhiều kho dùng điện thoại Samsung **chỉ ±2 g và bão hòa đúng ở pha va
+  đập** (Casilari 2017: tầm đó *"not sufficient to capture the brusque increase of the
+  acceleration caused by the impact"*); SisFall ±16 g. **Không trộn kho ±2 g với ±16 g
+  trong cùng một so sánh.**
+- **Kiểm tra giấy phép trước khi tải:** UMAFall (CC BY 4.0), KFall (CC BY 4.0) dùng được;
+  FARSEEING **theo yêu cầu + DUA**; và **ba kho SisFall/SISTEMIC, tFall/eduqtech,
+  MobiFall/BMI trả HTTP 000 tại 2026-10-01** ⇒ giấy phép hiện hành chưa xác minh.
+- **Lập luận mạnh cho RQ1 (đưa vào phần đóng góp):** SisFall dùng **10-fold CV trộn cửa
+  sổ, KHÔNG LOSO**, và Villa & Casilari 2025 cũng không mô tả chia theo người ⇒ **các
+  baseline 96–99 % không so sánh được với kết quả LOSO của đề tài**.
 - **Cổng G7:** recall đạt mục tiêu ở ngân sách FAR đặt trước, chia tập theo người,
   **và** có kết quả trên ngã thực.
 
@@ -842,9 +880,14 @@ mở, phải cân với chi phí airtime.
 | Chia tập | Leave-subject-out; bắt buộc có một lần chạy trên ngã thực |
 | Thang baseline | (B0) ngưỡng → (B1) ngưỡng + luật bất động → (B2) RF/GBDT + luật → (B3) CNN int8 + luật |
 | Thước đo chính | Recall ở ngân sách FAR đặt trước; F1; AUROC; độ trễ phát hiện |
-| **Biến mới bắt buộc** | **Loại ngã: staged vs ngã thực** (FARSEEING: 143 ca; "Free From Falls": 690 cửa sổ 4 giây) — đây là nơi mọi công trình đều tụt mạnh |
-| Ca khó | Ngồi phịch, nhảy, chạy, xe xóc, thiết bị rơi khỏi túi |
+| **Biến mới bắt buộc** | **Loại ngã: staged vs ngã thực** (FARSEEING/Klenk 2016: 347 ghi / **208 xác minh**; FFF: 690 cửa sổ 4 giây) — đây là nơi mọi công trình đều tụt mạnh |
+| **Biến gây nhiễu bị bỏ quên: tầm đo** | Nhiều kho dùng điện thoại Samsung **chỉ ±2 g ⇒ bão hòa đúng ở pha va đập**; Casilari 2017 (`10.3390/s17071513`) nói nguyên văn tầm này *"not sufficient to capture the brusque increase of the acceleration caused by the impact"*. SisFall ±16 g; Cogent/UR/TST ±8 g. **Phải báo cáo tầm đo của từng kho** và không trộn kho ±2 g với ±16 g trong cùng một so sánh |
+| **Vị trí đeo** | Özdemir 2016 (`10.3390/s16081161`, 2.520 thử nghiệm): waist 99,96 % > thigh 97,89 % > ankle 97 % > head 96,61 % > chest 96,50 % > **wrist kém nhất**. Điện thoại trong túi quần = thigh (hạng 2) nhưng túi lỏng làm giảm độ bám ⇒ **hai nguồn suy giảm độc lập** |
+| **Tần số lấy mẫu** | 20 Hz là điểm cân bằng tốt nhất, 10 Hz vẫn đủ; Sucerquia 2018 dùng **25 Hz**; SisFall suy ra **11 Hz đủ** ⇒ chọn **20 Hz** và báo cáo độ nhạy theo 10/20/50 Hz |
+| **Cảm biến dùng** | **Chỉ accelerometer**: ADXL345 tốn **30–140 µA** còn **gyroscope > 10× accelerometer** (Sucerquia 2018) — bỏ gyro là quyết định năng lượng, không phải bỏ sót |
+| Ca khó | Ngồi phịch, nhảy, chạy, xe xóc, thiết bị rơi khỏi túi; **hoạt động thể thao chồng lấn ngã** (ở Gravity/UMAFall trung vị đỉnh **cao hơn** của ngã); **vấp (stumble)** chiếm ~20 % biến cố nhầm (Harari) |
 | Lặp | ≥ 5 seed mô hình; bootstrap 10.000 lần cho CI |
+| **Giấy phép kho** | UMAFall: figshare `10.6084/m9.figshare.4214283.v8` = **CC BY 4.0**; KFall: **CC BY 4.0**; FARSEEING: **theo yêu cầu + DUA, không mở hoàn toàn**. ⚠️ **Tại 2026-10-01, ba kho SisFall/SISTEMIC, tFall/eduqtech và MobiFall/BMI trả HTTP 000** ⇒ giấy phép hiện hành **KHÔNG TÌM THẤY NGUỒN** — phải kiểm lại trước khi dùng |
 
 ### 10.2 Mesh LoRa
 
@@ -953,10 +996,11 @@ gantt
 >
 > - **(a) Băng 920–923 MHz** (đã có QCVN 122:2020 rõ ràng): dùng module **SX1262**
 >   như Ra-01SH. Anten nhỏ gọn, băng ít nhiễu hơn; module đắt và hiếm hơn một chút.
-> - **(b) Băng 433,05–434,79 MHz**: **cũng nằm trong danh mục LPWAN được miễn giấy
->   phép** theo Thông tư 08/2021, và module SX1278 **rẻ, sẵn có**. Đổi lại: anten dài
->   hơn (λ/4 ≈ 17 cm), băng ISM đông đúc hơn, và **còn câu hỏi kỹ thuật mở**: QCVN
->   122:2020 chỉ viết cho 920–923 MHz, nên phải xác định quy chuẩn nào áp cho băng 433.
+> - **(b) Băng 433,05–434,79 MHz**: **điều kiện pháp lý GIỐNG HỆT** băng 920–923
+>   (≤ 25 mW ERP; duty cycle 10 %/1 % — Thông tư 08/2021 Phụ lục 19), nên **không có
+>   lợi thế pháp lý nào khi chọn 433**; module SX1278 thì **rẻ và sẵn có** ở VN. Đổi
+>   lại: anten dài hơn (λ/4 ≈ 17 cm), băng ISM đông đúc hơn, và **không có QCVN loại
+>   hình để đối chiếu** — chỉ có giới hạn phát xạ giả (QCVN 73:2013/BTTTT).
 >
 > **Khuyến nghị:** giữ **(a)** làm đường chuẩn (đã có quy chuẩn đọc được), và mua
 > thêm **một bộ (b)** nếu ngân sách cho phép — so sánh tầm xa 433 MHz vs 920 MHz là
@@ -974,10 +1018,42 @@ gantt
 | Điều kiện kỹ thuật là gì? | **QCVN 122:2020/BTTTT** quy định chỉ tiêu phổ tần, điều kiện kỹ thuật và phương pháp đo cho thiết bị LPWAN 920–923 MHz, xây dựng trên ITU-R SM.2423-0/SM.329-12, ETSI EN 300 220-1/-2 và tiêu chuẩn ASEAN | Thông tư 38/2020/TT-BTTTT (16/11/2020, hiệu lực 01/07/2021) |
 | **Giới hạn công suất** | **≤ 14 dBm e.r.p.** (≈ 25 mW e.r.p.; ≈ 16,2 dBm EIRP) cho cảm biến/đầu cuối | Đã đọc **bản công báo gốc 61 trang** (QCVN 122:2020, mục 2.4.3.2) |
 | **Giới hạn duty cycle** | **Đầu cuối/cảm biến ≤ 1 %**; **gateway/access station ≤ 10 %**; chu kỳ quan sát `Tobs` = 1 giờ | Đã đọc bản công báo gốc (QCVN 122:2020, mục 2.4.4.2) |
+| **Băng 433,05–434,79 MHz có điều kiện gì?** | **Giống hệt 920–923 MHz**: **≤ 25 mW ERP** (≈ 13,98 dBm e.r.p.) và duty cycle **≤ 10 % gateway / ≤ 1 % đầu cuối** — điều kiện này do **chính Thông tư 08/2021 đặt tại Phụ lục 19**, đã đọc bản công báo gốc và **không đổi** trong bản hợp nhất 2025 (Công báo 761+762 ngày 19-6-2025, sửa bởi **Thông tư 01/2025/TT-BKHCN**) | `congbaocdn.chinhphu.vn/.../37213-1-2021863-86408-2021-tt-btttt.pdf` |
+| **Có QCVN cho băng 433 không?** | **KHÔNG.** Chỉ **QCVN 122:2020/BTTTT** mới là quy chuẩn loại hình cho LPWAN, và nó **chỉ áp cho 920–923 MHz**. Với 433, quy chuẩn duy nhất được viện dẫn là **giới hạn phát xạ giả** (QCVN 73:2013/BTTTT) | Thông tư 08/2021 Phụ lục 19; Thông tư 11/2020/TT-BTTTT |
+| **Ngày hiệu lực Thông tư 08/2021** | **28/11/2021** (Điều 8 bản công báo gốc) — **mâu thuẫn 18/11 vs 28/11 trước đây đã hết** | Bản công báo gốc |
 | **Hệ quả thiết kế bắt buộc** | Mức PA_BOOST 17 dBm và các board Meshtastic bán sẵn (+20/+22 dBm) **vượt giới hạn QCVN** → phải hạ công suất phát xuống ≤ 14 dBm e.r.p. trong mọi thí nghiệm tại Việt Nam; và cấu hình SF12 + beacon 60 s (2,36 %) **không hợp quy** | QCVN 122:2020 + mô hình `SUY` của đề tài |
+| **Hai rủi ro pháp lý mới, chưa từng ghi trong tài liệu dự án** | (i) **"Miễn giấy phép tần số" ≠ "miễn mọi nghĩa vụ"**: thiết bị vẫn thuộc **nhóm 2 phải chứng nhận/công bố hợp quy** (Thông tư 11/2020/TT-BTTTT); (ii) **Luật Viễn thông 24/2023/QH15 Điều 19.5** có thể buộc **giấy phép thiết lập mạng viễn thông dùng riêng** cho mesh liên xã/nhiều hội, trong khi **Điều 42.4 miễn** nếu thành viên **cùng một tổ chức** và **không tự xây đường truyền**. **Không tìm thấy hướng dẫn chính thức cho mạng cứu hộ cộng đồng** ⇒ đây là khoảng trống pháp lý thật | Luật Viễn thông 24/2023/QH15; Thông tư 11/2020/TT-BTTTT |
+| **Bẫy phân loại thiết bị** | Nếu bị xếp là "thiết bị đo từ xa" thay vì LPWAN thì trần ở 433 chỉ còn **10 mW ERP** (mất 4 dB) | Thông tư 08/2021 Phụ lục 1 mục 39 |
+| **Vượt 25 mW thì sao?** | 433 được tới **100 mW ERP** và 920 tới **306 mW ERP**, nhưng **phải xin giấy phép** | Thông tư 08/2021 Điều 5.2 |
 | Băng 920–923 MHz dùng chung với thiết bị cự ly ngắn khác | Có — quy chuẩn nêu rõ dùng chung phổ tần | Thông tư 38/2020/TT-BTTTT |
 | Cơ quan quản lý hiện hành | Thông tư 08/2021 và 38/2020 do **Bộ TT&TT** ban hành; từ 2025 đầu mối quản lý tần số/viễn thông chuyển về **Bộ KH&CN** (Cục Tần số VTĐ, Cục Viễn thông). Khi trích văn bản 2026 **không** gán cho Bộ TT&TT | Cổng pháp luật (nay thuộc Bộ KH&CN); các văn bản cấp phép vệ tinh 2026 |
 | Cơ quan quản lý hiện hành | Thông tư 08/2021 và 38/2020 do **Bộ TT&TT** ban hành; từ 2025 đầu mối quản lý tần số/viễn thông chuyển về **Bộ KH&CN** (Cục Tần số VTĐ, Cục Viễn thông). Khi trích văn bản 2026 **không** gán cho Bộ TT&TT | Cổng pháp luật (nay thuộc Bộ KH&CN); các văn bản cấp phép vệ tinh 2026 |
+
+**Bối cảnh bão lũ Việt Nam (số liệu đã mở toàn văn bài gốc):**
+
+| Sự kiện | Số liệu xác minh | Nguồn |
+|---|---|---|
+| Bão Yagi 9/2024 | **27 cột viễn thông gãy đổ**; **6.285 vị trí mất liên lạc di động do mất điện**; 7 tuyến cáp quang liên tỉnh + 12 tuyến nội tỉnh đứt; **> 32 triệu thuê bao** nhận SMS cảnh báo; gần **7.000 cán bộ** ứng cứu; **284 máy phát điện** | Số liệu Bộ TT&TT qua báo chính thống |
+| Lũ miền Trung 11/2025 | Số người chết/mất tích **lệch theo mốc thời gian, nêu cả ba**: 85 (22-11) → **102 = 91 chết + 11 mất tích** (24-11) → 108 (26-11, chỉ tiêu đề); **> 258.000 người mất điện**; **343 trạm BTS mất kết nối**; thiệt hại ~13.078 tỷ đồng | Báo cáo nhanh Cục Quản lý đê điều & PCTT qua báo chính thống |
+| **Còn thiếu** | **Thời lượng mất liên lạc tính bằng giờ của một xã cụ thể: KHÔNG TÌM THẤY NGUỒN** (cả Yagi và 11/2025) ⇒ không được đặt con số này trong bài | — |
+
+**Văn bản trung tâm về liên lạc PCTT mà tài liệu dự án còn thiếu — nên đưa vào Chương 1:**
+
+- **Thông tư 14/2025/TT-BKHCN** ngày 08-8-2025, **hiệu lực 22-9-2025** (thay TT 17/2012 và
+  17/2019). **Điều 4.1: "ưu tiên sử dụng mạng lưới tại chỗ"** — đây là **câu neo pháp lý
+  mạnh nhất** cho định hướng của đề tài. **Điều 6.2:** khi mất mạng công cộng, liên lạc
+  tới **cấp xã** dựa chủ yếu vào **vệ tinh (di động + cố định) và vô tuyến điện**.
+  **Điều 12.6:** mỗi xã vùng thường xuyên thiên tai phải có **≥ 01 trạm BTS kiên cố cấp 4**.
+  Thông tư **không** nhắc mesh cộng đồng hay radio nghiệp dư.
+- **Quyết định 226/QĐ-TTg (2016)**: Đề án thông tin liên lạc khẩn cấp dùng chung, số **112**.
+- **Hiệu chỉnh quan trọng:** "**4 tại chỗ**" theo **Điều 4.3 Luật PCTT** chỉ gồm *chỉ huy /
+  lực lượng / phương tiện-vật tư / hậu cần* — **KHÔNG gồm thông tin liên lạc**; liên lạc
+  nằm ở **Điều 7.2 và Điều 26**. Nếu bài viết "4 tại chỗ gồm liên lạc" là **SAI**.
+- **Giải pháp hiện có khi mất sóng:** Viettel ~6.000 máy phát điện, > 1.900 ắc quy,
+  **17 điện thoại vệ tinh**, 48 bộ đàm, 9 xe phát sóng, 4 drone; VNPT roaming 2 chiều +
+  điểm sạc; MobiFone châm nhiên liệu. **Radio nghiệp dư KHÔNG miễn giấy phép** (Nghị định
+  63/2023/NĐ-CP: giấy phép đài + chứng chỉ vô tuyến điện viên nghiệp dư); **không tìm thấy**
+  vai trò PCTT chính thức của radio nghiệp dư.
 
 Ba việc pháp lý phải làm trước WP10: (i) đọc bản gốc QCVN 122:2020/BTTTT và ghi
 lại giới hạn EIRP/duty cycle; (ii) xác nhận nghĩa vụ khi thiết bị miễn giấy phép
@@ -1025,7 +1101,7 @@ gây nhiễu; (iii) ghi rõ trong báo cáo rằng nguyên mẫu **chưa đượ
 ## 14. Tiêu chuẩn "hoàn thành" và hai lộ trình công bố
 
 **Hoàn thành tối thiểu (báo cáo NCKH):**
-1. Codec khung v2.0 có test + bảng byte/airtime (RQ5);
+1. Codec khung v2.0 **và v2.1** có test + bảng byte/airtime + kiểm chứng bố cục bit (RQ5);
 2. Kết quả phát hiện ngã LOSO trên ≥ 2 kho dữ liệu, **có một lần trên ngã thực** (RQ1);
 3. So sánh flooding vs gradient trên mô hình airtime đã hiệu chuẩn (RQ2);
 4. Ngân sách sức chứa một gateway (RQ3) và ngân sách độ trễ + năng lượng đầu-cuối (RQ4);

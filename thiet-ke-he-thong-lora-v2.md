@@ -325,9 +325,12 @@ nhà ≤ 50 m cho 80 % cuộc gọi — 3GPP TS 22.071 Annex A). ⇒ **giữ 24 
 ngữ, đỉnh polygon, chữ ký 64 byte đầy đủ, phong bì EDXL, `hop_count`/`ttl`. Những thứ
 đó thuộc **trạm** khi dựng thông điệp CAP đầy đủ.
 
-**Trạng thái:** codec `packets_lora.py` hiện **đóng băng ở v2.0** (36/36 test xanh).
-Việc chuyển sang v2.1 là **hạng mục WP6 mở rộng** với cổng riêng (cập nhật codec +
-test + golden vector), **không** làm giữa chừng để tránh phá vỡ bộ test đang xanh.
+**Trạng thái: ĐÃ CÀI (2026-10-01), tương thích ngược.** Codec `packets_lora.py` hỗ trợ
+cả hai: khung không truyền `cap` vẫn là **v2.0** (version = 2, hai byte cuối = 0) và
+giữ nguyên mọi hành vi cũ; khung truyền `cap` tự động thành **v2.1** (version = 3).
+Version nằm trong vùng HMAC nên hai version không thể tráo cho nhau. `CapFields.pack()`
+đã được kiểm bằng bố cục bit tuyệt đối (`0xA45D` cho net_id 10, severity 2, urgency 1,
+certainty 3, accuracy 5) và `test_packets_lora.py` nay có **43/43 test xanh**.
 
 **Ánh xạ đích khi lên trạm:** CAP v1.2 (OASIS Standard 01-07-2010; CAP 1.1 = ITU-T
 X.1303), bọc trong EDXL-DE v2.0 nếu vào hệ thống EDXL. Cell Broadcast/PWS/ETWS chỉ là

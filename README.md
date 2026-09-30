@@ -34,8 +34,10 @@ tiếp có kiểm soát về trạm cứu hộ.
 | 7 | [nghien-cuu-beacon-suc-chua-2026-10-01.md](nghien-cuu-beacon-suc-chua-2026-10-01.md) | Phụ lục beacon & sức chứa: chu kỳ quảng bá thật (Meshtastic 3 h, MeshCore 12 h), Trickle RFC 6206, bản Bor đã sửa, hiệu chuẩn LoRaWANSim, đo năng lượng relay |
 | 8 | [nghien-cuu-link-ca-nhan-ble-2026-10-01.md](nghien-cuu-link-ca-nhan-ble-2026-10-01.md) | Phụ lục link cá nhân BLE: connection interval AOSP, ràng buộc chạy nền định lượng, số đo độ trễ, khuyến nghị PHY 2M |
 | 9 | [nghien-cuu-chuan-khan-cap-2026-10-01.md](nghien-cuu-chuan-khan-cap-2026-10-01.md) | Phụ lục chuẩn khẩn cấp: CAP v1.2, trường tối thiểu, 3GPP TS 23.032 xác nhận 24 bit/trục, khuyến nghị khung v2.1 |
-| 10 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
-| 11 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
+| 10 | [nghien-cuu-du-lieu-nga-2026-10-01.md](nghien-cuu-du-lieu-nga-2026-10-01.md) | Phụ lục dữ liệu phát hiện ngã: DOI đúng của 9 kho, giấy phép, tầm đo ±2g vs ±16g, LOSO, số liệu ngã thực |
+| 11 | [nghien-cuu-phap-ly-vn-2026-10-01.md](nghien-cuu-phap-ly-vn-2026-10-01.md) | Phụ lục pháp lý VN: hai băng có điều kiện giống hệt, không QCVN cho 433, Luật Viễn thông 19.5, **Thông tư 14/2025/TT-BKHCN**, số liệu bão lũ đã mở toàn văn |
+| 12 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
+| 13 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
 
 ### Tài liệu lịch sử (hướng BLE đã loại)
 
@@ -55,7 +57,7 @@ tiếp có kiểm soát về trạm cứu hộ.
 | [rescuemesh/test_lora.py](rescuemesh/test_lora.py) | Kiểm thử tính chất, ghìm hồi quy giá trị đã biết, đối chiếu công thức độc lập | — |
 | [rescuemesh/node_power.py](rescuemesh/node_power.py) | Ngân sách năng lượng nút: dòng từng khối, tự xả pin, duty cycle, tuổi thọ, **chi phí mỗi SOS giao được** | 19/19 test xanh |
 | [rescuemesh/test_node_power.py](rescuemesh/test_node_power.py) | Kiểm thử kế toán năng lượng và các bất biến | — |
-| [rescuemesh/packets_lora.py](rescuemesh/packets_lora.py) | Codec **khung v2.0**: SOS 36 B, HEARTBEAT 14 B, BEACON 18 B, ACK 12 B; HMAC cắt ngắn; token ACK 24 bit; bảng airtime và va chạm token | 36/36 test xanh |
+| [rescuemesh/packets_lora.py](rescuemesh/packets_lora.py) | Codec khung **v2.0** (SOS 36 B, HEARTBEAT 14 B, BEACON 18 B, ACK 12 B) **và v2.1 tương thích ngược** (2 byte cuối mang trường ánh xạ CAP + lớp độ chính xác vị trí, version = 3); HMAC cắt ngắn; token ACK 24 bit | 43/43 test xanh |
 | [rescuemesh/test_packets_lora.py](rescuemesh/test_packets_lora.py) | Round-trip, tamper, biên, fuzz, Monte Carlo va chạm token 16/24 bit | — |
 | [rescuemesh/sim_lora.py](rescuemesh/sim_lora.py) | Simulator mesh LoRa: thời gian liên tục, airtime, collision, capture, duty cycle, 5 thuật toán, cold/warm start, courier, **3 chế độ mặt phẳng điều khiển**, **3 chính sách nghe**, **mô hình link cá nhân** | 41/41 test xanh |
 | [rescuemesh/test_sim_lora.py](rescuemesh/test_sim_lora.py) | Kiểm soát âm bắt buộc, tái lập, kế toán airtime, và test cho các tính năng v2.1 | — |
@@ -78,7 +80,7 @@ cd rescuemesh
 
 python3 test_lora.py            # 32/32
 python3 test_node_power.py      # 19/19
-python3 test_packets_lora.py    # 36/36
+python3 test_packets_lora.py    # 43/43 (gồm khung v2.1 ánh xạ CAP)
 python3 test_sim_lora.py        # 41/41 (gồm 3 chế độ điều khiển, 3 chính sách nghe, link cá nhân)
 python3 test_packets.py         # 15/15 (codec BLE lịch sử)
 
@@ -126,6 +128,22 @@ python3 analyze_sim_lora.py     # ghép cặp + Pareto + theo ô
   5. **RQ6:** mất khung trên link cá nhân **chỉ làm tăng độ trễ, không làm mất SOS**
      (nhờ nút cầu đệm bền) — giả thuyết thiết kế được mô hình xác nhận.
   Xem §7.5 của kế hoạch và [results/](results/).
+- **Tự sửa lỗi sau khảo sát (2026-10-01)** — quan trọng cho tính trung thực của tài liệu:
+  1. **5 DOI kho dữ liệu ngã trong kế hoạch trước đây SAI** (UMAFall, KFall, FARSEEING,
+     MobiFall, UniMiB-SHAR — Crossref trỏ sang bài khác) và **"SafeFall" không tồn tại**;
+     DOI đúng đã ghi ở §10.1 của kế hoạch.
+  2. **Ba số liệu ngã SAI**: "3–85 báo động giả/ngày" → thật là **22–85** và **27–84**;
+     **"Kangas 2015" không tồn tại** → **Kangas 2012**; **"FARSEEING 143 ca"** thực ra
+     thuộc **Palmerini 2020**.
+  3. **Hai băng 433,05–434,79 MHz và 920–923 MHz có điều kiện pháp lý GIỐNG HỆT**
+     (≤ 25 mW ERP; duty cycle 10 %/1 %) — không băng nào thoáng hơn; khác biệt duy nhất
+     là **chỉ 920–923 có QCVN loại hình**. Ngày hiệu lực TT 08/2021 nay chốt:
+     **28/11/2021**.
+  4. **Văn bản neo cho định hướng dự án:** **Thông tư 14/2025/TT-BKHCN** (hiệu lực
+     22-9-2025) Điều 4.1 *"ưu tiên sử dụng mạng lưới tại chỗ"*.
+  5. **Khung v2.1 đã cài** (tương thích ngược): 2 byte cuối mang `net_id` + ba trục CAP
+     + lớp độ chính xác vị trí; 3GPP **TS 23.032** xác nhận **24 bit/trục là đủ**
+     (*"uncertainty of less than 3 metres"*).
 - **Chưa có kết quả `ĐO` nào.** Mọi số hiện tại là `SUY` (từ mô hình) hoặc `SIM`
   (từ mô phỏng chưa hiệu chuẩn). Không được viết như kết quả thực nghiệm.
 - **Pháp lý và thông số đã xác minh từ bản gốc:** băng **920–923 MHz được miễn giấy
