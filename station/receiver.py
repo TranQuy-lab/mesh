@@ -29,15 +29,22 @@ def frame_id(data: bytes) -> str:
 
 
 class Station:
-    def __init__(self, key: bytes, output: Path):
+    def __init__(self, key: bytes, output: Path, verbose: bool = False):
         self.key = key
         self.output = output
+        self.verbose = verbose
         self.seen: set[str] = set()
         self.count = 0
         self.valid = 0
 
     def handle(self, data: bytes, address: str = "unknown", rssi: int | None = None):
-        if len(data) != 24 or not SosPacket.verify(data, self.key):
+        if len(data) != 24:
+            if self.verbose:
+                print(f"[CẢNH BÁO] Nhận gói từ {address} có độ dài {len(data)} B (cần 24 B): {data.hex()}", file=sys.stderr)
+            return
+        if not SosPacket.verify(data, self.key):
+            if self.verbose:
+                print(f"[CẢNH BÁO] Nhận gói 24 B từ {address} nhưng SAI HMAC (kiểm tra lại --key)! Hex: {data.hex()}", file=sys.stderr)
             return
         fid = frame_id(data)
         if fid in self.seen:
@@ -74,13 +81,20 @@ class Station:
             return 2
 
         def detection(device, advertisement):
+            if self.verbose and advertisement.manufacturer_data:
+                print(f"[BLE-RAW] {device.address} (RSSI {advertisement.rssi}): MF={list(advertisement.manufacturer_data.keys())}")
             data = advertisement.manufacturer_data.get(COMPANY_ID)
             if data is not None:
                 self.handle(bytes(data), device.address, advertisement.rssi)
 
-        scanner = BleakScanner(detection_callback=detection)
+        # Cấu hình active scan và DuplicateData=True để BlueZ không drop gói quảng bá liên tục
+        scanner = BleakScanner(
+            detection_callback=detection,
+            scanning_mode="active",
+            bluez=dict(filters=dict(DuplicateData=True, Transport="le")),
+        )
         await scanner.start()
-        print(f"Station đang nghe BLE, lưu tại {self.output}. Nhấn Ctrl-C để dừng.", flush=True)
+        print(f"Station đang nghe BLE (active scan, DuplicateData=True), lưu tại {self.output}. Nhấn Ctrl-C để dừng.", flush=True)
         try:
             while True:
                 await asyncio.sleep(1)
@@ -93,11 +107,12 @@ def main() -> int:
     p = argparse.ArgumentParser(description="RescueMesh laptop station receiver")
     p.add_argument("--key", default=None, help="khóa HMAC dạng chữ hoặc hex")
     p.add_argument("--output", default="results/station-events.jsonl")
+    p.add_argument("-v", "--verbose", action="store_true", help="in log chi tiết tất cả gói BLE nhận được")
     args = p.parse_args()
     raw = args.key.encode() if args.key is not None else DEFAULT_KEY
     if args.key and all(c in "0123456789abcdefABCDEF" for c in args.key) and len(args.key) % 2 == 0:
         raw = bytes.fromhex(args.key)
-    return asyncio.run(Station(raw, Path(args.output)).run())
+    return asyncio.run(Station(raw, Path(args.output), verbose=args.verbose).run())
 
 
 if __name__ == "__main__":

@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OASIS Emergency Management TC — Subcommittee | OASIS</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<link href="https://www.oasis-open.org/wp-content/uploads/2020/11/cropped-2-layers@3x-32x32.png" rel="icon" sizes="32x32"/>
+<link href="https://www.oasis-open.org/wp-content/uploads/2020/11/cropped-2-layers@3x-192x192.png" rel="icon" sizes="192x192"/>
+<link href="https://www.oasis-open.org/wp-content/uploads/2020/11/cropped-2-layers@3x-180x180.png" rel="apple-touch-icon"/>
+<meta content="https://www.oasis-open.org/wp-content/uploads/2020/11/cropped-2-layers@3x-270x270.png" name="msapplication-TileImage"/> <link href="https://www.oasis-open.org/wp-includes/css/dist/block-library/style.min.css?ver=5.5.3" id="wp-block-library-css" media="all" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700&amp;subset=latin-ext&amp;display=swap&amp;ver=5.5.3" id="poppins-google-font-css" media="all" rel="stylesheet"/>
+<link href="https://www.oasis-open.org/wp-includes/css/dashicons.min.css?ver=5.5.3" id="dashicons-css" media="all" rel="stylesheet"/>
+<link href="https://www.oasis-open.org/css/wordpress-20201106.css" id="oasis-2020-style-css" media="all" rel="stylesheet"/>
+<link href="/css/legacy.css" id="legacy-css" media="all" rel="stylesheet"/> <script id="wp-polyfill-js" src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=7.4.4"></script>
+<script id="wp-polyfill-js-after">
+( 'fetch' in window ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?ver=3.42.0"></scr' + 'ipt>' );( window.DOMRect ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js?ver=3.42.0"></scr' + 'ipt>' );( window.URL && window.URL.prototype && window.URLSearchParams ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-url.min.js?ver=3.6.4"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://www.oasis-open.org/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?ver=2.0.2"></scr' + 'ipt>' );
+</script>
+<script id="wp-i18n-js" src="https://www.oasis-open.org/wp-includes/js/dist/i18n.min.js?ver=bb7c3c45d012206bfcd73d6a31f84d9e"></script>
+<script id="oasis-2020-frontend-js-extra">
+var oasisData = {"ajaxUrl":"https:\/\/www.oasis-open.org\/wp-admin\/admin-ajax.php"};
+</script>
+<script id="oasis-2020-frontend-js" src="https://www.oasis-open.org/js/wordpress-20201106.js"></script>
+<script id="wp-embed-js" src="https://www.oasis-open.org/wp-includes/js/wp-embed.min.js?ver=5.5.3"></script>
+<script type="text/javascript">
+  function rotate() { }
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35180637-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script></head>
+<body class="" onload="rotate()">
+<div id="page"><div id="page-inner">
+<a id="navigation-top" name="top"></a>
+<div id="header"><div class="clear-block" id="header-inner">
+<div id="logo-title">
+<div id="logo"><a href="//www.oasis-open.org/" rel="home" title="Home"><img alt="Home" id="logo-image" src="#"/></a></div>
+</div> <!-- /#logo-title -->
+<div class="region region-header" id="header-blocks">
+<!-- wordpress-header -->
+<header class="site-header" id="masthead" style="position:relative">
+<nav class="member-navigation" id="member-navigation"><ul class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5566" id="menu-item-5566"><a href="https://www.oasis-open.org/kws">TC Workspace Login</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5567" id="menu-item-5567"><a href="https://community.oasis-open.org/CPBase__custom_login?site=a0d1N000006P19iQAC">Account Login</a></li>
+</ul></nav>
+<div class="site-header__wrap">
+<div class="site-branding">
+<h1 class="site-title">
+<a href="https://www.oasis-open.org/" rel="home">
+<span class="screen-reader-text">
+								OASIS Open							</span>
+</a>
+</h1>
+</div><!-- .site-branding -->
+<nav class="main-navigation" id="site-navigation">
+<button aria-controls="primary-menu" aria-expanded="false" class="menu-toggle">Menu</button>
+<ul class="menu" id="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5542" id="menu-item-5542"><a href="https://www.oasis-open.org/org/">About</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5746" id="menu-item-5746"><a href="https://www.oasis-open.org/org/">Organization</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5618" id="menu-item-5618"><a href="https://www.oasis-open.org/member-roster/">Members</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5627" id="menu-item-5627"><a href="https://www.oasis-open.org/board/">Board of Directors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5628" id="menu-item-5628"><a href="https://www.oasis-open.org/staff/">Staff</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5629" id="menu-item-5629"><a href="https://www.oasis-open.org/member-roster/distinguished-contributors/">Distinguished Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5630" id="menu-item-5630"><a href="https://www.oasis-open.org/open-projects-advisory-council/">Open Projects Advisory Council</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5778" id="menu-item-5778"><a href="https://www.oasis-open.org/liaisons/">Liaisons</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5780" id="menu-item-5780"><a href="https://www.oasis-open.org/policies-guidelines/">Policies &amp; Guidelines</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-project-committee menu-item-has-children menu-item-3022" id="menu-item-3022"><a href="https://www.oasis-open.org/projects-committees/">Projects &amp; Committees</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-project-committee menu-item-5860" id="menu-item-5860"><a href="https://www.oasis-open.org/projects-committees/">View All Projects &amp; Committees</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5639" id="menu-item-5639"><a href="https://www.oasis-open.org/technical-committees/">Technical Committee Program</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5638" id="menu-item-5638"><a href="https://www.oasis-open.org/open-projects/">Open Projects Program</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5747" id="menu-item-5747"><a href="https://www.oasis-open.org/tags/">Technical Advisory Groups to ISO</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5636" id="menu-item-5636"><a href="https://www.oasis-open.org/foundation-as-a-service/">Foundation-as-a-Service</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-standard menu-item-has-children menu-item-3023" id="menu-item-3023"><a href="https://www.oasis-open.org/standards/">Standards</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-standard menu-item-5657" id="menu-item-5657"><a href="https://www.oasis-open.org/standards/">View Standards &amp; Releases</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5782" id="menu-item-5782"><a href="https://www.oasis-open.org/open-standards-cup/">Open Standards Cup</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5868" id="menu-item-5868"><a href="https://www.oasis-open.org/join-3/">Get Involved</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5753" id="menu-item-5753"><a href="https://www.oasis-open.org/join-3/">Join</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5907" id="menu-item-5907"><a href="https://www.oasis-open.org/join/membership-agreement.pdf">Membership Agreement</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5652" id="menu-item-5652"><a href="https://www.oasis-open.org/news/">News &amp; Events</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5653" id="menu-item-5653"><a href="https://www.oasis-open.org/news/">Announcements</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5651" id="menu-item-5651"><a href="/events/?filter-status=publish">Events Calendar</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5648" id="menu-item-5648"><a href="https://www.oasis-open.org/open-matters-forum/">Open Matters Forum</a></li>
+</ul>
+</li>
+</ul> </nav><!-- #site-navigation -->
+<button aria-controls="site-search" class="search-toggle">Search</button>
+<div class="site-search">
+<form action="https://www.oasis-open.org/" class="site-search__form" method="get" role="search" tabindex="-1">
+<label class="screen-reader-text" for="search-input">Search OASIS Open site</label>
+<input class="site-search__input" id="search-input" name="s" placeholder="Search" required="" type="text" value=""/>
+<button aria-label="Submit search" class="site-search__submit"></button>
+</form>
+<button class="site-search__close">Cancel</button>
+</div>
+</div><!-- .site-header__wrap -->
+</header><!-- #masthead -->
+<!-- /wordpress-header --> </div> <!-- /#header-blocks -->
+</div></div> <!-- /#header-inner, /#header -->
+<div id="main"><div class="clear-block" id="main-inner">
+<div id="content"><div id="content-inner">
+<div id="content-header">
+<h1 class="title">OASIS Emergency Management TC</h1>
+</div> <!-- /#content-header -->
+<div id="content-area">
+<div class="node node-type-page" id="node-sc-home"><div class="node-inner">
+<div class="content"><div class="workgroup-buttons"><a href="/participation-instructions/"> <img alt="Join TC" class="workgroup-button" height="20" src="/committees/images/join_tc.gif" title="Join TC" width="90"/></a>
+       <a href="/apps/org/workgroup/emergency/"> <img alt="TC Page" class="workgroup-button" height="20" src="/committees/images/committee_button.gif" title="TC Page" width="90"/></a>       
+    <a href="/committees/comments/index.php?wg_abbrev=emergency"> <img alt="Send a comment to this TC" class="workgroup-button" height="20" src="/committees/images/comment_button.gif" title="Send a comment to this TC" width="90"/></a></div><p class="description"><i>Enabling information exchange to advance incident preparedness and response to emergency situations</i></p>
+<p>
+</p><!-- The Table of Contents below links to the individual sections within the page. If your TC
+doesn't use certain sections, please comment out the TOC entry as well as the actual section -->
+<!-- Start TOC -->
+<p class="tcoutputheading">Table of Contents</p>
+<ul>
+<li><a href="#announcements">Announcements</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#subcommittees">Subcommittees</a></li>
+<li><a href="#tc-liaisons">TC Liaisons</a></li>
+<li><a href="#tc-tools">TC Tools and Approved Publications</a></li>
+<li><a href="#technical">Technical Work Produced by the Committee</a></li>
+<li><a href="#expository">Expository Work Produced by the Committee</a></li>
+<li><a href="#resources">External Resources</a></li>
+<li><a href="#feedback">Mailing Lists and Comments</a></li>
+<li><a href="#other">Additional Information</a></li>
+</ul>
+<!-- End TOC -->
+<!-- Start Announcements -->
+<!-- The announcement section provides links to time-sensitive information on TC activities, such as:
+          - open ballots
+		  - calls for public review
+		  - info on upcoming TC events, e.g., TC InterOp, webinar, conference presentation made on behalf of TC
+		  - link to recent OASIS press releases on TC work (less than 3 months old)
+       It is very important to keep this section up-to-date, removing items as they become old.
+		   -->
+<p><strong><a class="tcoutputheading" id="announcements" name="announcements">Announcements</a></strong></p>
+<a class="twitter-hashtag-button" data-related="OASISopen" href="https://twitter.com/intent/tweet?button_hashtag=EDXL">Tweet #EDXL</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!-- Insert any announcements here -->
+***
+From Nov. 3, 2023 to Nov. 9, 2023 the 2023 Annual Conference of The International Association of Emergency Managers (IAEM) was held in Long Beach, California. 
+<p>The OASIS Open Emergency Management Technical Committee (EMTC) hosted a booth at IAEM. 
+</p><p><img src="https://www.oasis-open.org/apps/org/workgroup/emergency/download.php/71609/latest" width="500"/>
+</p><p>The booth was setup with banners with a large TV playing a loop of the CAP and EDXL videos.  Handouts on CAP and EDXL were available at the front desk. 
+</p><p>Jacob Westfall was the OASIS EMTC CAP-SC representative at IAEM. He split his time between two booths and had a sign on the table directing interested attendees to come to his other booth to talk to him when he wasn't available in the OASIS EMTC booth.
+</p><p>The audience for this conference, the attendees, was different than last year's -- while many of the same vendors were there. Jacob noticed there were fewer alerting devices and hands-on demos. There were more online virtual informational presentations instead. 
+</p><p>Jacob spoke about CAP and OASIS with IAEM attendees from the 
+</p><ul>
+<l>National Oceanic and Atmospheric Agency National Weather Service (NOAA, NWS)
+  <li>The Federal Emergency Management Agency Integrated Public Alert and Warning System (FEMA, IPAWS)
+  </li><li>The International Association of Red Cross and Red Crescent Societies
+  </li><li>The Public Broadcast System (PBS)
+  </li><li>The University of Massachusetts Lowell
+  </li><li>Northern Arizona University
+  </li><li>Environmental Systems Research Institute (Esri)
+  </li><li>Rave Mobile Safety (RAVE)
+  </li><li>Juvare, a company that provides software for emergency preparedness and response. 
+  </li><li>Genesys Telecommunications Laboratories Inc
+  </li><li>Boston CONSULTING company (BCG), and
+  </li><li>The Country of Nigeria.
+</li></l></ul>
+
+* * *
+<p>On October 10-12, 2023 The annual Common Alert Protocol (CAP) Implementation Workshop was held in Geneva Switzerland. The Workshop was hosted by the United States Agency for
+International Development (USAID) and AlertHub.Org CIC. The events were
+co-sponsored by the International Association of Emergency Managers (IAEM) and the OASIS
+standards organization.
+
+</p><p>The Workshop was intended solely for information sharing among experts. Accordingly, Workshop participants represented themselves rather than the organizations with which they were affiliated.
+
+</p><p>The Workshop and Training events had more than 1,000 persons registered as participants. They were from 162 countries/territories, 44 international organizations, and 116 commercial companies, academic institutions, or other non-governmental organizations. About 60 people participated in person at the Movenpick Hotel in Geneva.
+</p><p>Recordings of the 2023 CAP Workshop and Training Webinars can be accessed at the following links. Enter the given passcode when prompted, and note that sound for 10 October session starts at one minute.
+</p><p>Training Day: <a href="https://us06web.zoom.us/rec/share/QmRFkrSGL7XRBekrPsJw3GRWO6b6wRKbZ6jWFfnupfBVG2Fr5A89-_vyVM0uJs.eO5VfEDkXQNT2F86">10 October link</a> – when prompted, enter passcode: !09EF%.p
+Workshop Day One: <a href="https://us06web.zoom.us/rec/share/QmRFkrSGL7XR-BekrPsJw3GRWO6b6wRKbZ6jWFfnupfBVG2Fr5A89-_vyVM0uJs.eO5VfEDkXQNT2F86"> 11 October link</a> – when prompted, enter passcode: QSQv9TP!
+Workshop Day Two:<a href="https://us06web.zoom.us/rec/share/cEf4ZRhSwjB21Iqw6TngO815FD__fh9p1OxYP6nRsnQ2B_zESfmB9GwcEJbVx5W0.F89EbGJNa0Cf7gzT"> 12 October link</a> – when prompted, enter passcode: 08C=z=Cw
+</p><p>The following informational documents might be also of interest:
+</p><ul><li><a href="https://cap-workshop.alert-hub.org/2023/programme.pdf">The Programme</a> lists all of the Workshop agenda topics and links to the presentations;
+</li><li> The list of <a href="https://cap-workshop.alert hub.org/2023/speakers.pdf">Speakers</a> includes speaker biographies, portraits and links to the presentations;
+</li><li> The list of <a href="https://cap-workshop.alert-hub.org/2023/speakers.pdf">Participants</a> gives name and organizational affiliation of registered participants.<p>
+You can access the report itself <a href="https://cap-workshop.alert-hub.org/2023/report.pdf">here<p></p></a>
+* * *  
+The OASIS Open Emergency Management Technical Committee (EMTC) announces this update of information about the 2023 CAP Implementation Workshop:
+</p><p>
+The United States Agency for International Development <a href="https://www.usaid.gov/">(USAID)</a> and <a href="https://alert-hub.org">Alert-Hub.Org Community Interest Company</a> are hosting the 2023 Common Alerting Protocol (CAP) Implementation Workshop and Training. Both events will be in the Lindbergh Room at the Movenpick Hotel, Rte de Pré-Bois 20, 1215 Geneva, Switzerland. The <a href="https://cap-workshop.alert-hub.org/2023/training.pdf">Training</a> will be 10 October, 9:30-17:30 CEST; the Workshop will be 11 - 12 October, 9:30-17:30 CEST. Click <a href="https://cap.alert-hub.org/register.php">here</a> to register.
+</p><p>For further updates see the <a href="https://cap-workshop.alert-hub.org/2023/flyer.pdf">2023 Common Alerting Protocol Implementation Workshop Flyer</a>.
+</p><p>****
+The OASIS EMTC is pleased to announce the publication by the EU CEN-CENELEC of documents from the <a href="https://strategy-project.eu/the-strategy-h2020-project-our-outcomes-and-achievements/">STRATEGY</a> Project in which Rex Brooks participated on behalf of the EM TC. These two documents are: 
+</p><p><a href="https://www.cencenelec.eu/media/CEN-CENELEC/CWAs/RI/cwa18028.pdf">Semantic layer definition and suitability of OASIS EDXL-CAP and OASIS EDXL-SitRep standards for crisis management in critical infrastructures</a> and 
+</p><p><a href="https://www.cencenelec.eu/media/CEN-CENELEC/CWAs/RI/cwa18024.pdf">Emergency management - Incident situational reporting for critical infrastructures.</a>
+</p><p><a href="https://www.cencenelec.eu/about-cen/">CEN</a> and <a href="https://www.cencenelec.eu/about-cenelec/">CENELEC</a> are business catalysts in Europe, removing trade barriers for European Industry and consumers in order to foster the European economy in global trading, the welfare of European citizens and the environment. 
+</p><p>CEN, the European Committee for Standardization and CENELEC, the European Electrotechnical Committee for Standardization, are two of three European Standardization Organizations (together with ETSI) that have been officially recognized by the European Union and by the European Free Trade Association (EFTA) as being responsible for developing and defining voluntary standards at European level.
+</p><p>It is important to understand that these two documents, and others that we were not directly involved in, but in which we have keen interest, are specifically “Pre-Standardization” documents meant to be instrumental in identifying standards, such as our EDXL standards for eventual recommendations for official use throughout the European Union.
+</p><p>****
+The OASIS Emergency Management Committee is proud to announce the initial publication of "Mobile Alerting Practices Version 1.0," a Committee Note. It can be found <a href="https://docs.oasis-open.org/emergency/mapcn/v1.0/cn01/mapcn-v1.0-cn01.docx">here.</a></p><p>
+From the Abstract: “One method of reaching people with emergency alert messages is via their personal mobile devices, such as mobile phones and tablets. Access to these devices is via the Mobile Network to which they are currently attached. However, the need to make a large-scale distribution in a specific geographic area without crashing the control channel, and the need to reach roamers, whose devices may retain their default behavior from their home network, needs consideration by those mobile networks. This document discusses how practitioners have considered this matter.” </p><p>
+This work will be highlighted at the <a href="https://cap-workshop.alert-hub.org/2023/flyer.pdf">2023 Common Alerting Protocol (CAP) Implementation Workshop and Training 10-12 October in Geneva.</a></p><p> and at <a href="https://www.iaem.org/usconf/">The 2023 IAEM Conference and EMEX in Long Beach, California</a></p><p>
+</p><p>****
+</p><p>On 10-12 October 2023 the <a href="http://www.ifrc.org/"> International Federation of Red Cross and Red Crescent Societies (IFRC)</a> is hosting the 2023 Common Alerting Protocol (CAP) Implementation Workshop and Training. Both events will be held at the IFRC headquarters in Geneva, Switzerland. <a href="https://cap-workshop.alert-hub.org/2023/training.pdf">Training</a> will be 10 October, 9:00-17:00 CEST and the Workshop will be 11 - 12 October, 9:00-17:00 CEST.</p><p>
+This Workshop is co-sponsored by the <a href="https://www.iaem.org/">International Association of Emergency Managers (IAEM)</a>, IFRC, <a href="http://www.itu.int/">the International Telecommunication Union (ITU)</a>, the <a href="https//:www.oasis-open. org">OASIS standards organization</a> and the <a href="https://www.wmo.int/">World Meteorological Organization (WMO)</a>.</p><p>
+You can register <a href="https://cap.alert-hub.org/register.php">here.</a> If you wish to attend in person in Geneva, you will be put on a wait list because the capacity of the meeting room has been reached.</p> 
+You can access the CAP Implementation Workshop Programme<a href="https://cap-workshop.alert-hub.org/2023/programme.pdf"> here.</a><p>
+You can access the List of Speakers <a href="https://cap-workshop.alert-hub.org/2023/speakers.pdf"> here.</a></p><p>	
+You can access the 2023 CAP Implementation Workshop Information flyer <a href='chttps://cap-workshop.alert-hub.org/2023/flyer.pdf"'>here.</a></p><p> 
+All presentations can be reached through the links provided within the programme.</p><p>
+</p><p>****
+</p><p>The OASIS Open Emergency Management Technical committee (EMTC) is pleased to announce that:</p><p>
+Mark and Thomas Wood attended the GSMA Mobile World Congress (MWC) 2023 in Barcelona, Spain Feb 27-March 2 as members of the OASIS Emergency Management Technical Committee (EMTC) Common Alerting Protocol Subcommittee (CAP SC).  Over 80,000 persons attended over four days.  There were eight halls of exhibits with about 100 booths per hall.  The International Telecommunication Union (ITU), a big proponent of CAP, initially recommended attendance at the MWC.  CAP was announced as the underlying alerting standard by the UN Early Warnings for All <a href="https://www.undrr.org/early-warning?_gl=1*1nbkcc*_ga*MTU5NTY5NTM3OC4xNjczMTk3OTg3*_ga_T3RWEE6Z0J*MTY3NTEzMTI0Ni4xNS4wLjE2NzUxMzEyNDYuMC4wLjA.">(EW4A)</a> initiative.  The ITU has responsibility for Pillar 3 in the EW4A Initiative.  They presented their role in working with their members consisting of many communication regulators and mobile operators to understand the value of cell broadcast for mobile alerting.  They spoke both about CAP and the work of the Subcommittee regarding cell broadcast.  
+</p><p>This work is the development of a Committee Note documenting Mobile Alerting Practices (MAP) used throughout the world.  This note will guide new implementers of cell broadcast technology by providing awareness of guidance and practice from neighboring jurisdictions.  The goal is to raise awareness and understanding so that good choices can be made by the stakeholders.
+</p><p>The MWC served as an excellent venue to meet with the ITU presenters, Regulatory Advisors, Mobile Operators, and other stakeholders for a successful EW4A.  Interested parties were shown copies of the current MAP draft with plans for follow up and an invitation to participate in the OASIS work.  
+</p><p>****
+</p><p>On 7 November 2022 at Sharm el-Sheikh, Egypt the 27th United Nations Climate Change conference or Conference of the Parties of The United Nations Framework Convention on Climate Change (UNFCCC), more commonly referred to as <a href="https://cop27.eg/#/">COP27</a>, the <a href="https://library.wmo.int/index.php?lvl=notice_display&amp;id=22154#.Y9hvnXbMJD">Executive Action Plan</a> for the <a href="https://www.preventionweb.net/news/early-warnings-all-action-plan-unveiled-cop27">Early Warnings for All Initiative</a> was unveiled. 
+</p><p>Elysa, Chair of the EMTC, along with Jacob Westfall, chair of the CAP Subcommittee (SC), Mark Wood, Tom Wood of the CAP SC and Mike Gerber of the NWS provided a full day pre-conference session entitled “Crash Course in Mobile Alerting.”  The audience maintained keen interest and asked many questions to better understand the components of mobile alerting.  Mark, Tom and Jacob also staffed the OASIS EMTC booth during the Expo. </p><p>
+</p><p> The Emergency Warnings For All work will be done with the United Nations Office of Disaster Risk Reduction (UNDRR) and is budgeted for initial new targeted investments between 2023 and 2027 of US$ 3.1 billion – a sum which would be dwarfed by the benefits. This is a small fraction (about 6 percent) of the requested US$ 50 billion in adaptation financing. It would cover the four pillars for success:
+</p><ul></ul>
+</li><li></li> observations and forecasting
+  <li></li> preparedness and response
+  <li></li> communication of early warnings
+  <li></li> disaster risk knowledge<p>
+
+CAP, the first of the Emergency Data Exchange Language  (EDXL) set of Emergency IT messaging standards and Specifications and a vital part of this initiative brings to this initiative a global coverage of 83% of the world population to the extent their country’s alert and warning systems are operational. The EMTC is humbly proud of this accomplishment.</p><p>
+</p><p><img height="340" src="https://www.oasis-open.org/committees/download.php/70713/Cap%20World%20Coverage-02-01-2023.jpg" width="585"/></p><p>
+</p><p>****
+EMTC was represented at <a href="https://www.iaem.org/usconf/">IAEM’s</a> 2022 Annual Conference and Exposition Nov. 11-17, 2022 in Savannah, Georgia in an in-person event. This year’s IAEM Conference Theme is “Emergency Management Unmuted” The EMTC will put its spotlight on the Emergency Management Framework Open Repository and the OASIS Open Europe Foundation (OOEF) collaboration with the EMTC's participation on the <a about="" href="”" https:="" strategy-project.eu=""></a>STRATEGY EU" Project.
+</p><p>
+From 19 October - 21 October 2022 in Amsterdam, Netherlands, the <a href="https://cap-workshop.alert-hub.org/2022/report.pdf">2022 CAP Implementation Workshop and Training</a> was held as an in-person event for the first time since the advent of the Covid-19 Pandemic.</p><p>
+</p><p>The OASIS Emergency Management Technical Committee was represented by Mark Wood and Thomas Wood in the Sept. 21, 2022 Training Day presentations they gave on the work of the EM CAP Subcommittee to create a new Committee Note on Mobile Alerting Practices. Elysa Jones attended remotely, and with Mark Wood gave an update on the ongoing work of the EMTC.
+</p><p>
+The following documents may be also of interest:
+</p><p>The <a href="https://cap-workshop.alert-hub.org/2022/programme.pdf">Programme</a> lists all of the Workshop agenda topics and links to the presentations;
+</p><p> The list of <a href="https://cap-workshop.alert-hub.org/2022/speakers.pdf">Speakers</a> includes speaker biographies, portraits and links to the presentations;
+</p><p>The list of <a href="https://cap-workshop.alert-hub.org/2022/speakers.pdf">Participants</a> gives name and organizational affiliation of each participant.
+</p><p>Our extensive work was largely well received.</p><p> 
+The EMTC also had a Training Day focusing on the EM CAP Subcommittee’s current work developing a Committee Note for Mobile Alerting Practices. 
+</p><p>
+EMTC Chairperson Elysa gave a brief report and an introduction for Mark Wood, the principal author and editor for this very important work. He was on hand to facilitate the Training. Mr. Wood resides in the UK, has personal experience with the issues that the Committee Note will address, while the EM-CAP SC has contributors associated with Canada’s Alerting authorities, as well as DHS-FEMA Integrated Public Alert and Warning System (IPAWS) in the US. EMTC Chairperson Elysa has personal experience working with smaller countries, such as Mauritius in the Indian Ocean, for whom cell broadcast for Mobile Alerting was chosen for their primary alerting service. 
+</p><p>A Zoom Webinar was also offered by the World Meteorological Organization (WMO) Conference Services for those who could not participate in person. Both events were hosted by Alert-Hub.Org CIC and Everbridge. They were co-sponsored by the International Association of Emergency Managers (IAEM), the International Federation of Red Cross and Red Crescent Societies (IFRC), the International Telecommunication Union (ITU), the OASIS standards organization, and WMO.</p><p>
+The EMTC is also pleased to announce that The World Health Organization (WHO) Member States just agreed to develop a legally binding Pandemic Accord, starting with a zero draft in early 2023. According to Eliot Christian, leader of the international <a href="http://alert-hub.org">Alert Hub CIC&gt;</a>Community Interest Company, a small non-profit company with a worldwide goal: help countries assure that people in harm's way get timely and effective emergency alerts.  Today, 83% of the world’s population lives in a country with a national-level CAP alert feed, either operational (83%) or in testing (10%). CAP uptake is on track to reach 100% by 2025, in line with the global-scale   <a href="https://cap-uptake.s3.amazonaws.com/call-to-action"> “Call to Action on Emergency Alerting”</a>
+</p><p>    
+On Jan. 20, 2021 – OASIS Open, the international open source and open standards consortium announced the launch of the <a href="https://www.oasis-open.eu"> OASIS Open Europe Foundation (OOEF)</a>. The foundation provides a strong and dedicated European focus in setting standards for open collaboration and allows OASIS to help provide long-term sustainability for European Union projects.
+</p><p>In early February 2021 OOEF was invited to participate in an ongoing EU Project: <a href="https://www.strategy-project.eu">STRATEGY EU</a>. The EMTC was invited to participate actively, and accepted the opportunity. EMTC Secretary Rex Brooks has joined the effort and reports that the use of EMTC Standards and Specifications are being intensively considered as part of the set of solutions that will eventually be  recommended following the current pre-standardization process.
+</p><p>On Dec. 17, 2021 The Emergency Management Technical Committee inaugurated the <a href="https://github.com/oasis-open/emergency-emf">OASIS TC Open Repository: emergency-emf</a> This is a part of the overall Emergency Management Framework that makes up a set of resources that are available to the public, and which the EMTC has established as part of our effort to build an open source community and attract software developers to adopt and implement our standards and specifications.
+</p><p>Statement of Purpose: The OASIS Emergency Management Framework (EMF) is a reference implementation and toolkit for enabling standardized emergency information exchange using the OASIS Emergency Data Exchange Language (EDXL). With the EMF, developers and users can create, send, store, template, visualize, search, and organize emergency messages. EDXL provides standardized alerting, resource sharing, situation reporting, tracking of emergency patients and clients, hospital availability, as well as packaging and addressing of emergency messages and attachments.
+</p><p> On 13-14 October 2021 from 13:00 to 17:15 CEST (Geneva time) each day, the international 2021 CAP Implementation Workshop was conducted for the second successive year as an online Video Webinar. Elysa Jones, Chair of the OASIS Emergency Management Technical Committee (EMTC) participated and gave a presentation you can access <a href="https://www.oasis-open.org/committees/document.php?document_id=69654&amp;wg_abbrev=emergency">here</a>. She updated the latest work of the EMTC, which includes a Committee Note: <a cap-etl="" cap-etl-cn01.pdf”="" cn01="" emergency="" href="”http://docs.oasis-open." org="" v1.2=""></a>Event Terms List Version 1.0 Committee Note 02 0212 October 2021 You can access this Committee Note in the link provided.</p><p>Norm Paulsen from Environment Canada, and a member of the EMTC's EM CAP Subcommittee gave a presentation titled <a href="https://drive.google.com/file/d/1q8y1BY-WSpuBV6FtI2Nov1fefr6Rhqi7/view?usp=sharing">CAP and Wireless Public Alerting Canada</a>.</p><p>You can access the Workshop <a href="https://preparecenter.org/wp-content/uploads/2021/04/speakers.pdf"> Speakers </a> as confirmed by 21 April 2021.
+</p><p>For the provisional list of participants from the same date, see <a href="”https://preparecenter.org/wp-content/uploads/2021/04/participants.pdf”/"> Participants.</a></p><p>You can can access the Information Flyer for the 2021 CAP Implementation Workshop<a href="https://preparecenter.org/wp-content/uploads/2021/04/flyer.pdf"> here.</a></p><p>The OASIS EMTC is pleased to draw attention to the international <a href="https://cap-uptake.s3.amazonaws.com/call-to-action.html"><b> Call to Action on Emergency Alerting</b></a>This website includes brief statements by the international organizations, international NGOs, and international companies who have endorsed this effort so far. The goal is <b>To scale up efforts to ensure that all countries have the capability for effective, authoritative emergency alerting that leverages the Common Alerting Protocol (CAP) suitable for all media and all hazards.</b>
+</p><p>On July 22, 2021, Elysa Jones, Chair of the Emergency Management Technical Committee (EMTC) participated in and gave a presentation on the work of the EMTC in OASIS to the National Alliance for Public Safety GIS (NAPSG) Foundation in their virtual PrepTech Talk titled “Innovations in Resource Management &amp; Mutual Aid Technology.” The participants and presenters in this webinar discussed the latest developments in nationally available technology tools and standards that increase resource management preparedness and improve efficiencies in managing incidents. </p>
+<p></p><p>You can access the recorded session from July 22, 2021 <a href="https://www.napsgfoundation.org/resources/innovations-in-resource-management-mutual-aid-technology/">here.</a> This page of the NAPSG website allows you to listen to the entire session either on that page or from YouTube through the link included on that page. If you prefer to listen to Elysa’s EMTC presentation, you have the controls to do that in the YouTube site if you use their controls to go to the timestamp of 50.05 / 1:14:10 within the webinar recording.</p>
+<p>January 8, 2021, The OASIS Emergency Management Technical Committee’s Common Alerting Protocol Subcommittee (EMTC EM-CAP SC) hosted the first of two Special Informal Zoom Meetings for Subject Matter Experts. These meetings were arranged to gather feedback on the Event Terms List that the CAP SC has been working on since Q4 of 2016.</p>
+<p>You can access the recorded session from January 8, 2021 <a href="https://youtu.be/CLEi9oqnXpg">here</a></p>
+<p>On January 15, 2021, The EMTC’s EM-CAP SC hosted the Second Special Informal Zoom Meeting for Subject Matter Experts to gather feedback on the Event Terms List.</p>
+<p>You can access the recorded session from January 15, 2021 <a href="https://youtu.be/ATkoTT1jS1A">here</a></p>
+<p>On 13-14 October 2021 from 13:00 to 17:15 CEST (Geneva time) each day, the 2021 CAP Implementation Workshop will be conducted as an online Webinar - Call-in instructions will be sent to all registered participants.
+</p><p>You can access the <a href=" https://cap-workshop.alert-hub.org/2021/information-note.pdf"> 2021 CAP Implementation Workshop Information flyer”&gt; here.
+<p>
+</p><p>From 28 September 2020 – 30 September 2020 the international <a href="https://preparecenter.org/initiative/common-alerting-protocol-implementation-workshop-2020/"> 2020 CAP Implementation Workshop</a> was held as a virtual event. The event was conducted as a Zoom webinar. Due to the ongoing COVID-19 Pandemic, this was the first CAP Workshop to be conducted as a virtual edition of the annual event.   
+</p><p>You can access the <a href="https://preparecenter.org/resource/cap-workshop-2020-report/"> 2020 CAP Implementation Workshop Report here</a>.   
+</p><p>You can access the <a href="”https://preparecenter.org/resources/cap-workshop-2020-speakers”"> List of Speakers here</a>
+</p><p>You can access the <a cap-workshop-2020-participants”="" href="”" https:="" preparecenter.org="" resources=""> List of Participants here.</a>
+</p><p>It is worth noting this event had more than 800 registered attendees.
+</p><p>All presentations can be reached through the links provided within the programme.
+</p><p>
+</p><p>
+</p><p>Beginning with the increased spread of the COVID-19 pandemic in the U.S. and the world, in the month of March 2020 and continuing through April and likely to stretch into the following months, the Emergency Management Technical Committee (EMTC) has increased its efforts to ensure awareness of the benefits of our Emergency Data Exchange Language (EDXL) standards and specifications for stakeholders from various agencies such as
+</p><ul>
+<li>The Department of Homeland Security (DHS) including several branches/divisions of the Federal Emergency Management Agency (FEMA)</li>
+<li>The Department of Health and Human Services (HHS) Office of the Assistant Secretary for Preparedness and Response (ASPR), Centers for Disease Control and Prevention (CDC), Office of the Assistant Secretary for Preparedness and Response (ASPR), Division of Emergency Operations</li>
+<li>Health Level 7 International (HL7) specifically for the Fast Healthcare Interoperability Resource (FHIR) initiative furthering awareness of the value of data interoperability through the use of our EDXL standards and specifications</li>
+<li>National Alliance for Public Safety GIS (NAPSG) Foundation</li>
+<ul><li>From NAPSG: <a href="https://www.napsgfoundation.org/wp-content/uploads/2019/07/InfoSharing_Standards_Guidance_20190702.pdf">Implementation Guidance: Information Sharing Standards for Crisis Management and Mutual Aid Technology</a></li>
+</ul>
+Specifically, we are encouraging awareness and adoption of
+<ul>
+<li>OASIS EDXL Tracking of Emergency Patients: <a href="https://www.oasis-open.org/standards#edxl-tep-02">https://www.oasis-open.org/standards#edxl-tep-02</a></li>
+<li>Bi-directional transformation specification: <a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=439">http://www.hl7.org/implement/standards/product_brief.cfm?product_id=439</a></li>
+<li>OASIS EDXL Hospital Availability Exchange: <a href="https://www.oasis-open.org/standards#edxl-have-20">https://www.oasis-open.org/standards#edxl-have-20</a></li>
+<li>Cross paradigm implementation guide: <a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=489">http://www.hl7.org/implement/standards/product_brief.cfm?product_id=489</a></li>
+</ul>
+<p>From November 15-20, 2019, the International Association of Emergency Managers (IAEM) Annual Conference was conducted in Savannah, Georgia.  The OASIS Emergency Management Technical Committee (EMTC) provided a full day pre-conference training session on the EDXL suite of standards.  While the EMTC has presented EDXL at sessions during the IAEM annual conference, this is the first time there has been pre-conference training event dedicated to the topic of data interoperability.  This provided emergency managers an opportunity to learn about the standards that are available to exchange data for alert and warning, patient tracking, hospital availability, situational awareness, resource management and message distribution.  The OASIS Emergency Member Section Steering Committee sponsored the event.  Jacob Westfall and I presented at the full day session on Saturday Nov 16.  It was attended by 10 persons from three countries (USA, Barbados, Saudi Arabia).  Some were longtime emergency managers, one emergency management student and some first time IAEM attendees.  All attendees stayed for the full day and stated they got out of the session what they had hoped for.  We provided a full overview of the EDXL suite of standards, guiding principles, toolkit with details on the Common Alerting Protocol (CAP), Hospital Availability Exchange (HAVE) and Tracking Emergency Patients) TEP specifications and their joint release with other international standards bodies (ITU and HL7).  Lunch was provided as well as a morning and afternoon break.
+</p><p><img src="https://www.oasis-open.org/committees/download.php/66636/latest" width="300"/>
+</p><p>In addition to the preconference workshop on EDXL, OASIS provided exhibit space during the conference.  This was a good opportunity to meet with emergency managers, product and service providers as well as government entities interested in interoperable data standards.
+</p><p></p><p>From 28 September – 30 September 2020, the international <a 09="" 2020="" cap-workshop-2020-programme-22.pdf"="" href="https://preparecenter.org/initiative/common-alerting-protocol-implementation/common-alerting-protocol-workshop-2020”&gt; CAP Implementation Workshop 2020 was held as a virtual event.&lt;/a&gt; It was conducted as a video call-in session over Zoom. Due to the ongoing COVID-19 Pandemic, this was the first CAP Workshop to be conducted as a virtual edition of the annual event. You can access the &lt;a href=" https:="" preparecenter.org="" uploads="" wp-content=""> 2020 CAP Implementation Workshop Programme here</a>. You can access the <a href="”https://preparecenter.org/resources/cap-workshop-2020-speakers”"> List of Speakers here</a> You can access the &lt; <a cap-workshop-2020-participants”="" href="”" https:="" preparecenter.org="" resources=""> List of Participants here. </a> It is worth noting that the virtual event allowed as many as 400 visitors to access the presentations.&gt;
+</p><p>We will post links to the presentations and any further information here. 
+</p><p>From 16 October - 18 October 2019, the international <a href="https://www.preparecenter.org/activities/common-alerting-protocol-workshop-2019">CAP Workshop 2019</a> was held in Mexico City, Mexico. You can access the <a href="https://www.preparecenter.org/resources/cap-workshop-2019-programme">agenda and presentations here</a>. You can access the <a href="https://www.preparecenter.org/resources/cap-workshop-2019-report">Final Report here.</a> The Report provides brief notes concerning each of the 22 presentations given at the Workshop, and the <a href="https://www.preparecenter.org/resources/cap-workshop-2019-speakers">List of Speakers</a> also links to each of their presentations. The <a href="https://www.preparecenter.org/resources/cap-workshop-2019-participants">List of Participants</a> provides names and affiliation of the 81 participants from 16 countries.</p></ul></a>
+</p><p>On 28 January 2019 the OASIS Committee Specification <a href="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/edxl-have-v2.0-cs01.zip">Emergency Data Exchange Language (EDXL) Hospital AVailability Exchange (HAVE) Version 2.0  Committee Specification 01   Proposed HL7® Informative Document  13 December 2018</a> was published. In addition, TC Administrator Chet Ensign posted the document on <a href="https://www.linkedin.com/feed/update/urn:li:activity:6496033949662400514/"><i>Linked-In</i></a> for discussion. This is noteworthy because it is the first Joint Release of OASIS Open and Health Level Seven International.
+</p><p>From 31 October - 1 November 2018, the international <a href="https://www.preparecenter.org/resources/cap-workshop-2018">CAP Workshop 2018</a> was held in Hong Kong, China. You can access the <a href="https://preparecenter.org/resources/cap-workshop-2018-programme">agenda and presentations here</a>. You can access the <a href="https://preparecenter.org/resources/cap-workshop-2018-report">Final Report here.</a>
+</p><p>On 3 April 2018 the HL7 paper <a href="https://www.oasis-open.org/apps/org/workgroup/emergency-adopt/download.php/64436/Healthcare%20IT%20Interoperability%20Strategy%202018-03-12.pdf">Healthcare IT Computable-Interoperability Strategy</a><i>“Methodology to manage data-quality risk by standardizing data” In accordance with 21st Century Cures Act, TEFCA and USCDI</i> was posted to the Documents repository of the EM Adoption TC.
+</p><p> On 22 March 2018 <a href="https://www.oasis-open.org/apps/org/workgroup/emergency-adopt/download.php/62745/Best+Practices+for+the+Dissemination+of+Weather+Warnings+to+the+Public.pdf">Best Practices for the Dissemination of Weather Warnings to the Public</a> <i>A Best Practice Statement of the American Meteorological Society(Adopted by the AMS Council 7 January 2018)</i> was posted to the Documents repository of the EM Adoption TC.
+</p><p>From Dec 2017-April 2018 implementers of the Common Alerting Protocol (CAP) are invited to answer questions regarding the creation of an Event Terms List.  For details, see <a href="https://www.oasis-open.org/apps/org/workgroup/emergency/email/archives/201712/msg00001.html"> Call for Comments</a> which was extended through April.
+</p><p> Late February 2018 marked the signing of the 2017 <a href="https://www.oasis-open.org/apps/org/workgroup/emergency/download.php/62599/HL7%20OASIS%20SOU%202017_signedLL.pdf">Statement of Understanding (SOU) </a> between OASIS and Health Level Seven (HL7).
+</p><p>On Jan 30 2018, HL7 Patient Administration Working Group approved joint release of the Hospital Availability Exchange (HAVE) standard which includes an appendix mapping to the HL7 data items.  A full announcement from HL7 and OASIS for the joint release is anticipated 1Q2018. 
+</p><p>On September 22, 2017 the first international <a href="https://www.oasis-open.org/events/edxl-workshop2017#overlay-context=">EDXL Workshop</a> was held in Rome. You can access the <a href="https://www.oasis-open.org/events/edxl-2017">agenda and presentations here</a>. You can access the <a href="https://www.oasis-open.org/events/edxl-2017">Final Report here.</a>
+</p><p>On September 20-21, 2017 the international <a href="https://www.preparecenter.org/sites/default/files/cap-workshop-2017_6.pdf">CAP Workshop 2017</a> was held in Rome. You can access the <a href="https://preparecenter.org/resources/cap-workshop-2018-programme">programme and presentations here</a>. You can access the <a href="https://preparecenter.org/resources/cap-workshop-2018-report">Final Report here</a>.
+</p><p>The video "Overview of EDXL Emergency Standards" is now available in both English and Italian. You can access the English version at <a href="https://www.youtube.com/watch?v=7eoV5XwZVO8">https://www.youtube.com/watch?v=7eoV5XwZVO8</a> and the Italian version at <a href="https://vimeo.com/234306686?utm_source=email&amp;utm_medium=vimeo-cliptranscode-201504&amp;utm_campaign=29220">https://vimeo.com/234306686?utm_source=email&amp;utm_medium=vimeo-cliptranscode-201504&amp;utm_campaign=29220</a>.</p>
+<p>Mert Gencturk from SRDC Corp, a spin-off from the Middle East Technical University, Software Research and Development Center (METU-SRDC) discusses his work on the C2-SENSE Project, a project to a develop a profile-based Emergency Interoperability Framework that exposes the functionalities of C2 Systems, Sensor Systems and other emergency/crisis management systems. The framework uses the OASIS CAP, EDXL SitRep, EDXL RM, EDXL HAVE and EDXL TEP standards. C2-SENSE is a joint project of 8 partners from France (SAFRAN), Austria (AIT), Italy (LUTECH, REGOLA, Innova Puglia, Regione Puglia), Turkey (SRDC) and Poland (PIAP). Watch the full presentation here: <a href="https://youtu.be/lDwlAYsshN0">https://youtu.be/lDwlAYsshN0</a>:  17 July 2017</p>
+<p><a href="https://www.oasis-open.org/news/pr/hl7-and-oasis-announce-joint-publication-of-implementation-guide-to-advance-emergency-and-di">HL7 and OASIS Announce Joint Publication of Implementation Guide to Advance Emergency and Disaster Response</a>; 20 Sept 2016 This Committee Note (OASIS) and Implementation Guide (HL7) is a bidirectional transformation specification between the OASIS message for Tracking of Emergency Patients and the HL7 message for the admit/discharge/transfer of patients in hospital administration systems.</p>
+<p>On August 23-24, 2016 the international <a cap-workshop-2016-presentations"="" content="" href="&lt;a href=" https:="" preparecenter.org="">CAP Workshop 2016</a> was held in Bangkok, Thailand. You can access the <a href="https://preparecenter.org/content/cap-workshop-2016-presentations"> presenters and presentations here</a>. You can access the <a href="https://preparecenter.org/resources/cap-workshop-2016-report">Final Report here</a>.
+</p><p>On September 23-24, 2015 the international <a href="https://www.preparecenter.org/sites/default/files/cap-workshop-2015-flyer_0.pdf">CAP Workshop</a> was held in Rome. You can access the <a href="http://preparecenter.org/content/cap-workshop-2015-presentations">presentations here</a>. You can access the <a href="http://preparecenter.org/resources/cap-workshop-2015-report">Final Report here</a>.
+</p><p>On 11 August 2015, the Emergency Management TC approved <a href="https://www.oasis-open.org/news/announcements/60-day-review-for-edxl-situation-reporting-sitrep-v1-0-ends-february-18">Emergency Data Exchange Language Situation Reporting (EDXL-SitRep)v1.0</a> as a Committee Specification Draft/Public Review Draft and arranged for the 60-Day public review.</p>
+<p>On 15 October 2015 National Association of State Emergency Medical Service Officials <a href="http://www.nasemso.org/">(NASEMSO)</a> signed a resolution calling for <a href="http://www.nasemso.org/Advocacy/PositionsResolutions/documents/NASEMSO-Resolution-2015-03.pdf">Completion and Implementation of a Data Standard for Tracking of Emergency Patients (TEP)</a></p>
+<p>On 04 August 2015, the Emergency Management TC approved <a href="https://www.oasis-open.org/news/announcements/30-day-public-review-for-emergency-data-exchange-language-edxl-tracking-of-emerge">Emergency Data Exchange Language Tracking of Emergency Patients (EDXL-TEP) 1.1</a> as a Committee Specification Draft/Public Review Draft and arranged for the 30-Day Public Review.</p>
+<p>On 13 January 2015, the Emergency Management TC approved <a href="https://www.oasis-open.org/news/announcements/60-day-public-review-for-emergency-data-exchange-language-edxl-hospital-availabil">Emergency Data Exchange Language Hospital AValability Exchange (EDXL-HAVE) 2.0</a> as a Committee Specification Draft/Public Review Draft and arranged for the 60-Day Public Review.</p>
+<p>Visit the <a href="http://www.oasis-emergency.org/activities">Emergency Management Technical Committee (EM-TC) Activities</a> page for more current topics.</p><p>
+<!-- End Announcements -->
+</p><hr/>
+<!-- Start Overview -->
+<!-- Brief description (50-100 words) of the TC's mission and goals. Tone should 
+  be introductory in nature, suitable for an editor or novice seeking to quickly 
+  understand the basic purpose of this effort. Conclude with: For more information 
+  see the TC Charter [link] and FAQ [link].  -->
+<p><strong><a class="tcoutputheading" id="overview" name="overview">Overview</a></strong></p>
+<!-- <p>Insert overview information here</p> -->
+<p>The EM-TC creates vendor-neutral and platform agnostic standards for organizations and agencies to more easily exchange emergency information. The EM-TC welcomes participation from members of the emergency management and response community, developers and implementers, and members of the public concerned with disaster management and response.</p>
+<p>The Emergency Data Exchange Language (EDXL) is a broad initiative to create an integrated framework for a wide range of emergency data exchange standards to support operations, logistics, planning and finance.</p>
+<p>Overview links below are provided for completed OASIS standards only. Non-linked items are works in progress. For most recent versions of all technical work see <a href="#technical">Technical Work Produced by the Committee</a></p>
+<p>EM-TC standard efforts include:
+  </p><ul>
+<li><a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.pdf">EDXL Common Alerting Protocol (EDXL-CAP)</a></li>
+<li><a href="https://docs.oasis-open.org/emergency/edxl-de/v1.0/EDXL-DE_Spec_v1.0.pdf">EDXL Distribution Element (EDXL-DE)</a></li>
+<li><a href="https://docs.oasis-open.org/emergency/edxl-have/os/emergency_edxl_have-1.0-spec-os.pdf">EDXL Hospital AVailability Exchange (EDXL-HAVE)</a></li>
+<li><a href="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-OS.pdf">EDXL Resource Messaging (EDXL-RM)</a></li>
+<li>EDXL Reference Information Model (EDXL-RIM)</li>
+<li>EDXL Situation Reporting (EDXL-SitRep)</li>
+<li>EDXL Tracking Emergency Patients (EDXL-TEP)</li>
+</ul>
+<p>For more information, see the <a href="https://www.oasis-open.org/committees/emergency/charter.php">TC Charter</a> and <a href="https://www.oasis-open.org/committees/emergency/faq.php">FAQ</a></p>
+<!-- End Overview -->
+<hr/>
+<!-- Start Subcommittees -->
+<!-- If the TC has any subcommittees, they should be listed here:
+       - Complete SC name including acronym, linked to Subcommittee's public page
+       - Brief statement of purpose, if needed-->
+<p><strong><a class="tcoutputheading" id="subcommittees" name="subcommittees">Subcommittees</a></strong></p>
+<!-- <p>Insert subcommittee info here</p> -->
+<ul>
+<!--<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-adoption">EM Adoption SC</a><br>
+  Supports the adoption of standards to enable information exchange which advance incident preparedness and response to emergency situations.</li> -->
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-cap-profiles">EM CAP Profiles SC</a><br/>
+  Designs, develops, and releases XML-based standards and specifications as CAP Profiles based on the CAP Standard.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-cap">EM CAP SC</a><br/>
+  Provides ongoing maintenance of the CAP standard and related work.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-gis">EM GIS SC</a><br/>
+  Ensures the proper use and integration of geographic standards in the development of EDXL standards.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-have">EM HAVE SC</a><br/>
+  Researches, analyzes, recommends, and organizes currently available information on implementation challenges and comments regarding the EDXL-HAVE standard.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-if">EM Infrastructure Framework SC</a><br/>
+  Produces a horizontal intellectual effort predicated on establishing a common set of EM infrastructure standards, regardless of originating industry and/or agency segment. In particular, it provides ongoing maintenance of the EDXL-DE standard and related work.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-msg">EM Messages and Notification SC</a><br/>
+  Addresses procedures and formats for exchanging new and updated information related to functions including public safety, emergency response and homeland security. In particular, it provides ongoing maintenance of the EDXL-RM and EDXL-SitRep standards and related work.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-rim">EM Reference Information Model SC</a><br/>
+  Creates the EDXL-RIM specification to provide a high-level, abstract, information model for the family of EDXL specifications. Provides guidance on extensions and constraints (profiles) and maintains Common Types, EDXL-CIQ and EDXL-GSF.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-tep">EM TEP SC</a><br/>
+  Develops the OASIS EDXL-Tracking of Emergency Patients (EDXL-TEP) messaging standard, which assists emergency responders, coordinators and management in the exchange of emergency patient and EMS tracking information, thus increasing the effectiveness of emergency medical management, patient tracking and care, and family notification.</li>
+<li><a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-tec">EM TEC SC</a><br/>
+  Develops the OASIS EDXL-Tracking of Emergency Clients (EDXL-TEC) messaging standard to facilitate the tracking of evacuees and other displaced persons during emergencies, disasters, and routine day-to-day incidents, the transport of such emergency clients to shelters, and the repatriation and reunification of emergency clients with their families.</li>
+<li>EM Adoption SC<br/>
+  The former EM Adoption SC has migrated to the <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=emergency-adopt">OASIS Emergency Management Adoption TC</a></li>
+</ul>
+<!-- End Subcommittees -->
+<hr/>
+<!-- Start TC Liaisons -->
+<p><strong><a class="tcoutputheading" id="tc-liaisons" name="tc-liaisons">TC Liaisons</a></strong></p>
+<p>On January 1, 2015 <a href="http://www.hl7.org/">Health Level Seven International</a> and <a href="https://www.oasis-open.org/">OASIS</a> signed a <!--<a href="https://www.oasis-open.org/apps/org/workgroup/emergency/download.php/57091/latest/HL7%20OASIS%20SOU%20JAN%202015%20FINAL_signedLL.pdf">--><a href="https://www.oasis-open.org/committees/download.php/57091/latest/HL7%20OASIS%20SOU%20JAN%202015%20FINAL_signedLL.pdf"> Statement of Understanding</a> formalizing a liaison agreement between the two organizations.</p>
+<!-- End TC Liaisons -->
+<hr/>
+<!-- ******* Start TC Tools and Approved Publications ******* -->
+<p><strong><a class="tcoutputheading" id="tc-tools" name="tc-tools">TC Tools and Approved Publications</a></strong></p>
+<!-- <p>Links for tools/publications have not yet been activated.</p> -->
+<ul>
+<li><a href="https://github.com/oasis-open/emergency-emf">emergency emf Open Repo</a></li>
+<li><a href="https://tools.oasis-open.org/issues/browse/EMERGENCY">Issues Management (JIRA)</a></li>
+<li><a href="https://docs.oasis-open.org/emergency/">OASIS Library for Approved Publications</a></li>
+<li><a href="https://wiki.oasis-open.org/emergency/">TC Wiki</a></li>
+<li><a href="https://tools.oasis-open.org/version-control/browse/wsvn/emergency/">Version Control (SVN)</a></li>
+<!-- <li><a href="http://webconf.soaphub.org/conf/room/OASIS-ID-Cloud">WebConf Meeting Management</a></li> -->
+</ul>
+<!-- End TC Tools and Approved Publications -->
+<hr/>
+<!-- Start Technical Work Products -->
+<!-- Need not be a comprehensive list, but should include links to the most current and relevant deliverables produced and approved by the TC, such as:
+       - approved OASIS standards
+	   - specifications under development (the most recent version)
+	   - schemas
+	   - requirements
+	   - profiles
+	   - issues lists
+	   OASIS Standards and specifications should be listed primarily by highest order of approval, then by most recent version. Each listing should cite:
+	   - Complete name including acronym (if any) and version #,  linked to document
+	   - Status (e.g., OASIS Standard, Committee Draft, Committee Spec, work-in-progress)
+	   - Date approved
+	   - Brief description if needed
+       If the Committee uses an OASIS-hosted wiki, a link to it should also be included here.-->
+<p><strong><a class="tcoutputheading" id="technical" name="technical">Technical Work Produced by the Committee </a></strong></p>
+<!-- <p>Insert work products here</p> -->
+<!--[if IE]>
+    <ul><div><font size="-1">
+      <u>IE users note</u>: your browser may block active content such as in the following drop down lists.<br>
+      A search for "How to allow blocked content in IE?" will point you to possible remedies.
+    </font></div></ul>
+  <![endif]-->
+<b>Developers please note</b>: Internet searches may lead to earlier versions of schemas, which may cause confusion, if used as implementation directive.<br/>
+<i>To ensure that you get the versions that correspond to the published standards, please retrieve them only from the following selection</i>.
+<p>
+</p></ul><form action="#">
+<ul>
+<li><b>Common Alerting Protocol 1.2</b> (<a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.pdf">EDXL-CAP v1.2</a>,   <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.xsd">Schema</a>)</li>
+<b>Warning</b>:
+<p><i>The current posting for this standard contains the wrong .bmp for the DOM and hence does not reflect one of the submitted changes. The good news is that the normative portion of the document is okay (except bold is missing from MIME type, which would indicate the other change that MIME type is required). The TC is working with the TC Administrator to correct the situation</i>.
+</p>
+  - <u>EDXL-CAP 1.2 Profiles</u>:
+  <ul>
+<li>USA Integrated Public Alert and Warning System Profile Version 1.0 (<a href="https://docs.oasis-open.org/emergency/cap/v1.2/ipaws-profile/v1.0/cap-v1.2-ipaws-profile-v1.0.pdf">IPAWS Profile v1.0</a>)</li>
+<li>EDXL-CAP v1.2 Australia (AU) Profile Version 1.0 (<a "http:="" cs01="" docs.oasis-open.org="" edxl-cap1.2-au="" edxl-cap1.2-au-v1.0-cs01.html"="" emergency="" href="" v1.0="">CAP-AU Profile v1.0</a>)</li>
+</ul>
+<li><b>Common Alerting Protocol 1.1</b> (<a href="https://www.oasis-open.org/committees/download.php/15135/emergency-CAPv1.1-Corrected_DOM.pdf">EDXL-CAP v1.1</a>) 
+  incorporating <a href="https://docs.oasis-open.org/emergency/cap/v1.1/errata/approved/CAP-v1.1-errata.pdf">Errata</a></li>
+  - <u>EDXL-CAP 1.1 Profile(s)</u>:
+  <ul>
+<li>USA Integrated Public Alert and Warning System Profile 1.0 (<a href="https://docs.oasis-open.org/emergency/cap/v1.1/ipaws-profile/v1.0/cap-v1.1-ipaws-profile-v1.0.pdf">IPAWS Profile v1.0</a>)</li>
+</ul>
+<!-- <li><a href="https://www.oasis-open.org/committees/download.php/14759/emergency-CAPv1.1.pdf">Common Alerting Protocol (CAP) 1.1</a> OASIS Standard CAP-V1.1, October 2005. --><!-- <li>Common Alerting Protocol (<a href="https://www.oasis-open.org/committees/download.php/6334/oasis-200402-cap-core-1.0.pdf">CAP</a>) 1.0</li> --><!-- <li><a href="https://wiki.oasis-open.org/emergency">Wiki for OASIS Emergency Management TC member collaboration</a></li> -->
+<li><b>Emergency Data Exchange Language Distribution Element 2.0</b> (<a href="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/edxl-de-v2.0-cs02.pdf">EDXL-DE v2.0</a>)</li>
+  (Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+  - xsd Schemas: <select name="EDXL-DE_XSDs" onchange="javascript:window.location=this.options[this.selectedIndex].value; return true">
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/edxl-de-v2.0-wd11.xsd">edxl-de</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/CommonTypes.xsd">CommonTypes</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl-ct-v1.0-wd05.xsd">edxl-ct-v1.0-wd05.</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl-ext-v1.0.xsd">edxl-ext-v1.0</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl-gsf-base.xsd">edxl-gsf-base</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl-gsf.v1.0.xsd">edxl-gsf.v1.0</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl_xAL.xsd">edxl_xAL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl_xNL.xsd">edxl_xNL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/edxl_xPIL.xsd">edxl_xPIL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/xAL-types.xsd">xAL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/xNL-types.xsd">xNL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/xPIL-types.xsd">xPIL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/other-supporting-schema/EDXLCT_wd06/xlink-2003-12-31.xsd">xlink-2003-12-31</option>
+</select>
+<p>
+</p><li><b>Emergency Data Exchange Language Distribution Element 1.0</b> (<a href="https://docs.oasis-open.org/emergency/edxl-de/v1.0/EDXL-DE_Spec_v1.0.pdf">EDXL-DE v1.0</a>)</li>
+<p>
+</p><li><b>Emergency Data Exchange Language Hospital AVailability Exchange 2.0</b> (<a href="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/edxl-have-v2.0-cs01.pdf">EDXL-HAVE v2.0</a>)</li>
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+  - xsd Schemas: <select name="EDXL-HAVE_XSDs" onchange="javascript:window.location=this.options[this.selectedIndex].value; return true">
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/CommonTypes.xsd">CommonTypes</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/edxl-have-v2.0.xsd">edxl-have</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/edxl-gsf.v1.0.xsd">edxl-gsf.v1.0.</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/edxl-gsf-base.xsd">edxl-gsf-base</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/xAL-types.xsd">xAL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/edxl-xAL.xsd">edxl-xAL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/xNL-types.xsd">xNL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/edxl-xNL.xsd">edxl-xNL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/xPIL-types.xsd">xPIL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/ImportedSchema/edxl-xPIL.xsd">edxl-xPIL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/edxl-ct-v1.0.xsd">edxl-ct-v1.0</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/v2.0/cs01/schema/edxl-ext-v1.0.xsd">edxl-ext-v1.0</option>
+</select>
+<p>
+</p><li><b>Emergency Data Exchange Language Hospital AVailability Exchange 1.0</b> (<a href="https://docs.oasis-open.org/emergency/edxl-have/v1.0/emergency_edxl_have-1.0.pdf">EDXL-HAVE v1.0</a>)
+  incorporating Draft <a href="https://docs.oasis-open.org/emergency/edxl-have/v1.0/errata/edxl-have-v1.0-errata.pdf">Errata</a></li>
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+  - xsd Schemas: <select name="EDXL-HAVE_XSDs" onchange="javascript:window.location=this.options[this.selectedIndex].value; return true">
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/CommonTypes.xsd">CommonTypes</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/edxl-have-cs01.xsd">edxl-have</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/geo-oasis.xsd">geo-oasis</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/gml-oasis.xsd">gml-oasis</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xAL-types.xsd">xAL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xAL.xsd">xAL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xNL-types.xsd">xNL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xNL.xsd">xNL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xPIL-types.xsd">xPIL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xPIL.xsd">xPIL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xlink-2003-12-31.xsd">xlink-2003-12-31</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-have/cs01/xlinks.xsd">xlinks</option>
+</select>
+<p>
+</p><li><b>Emergency Data Exchange Language Resource Messaging 1.0</b> (<a href="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/EDXL-RM-SPEC-V1.0.pdf">EDXL-RM v1.0</a>)
+  incorporating Draft <a href="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/errata/EDXL-RM-v1.0-errata.pdf">Errata</a></li>
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the schema displayed, you may need to make another selection first, so that selecting the displayed schema occurs as a change.)
+  - xsd Schemas: <select name="EDXL-RM_XSDs" onchange="javascript:window.location=this.options[this.selectedIndex].value; return true">
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMCommitResource.xsd">EDXL-RMCommitResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMCommonTypes.xsd">EDXL-RMCommonTypes</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMOfferUnsolicitedResource.xsd">EDXL-RMOfferUnsolicitedResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMReference.xsd">EDXL-RMReference</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMReleaseResource.xsd">EDXL-RMReleaseResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMReportResourceDeploymentStatus.xsd">EDXL-RMReportResourceDeploymentStatus</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestExtendedDeploymentDuration.xsd">EDXL-RMRequestExtendedDeploymentDuration</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestInformation.xsd">EDXL-RMRequestInformation</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestQuote.xsd">EDXL-RMRequestQuote</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestResource.xsd">EDXL-RMRequestResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestResourceDeploymentStatus.xsd">EDXL-RMRequestResourceDeploymentStatus</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequestReturn.xsd">EDXL-RMRequestReturn</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMRequisitionResource.xsd">EDXL-RMRequisitionResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMResponseToRequestExtendedDeploymentDuration.xsd">EDXL-RMResponseToRequestExtendedDeploymentDurationStatus</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMResponseToRequestInformation.xsd">EDXL-RMResponseToRequestInformation</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMResponseToRequestQuote.xsd">EDXL-RMResponseToRequestQuote</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMResponseToRequestResource.xsd">EDXL-RMResponseToRequestResource</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/EDXL-RMResponseToRequestReturn.xsd">EDXL-RMResponseToRequestReturn</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/CommonTypes.xsd">CommonTypes</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/geo-oasis.xsd">geo-oasis</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/gml-oasis.xsd">gml-oasis</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xAL-types.xsd">xAL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xAL.xsd">xAL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xLink.xsd">xLink</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xNAL-types.xsd">xNAL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xNAL.xsd">xNAL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xNL-types.xsd">xNL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xNL.xsd">xNL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xPIL-types.xsd">xPIL-types</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xPIL.xsd">xPIL</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xlink-2003-12-31.xsd">xlink-2003-12-31</option>
+<option value="https://docs.oasis-open.org/emergency/edxl-rm/v1.0/os/EDXL-RM-v1.0-Schemas-Examples/RMSchemas080126/xlinks.xsd">xlinks</option>
+</select>
+<p>
+</p><li><b>Emergency Data Exchange Language Situa    <hr/>
+</b><p>
+<strong>Providing Feedback:</strong> OASIS welcomes <a href="/committees/comments/index.php?wg_abbrev=emergency">feedback</a> on its technical activities from potential users, developers, and others to better assure the interoperability and quality of OASIS work.
+    </p>
+</li></ul></form></div>
+</div></div> <!-- /node-inner, /node --> </div>
+</div></div> <!-- /#content-inner, /#content -->
+<div id="sidebar-right"><div class="region region-right" id="sidebar-right-inner">
+<!--<div id="search-box">-->
+<!--</div>--> <!-- /#search-box -->
+<div class="block block-views region-even even region-count-2 count-2" id="block-views-related_links-block_1"><div class="block-inner">
+<h2 class="title">Related links</h2>
+<div class="content">
+<div class="view view-related-links view-id-related_links view-display-id-block_1 view-dom-id-1">
+<div class="view-content">
+<div class="item-list">
+<ul> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/emergency/charter.php">Charter</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/emergency/ipr.php">IPR Statement</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/emergency/faq.php">FAQ</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/membership.php?wg_abbrev=emergency">Membership</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/emergency/obligation.php">Obligated Members</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="//lists.oasis-open.org/archives/emergency/">Email Archives</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="//lists.oasis-open.org/archives/emergency-comment/">Comments Archive</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/ballots.php?wg_abbrev=emergency">Ballots</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/documents.php?wg_abbrev=emergency&amp;show_descriptions=yes">Documents</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/calendar.php?wg_abbrev=emergency">Schedule</a></span>
+</div>
+</li> <li class="views-row views-row-1 views-row-odd views-row-first">
+<div class="views-field-field-related-links-url">
+<span class="field-content"><a class="rightnav" href="/committees/emergency/press.php">Press</a></span>
+</div>
+</li> </ul>
+</div>
+</div>
+</div>
+</div>
+</div></div> </div></div> <!-- /#sidebar-right-inner, /#sidebar-right -->
+</div></div> <!-- /#main-inner, /#main -->
+<div id="footer"><div class="clear-block region region-footer" id="footer-inner">
+<!-- wordpress-footer -->
+<footer class="site-footer" id="colophon">
+<div class="site-footer__wrap">
+<nav class="footer-navigation" id="footer-navigation"><ul class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5542"><a href="https://www.oasis-open.org/org/">About</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5746"><a href="https://www.oasis-open.org/org/">Organization</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5618"><a href="https://www.oasis-open.org/member-roster/">Members</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5627"><a href="https://www.oasis-open.org/board/">Board of Directors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5628"><a href="https://www.oasis-open.org/staff/">Staff</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5629"><a href="https://www.oasis-open.org/member-roster/distinguished-contributors/">Distinguished Contributors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5630"><a href="https://www.oasis-open.org/open-projects-advisory-council/">Open Projects Advisory Council</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5778"><a href="https://www.oasis-open.org/liaisons/">Liaisons</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5780"><a href="https://www.oasis-open.org/policies-guidelines/">Policies &amp; Guidelines</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-project-committee menu-item-has-children menu-item-3022"><a href="https://www.oasis-open.org/projects-committees/">Projects &amp; Committees</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-project-committee menu-item-5860"><a href="https://www.oasis-open.org/projects-committees/">View All Projects &amp; Committees</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5639"><a href="https://www.oasis-open.org/technical-committees/">Technical Committee Program</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5638"><a href="https://www.oasis-open.org/open-projects/">Open Projects Program</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5747"><a href="https://www.oasis-open.org/tags/">Technical Advisory Groups to ISO</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5636"><a href="https://www.oasis-open.org/foundation-as-a-service/">Foundation-as-a-Service</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-standard menu-item-has-children menu-item-3023"><a href="https://www.oasis-open.org/standards/">Standards</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-standard menu-item-5657"><a href="https://www.oasis-open.org/standards/">View Standards &amp; Releases</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5782"><a href="https://www.oasis-open.org/open-standards-cup/">Open Standards Cup</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5868"><a href="https://www.oasis-open.org/join-3/">Get Involved</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5753"><a href="https://www.oasis-open.org/join-3/">Join</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5907"><a href="https://www.oasis-open.org/join/membership-agreement.pdf">Membership Agreement</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5652"><a href="https://www.oasis-open.org/news/">News &amp; Events</a>
+<ul class="sub-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5653"><a href="https://www.oasis-open.org/news/">Announcements</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5651"><a href="/events/?filter-status=publish">Events Calendar</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5648"><a href="https://www.oasis-open.org/open-matters-forum/">Open Matters Forum</a></li>
+</ul>
+</li>
+</ul></nav>
+<nav class="useful-links" id="useful-links">
+<h6>Useful links</h6>
+<ul class="menu useful-links__main"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3148" id="menu-item-3148"><a href="https://www-legacy.oasis-open.org">Browse the archive</a></li>
+</ul><ul class="menu useful-links__social"><li class="dashicons-before dashicons-facebook-alt menu-item menu-item-type-custom menu-item-object-custom menu-item-3145" id="menu-item-3145"><a href="https://facebook.com/oasis.open"><span class="screen-reader-text">Like us on Facebook</span></a></li>
+<li class="dashicons-before dashicons-twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-3146" id="menu-item-3146"><a href="https://twitter.com/OASISopen"><span class="screen-reader-text">Follow us on Twitter</span></a></li>
+<li class="dashicons-before dashicons-linkedin menu-item menu-item-type-custom menu-item-object-custom menu-item-3147" id="menu-item-3147"><a href="https://www.linkedin.com/company/oasis/"><span class="screen-reader-text">Connect with us on LinkedIn</span></a></li>
+</ul> </nav>
+<div class="site-info">
+				Copyright © 2020 OASIS®. All Rights Reserved. The <a href="/policies-guidelines/trademark">OASIS Trademark Policy</a> and other <a href="/policies-guidelines">OASIS Policies</a> apply.			</div><!-- .site-info -->
+</div><!-- .site-footer__wrap -->
+</footer><!-- #colophon -->
+<!-- /wordpress-footer -->
+</div></div> <!-- /#footer-inner, /#footer -->
+</div></div> <!-- /#page-inner, /#page -->
+<div class="clear-block region region-closure" id="closure-blocks">
+</div>
+</body>
+</html>

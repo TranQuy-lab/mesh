@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Jtfu1VxTbtMTr3I9iMUDAV2U0iM</id>
+  <title>arXiv Query: search_query=all:"LoRa mesh" AND all:"overhead"&amp;id_list=&amp;start=0&amp;max_results=6</title>
+  <updated>2026-09-30T16:32:05Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22LoRa+mesh%22+AND+all:%22overhead%22&amp;start=0&amp;max_results=6&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>6</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.03714v1</id>
+    <title>A Position- and Energy-Aware Routing Strategy for Subterranean LoRa Mesh Networks</title>
+    <updated>2025-10-04T07:25:13Z</updated>
+    <link href="https://arxiv.org/abs/2510.03714v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.03714v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although LoRa is predominantly employed with the single-hop LoRaWAN protocol, recent advancements have extended its application to multi-hop mesh topologies. Designing efficient routing for LoRa mesh networks remains challenging due to LoRa's low data rate and ALOHA-based MAC. Prior work often adapts conventional protocols for low-traffic, aboveground networks with strict duty cycle constraints or uses flooding-based methods in subterranean environments. However, these approaches inefficiently utilize the limited available network bandwidth in these low-data-rate networks due to excessive control overhead, acknowledgments, and redundant retransmissions. In this paper, we introduce a novel position- and energy-aware routing strategy tailored for subterranean LoRa mesh networks aimed at enhancing maximum throughput and power efficiency while also maintaining high packet delivery ratios. Our mechanism begins with a lightweight position learning phase, during which LoRa repeaters ascertain their relative positions and gather routing information. Afterwards, the network becomes fully operational with adaptive routing, leveraging standby LoRa repeaters for recovery from packet collisions and losses, and energy-aware route switching to balance battery depletion across repeaters. The simulation results on a representative subterranean network demonstrate a 185% increase in maximum throughput and a 75% reduction in energy consumption compared to a previously optimized flooding-based approach for high traffic.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-04T07:25:13Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Nalith Udugampola</name>
+    </author>
+    <author>
+      <name>Xiaoyu Ai</name>
+    </author>
+    <author>
+      <name>Binghao Li</name>
+    </author>
+    <author>
+      <name>Henry Gong</name>
+    </author>
+    <author>
+      <name>Aruna Seneviratne</name>
+    </author>
+  </entry>
+</feed>

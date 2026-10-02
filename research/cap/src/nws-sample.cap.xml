@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+    <identifier>urn:oid:2.49.0.1.840.0.6df8c047e1cbe829627cc92d595584cc92d7c79f.002.1</identifier>
+    <sender>w-nws.webmaster@noaa.gov</sender>
+    <sent>2026-09-30T09:46:00-07:00</sent>
+    <status>Actual</status>
+    <msgType>Alert</msgType>
+    <source>211803 v2.3.0</source>
+    <scope>Public</scope>
+    <code>IPAWSv1.0</code>
+    <info>
+        <language>en-US</language>
+        <category>Met</category>
+        <event>Extreme Heat Watch</event>
+        <responseType>Monitor</responseType>
+        <urgency>Future</urgency>
+        <severity>Severe</severity>
+        <certainty>Likely</certainty>
+        <eventCode>
+            <valueName>SAME</valueName>
+            <value>NWS</value>
+        </eventCode>
+        <eventCode>
+            <valueName>NationalWeatherService</valueName>
+            <value>XHA</value>
+        </eventCode>
+        <effective>2026-09-30T09:46:00-07:00</effective>
+        <onset>2026-10-02T10:00:00-07:00</onset>
+        <expires>2026-10-02T10:15:00-07:00</expires>
+        <senderName>NWS Los Angeles/Oxnard CA</senderName>
+        <headline>Extreme Heat Watch issued September 30 at 9:46AM PDT until October 8 at 8:00PM PDT by NWS Los Angeles/Oxnard CA</headline>
+        <description>* WHAT...Dangerously hot conditions with temperatures up to 90 at the
+coast and 105 in the valleys.
+
+* WHERE...Coast and valleys of Los Angeles and Ventura Counties.
+
+* WHEN...From Friday morning through Thursday, October 08.
+
+* IMPACTS...Heat related illnesses increase significantly during
+extreme heat events.
+
+* ADDITIONAL DETAILS...Very hot temperatures are likely to continue
+into the second week of October, possibly requiring an extension of
+this product.
+</description>
+        <instruction>Drink plenty of fluids, stay in an air-conditioned room, stay out of
+the sun, and check up on relatives and neighbors.
+
+Do not leave young children and pets in unattended vehicles. Car
+interiors will reach lethal temperatures in a matter of minutes.</instruction>
+        <web>http://www.weather.gov</web>
+        <parameter>
+            <valueName>AWIPSidentifier</valueName>
+            <value>NPWLOX</value>
+        </parameter>
+        <parameter>
+            <valueName>WMOidentifier</valueName>
+            <value>WWUS76 KLOX 301646</value>
+        </parameter>
+        <parameter>
+            <valueName>NWSheadline</valueName>
+            <value>EXTREME HEAT WATCH IN EFFECT FROM FRIDAY MORNING THROUGH THURSDAY, OCTOBER 08</value>
+        </parameter>
+        <parameter>
+            <valueName>BLOCKCHANNEL</valueName>
+            <value>EAS</value>
+        </parameter>
+        <parameter>
+            <valueName>BLOCKCHANNEL</valueName>
+            <value>NWEM</value>
+        </parameter>
+        <parameter>
+            <valueName>VTEC</valueName>
+            <value>/O.NEW.KLOX.XH.A.0006.261002T1700Z-261009T0300Z/</value>
+        </parameter>
+        <parameter>
+            <valueName>eventEndingTime</valueName>
+            <value>2026-10-08T20:00:00-07:00</value>
+        </parameter>
+        <parameter>
+            <valueName>BLOCKCHANNEL</valueName>
+            <value>CMAS</value>
+        </parameter>
+        <area>
+            <areaDesc>Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casitas; Ojai Valley; Central Ventura County Valleys; Malibu Coast; Los Angeles County Beaches; Palos Verdes Hills; Los Angeles County Inland Coast including Downtown Los Angeles; Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Calabasas and Agoura Hills; Western San Fernando Valley; Eastern San Fernando Valley; Southeastern Ventura County Valleys; Santa Susana Mountains; Los Angeles County San Gabriel Valley</areaDesc>
+            <geocode>
+                <valueName>SAME</valueName>
+                <value>006037</value>
+            </geocode>
+            <geocode>
+                <valueName>SAME</valueName>
+                <value>006111</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ087</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ088</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ354</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ355</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ356</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ357</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ358</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ362</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ366</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ367</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ368</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ369</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ370</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ371</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ372</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ373</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ374</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ375</value>
+            </geocode>
+            <geocode>
+                <valueName>UGC</valueName>
+                <value>CAZ548</value>
+            </geocode>
+        </area>
+    </info>
+</alert>

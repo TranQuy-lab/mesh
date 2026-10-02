@@ -1,0 +1,13 @@
+n_nodes,branch,n_seeds,delivered_after_recovery_mean,delivered_after_recovery_sd,pdr_mean,no_route_mean
+50,A_always_up_expiry_on,60,6.533,2.861,0.641667,19.52
+50,B_always_up_expiry_off,60,6.383,2.322,0.664167,0.13
+50,C_recovers_expiry_on,60,6.433,2.825,0.631667,19.53
+50,D_recovers_expiry_off,60,6.367,2.307,0.660833,0.13
+100,A_always_up_expiry_on,90,6.522,2.969,0.414444,49.23
+100,B_always_up_expiry_off,90,6.278,2.274,0.451222,0.26
+100,C_recovers_expiry_on,90,6.522,3.01,0.413444,49.29
+100,D_recovers_expiry_off,90,6.278,2.361,0.446556,0.26
+200,A_always_up_expiry_on,90,5.2,1.921,0.367,58.13
+200,B_always_up_expiry_off,90,4.944,1.319,0.392222,0.22
+200,C_recovers_expiry_on,90,5.1,1.891,0.365667,58.1
+200,D_recovers_expiry_off,90,4.978,1.374,0.393556,0.22

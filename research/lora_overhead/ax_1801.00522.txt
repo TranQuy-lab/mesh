@@ -1,0 +1,208 @@
+                                                 This work has been accepted for publication at EWSN in February 2018. Please cite the EWSN poster paper.
+
+
+
+
+                                                       A Fair Adaptive Data Rate Algorithm for LoRaWAN
+
+                                                                           Khaled Q. Abdelfadeel, Victor Cionca, Dirk Pesch
+                                                                               Nimbus Centre, Cork Institute of Technology, Ireland
+                                                                khaled.abdelfadeel@mycit.ie, victor.cionca@cit.ie, dirk.pesch@cit.ie
+arXiv:1801.00522v1 [cs.NI] 1 Jan 2018
+
+
+
+
+                                                                                                                          1.0
+                                                                                                                                              Aloha + Perfect Orthogonality                       0.9              Aloha + Perfect Orthogonality
+                                        Abstract                                                                          0.9
+                                                                                                                                              Capture Effect + Perfect Orthogonality
+                                                                                                                                              Capture Effect + Imperfect Orthogonality
+                                                                                                                                                                                                  0.8              Capture Effect + Perfect Orthogonality
+                                                                                                                                                                                                                   Capture Effect + Imperfecet Orthogonality
+                                           LoRaWAN exhibits several characteristics that can lead                         0.8                                                                     0.7
+
+
+
+
+                                                                                                             Fairness Index
+                                                                                                                                                                                                  0.6
+                                        to an unfair distribution of the Data Extracted Rate (DER)                        0.7
+
+
+
+
+                                                                                                                                                                                            DER [%]
+                                                                                                                                                                                                  0.5
+                                                                                                                          0.6
+                                        among nodes. Firstly, the capture effect leads to a strong sig-                   0.5
+                                                                                                                                                                                                  0.4
+
+                                        nal suppressing a weaker signal at the gateway and secondly,                      0.4
+                                                                                                                                                                                                  0.3
+
+                                        the spreading codes used are not perfectly orthogonal, caus-                      0.3
+                                                                                                                                                                                                  0.2
+
+                                                                                                                                                                                                  0.1
+                                        ing packet loss if an interfering signal is strong enough. In                           0   500    1000   1500   2000   2500
+                                                                                                                                                  Number of Nodes
+                                                                                                                                                                       3000   3500   4000               0   500   1000   1500   2000   2500
+                                                                                                                                                                                                                         Number of Nodes
+                                                                                                                                                                                                                                              3000   3500   4000
+
+                                        these conditions, nodes experiencing higher attenuation are
+                                                                                                                                          (a) Fairness Index                                                              (b) DER
+                                        less likely to see their packets received correctly. We develop
+                                                                                                           Figure 1: Study of Aloha, Capture and Imperfect Orthogo-
+                                        FADR, a Fair Adaptive Data Rate algorithm for LoRaWAN
+                                                                                                           nality effects
+                                        that exploits the different Spreading Factors (SFs) and Trans-
+                                        mission Powers (TPs) settings available in LoRa to achieve a       using a lower SF leads to a shorter airtime which results in a
+                                        fair Data Extraction Rate among all nodes while at the same        lower probability of collision.
+                                        time avoiding excessively high TPs. Simulations show that              As LoRaWAN is based on Aloha, it is supposed to be
+                                        FADR, in highly congested cells, achieves 300% higher fair-        a fair MAC protocol. However, the above effects intro-
+                                        ness than the minimum airtime allocation approach and 22%          duce unfairness, favouring transmissions from nodes closer
+                                        higher fairness than Brechts approach, while consuming al-         to the gateway and by those that use lower spreading fac-
+                                        most 22% lower energy.                                             tors. The impact of these issues was validated experimen-
+                                        1 Introduction                                                     tally, with all nodes allocated the same transmission power
+                                           Depending on the specific radio communication condi-            level (TP), and the SFs allocated uniformly, in the order of
+                                        tions, a LoRaWAN gateway can decode one, all, or none of           distance from the gateway. Figure 1a shows Jain’s fairness
+                                                                                                                             i              (∑n DER )2
+                                        the colliding packets transmitted by multiple nodes. When          index, ζ = n i=1
+                                                                                                                         n DER2 , where DER denotes the Data Extrac-
+                                                                                                                                              ∑i=1  i
+                                        two signals using the same spreading factor (SF) arrive at the     tion Rate. When all the issues are considered the fairness de-
+                                        same time, with one signal stronger than the other by a cer-       creases drastically with increasing network size. Even with-
+                                        tain threshold, the capture effect causes the stronger signal to   out capture effect and with perfectly orthogonal spreading
+                                        drown the weaker. This was verified experimentally by [1].         codes, the fairness of Aloha decreases as well, due to the
+                                        Even when the signals use different spreading factors, this        different collision probabilities of the SFs.
+                                        effect can still be observed, because the spreading codes are
+                                                                                                               Figure 1b shows the DER and as expected the capture ef-
+                                        not perfectly orthogonal. However, if the power difference is
+                                                                                                           fect favours the nodes closest to the gateway, which is re-
+                                        below the Co-channel Interference Rejection (CIR) thresh-
+                                                                                                           flected in the overall DER of the system. However, consid-
+                                        old, both signals will be decoded, whereas with the capture
+                                                                                                           ering the imperfect orthogonality effect, the overall DER is
+                                        effect, none will. Croce et. al. measured the CIR for LoRa
+                                                                                                           lower than Aloha. Here, we propose an approach to remedy
+                                        in [2]. Furthermore, the SF allocation is affecting the prob-
+                                                                                                           this. Our proposal, FADR, a Fair Adaptive Data Rate algo-
+                                        ability of collision as each SF has a different airtime, e.g.
+                                                                                                           rithm for LoRaWAN, computes the optimal combination of
+                                                                                                           SFs and TPs settings to achieve a fair DER among all nodes.
+                                                                                                           2 The FADR Algorithm
+                                                                                                              The FADR algorithm manages the allocation of SFs and
+                                                                                                           TPs to the nodes. For SF allocation we use the optimal SF
+                                                                                                           distribution for fair collision probability, determined in [3].
+                                                                                                           However, while the authors in [3] apply this to the entire
+                                                                                                           network, based on distance from the gateway, we propose to
+                                                                                                           assign it over regions. To this extent, the nodes are first or-
+                                                                                                           dered based on RSSI and divided into groups of 50 to over-
+                          This work has been accepted for publication at EWSN in February 2018. Please cite the EWSN poster paper.
+
+
+                1.0                                                                                                                  FADR                                     70000       FADR                                                         1.0                                  FADR
+                                                                                                                                     Approach in [3]                                      Approach in [3]                                                                                   Approach in [3]
+                                                                                                                                                                              60000                                                                    0.9
+                                                                                        0.8                                          SN 5 in [1]                                          SN 5 in [1]                                                                                       SN 5 in [1]
+
+
+
+
+                                                                                                                                                         Energy Consumption [J]
+                0.8
+                                                                                                                                                                              50000                                                                    0.8
+   Fairness Index
+
+
+
+
+                                                                                        0.6
+
+
+
+
+                                                                                  DER [%]
+
+
+
+
+                                                                                                                                                                                                                                                 DER [%]
+                                                                                                                                                                              40000                                                                    0.7
+                0.6
+
+                                                                                                                                                                              30000                                                                    0.6
+                                                                                        0.4
+                0.4                                                                                                                                                           20000                                                                    0.5
+
+                          FADR                                                          0.2                                                                                                                                                            0.4
+                                                                                                                                                                              10000
+                0.2       Approach in [3]
+                          SN 5 in [1]                                                                                                                                             0
+                                                                                                                                                                                                                                                       0.3
+
+                      0   500    1000   1500   2000   2500   3000   3500   4000               0   500   1000   1500   2000   2500   3000   3500   4000                                0   500   1000   1500   2000   2500   3000   3500   4000               0   20   40   60   80    100      120     140
+                                        Number of Nodes                                                        Number of Nodes                                                                         Number of Nodes                                                     Distance
+
+                                (a) Fairness Index                                                      (b) Overall DER                                                                     (c) Overall Energy                                                   (d) DER vs distance
+                                                                                                                             Figure 2: Evaluation results
+Algorithm 1 FADR - Power Allocation Algorithm                                                                                                                                     ent random seeds.
+ 1: Input List of nodes N, corresponding RSSI, power levels PowLevels,                                                                                                               The SN 5 algorithm assigns to nodes the lowest SF and the
+    matrix of CIR                                                                                                                                                                 lowest available TP. The algorithm in [3] assigns SFs based
+ 2: Output ∀n ∈ N,P[n] ∈ PowLevels                                                                                                                                                on a distribution that achieves a fair probability of collisions
+ 3: Sort N by RSSI                                                                                                                                                                (FADR uses the same). Allocating over the whole network
+ 4: RSSIm = min(RSSI), RSSIM = max(RSSI), CIRm = min(CIR)
+ 5: Powm ← PowLevels.pop(0)                                                                                                                                                       will result in almost 45% of nodes at SF 7 and the same TP,
+ 6: PowM ← arg mini∈PowLevels |RSSIM + Powm − RSSIm − i| ≤ CIRm                                                                                                                   which increases the probability of the capture effect. The
+ 7: PowLevels = [0 : PowLevels.index(PowM )]                                                                                                                                      TP control algorithm attempts to minimise RSSI difference,
+ 8: RSSIm ← min(RSSIm + PowM ,RSSIM + Powm )                                                                                                                                      however the reference is the node with the highest path loss
+ 9: RSSIM ← max(RSSIm + PowM ,RSSIM + Powm )
+10: i0 ← arg maxi<|N| |RSSI[i] + Powm | ≤ |RSSIm |
+                                                                                                                                                                                  and SF 8, assuming that this node is having the highest error
+11: P[i] = Powm ∀i < i0
+                                                                                                                                                                                  rate. This assumption is valid only in uniformly distributed
+12: in ← arg max|N|>i>i0 |RSSI[i] + PowM − RSSIm | > CIRm                                                                                                                         networks, because the location and path loss of this node de-
+13: P[i] = PowM ∀i > in                                                                                                                                                           pends on the node placement. In a large network this node
+14: idx ← i0 + 1                                                                                                                                                                  could be close to the sink and with low path loss; in a small
+15: for all p ∈ PowLevels do                                                                                                                                                      network it might be closer to the edge, with high path loss.
+16:    if |RSSI[idx] + p − RSSIm | ≤ CIRm and |RSSI[idx] + p − RSSIM −
+       PowM | ≤ CIRm then
+                                                                                                                                                                                     The results in figure 2 show that FADR surpasses the state
+17:        ik ← arg maxidx< j<in |RSSI[ j] + p − RSSI[in ] − PowM | ≤ CIRm                                                                                                        of the art [3] in fairness and energy consumption, without
+18:        P[ j] = p∀ j ∈ [idx,ik ], idx = ik                                                                                                                                     sacrificing the DER. At 4000 nodes, FADR achieves 300%
+19:    end if                                                                                                                                                                     higher fairness than [1] and 22% higher than [3]. FADR as-
+20: end for                                                                                                                                                                       signs lower TPs than [3], achieving 22% reduction in energy
+                                                                                                                                                                                  consumption. However, both consume more energy than [1]
+                                                                                                                                                                                  in which all nodes transmit with the lowest TP. FADR’s ad-
+come the rounding problem and for better representation of                                                                                                                        vantage over [3] is shown in figure 2d (1000 nodes). FADR
+all SFs in which SF 12 is assigned to one node. The optimal                                                                                                                       achieves roughly the same DER for a larger proportion of the
+SF distribution is applied to each group of 50 nodes.                                                                                                                             network than [3], which experiences high variation for nodes
+    The allocation of transmission power levels is shown in                                                                                                                       with SF 7 and high path loss, thus, FADR is fairer.
+algorithm 1. The algorithm allocates the lowest TPs that can                                                                                                                      4 Conclusions
+reduce the difference in RSSI below the CIR threshold to                                                                                                                             We propose FADR to achieve a fair data extraction rate
+mitigate the capture effect and the imperfect orthogonality of                                                                                                                    in LoRa/LoRaWAN by exploiting optimal combinations of
+spreading codes. FADR assumes that all nodes are initiated                                                                                                                        spreading factors and transmission power levels and at the
+with the same transmission power. FADR requires the RSSI                                                                                                                          same time maintain node lifetime by not using excessively
+corresponding to each node, so it is run only after a certain                                                                                                                     high transmission power levels. Simulations show that
+number of packets have been collected by the network.                                                                                                                             FADR, in a highly congested cell, achieves 300% higher fair-
+                                                                                                                                                                                  ness than the minimum airtime allocation approach and 22%
+3 Evaluation and Results                                                                                                                                                          higher fairness than Brechts approach, which is one of the
+   FADR was implemented in a version of LoRaSim [1]                                                                                                                               state-of-art approaches, targeting the same problem with al-
+modified to include the effect of imperfect orthogonality of                                                                                                                      most 22% lower network energy consumption. For future
+SFs. FADR was compared with the state of the art in [3], and                                                                                                                      work, we will implement FADR in a real LoRa deployment.
+with the minimum transmission time algorithm SN 5 in [1],                                                                                                                            Acknowledgments - this research has received support
+from the point of view of DER fairness and overall energy                                                                                                                         from Science Foundation Ireland (SFI) under Grant Number
+consumption. To replicate the evaluation in [3] the mini-                                                                                                                         13/RC/2077.
+mum sensitiviy of all SFs in LoRaSim was lowered to -140                                                                                                                          5 References
+dBm, so that all nodes can reach the gateway with all combi-
+                                                                                                                                                                                  [1] M. Bor, U. Roedig, T. Voigt, and J. Alonso. Do lora low-power wide-
+nations of SF and TP. The CIR and capture effect thresholds                                                                                                                           area networks scale? In MSWiM, 2016.
+were set to 6dB for all SFs, based on the work of [2] and [1],                                                                                                                    [2] D. Croce, M. Gucciardo, I. Tinnirello, D. Garlisi, and S. Mangione.
+respectively. The number of nodes was varied from 100 to                                                                                                                              Impact of spreading factor imperfect orthogonality in lora communica-
+4000 nodes, packet length set to 80 bytes and average packet                                                                                                                          tions. In TIWDC. Springer, 2017.
+transmission interval to 1 minute. Each experiment was run                                                                                                                        [3] B. Reynders, W. Meert, and S. Pollin. Power and spreading factor con-
+                                                                                                                                                                                      trol in low power wide area networks. In ICC’17 SAC-7 IoT, 2017.
+for a simulation time of one day and repeated with 10 differ-
+

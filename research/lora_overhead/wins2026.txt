@@ -1,0 +1,313 @@
+     Beyond Single-Hop: A Simulation Study of the
+      Meshtastic LoRa Mesh Protocol for Robust
+            Long-Range IoT Connectivity
+                      Fawwaz M. Najm                                                        Gabor Feher
+ Department of Telecommunications and Artificial Intelligence Department of Telecommunications and Artificial Intelligence
+      Faculty of Electrical Engineering and Informatics            Faculty of Electrical Engineering and Informatics
+     Budapest University of Technology and Economics              Budapest University of Technology and Economics
+                     Budapest, Hungary                                            Budapest, Hungary
+         fawwazmaannajm.aboalhasan@edu.bme.hu                                  feher.gabor@vik.bme.hu
+
+
+
+
+   Abstract—Mesh-based LoRa communication has emerged as               Despite these advantages, traditional single-hop LoRa and
+a practical solution for extending connectivity in environments     LoRaWAN deployments remain limited by propagation loss,
+where single-hop transmission is limited by distance, obstruc-      line of sight constraints, and environmental attenuation. Ex-
+tions, or the absence of centralized infrastructure. This work
+investigates the performance of a self-operated LoRa mesh           perimental studies and real-world measurements show that
+network based on the Meshtastic protocol, targeting linear urban    LoRa communication performance degrades significantly in
+infrastructures where centralized network operators and multiple    dense urban areas, obstructed environments, and deployments
+gateways are unavailable. A custom simulation framework is          stretched over long distances, where direct communication
+developed to model multi-hop communication using fixed node         between end nodes and gateways cannot always be maintained
+placements along the Széchenyi Chain Bridge, Margaret Bridge,
+and Liberty Bridge in Budapest, enabling realistic evaluation of    reliably [2,3]. As a result, single-hop LoRa networks often fail
+routing behavior and hop formation.                                 to provide sufficient coverage and packet delivery reliability
+   Network performance is assessed in terms of packet delivery      for geographically linear or infrastructure-based scenarios such
+ratio (PDR), end-to-end latency, hop count, and energy con-         as bridges, tunnels, transmission lines, and pipelines.
+sumption under varying traffic and hop-distance conditions. The        To overcome these limitations, multi-hop and mesh-based
+results show that the Meshtastic-based multi-hop forwarding
+protocol achieves a high packet delivery ratio (PDR) across         LoRa networking approaches have been proposed. By allowing
+extended paths, while latency and energy consumption increase       nodes to forward packets through intermediate devices, multi-
+predictably with hop count and traffic load. Despite these          hop LoRa networks extend coverage and improve communica-
+overheads, the observed performance remains suitable for delay-     tion reliability beyond the limits of direct transmission [4,5].
+tolerant IoT monitoring applications deployed in constrained or     Prior work demonstrates that mesh-based LoRa architectures
+infrastructure-limited environments. The findings provide insight
+into the operational characteristics of the Meshtastic LoRa mesh    are particularly well suited for linear infrastructures, where
+protocol and support its applicability for robust, low-power IoT    nodes are distributed along elongated paths and dense gateway
+deployments without reliance on centralized gateways.               deployment is impractical or economically infeasible [4].
+   Index Terms—Meshtastic, LoRa mesh, multi-hop communica-          Cooperative forwarding enables reliable data delivery even in
+tion, self-operated networks, simulation, packet delivery ratio,    scenarios where single-hop LoRa links fail due to distance or
+energy efficiency, latency
+                                                                    obstruction.
+                                                                       Recent research has further explored routing and for-
+                      I. I NTRODUCTION
+                                                                    warding strategies for multi-hop LoRa and LoRaWAN net-
+   As long-range, low-power communication becomes increas-          works, including hop-aware routing, distance-based forward-
+ingly important for distributed sensing and Internet of Things      ing, and airtime-efficient scheduling mechanisms [5,6]. These
+(IoT) infrastructures, Low Power Wide Area Network (LP-             approaches aim to improve scalability and packet delivery
+WAN) technologies have gained significant attention. Among          performance while mitigating collisions and congestion in
+these, LoRa has emerged as a widely adopted solution due            multi-hop environments. However, multi-hop communication
+to its ability to provide multi-kilometer communication range       inherently introduces trade-offs, as additional forwarding hops
+while maintaining very low energy consumption, making it            increase end-to-end latency and energy consumption due to
+suitable for large scale IoT deployments with infrequent data       repeated transmission and reception operations at intermediate
+transmission requirements [1,2]. These characteristics enable       nodes [3,7]. Understanding these trade-offs requires systematic
+LoRa-based systems to support sensing and monitoring appli-         performance evaluation under realistic deployment conditions.
+cations deployed across wide geographic areas and resource-            Motivated by these considerations, this study develops a
+constrained environments.                                           custom simulation framework to evaluate the performance of
+
+
+
+
+https://doi.org/10.3311/WINS2026-013
+a self-operated LoRa mesh network, where no centralized             and scalability, leading to different performance trade-offs in
+network operator or dense gateway infrastructure is assumed.        practical deployments.
+The study focuses on a mesh implementation based on the                In this study, the Meshtastic protocol is selected as the target
+Meshtastic protocol, which is selected as a representative LoRa     LoRa mesh implementation. Meshtastic is an open-source
+mesh solution for evaluation in this work. Unlike LoRaWAN-          firmware that enables decentralized, self-operated multi-hop
+based architectures, Meshtastic operates as a fully decentral-      communication using low-cost LoRa hardware. It supports
+ized LoRa mesh without reliance on standardized LoRaWAN             automatic neighbor discovery, hop-based packet forwarding,
+gateways, network servers, or star topology assumptions. The        and adaptive retransmission mechanisms without requiring
+simulation analyzes routing behavior, hop formation, packet         centralized coordination or external network infrastructure.
+delivery ratio (PDR), end-to-end latency, and energy con-           Its open design, widespread community adoption, and focus
+sumption using fixed node placements that reflect real-world        on practical deployments make it a suitable representative
+linear urban infrastructures. The results provide insight into      platform for evaluating multi-hop LoRa performance in in-
+the operational characteristics and suitability of LoRa mesh        frastructure limited IoT scenarios.
+networking for robust, low-power IoT deployments in con-               This work focuses exclusively on Meshtastic and does not
+strained and infrastructure-limited environments. This work         attempt to generalize its findings to all LoRa mesh protocols.
+does not propose a new routing or forwarding protocol. In-          Different mesh implementations may employ alternative rout-
+stead, it provides a systematic performance characterization of     ing, synchronization, or congestion control mechanisms and
+a Meshtastic-based LoRa mesh network under realistic linear         therefore exhibit different performance characteristics under
+urban deployment conditions. The objective is to quantify the       similar deployment conditions.
+trade-offs between coverage extension, packet delivery ratio,
+latency, and energy consumption in multi-hop LoRa mesh              A. Meshtastic Forwarding Model
+deployments, rather than to introduce or optimize protocol             Meshtastic enables decentralized multi-hop communication
+mechanisms.                                                         by allowing LoRa nodes to cooperatively forward packets
+                                                                    toward a destination using hop-limited relaying. Each packet
+      II. L O R A M ESH P ROTOCOLS AND M ESHTASTIC                  is transmitted with a maximum hop count, and intermediate
+                         OVERVIEW                                   nodes rebroadcast the packet if the hop limit has not been
+                                                                    exceeded and the packet has not been previously seen. This
+   LoRaWAN is a standardized Low Power Wide Area Net-               mechanism increases delivery resilience in obstructed or ex-
+work (LPWAN) protocol that adopts a star topology, where            tended deployments at the cost of additional airtime usage.
+end devices communicate directly with gateways using single-           In this work, the forwarding behavior of Meshtastic is
+hop wireless links [8]. While this architecture enables long-       abstracted to capture its essential characteristics, namely hop-
+range and energy-efficient communication, it relies on gateway      based cooperative forwarding and neighbor relaying. Low-
+availability and favorable propagation conditions, which can        level firmware details such as packet deduplication timing,
+limit reliability in obstructed or infrastructure-constrained en-   cryptographic overhead, and adaptive channel selection are not
+vironments. This overview is provided solely for contextual         explicitly modeled. The abstraction allows systematic evalua-
+contrast, as the network evaluated in this work does not            tion of multi-hop behavior while preserving the fundamental
+employ LoRaWAN and instead relies on a fully decentralized          forwarding principles of Meshtastic.
+Meshtastic-based LoRa mesh architecture.
+                                                                                     III. S IMULATION S CHEMES
+   To address these limitations, mesh-based LoRa networking
+has been proposed, enabling nodes to forward packets coop-          A. LoRa Mesh Simulation Framework
+eratively over multiple wireless hops. Such multi-hop com-             The performance of the multi-hop LoRa mesh network was
+munication extends network coverage and improves delivery           evaluated using a custom discrete-event simulation framework
+reliability without relying on dense gateway infrastructure.        designed to capture the dominant characteristics of LoRa-
+Prior work demonstrates that LoRa mesh architectures can            based multi-hop communication. Unlike traditional single-
+significantly outperform star-based LoRaWAN deployments in          hop LoRaWAN deployments, the simulated mesh architecture
+underground, urban, and non-line-of-sight scenarios, albeit at      enables nodes to cooperatively forward packets over multiple
+the cost of increased coordination overhead and end-to-end          hops toward a designated sink node, without reliance on
+latency [9].                                                        centralized gateways.
+   Several LoRa mesh implementations and routing approaches            The simulator models key LoRa physical-layer parame-
+have been investigated in the literature. Synchronous multi-hop     ters, including spreading factor, bandwidth, transmit power,
+LoRa mesh designs introduce controlled transmission schedul-        and airtime. Packet collisions are modeled by assuming that
+ing to enable reliable forwarding across multiple hops, while       overlapping transmissions using the same spreading factor
+general-purpose LoRa mesh libraries provide basic routing and       and channel result in packet loss. Capture effects and inter-
+packet forwarding mechanisms suitable for experimentation           spreading-factor interference are not considered. Path loss is
+on resource-constrained devices [10]. These approaches differ       modeled using a distance-based attenuation model consistent
+in their synchronization requirements, routing complexity,          with urban LoRa propagation studies.
+                                                                                                             TABLE I
+                                                                                                     S IMULATION PARAMETERS
+
+                                                                               Parameter                                  Value
+                                                                               Number of nodes                              26
+                                                                               Operating frequency                     869.25 MHz
+                                                                               Topology                           Linear (bridge-based)
+                                                                               Spreading factor                            SF9
+                                                                               Bandwidth                                 125 kHz
+                                                                               Transmit power                            14 dBm
+                                                                               Routing method         Hop-based relaying (distance-vector abstraction)
+                                                                               Traffic model                        Periodic reporting
+
+
+
+                                                                              frequency of 869.25 MHz, which lies within the ETSI-defined
+                                                                              869.2–869.65 MHz sub-band. This frequency was selected
+                                                                              due to its widespread use in European long-range LoRa
+                                                                              deployments and its suitability for self-operated Meshtastic
+                                                                              networks, where higher permitted effective radiated power
+                                                                              improves link robustness in extended linear topologies. A fixed
+                                                                              bandwidth of 125 kHz is used throughout the simulations.The
+                                                                              transmit power is fixed at 14 dBm, which corresponds to
+                                                                              the maximum commonly permitted output power for LoRa
+Fig. 1. Simulated linear LoRa mesh deployment along three bridges in
+Budapest: (a) Margaret Bridge, (b) Széchenyi Chain Bridge, and (c) Liberty
+                                                                              devices operating in the European 868 MHz ISM band. This
+Bridge. Nodes are placed at fixed intervals to support multi-hop forwarding   value is selected to represent a best-practice configuration for
+toward the sink.                                                              infrastructure monitoring scenarios, where maximizing link
+                                                                              robustness is prioritized over energy minimization, particularly
+   Forwarding follows a hop-based relaying mechanism in-                      in multi-hop linear deployments.
+spired by Meshtastic, where nodes retransmit packets toward                      Packet forwarding is implemented using a hop-based re-
+the sink subject to a maximum hop limit. Retransmissions are                  laying mechanism inspired by Meshtastic behavior. For sim-
+limited to a single forwarding attempt per hop. Duty-cycle                    ulation purposes, forwarding decisions are abstracted using a
+restrictions and downlink traffic are not explicitly modeled.                 distance-vector–like approach to represent hop-distance pro-
+Energy consumption is estimated based on time spent in                        gression toward the sink, without implementing full Meshtastic
+transmission, reception, and idle listening states using airtime-             firmware routing logic. A fixed spreading factor of SF9 is
+derived power consumption values.                                             selected as a compromise between airtime efficiency and link
+                                                                              robustness, reflecting a practical operating point commonly
+B. Deployment Scenario                                                        used in Meshtastic deployments for medium-range multi-hop
+   To reflect realistic linear infrastructure deployments, nodes              communication.
+were placed at fixed locations along three major bridges in                      The main simulation parameters are summarized in Table I.
+Budapest: the Széchenyi Chain Bridge, Margaret Bridge, and
+Liberty Bridge. These bridges represent elongated urban struc-
+                                                                                      IV. S IMULATION S CENARIOS AND R ESULTS
+tures where communication paths follow constrained geome-
+tries and direct long-range links may not always be feasible                     To evaluate the behavior of the LoRa mesh network under
+due to distance and obstruction. Nodes were positioned at fixed               different operating conditions, two simulation scenarios were
+intervals along each bridge, including entry, mid-span, and exit              defined. Scenario A represents baseline monitoring with low
+segments. The simulated deployment consists of a total of 26                  reporting frequency, while Scenario B evaluates the impact of
+nodes, including a single sink node. Each bridge is populated                 increased traffic load. For both scenarios, results are analyzed
+with multiple nodes spaced approximately uniformly along its                  for nodes located one hop (Hop = 1) and five hops (Hop = 5)
+length, forming a linear multi-hop topology toward the sink,                  away from the sink. The Hop = 1 configuration is included as
+enabling evaluation of hop formation and forwarding behavior                  a baseline reference to quantify the incremental latency and
+in linear topologies. Such deployment scenarios are repre-                    energy overhead introduced by deeper multi-hop forwarding.
+sentative of real-world infrastructure monitoring applications,               Intermediate hop counts are omitted for clarity, as the selected
+including bridges, tunnels, pipelines, and transmission lines                 values represent the lower and upper bounds of hop-based
+[6].                                                                          performance observed in the simulated topology.
+                                                                                 1) Hop = 1 Performance: Nodes located one hop from
+C. Simulation Parameters                                                      the sink represent baseline communication performance and
+   The simulated network consists of 26 LoRa nodes operating                  exhibit highly reliable short-range communication under base-
+in the European 868 MHz ISM band and deployed in a linear,                    line traffic conditions. Under Scenario A, these nodes achieve
+bridge-based topology. All simulations operate at a carrier                   a packet delivery ratio of approximately 99.5%, indicating
+Fig. 2. Performance metrics for Hop = 1 nodes under baseline monitoring   Fig. 3. Performance metrics for Hop = 5 nodes under baseline monitoring
+conditions: (a) energy consumption and (b) end-to-end latency.            conditions: (a) energy consumption and (b) end-to-end latency.
+
+
+
+minimal packet loss and stable link conditions in the absence             delays accumulate across multiple hops. Nevertheless, the
+of forwarding overhead.                                                   observed latency values remain within acceptable limits for
+   When extending communication to deeper multi-hop paths,                delay-tolerant infrastructure monitoring applications.
+nodes located five hops away from the sink experience a                   A. Scenario B: Increased Traffic Load
+reduction in packet delivery ratio to approximately 94.5%.
+                                                                             In this scenario, nodes transition from baseline monitoring
+This decrease reflects the cumulative impact of multi-hop
+                                                                          to higher reporting frequencies in order to evaluate the impact
+forwarding, including additional transmission attempts and
+                                                                          of increased traffic load on network performance. Three traffic
+increased contention along the forwarding path. Despite this
+                                                                          phases are considered: normal load (one packet per hour),
+reduction, the observed packet delivery performance remains
+                                                                          moderate load (one packet every five minutes), and high load
+acceptable for delay-tolerant infrastructure monitoring appli-
+                                                                          (one packet per minute).
+cations and demonstrates the robustness of Meshtastic-based
+                                                                             1) Hop = 1 Performance: Nodes located one hop from
+multi-hop communication in linear deployments.
+                                                                          the sink maintain a high packet delivery ratio under moderate
+   Energy consumption remains low and stable for nodes
+                                                                          traffic conditions, while a slight degradation is observed at
+close to the sink, as these nodes do not participate in packet
+                                                                          high traffic loads due to increased channel contention. Energy
+forwarding for other devices. End-to-end latency is minimal,
+                                                                          consumption increases with reporting frequency, reflecting
+reflecting the limited processing and transmission overhead
+                                                                          higher transmission activity. End-to-end latency remains low
+associated with single-hop communication.
+                                                                          but shows a gradual increase as traffic load intensifies.
+   2) Hop = 5 Performance: For nodes located five hops from                  2) Hop = 5 Performance: For nodes located five hops from
+the sink, the packet delivery ratio decreases compared to the             the sink, increased traffic load results in a more pronounced
+single-hop case, reflecting the increased probability of packet           reduction in packet delivery ratio due to cumulative contention
+loss across extended multi-hop paths. Despite this reduction,             and forwarding overhead. Energy consumption rises signifi-
+the mesh network maintains reliable end-to-end communi-                   cantly along multi-hop paths, and end-to-end latency increases
+cation through cooperative forwarding among intermediate                  as packets experience longer queuing and forwarding delays
+nodes.                                                                    under high traffic conditions.
+   Energy consumption increases for nodes along the for-
+warding path due to repeated transmission and reception                                           V. D ISCUSSION
+operations required for multi-hop relaying. End-to-end latency              In this paper, communication performance is quantified us-
+also increases relative to the Hop = 1 case, as forwarding                ing packet delivery ratio (PDR), end-to-end latency, and energy
+Fig. 4. Performance metrics for Hop = 1 nodes under increased traffic load:      Fig. 5. Performance metrics for Hop = 5 nodes under increased traffic load:
+(a) packet delivery ratio, (b) energy consumption, and (c) end-to-end latency.   (a) packet delivery ratio, (b) energy consumption, and (c) end-to-end latency.
+
+
+
+consumption; long-term reliability and availability metrics are                  maintains acceptable PDR levels, illustrating the effectiveness
+not explicitly modeled. The simulation results provide clear                     of cooperative multi-hop forwarding in extending network cov-
+insights into the behavior of multi-hop LoRa mesh networks                       erage while preserving communication reliability. Although
+under varying traffic loads and hop distances. Across both                       energy consumption and latency increase with hop count, these
+evaluated scenarios, the impact of hop count and reporting                       increases remain within acceptable bounds for delay-tolerant
+frequency emerges as a dominant factor influencing packet                        monitoring applications.
+delivery ratio (PDR), energy consumption, and end-to-end                            In Scenario B (Increased Traffic Load), the effects of higher
+latency.                                                                         reporting frequencies become more pronounced. Increased
+   Under Scenario A (Baseline Monitoring), the network                           traffic introduces additional channel contention and forwarding
+demonstrates stable and reliable performance. Nodes located                      overhead, particularly along multi-hop paths. As a result,
+one hop from the sink achieve consistently high PDR values,                      nodes located farther from the sink experience a noticeable
+confirming that short-range communication combined with                          reduction in PDR, accompanied by a significant rise in energy
+low reporting frequency minimizes packet loss. Energy con-                       consumption due to repeated transmission and reception oper-
+sumption remains low and predictable, as nodes close to the                      ations. End-to-end latency also increases as packets encounter
+sink do not participate extensively in packet forwarding. For                    longer queuing and forwarding delays across multiple hops.
+nodes located five hops away, the mesh routing mechanism                         Despite these challenges, the network maintains functional
+operation, demonstrating the robustness of the mesh-based                         [10] Y. Bao and Z. Li, “Structural health monitoring systems for bridge
+LoRa architecture under increased traffic demands.                                     structures: A review,” Journal of Civil Structural Health Monitoring,
+                                                                                       vol. 7, no. 3, pp. 405–424, 2017.
+  Overall, the results highlight a fundamental trade-off be-
+tween network scalability, energy efficiency, and latency.
+While deeper multi-hop routes and higher traffic loads enable
+broader coverage and more frequent data reporting, they
+impose additional energy and delay costs. These findings em-
+phasize the importance of traffic-aware routing strategies and
+adaptive reporting mechanisms to balance performance and
+energy consumption in infrastructure monitoring deployments.
+
+                           VI. C ONCLUSION
+   This paper evaluated the performance of a multi-hop LoRa
+mesh network deployed over a linear bridge infrastructure
+using a custom simulation framework. Two operating scenarios
+were examined: baseline monitoring with low reporting fre-
+quency and increased traffic load with higher reporting rates.
+Performance was assessed in terms of packet delivery ratio,
+energy consumption, and end-to-end latency for nodes located
+at different hop distances from the sink.
+   The results demonstrate that the evaluated mesh-based LoRa
+architecture enables communication beyond the limitations of
+single-hop LoRa, achieving high packet delivery ratios under
+baseline conditions and maintaining acceptable performance
+under increased traffic loads. While energy consumption and
+latency increase with hop count and traffic intensity, these
+effects scale predictably and remain suitable for delay-tolerant
+infrastructure monitoring applications. The findings confirm
+that cooperative multi-hop forwarding is a viable solution for
+infrastructure-constrained and delay-tolerant IoT deployments.
+   Future work will focus on integrating adaptive routing
+metrics, traffic-aware scheduling mechanisms, and energy-
+balancing strategies to further enhance network scalability and
+robustness under dynamic operating conditions.
+
+                              R EFERENCES
+ [1] U. Raza, P. Kulkarni, and M. Sooriyabandara, “Low Power Wide Area
+     Networks: An Overview,” IEEE Communications Surveys & Tutorials,
+     vol. 19, no. 2, pp. 855–873, 2017.
+ [2] P. Centenaro, L. Vangelista, A. Zanella, and M. Zorzi, “Long-range
+     communications in unlicensed bands: The rising stars in the IoT and
+     smart city scenarios,” IEEE Wireless Communications, vol. 23, no. 5,
+     pp. 60–67, Oct. 2016.
+ [3] M. Bor, U. Roedig, T. Voigt, and J. M. Alonso, “Do LoRa low-power
+     wide-area networks scale?,” in Proc. ACM MSWiM, Malta, 2016, pp. 59–
+     67.
+ [4] J. Petäjäjärvi, K. Mikhaylov, M. Hämäläinen, and J. Iinatti, “On the
+     coverage of LPWANs: Range evaluation and channel attenuation model
+     for LoRa technology,” in Proc. IEEE ITS-T, 2015, pp. 55–59.
+ [5] M. R. Islam et al., “Performance Evaluation of Multi-Hop LoRaWAN,”
+     IEEE Access, vol. 11, pp. 50929–50950, 2023.
+ [6] C. Ebi et al., “Synchronous LoRa Mesh Network to Monitor Processes
+     in Underground Infrastructure,” IEEE Access, vol. 7, pp. 57663–57677,
+     2019.
+ [7] J. M. Solé et al., “Implementation of a LoRa Mesh Library,” IEEE
+     Access, vol. 10, 2022.
+ [8] D. B. Gemeda, M. Lehner, P. Rauh, and W. Stork, “LoRa Mesh Network
+     for Overhead Transmission Line Monitoring,” in Proc. IEEE ICT4DA,
+     2022.
+ [9] A. Zanella, N. Bui, A. Castellani, L. Vangelista, and M. Zorzi, “Internet
+     of Things for smart cities,” IEEE Internet of Things Journal, vol. 1,
+     no. 1, pp. 22–32, Feb. 2014.
+

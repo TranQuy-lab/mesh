@@ -1,0 +1,524 @@
+                                         Achieving Max-Min Throughput in LoRa Networks
+                                                                 Jiangbin Lyu, Member, IEEE, Dan Yu, and Liqun Fu, Senior Member, IEEE
+
+
+                                           Abstract—With growing popularity, LoRa networks are piv-                     how to effectively allocate wireless resources in LoRa networks
+                                        otally enabling Long Range connectivity to low-cost and power-                  to support massive connectivity with fairness in a wide area
+                                        constrained user equipments (UEs). Due to its wide coverage                     remains as a challenging and critical issue.
+                                        area, a critical issue is to effectively allocate wireless resources
+                                        to support potentially massive UEs in the cell while resolving                     In particular, the LoRa physical layer adopts the robust Chirp
+                                        the prominent near-far fairness problem for cell-edge UEs, which                Spread Spectrum (CSS) modulation with different spreading
+                                        is challenging to address due to the lack of tractable analytical               factors (SFs) to accommodate multiple UEs in one channel,
+                                        model for the LoRa network and its practical requirement for low-               whereby the CSS interference comes mostly from the co-
+                                        complexity and low-overhead design. To achieve massive connec-                  SF signals, and has a pseudo-orthogonal characteristic with
+                                        tivity with fairness, we investigate the problem of maximizing the
+                                        minimum throughput of all UEs in the LoRa network, by jointly                   different-SF signals [3]. Moreover, higher SF is associated
+                                        designing high-level policies of spreading factor (SF) allocation,              with lower receiver sensitivity1 (often below the noise floor)
+                                        power control, and duty cycle adjustment based only on average                  thus extending the communication range, at the cost of lower
+arXiv:1904.12300v2 [cs.IT] 2 Sep 2020
+
+
+
+
+                                        channel statistics and spatial UE distribution. By leveraging on                bit rate. On top of the LoRa physical layer, LoRa Alliance
+                                        the Poisson rain model along with tailored modifications to our                 has defined the higher layers and network architecture termed
+                                        considered LoRa network, we are able to account for channel
+                                        fading, aggregate interference and accurate packet overlapping,                 as LoRaWAN, whereby the medium access control (MAC)
+                                        and still obtain a tractable and yet accurate closed-form formula               layer is essentially an Aloha variant of random access owing
+                                        for the packet success probability and hence throughput. We                     to its simplicity. In particular, the class A-type devices in
+                                        further propose an iterative balancing (IB) method to allocate                  LoRaWAN consume the lowest power as they adopt the pure
+                                        the SFs in the cell such that the overall max-min throughput                    (unslotted) Aloha-like random access with no synchronization
+                                        can be achieved within the considered time period and cell
+                                        area. Numerical results show that the proposed scheme with                      or scheduling overhead, and thus are well suited for low duty-
+                                        optimized design greatly alleviates the near-far fairness issue, and            cycle devices which are asleep most of the time. Therefore, we
+                                        significantly improves the cell-edge throughput.                                consider class A type in this paper, which is the simplest and
+                                                                                                                        also mandatory for all LoRa devices to implement.
+                                                                  I. I NTRODUCTION                                         Despite the low duty cycle, in very dense deployment
+                                           The Internet of Things (IoT) has found fast-growing ap-                      scenarios, LoRa networks will still suffer from collisions of
+                                        plications over recent years in the civilian domain such as                     concurrent transmissions in the same channel and SF. The
+                                        for environmental monitoring, building automation and smart                     conventional protocol model2 for pure Aloha is over simplified
+                                        cities, which call for wireless technologies that enable low-                   which does not account for channel fading, power control, and
+                                        cost, large-scale, and ultra-durable connectivity for almost                    aggregate interference, and thus cannot characterize the capture
+                                        everything. Low Power Wide Area Network (LPWAN) is one of                       effect due to near-far problem in a cell. A simulation model
+                                        the IoT paradigms that targets at providing long range wireless                 based on real interference measurements is presented in [4],
+                                        connectivity to power-constrained IoT devices in a wide area,                   while a scalability analysis of LoRa networks is performed in
+                                        which includes pronounced technologies such as Narrow Band                      [5] using a LoRa error model together with the LoRaWAN
+                                        (NB)-IoT [1] in the licensed band, and LoRa (Long Range) [2]                    MAC protocol in the ns-3 simulator. In [6], SFs are assigned
+                                        in the unlicensed band.                                                         by equalizing the time-on-air of packets sent by each UE,
+                                           This paper focuses on LoRa, one of the most promising                        while in [7] the transmit power and SFs are assigned to UEs
+                                        LPWAN technologies proposed by Semtech [3] and further pro-                     by minimizing the collision probability within the same SF,
+                                        moted by the LoRa Alliance [2]. By adaptively trading bit rates                 both of which have not considered the effect of small-scale
+                                        for better link budgets, the LoRa physical layer enables flexible               fading and the fairness in terms of throughput. The small-
+                                        long-range communication with low power consumption and                         scale fading effect has been considered in the classic stochastic
+                                        low cost design, which is particularly suitable for those user                  geometry method for slotted Aloha [8]. In the context of LoRa
+                                        equipments (UEs) that transmit little amount of data over long                  networks, a mathematical analysis on the uplink coverage is
+                                        periods of time, e.g., water and gas meters. On the other hand,                 conducted in [9] via stochastic geometry, which yet considers
+                                        however, due to the wide coverage area, there are potentially                   only the strongest interferer and ignores the time dependence of
+                                        massive UEs to be connected by the LoRa Gateway (GW).                           (partially) overlapping packets. Recent works in [10] and [11]
+                                        Worse still, the near-far fairness issue becomes more prominent,                consider channel fading, aggregate interference, and accurate
+                                        as the cell-edge UEs suffer from more severe path-loss and are                  packet overlapping, and yet it is difficult to obtain the exact
+                                        typically the bottleneck of overall system performance. To date,                distribution of packet success probability analytically. In sum-
+                                                                                                                        mary, a tractable and accurate analytical model is highly needed
+                                           This work was supported in part by the National Natural Science Foundation   for the performance evaluation in LoRa networks, which also
+                                        of China (No. 61801408 and No. 61771017), the Natural Science Foundation        facilitates further system optimization with low-complexity and
+                                        of Fujian Province (No. 2019J05002) and the Fundamental Research Funds for
+                                        the Central Universities (No. 20720190008).
+                                                                                                                          1 Receiver sensitivity is the lowest power level at which the receiver can
+                                           The authors are with School of Informatics, and Key Laboratory of
+                                        Underwater Acoustic Communication and Marine Information Technology,            detect the signal and demodulate data.
+                                        Xiamen University, China 361005 (e-mail: {ljb, liqun}@xmu.edu.cn; yu-             2 In the protocol model, two packets are considered both failure if they
+                                        danx@stu.xmu.edu.cn). Corresponding author: Liqun Fu.                           overlap by any part in time.
+low-overhead design.
+   To achieve massive connectivity with fairness, we study the
+                                                                                                                                   12
+problem of maximizing the minimum throughput of all UEs                                                                      10
+                                                                                                                                  11
+                                                                                                                         9
+in the cell, by jointly optimizing the SF allocation, power                                                          8
+                                                                                                              s 7
+control, and duty cycle adjustment. Note that achieving the                                                                             r11
+instantaneous max-min throughput usually requires the real-                                                  0      r7 r8 r9 r10              rc
+time channel state information (CSI) of all UEs which is
+prohibitive to collect from low power and duty cycle devices,
+and worse still, the problem is shown to be a mixed-integer non-
+linear programming (MINLP) which is computationally costly.                                                                            
+We therefore design high-level control policies based only on
+average channel statistics and spatial UE distribution, e.g.,                             Fig. 1: Single-gateway LoRa networks.
+slow channel inversion power control based on average chan-
+nel strength. Moreover, for analytical tractability, we leverage          pseudo-orthogonal SFs s ∈ S , {7, · · · , 12}. For a given s,
+another thread of stochastic geometry for non-slotted Aloha,              the transmission rate in bits/second (bps) is given by [3]
+i.e., the Poisson rain model [12], which caters for channel                                                s
+                                                                                                    Rs = s BC,                          (1)
+fading, aggregate interference, and accurate packet overlapping.                                           2
+With tailored modifications to our considered LoRa network,               where C is the code rate. For simplicity, assume that the packets
+we are able to obtain a tractable and yet accurate closed-                are of equal length Ls bits for a given s, which corresponds to
+form formula for the packet success probability and hence                 a packet duration of Ts , Ls /Rs .
+throughput, based on which the optimal duty cycle can be                     Denote Pk as the transmit power of UE k in Watt (W),
+derived. We further propose an iterative balancing (IB) method            capped by the maximum allowed value Pmax . Assume that the
+to allocate the SFs in the cell such that the overall max-min             GW and UEs are each equipped with a single omnidirectional
+throughput can be achieved within the considered time period              antenna with unit gain. We assume a fading channel between
+and cell area, even when the duty cycle is pre-determined                 the GW and UEs, which consists of distance-dependent path-
+and non-adjustable. Numerical results show that the proposed              loss with path-loss exponent n ≥ 2 and an additional random
+scheme with optimized design greatly alleviates the near-far              term accounting for small-scale fading. Therefore, the channel
+fairness issue in a large service area, and significantly improves        power gain from the GW to UE k can be modelled as
+the cell-edge throughput. Moreover, the total spatial throughput          gk = ḡk ζk , where ḡk , α0 (HG   2
+                                                                                                                + d2k )−n/2 is the average
+has also been improved significantly, compared with benchmark             channel power gain, with α0 = ( 4πf   c −2
+                                                                                                               c )     denoting the average
+schemes with fixed transmit power and duty cycle. Finally,                channel power gain at a reference distance of 1 m, fc denoting
+besides system optimization, the proposed throughput formula              the carrier frequency, c denoting the speed of light, and dk
+is itself useful for performance evaluation, while the proposed           denoting the horizontal distance between GW 0 and UE k;
+analytical framework can be extended to other general settings                     dist.
+                                                                          and ζk = ζ ∼ Exp(1/µ) is an independent and identically
+in LoRa networks.
+                                                                          distributed (i.i.d.) exponential RV with mean 1/µ accounting
+   Notations: R denotes the set of real numbers; Z denotes
+                                                                          for the small-scale Rayleigh fading.5
+the set of integer numbers; P{·} denotes the probability of
+                                                                             Consider a typical UE 0 with SF s. Assume that the receiver
+an event; E{·} denotes the expectation of a random variable
+        dist.                                                             noise at the GW is additive white Gaussian noise (AWGN) with
+(RV); = denotes equal in distribution; exp{·} denotes the                 zero mean and power σ 2 (W). In the case without interference,
+exponential function; k·k denotes the Euclidean norm; |·| takes S         the received signal-to-noise ratio (SNR) is given by
+the cardinality of a set; T\· denotes the set minus operation;
+denotes the set union;        denotes the set intersection; and ∅                            ηs,0 , P0 g0 /σ 2 = P0 ḡ0 ζ0 /σ 2 ,                  (2)
+denotes the empty set.
+                                                                          which needs to be not smaller than a certain threshold η̄s in
+                                                                          order for the packet to be successfully decoded, where η̄s is
+                       II. S YSTEM M ODEL
+                                                                          typically lower for higher SF (see Table I in [9]).
+   Consider uplink3 communication from distributed UEs to a                  In the case when multiple UEs transmit concurrently on the
+single GW with height HG meters (m) at the origin and a                   same channel and SF, the co-SF interference could fail the
+disk cell area A ⊂ R2 of radius rc m, as shown in Fig. 1. In              overlapping packets. Consider pure (unslotted) Aloha as the
+the considered time period, denote K = {1, 2, · · · , K} as the           MAC-layer multiple access method, which corresponds to Class
+set of active UEs4 in the cell which have packets to transmit,            A in LoRaWAN. Denote Ks ⊆ K as the set of UEs with SF s,
+with 2D locations wk , (xk , yk ), xk , yk ∈ R, k ∈ K on the              i.e.,
+ground, which are assumed to follow a homogeneous Poisson                                    Ks = {k|sk = s, k ∈ K},                (3)
+point process (HPPP) Φ ⊂ A with density λ /m2 . Then K is
+a Poisson RV with mean K̄ , λπrc2 .                                       where sk is the SF of UE k. Denote Ks , |Ks | as the number
+   LoRa is adopted as the physical layer transmission technol-            of UEs with SF s. Denote the duty cycle, i.e., fraction of time
+ogy for UE-GW communications. For the purpose of expo-                    that an active UE is transmitting packets, as δk ∈ [0, 1] for
+sition, consider a single channel with bandwidth B Hz, and                UE k, which is subject to a certain limit ∆max (e.g., 1%). For
+                                                                          simplicity, assume that the UEs in Ks adopt the same duty cycle
+  3 Uplink communication from LoRa end devices to the network server is
+typically uncoordinated and presents as the performance bottleneck.         5 The proposed analytical method in this paper can be readily extended to
+  4 We neglect “active” in the rest of the paper for simplicity.          account for other fading channels.
+δk = ∆s , ∀k ∈ Ks . The number of transmission initiations per                             III. P ROBLEM F ORMULATION
+UE per unit time is then given by                                            In this section, we formulate the optimization problem to
+                          1            ∆s                                maximize the minimum throughput θ of all UEs by jointly
+                ρs ,             =             ,                   (4)   optimizing the transmit power Pk , SF sk , and duty cycle ∆s
+                     Ts /∆s − Ts   (1 − ∆s )Ts
+                                                                         of all UEs k ∈ K, under given UE density λ and cell radius
+which corresponds to the time frequency of channel access.
+                                                                         rc . The problem can be formulated as
+   The aggregate co-SF interference is modeled in the follow-
+ing. Consider the typical UE 0 with SF s which transmits a                        (P1) :     max           θ
+                                                                                           θ,∆s ,s∈S
+reference packet during the time interval [0, Ts ]. The average                            Pk ,sk ,k∈K
+number of co-SF packets initiated during this packet interval                                  s.t.      θs,k ≥ θ, ∀k ∈ Ks , s ∈ S,     (11)
+is given by Ks ρs Ts . At a given time instant t ∈ [0, Ts ], the                                         0 ≤ ∆s ≤ ∆max , s ∈ S,         (12)
+transmitting UEs with SF s make up a set Ks (t) ⊆ Ks , which
+cause the total received interference power at the GW as                                                 0 ≤ Pk ≤ Pmax , k ∈ K,         (13)
+                    X                   X                                                                sk ∈ S, k ∈ K.                 (14)
+        Is (t) ,            Pk gk =             Pk ḡk ζk .  (5)
+                 k∈Ks (t)\{0}           k∈Ks (t)\{0}                        The problem (P1) is a MINLP due to the discrete SF
+                                                                         allocation and the non-linear constraint (11). In general, it
+The aggregate interference power at the GW averaged over one             requires O(|S|K ) complexity to search for the optimal solution,
+packet duration Ts is then given by                                      which is prohibitive for the scenario with massive IoT devices.
+                             Z Ts
+                          1                                                 In addition to the complexity, solving problem (P1) also
+                    ¯
+                    Is ,          Is (t) dt.              (6)
+                          Ts 0                                           faces practical challenges. Due to the low energy consumption
+                                                                         requirement of IoT devices, the UEs typical have low wake-up
+   Under the non-slotted Aloha model with average interference           frequency and limited active time upon wake-up. Therefore,
+constraint [12], the signal-to-interference ratio (SIR) γs,0 of the      the set of active UEs may be constantly changing over time
+reference packet is given by                                             from the pool of massive IoT devices. As a result, it would be
+                        γs,0 , P0 ḡ0 ζ0 /I¯s ,                    (7)   difficult for the GW to obtain the instantaneous CSI of all UEs
+                                                                         at all time which is required to solve (P1) optimally. Moreover,
+which corresponds to a situation where some coding with                  the GW has limited downlink capacity to send control or
+repetition and interleaving of bits on the whole packet duration         feedback information to UEs. Therefore, even if the centralized
+is used; and the reference packet can be successfully decoded            problem (P1) can be solved instantaneously for every given
+if its SIR is not smaller than a certain threshold γ̄s (see Table        snapshot of active UEs, it would create a huge overhead for
+1 in [13]).                                                              GW-UE handshaking and conveying the optimal solutions to
+   In summary, the success probability of a reference packet             each individual UE.
+sent by the typical UE 0 with SF s is thus given by                         In order to resolve the above challenges, we propose to
+                                                                         design high-level policies to optimize the overall system perfor-
+      Psuc
+       s,0 , P {ηs,0 ≥ η̄s }&{γs,0 ≥ γ̄s }
+               
+                                                              (8)        mance in a larger time scale. Specifically, instead of requiring
+                            2                    ¯
+               
+           = P {P0 ḡ0 ζ0 /σ ≥ η̄s }&{P0 ḡ0 ζ0 /Is ≥ γ̄s }              detailed information about UE locations and instantaneous CSI
+          (a)                                                            at a given time snapshot, we assume only knowledge about
+          ≥ P ζ0 ≥ η̄s σ 2 /(P0 ḡ0 ) P ζ0 ≥ γ̄s I¯s /(P0 ḡ0 )
+                                           
+                                                                         the active UE distribution and density over a certain period of
+          (b) −µη̄s σ2 /(P0 ḡ0 )             ¯                          time as well as the channel statistics such as fading distribution
+                                  EI¯s e−µγ̄s Is /(P0 ḡ0 ) ,
+                                      
+          =e                                                       (9)   and path-loss exponent. We seek to maximize the minimum
+where the inequality (a) holds since the two events on ζ0                throughput averaged over time, by jointly designing the policies
+are positively correlated 6
+                            ; (b) is due to ζ0 with exponential         of power control, SF allocation and duty cycle adjustment.
+                        −µγ̄    ¯
+                               s Is /(P0 ḡ0 )
+distribution; and EI¯s e                       , LI¯s µγ̄s /(P0 ḡ0 )
+                                                                                              IV. P ROPOSED S CHEME
+where LI¯s (·) is the Laplace transform7 of the RV I¯s . Note
+that the inequality (a) is tight when γ̄s I¯s ≫ η̄s σ 2 , which is          In general, higher SF is associated with lower SNR threshold
+typically the case for interference-limited scenario, especially         η̄s at the cost of lower data rate [3], which helps to extend
+thanks to the low value of η̄s (e.g., -6 dB to -20 dB) associated        the communication range from the GW in the absence of
+with the low sensitivity of LoRa receiver.                               interference. Therefore, it is natural to assign higher SF to UEs
+                                                                         at a longer distance from the GW, which have larger path-
+   As a result, we need to characterize the Laplace transform of
+                                                                         loss and hence lower average received power at the GW under
+the average interference I¯s in order to obtain Psucs,0 , and further
+                                                                         the same transmit power. We thus adopt the distance-based SF
+obtain the throughput of the typical UE 0 in bps given by
+                                                                         allocation policy without requiring real-time CSI.
+                        θs,0 , Rs ∆s Psuc
+                                      s,0 .                       (10)      Specifically, for the considered cell area of radius rc , it is
+                                                                         partitioned into |S| = 6 zones with the delimiting distance
+The throughput of other UE k with SF s, denoted as θs,k , can            threshold rs , s = 7, · · · , 11. By default, denote r6 = 0 and
+be obtained similar to θs,0 .                                            r12 = rc . The UEs in each zone As within distance rs to rs−1
+                                                                         are allocated with the SF s, respectively. For example, the UEs
+  6 We have P
+                                                                      within distance r7 from GW 0 are allocated with SF 7, the
+               {ζ0 ≥ a}&{ζ0 ≥ b} = P ζ0 ≥ a P ζ0 ≥ b|ζ0 ≥ a ,
+        
+where P ζ0 ≥ b|ζ0 ≥ a ≥ P ζ0 ≥ b since the event ζ0 ≥ a implies that
+                                                                         UEs within distance r8 to r7 are allocated with SF 8 and so
+ζ0 ≥ b is more likely to happen.                                         on, as shown in Fig. 1. Denote r , (r7 , · · · , r11 ) as the vector
+  7 The Laplace transform of an RV X is defined as L (z) , E
+                                                              −zX
+                                                    X       X e    .     of partitioning distance threshold, which is the optimization
+variable to determine the SF allocation. For HPPP distributed                      LemmaP 1 (Fact A.3 in [12]). Consider a generic shot-noise
+UEs, the number of UEs Ks allocated to SF s is a Poisson RV                        J , Yk ∈Π f (ζk , Yk ) generated by some HPPP Π with density
+with mean λAs , where As = |As | denotes the area associated                       Λ, response function f (·, ·) and i.i.d. marks ζk distributed as
+with SF s and is given by                                                          a generic RV ζ. Then the Laplace transform of J is given by
+                                                                                                                                         
+                 As = π(rs2 − rs−1
+                               2
+                                                                                                            Z
+                                   ), s = 7, · · · , 12.                  (15)         LJ (z) = exp − Λ          1 − Eζ {e  −zf (ζ,y)
+                                                                                                                                       
+                                                                                                                                      } dy ,   (21)
+   When the partitioning distance threshold r is given, the
+power control problem is also simplified. If the typical UE                        where the integral is evaluated over the whole state space on
+is at the zone edge with distance rs from the GW, its packet                       which Π lives.
+success probability follows from (9), and thus is more likely to                     Based on Lemma 1, we derive the Laplace transform of the
+be in outage due to larger path-loss than the inner UEs with the                   average interference I¯s in our setting with power control and
+same SF s, under the same transmit power. In order to achieve                      bounded UE distribution field. The results are summarized in
+max-min throughput for the UEs k ∈ Ks without real-time CSI,                       the following proposition:
+we propose the “slow” channel inversion power control based
+on the average channel power gain ḡk , such that the average                      Proposition 1. The Laplace transform of the average interfer-
+received power at the GW is the same8 for all UEs with SF                          ence I¯s defined by (6) and (20) under the Poisson rain model
+s, denoted by Q̄s . Specifically, the transmit power of each UE                    is given by
+k ∈ Ks is given by                                                                                                                  
+                                                                                                      −2λAs ∆s         µ         µ
+                             2                                                       LI¯s (z) = exp               1+       ln             . (22)
+       Pk = Q̄s /ḡk = Q̄s (HG + d2k )n/2 /α0 , ∀k ∈ Ks ,                 (16)                          1 − ∆s        Q̄s z µ + Q̄s z
+where the transmit power Pk is inversely proportional to ḡk ,                       Proof: Please refer to Appendix A.
+and thus we have Q̄s = Pk ḡk , ∀k ∈ Ks , including the typical                                                                       dist.
+                                                                                      For the UEs k ∈ Ks with i.i.d. fading ζk = ζ and under
+UE 0. The power control in (16) can also be written in the                         the above power control, their SNR and SIR are both equal
+form of distance-based policy as follows:                                          in distribution, respectively, and hence they have equal packet
+                                    2
+                   P (s, r) , Q̄s (HG + r2 )n/2 /α0 ,                     (17)     success probability which can be obtained based on (9) and
+                                                                                   Proposition 1 as follows:
+where P (s, r) denotes the transmit power of the UE with SF                                                                        ¯
+                                                                                                         −µη̄s σ2 /Q̄s
+                                                                                                Psuc                   EI¯s e−µγ̄s Is /Q̄s
+                                                                                                                           
+s at distance r from the GW. In particular, for the UE at the                                    s,0 = e
+zone edge with transmit power Psedge , P (s, rs ), we have                                                     −σ 2 µη̄s
+                                                                                                                                           
+                                                                                                                              2λAs Cs ∆s
+                                                                                                      = exp                −                  ,      (23)
+                                      2
+                    Q̄s , Psedge α0 (HG + rs2 )−n/2 ,                     (18)                                     Q̄s          1 − ∆s
+                                                                                   where Cs , 1 + γ̄1s ln 1+γ̄     1
+                                                                                                                       
+and hence                                                                                                            s
+                                                                                                                          is a constant. Therefore, the
+                                                     n/2                          common throughput of UEs with SF s is given by
+                                            2
+                                              + r2
+                                       
+                                           HG
+                   P (s, r) = Psedge                        .                                                              −σ 2 µη̄s
+                                                                                                                                                   
+                                            2 + r2                        (19)                       suc                                 2λAs Cs ∆s
+                                           HG    s                                    θ̄s , Rs ∆s Ps,0 = Rs ∆s exp                    −               .
+                                                                                                                              Q̄s          1 − ∆s
+In other words, the transmit power of inner UEs with SF s and                                                                                        (24)
+r < rs is reduced so that their average received power at the                         The tractable closed-form formula in (24) reveals insights
+GW equals to that of the UE at the zone edge, which achieves                       about the effects of key system parameters. First, θ̄s is mono-
+both fairness and power savings.                                                   tonically increasing with the equalized received power Q̄s in
+   Under the above UE partitioning and power control, we                           (18), which suggests Psedge = Pmax to be adopted by the
+derive the packet success probability in the following. The                        zone-edge UE. Second, θ̄s is monotonically decreasing with
+average interference I¯s is given in (6), and the instantaneous                    the zone-edge distance rs , which affects not only the average
+interference Is (t) in (5) is reduced to                                           received power Q̄s at the zone edge, but also the zone area
+                                 X                                                 As (and hence the number of UEs in the zone). Third, it
+                    Is (t) =             Q̄s ζk .          (20)
+                                                                                   can be verified that θ̄s first increases and then decreases with
+                                  k∈Ks (t)\{0}
+                                                                                   ∆s , which facilitates efficient solutions to achieve maximum
+Note that the UEs k ∈ Ks reside in the ring region As , whose                      throughput for those UEs with SF s. Also note that θ̄s goes to
+locations wk and packet initiation time instant tk are both                        0 as ∆s → 1, which is consistent with the practical scenario
+random, rendering the set Ks (t) difficult to model and analyze.                   where all UEs keep transmitting all the time. Finally, besides
+   In this paper, we adopt the Poisson rain model for the                          for system optimization, the throughput formula (24) is itself
+UEs k ∈ Ks (t), which forms a space-time HPPP Φs ,                                 useful as a tractable analytical result for performance evaluation
+{(wk , tk ), k ∈ Ks }. We may think of wk “born” at time instant                   in LoRa networks, while its deriving method is extendable to
+tk transmitting a packet during time interval [tk , tk + Ts ) and                  other general settings, e.g., multiple-GW scenario.
+“disappearing” immediately after. The HPPP Φs has a density                           To this end, the problem (P1) can be re-cast into the
+λρs , which corresponds to the space-time frequency of channel                     following problem:
+access. In the sequel, we derive the Laplace transform of the
+interference I¯s based on the formula for the Laplace functional                               (P2) : max          θ̄
+                                                                                                         θ̄,r
+of the HPPP:                                                                                           ∆s ,s∈S
+                                                                                                         s.t.    θ̄s ≥ θ̄, s ∈ S,                   (25)
+  8 For simplicity, continuous power control is considered here while the
+obtained results can be quantized into discrete power levels for implementation.                                 0 ≤ ∆s ≤ ∆max ,    s ∈ S,          (26)
+                      TABLE I: LoRa parameters                                                                                       10
+
+
+
+
+                                                                                                          Average Throughput (bps)
+ SF BitRateRs (bps) SNR threshold η̄s (dB) Max Range(m) EqualArea Range(m)                                                                   SF=7, MC
+                                                                                                                                     8       SF=7, Theory
+  7      5469                -6                1053             408                                                                          SF=8, MC
+  8      3125                -9                1283             577                                                                          SF=8, Theory
+  9      1758               -12                1563             707                                                                  6       SF=9, MC
+ 10       977               -15                1904             816                                                                          SF=9, Theory
+
+ 11       537              -17.5               2244             913                                                                  4
+ 12       293               -20                2645            1000
+
+                                                                                                                                     2
+
+
+where the optimal solution to (P2) is denoted as (r∗ ; ∆∗s , s ∈                                                                     0
+                                                                                                                                     0.0      0.1        0.2     0.3       0.4     0.5     0.6         0.7      0.8    0.9      1.0
+S), and the corresponding max-min throughput denoted as θ̄∗ .                                                                                                              Duty Cycle (%)
+In order to solve (P2), we first obtain the optimal duty cycle
+under given r for each SF s as follows:                                      Fig. 2: MC simulation verification for the throughput formula (24).
+                                                          
+                                                 1                                                      100
+  ∆∗s (r) = min     ∆max ,                  p                         ,                                                                           SF=7
+                             1 + λAs Cs +       λAs Cs (2 + λAs Cs )                                     10                                                                 SF=8
+                                                                                                                                                                                               SF=9
+                                                                     (27)
+
+
+
+
+                                                                             Average Throughput (bps)
+                                                                                                                                                                                                             SF=10
+                                                                                                                                                                                                                      SF=11
+which is obtained by finding the root of the first-order derivative                                         1
+                                                                                                                                                                                                                               SF=12
+
+on ∆s in (24) along with the constraint (26). It can be further                                                                           Benchmark Scheme 1
+
+verified that the corresponding throughput θ̄s∗ (r) is decreasing                                        0.1
+                                                                                                        100
+with the zone area As , which itself is decreasing with rs−1 but
+increasing with rs as given in (15).                                                                     10
+                                                                                                                                                               ∆7 =0.17%                                ∆8 =0.3%
+                                                                                                                                                                                                                              ∆10 =0.82%
+
+   Based on such monotonicity, we propose the Iterative Bal-                                                1
+                                                                                                                                                                                                                      ∆9 =0.49%
+                                                                                                                                     solid line: Theoretical Max-Min                                                              ∆11 =1%
+ancing (IB) method to find the optimal partitioning threshold                                                                        diamond dashed line: MC
+r∗ to achieve the overall max-min throughput θ̄∗ . Specifically,                                        0.1
+                                                                                                          100                               200      300         400         500         600          700       800      900          1000
+in each iteration, we find two neighboring zones As and As+1                                                                                                           TypicalUser Distance (m)
+
+which have the largest throughput gap ϑmax , and then tune rs                                                           Fig. 3: Throughput distribution in a cell with radius 1 km.
+with others in r fixed, such that the throughput gap is eliminated
+or reduced to the best extend. The iterations continue until ϑmax            into six equal-area ring regions (similar to Fig. 1) each allocated
+is less than a certain threshold ǫ, or until none of the throughput          with SF 7 to 12, respectively. Under the slow channel inversion
+gaps, in descending order, can be further reduced. Since the                 power control, we obtain the average (common) throughput of
+throughput gaps are bounded below by 0, and the larger gap                   the UEs in each region for a given duty cycle, and plot the
+is decreasing in each iteration, convergence is guaranteed at                results in Fig. 29 , for both the MC method and our proposed
+which the (lexicographical) max-min throughput is achieved.                  throughput formula (24). It can be seen that the proposed
+Due to space limit, the detailed algorithm pseudo code can be                formula matches quite well with the MC simulation results.
+found in [14]. Finally, note that for the case where the duty                Therefore, in the following, we apply (24) to find the optimal
+cycle is pre-determined and cannot be adjusted, the proposed                 operating point for achieving the overall max-min throughput
+power control and IB method can still be applied to achieve                  in (P2) under different target service area.
+the corresponding max-min throughput given the duty cycle.
+                                                                                In the second set of simulations, we first simulate a bench-
+                                                                             mark scheme 1 using the MC method with fixed transmit power
+                     V. N UMERICAL R ESULTS
+                                                                             Pk = Pmax and fixed duty cycle δk = 1% for all UEs k ∈ K,
+   In this section, we first verify the accuracy of the analyt-              under the equal-area cell partitioning where the partitioning
+ical formula in (24) by comparing with Monte Carlo (MC)                      distance threshold r is given in the last column of Table I. The
+simulation results, which is then applied to obtain the max-                 results are plotted in the upper half of Fig. 3. It can be seen
+min throughput solution to (P2) under different cell radius rc .             that the average throughput of the typical UE with a certain
+The following parameters are used if not mentioned otherwise:                SF decreases with its distance from the GW, resulting in a
+HG = 25 m, λ = 700/km2, B = 125 kHz, C = 4/5, Ls = 25                        prominent near-far fairness issue. Worse still, the UEs close to
+Bytes, Pmax = 14 dBm, n = 3.5, fc = 868 MHz, c = 3 × 108                     the cell edge (with SF 11 or 12) suffer from a poor throughput
+m/s, µ = 1, σ 2 = −117 dBm, ∆max = 1%, ǫ = 0.02 bps,                         due to lower bit rate.
+γ̄s = 6 dB for s ∈ S, and η̄s is given in Table I.                              In comparison, in the lower half of Fig. 3, we plot the results
+   In the MC simulations, we first generate the location database            obtained by our proposed scheme for solving (P2), which
+for the set Kall of all UEs (including both active and inactive)             matches well with the MC simulations under the obtained
+in the considered area, which is a random realization of an                  operating point. It can be seen that the achieved max-min
+HPPP with larger density λall (e.g., λall = 2λ). Then the set K              throughput is around 3 bps per UE, where more UEs tend to be
+of active UEs in the considered time period is randomly and                  allocated with lower SF to enjoy higher bit rate. In particular,
+independently drawn from Kall . The packet success probability               the optimal duty cycle of SF 11 is capped by 1%, while SF 12
+is obtained by averaging over N (e.g., N = 106 ) realizations of             is not used in this case due to its low bit rate. As a result, the
+K, where for each realization we simulate the random packet                  near-far fairness issue is greatly alleviated, and the throughput
+generation and verify both the SNR and SIR conditions for the                of cell-edge UEs greatly improved. On the other hand, define
+reference packet according to (8).                                           the spatial throughput of all UEs k ∈ K in bps/m2 as the ratio
+   In the first set of simulations, for the purpose of illustration,
+we consider a cell with radius rc = 1 km which is partitioned                                  9 SFs 10, 11 and 12 have similar results which are omitted for brevity.
+                           10 2                                                                                                                           A PPENDIX A
+                                                     SF=7                SF=8   SF=9        SF=10         SF=11       SF=12
+                           10 0
+                                                                                                                                    The average interference I¯s follows from (6) and (20):
+                           10 -2
+Average Throughput (bps)
+
+
+
+
+                                                                                                                                              Z Ts
+                                                                                                                                        1                                     dist.
+                                                                                                                                  I¯s =
+                                                                                                                                                              X                           X
+                           10 -4                                                                                                                                     Q̄s ζk dt =                     ζk h(tk )Q̄s , (29)
+                                          Benchmark Scheme 2                                                                            Ts     0
+                           10 -6                                                                                                                     k∈Ks (t)\{0}                     (wk ,tk )∈Φs
+
+                           10 2                                                                                                  where the second equality is due to swapping of integration
+                                                  ∆7 =7.1e-4
+                           10 0                                                 ∆9 =9.55e-4
+                                                                     ∆8 =0.13e-2
+                                                                                                     ∆11 =6.3e-4                 and summation, and the fact that the HPPP remains equal in
+                           10 -2                                                          ∆10 =6.44e-4             ∆12 =3.9e-4   distribution after removing one point; and
+                           10 -4       solid line: Theoretical Max-Min                                                                                                                  
+                                                                                                                                               Z         Ts                                  max Ts − |tk |, 0
+                                       diamond dashed line: MC                                                                                1
+                           10 -6                                                                                                   h(tk ) ,                   1(tk ≤ t < tk + Ts ) dt =                         ,
+                                   0              500            1000              1500                  2000          2500
+                                                                                                                                              Ts     0                                            Ts
+                                                                  TypicalUser Distance (m)                                                                                                                     (30)
+                                                                                                                                 which represents the time ratio of UE k’s packet overlapping
+                             Fig. 4: Throughput distribution in a cell with radius 2645 m.
+                                                                                                                                 with the reference packet in the time interval [0, Ts ], where 1(·)
+                                                                                                                                 is the indicator function.
+of the total throughput versus the considered cell area, i.e.,                                                                      Note that (29) matches with the shot-noise definition with the
+                         P      P
+                           s∈S    k∈Ks θs,k                                                                                      response function ζk h(tk )Q̄s , and thus it follows from Lemma
+                   Θ,                       .               (28)                                                                 1 that
+                                πrc2
+                                                                                                                                                       R ∞ R 2π R rs                       
+Compared with the benchmark scheme 1, the overall spatial                                                                                         −λρs −∞               1−Eζ {e−zζh(t)Q̄s } r dr dφ dt
+                                                                                                                                     LI¯s (z) = e            0   rs−1
+
+throughput has also been improved from 142 to 1000 bps/km2 .                                                                                              R∞                          
+                                                                                                                                                  −λρs As −∞    1−Eζ {e−zζh(t)Q̄s } dt
+   In the last set of simulations, we consider a larger cell with                                                                             =e
+radius rc = 2645 m, which is the maximum range reachable                                                                                                   R             µ
+                                                                                                                                                                                 
+                                                                                                                                              (a) −λρs As ∞ 1−                     dt
+by SF 12 under path-loss only. A benchmark scheme 2 is                                                                                        = e           −∞       µ+zh(t)Q̄ s
+
+                                                                                                                                                                   µ        µ
+                                                                                                                                                                                  
+simulated using the MC method with fixed transmit power and                                                                                   = e−2λρs As Ts 1+ Q̄s z ln µ+Q̄s z ,                   (31)
+duty cycle as in benchmark scheme 1, while the partitioning
+distance threshold rs is set as the maximum range reachable                                                                      where As is given in (15); and (a) is due to the Laplace
+by SF s under path-loss only, as in the fourth column of Table                                                                   transform of exponentially distributed ζ with mean 1/µ, which
+                                                                                                                                                           µ
+I. The results are plotted in the upper half of Fig. 4. Due to                                                                   is given by Lζ (z ′ ) , µ+z ′ . Therefore, Proposition 1 follows
+
+longer range and larger service area, it can be seen that the near-                                                              by substituting (4) into (31).
+far fairness issue becomes more severe, and the throughput of                                                                                                       R EFERENCES
+cell-edge UEs becomes even poorer. In comparison, we also
+                                                                                                                                  [1] J. Gozalvez, “New 3GPP standard for IoT [mobile radio],” IEEE Veh.
+plot the results obtained by our proposed scheme in the lower                                                                         Technol. Mag., vol. 11, no. 1, pp. 14–20, Mar. 2016.
+half of Fig. 4, which greatly alleviates the near-far fairness                                                                    [2] LoRa Alliance Technical Committee, LoRaWAN Specifications v1.1.
+issue and improves the cell-edge throughput. Compared with                                                                            LoRaWAN Alliance, Oct. 2017.
+                                                                                                                                  [3] Semtech, LoRa Modulation Basics, AN1200.22 Revision 2. Semtech,
+the benchmark scheme 2, the overall spatial throughput has also                                                                       May 2015.
+been improved from 10.3 bps/km2 to 88.2 bps/km2 . Finally,                                                                        [4] J. Haxhibeqiri, F. Van den Abeele, I. Moerman, and J. Hoebeke, “LoRa
+some deployment/design guidelines are suggested for a large                                                                           scalability: A simulation model based on interference measurements,”
+                                                                                                                                      Sensors, vol. 17, no. 6, p. 1193, 2017.
+service area. The properly-optimized LoRa network is able to                                                                      [5] F. Van den Abeele, J. Haxhibeqiri, I. Moerman, and J. Hoebeke, “Scala-
+serve the cell-edge UEs but typically at a low throughput, and                                                                        bility analysis of large-scale LoRaWAN networks in ns-3,” IEEE Internet
+it is beneficial to allow the UEs to adjust their duty cycle so                                                                       Things J., vol. 4, no. 6, pp. 2186–2198, Dec. 2017.
+                                                                                                                                  [6] F. Cuomo, M. Campo, A. Caponi, G. Bianchi, G. Rossini, and P. Pisani,
+as to alleviate the collisions from massive co-SF devices.                                                                            “EXPLoRa: Extending the performance of LoRa by suitable spreading
+                                                                                                                                      factor allocations,” in Proc. IEEE Int. Conf. Wireless Mob. Comput. Netw.
+                                                               VI. C ONCLUSIONS                                                       Commun. (WiMob), Oct. 2017, pp. 1–8.
+                                                                                                                                  [7] B. Reynders, W. Meert, and S. Pollin, “Power and spreading factor control
+   To achieve massive connectivity with fairness in LoRa net-                                                                         in low power wide area networks,” in Proc. IEEE Int. Conf. Commun.,
+works, this paper investigates the max-min throughput problem                                                                         May 2017, pp. 1–6.
+by jointly designing high-level policies of SF allocation, power                                                                  [8] F. Baccelli, B. Blaszczyszyn, and P. Muhlethaler, “An Aloha protocol for
+                                                                                                                                      multihop mobile wireless networks,” IEEE Trans. Inf. Theory, vol. 52,
+control, and duty cycle adjustment based only on average                                                                              no. 2, pp. 421–436, Feb. 2006.
+channel statistics and spatial UE distribution. By leveraging                                                                     [9] O. Georgiou and U. Raza, “Low power wide area network analysis: Can
+on the Poisson rain model along with tailored modifications to                                                                        LoRa scale?” IEEE Wireless Commun. Lett., vol. 6, no. 2, pp. 162–165,
+                                                                                                                                      Apr. 2017.
+our considered LoRa network, we are able to obtain a tractable                                                                   [10] Z. Li, S. Zozor, J. Brossier, N. Varsier, and Q. Lampin, “2D time-
+and yet accurate closed-form formula for the packet success                                                                           frequency interference modelling using stochastic geometry for perfor-
+probability and hence throughput. We further propose an IB                                                                            mance evaluation in low-power wide-area networks,” in Proc. IEEE Int.
+                                                                                                                                      Conf. Commun., May 2017, pp. 1–7.
+method to allocate the SFs in the cell such that the overall max-                                                                [11] J. Lim and Y. Han, “Spreading factor allocation for massive connectivity
+min throughput can be achieved. Numerical results show that                                                                           in LoRa systems,” IEEE Commun. Lett., vol. 22, no. 4, pp. 800–803, Apr.
+the proposed scheme with optimized design greatly alleviates                                                                          2018.
+                                                                                                                                 [12] B. Blaszczyszyn and P. Muhlethaler, “Stochastic analysis of non-slotted
+the near-far fairness issue, and significantly improves the cell-                                                                     Aloha in wireless ad-hoc networks,” in Proc. IEEE INFOCOM, Mar.
+edge throughput. Moreover, the overall spatial throughput has                                                                         2010, pp. 1–9.
+also been improved significantly compared with benchmark                                                                         [13] C. Goursaud and J.-M. Gorce, “Dedicated networks for IoT: PHY / MAC
+                                                                                                                                      state of the art and challenges,” EAI endorsed trans. Internet of Things,
+schemes with fixed transmit power and duty cycle. Future work                                                                         Oct. 2015.
+could extend the current scheme to the multiple-GW scenario                                                                      [14] J. Lyu, D. Yu, and L. Fu, “Achieving max-min throughput in LoRa
+to further improve the throughput and coverage range.                                                                                 networks,” 2019. [Online]. Available: http://arxiv.org/abs/1904.12300
+

@@ -1,0 +1,448 @@
+                                                       LoRa Multi-Hop Networks for Monitoring
+                                                          Underground Mining Environments
+                                                                 Luca Scalambrin                                      Andrea Zanella                   Xavier Vilajosana
+                                               Worldsensing & Universitat Oberta de Catalunya                     University of Padova           Universitat Oberta de Catalunya
+                                                              Barcelona, Spain                                       Padova, Italy                      Barcelona, Spain
+                                                       lscalambrin@worldsensing.com                             andrea.zanella@unipd.it               xvilajosana@uoc.edu
+
+
+
+                                            Abstract—Internet of Things applications have gained                       which have resulted in numerous fatalities over time [3].
+                                         widespread recognition for their efficacy in typical scenarios,
+arXiv:2310.20515v1 [cs.NI] 31 Oct 2023
+
+
+
+
+                                                                                                                       One of the primary challenges in implementing IoT-based
+                                         such as smart cities and smart healthcare. Nonetheless, there                 monitoring in such scenarios is the communication problem, as
+                                         exist numerous unconventional situations where IoT technologies
+                                         have not yet been massively applied, though they can be extremely             they predominantly consist of rock wall tunnels, where radio
+                                         useful. One of such domains is the underground mining sector,                 propagation is extremely challenging due to high signal loss
+                                         where enhancing automation monitoring through wireless com-                   [4]. Consequently, monitoring devices must exhibit reliable
+                                         munications is of essential significance. In this paper, we focus             communication capabilities, and they should be easily deploy-
+                                         on the development, implementation, and evaluation of a LoRa-                 able, considering that the locations can be difficult to access.
+                                         based multi-hop network tailored specifically for monitoring
+                                         underground mining environments, where data traffic is sporadic,                 Among the various IoT solutions available, LoRaWAN
+                                         but energy efficiency is of paramount importance. We hence                    stands out as one of the most commonly used for monitoring
+                                         define a synchronization framework that makes it possible for                 rugged environments with low data rate requirements, as is
+                                         the nodes to sleep for most of the time, waking up only when                  the case for underground domains. This is mainly due to
+                                         they need to exchange traffic. Notably, our network achieves a                its robust long-range coverage, achieved through a spread
+                                         sub 40 µs proven synchronization accuracy between parent-child
+                                         pairs with minimum overhead for diverse topologies, rendering                 spectrum technique denominated chirp spread spectrum (CSS),
+                                         it highly viable for subterranean operations. Furthermore, for                where the signal is modulated by chirp pulses [5]. Nev-
+                                         proper network dimensioning, we model the interplay between                   ertheless, LoRaWAN’s star topology architecture, in which
+                                         network’s throughput, frame size, and sampling periods of                     sensing nodes wirelessly connect to a central point known
+                                         potential applications. Moreover, we propose a model to estimate              as Gateway, presents significant limitations in subterranean
+                                         devices’ duty cycle based on their position within the multi-hop
+                                         network, along with empirical observations for its validation.                galleries, primarily because a single hop is insufficient to cover
+                                         The proposed models make it possible to optimize the network’s                the long distances that can be found in such scenarios. To
+                                         performance to meet the specific demands that can arise from the              overcome this challenge, a possible solution is to implement a
+                                         different subterranean use cases, in which robustness, low power              multi-hop network, a concept extensively utilized in the past
+                                         operation, and compliance with radio-frequency regulations are                with the advent of technologies such as WirelessHART and
+                                         key requirements that must be met.
+                                            Index Terms—synchronized wireless networks, underground                    802.15.4-6TISCH [6], [7]. However, these technologies were
+                                         mining monitoring, IoT, energy efficiency, multi-hop LoRa                     not engineered to face the challenges of harsh underground
+                                                                                                                       environments, and they were optimized for higher capacities
+                                                                  I. I NTRODUCTION                                     than those provided by LoRa. As a consequence, fitting all
+                                            In recent years, the Internet of Things (IoT) has witnessed                the required signaling within LoRa data rates while remaining
+                                         remarkable growth and impact across conventional domains,                     compliant with duty cycle regulations becomes unfeasible,
+                                         such as smart agriculture, smart cities and smart healthcare                  which leads to the need for the development of a new LoRa-
+                                         [1]. However, there are numerous unexplored applications                      based multi-hop framework.
+                                         where IoT could make a significant positive contribution, as                     Building an energy-efficient multi-hop structure requires
+                                         is the case with monitoring in the underground mining sector                  coordination between devices so communication processes can
+                                         [2]. This sector poses challenging working conditions for                     occur in a synchronized manner. This coordination is usually
+                                         laborers, and the automation of monitoring processes could                    rooted in clock synchronization approaches that ensure a
+                                         not only accelerate on-site measurements, including those of                  common notion of time among the entire network [8]. A usual
+                                         air quality, pressure, temperature, and structural vibrations,                method to achieve synchronization is to rely on a network
+                                         but also considerably reduce the risks faced by workers,                      protocol in which parent nodes act as time reference for their
+                                                                                                                       children, using data and/or control traffic to minimize the
+                                           The present work has received funding from the European Union’s Hori-       clock drift between peers [9]. However, maintaining network
+                                         zon 2020 Marie Skłodowska Curie Innovative Training Network Greenedge         synchronization often comes at the expense of sending extra
+                                         (GA.No. 953775) and is co-funded by the Spanish Ministry of Science, Inno-
+                                         vation and Universities under RF-VOLUTION project (PID2021-122247OB-          packets, which can negatively impact the network. Conse-
+                                         I00), the SGR 00174 2021 grant.                                               quently, the LoRa multi-hop protocol must keep overhead to
+a minimum, so as to run efficiently on extremely constrained       to the one proposed by the LoRa-Alliance, in which devices
+devices whilst adhering to regional regulations.                   closer to the gateway take on the role of relays. However, a
+   In this work, we propose a Time-Division Multiple Access        notable limitation of the method is that it only provides an ad-
+(TDMA) scheme explicitly designed to support multi-hop             ditional hop, which proves insufficient for underground mining
+LoRa-based communication in tree-shaped wireless networks.         environments. In [14], a library that facilitates the integration
+The proposed protocol has been implemented and tested on           of LoRa-enabled devices into a mesh network with a routing
+real devices to prove its effectiveness and practicality. To       protocol of distance-vector type is presented. Unfortunately,
+summarize, the primary contributions of this work are:             this library is exclusively suitable for end devices that can be
+1) Design, implementation and testing of a TDMA multi-hop          held in the listening state indefinitely, as it is also the case of
+protocol for LoRa-based wireless networks, with a sub 40 µs        the work carried out in [15], [16], rendering it impractical for
+father-child synchronization accuracy;                             most underground monitoring applications.
+2) Theoretical analysis of the inter-dependencies of frame size,      Given the inadequacy of the mentioned approaches for
+throughput and sampling period in a multi-hop network;             monitoring in underground scenarios, this study proposes a
+3) Model to estimate devices duty cycle depending on their         TDMA protocol specifically designed for battery-powered
+position within the multi-hop network, jointly with measure-       LoRa-enabled devices to be deployed in underground tun-
+ments for validation.                                              nels/galleries, where only one permanent-power sourced gate-
+   All these contributions together aim to provide a wider         way is needed at the periphery of the network, as exemplified
+perspective on the feasibility of LoRa multi-hop for industrial    in Fig. 1.
+scenarios, considering the limiting factors for its practical
+                                                                                               LoRa             LoRa             LoRa             LoRa
+adoption, such as the band regulations. As far as we know,                 LoRaWAN
+                                                                                              M-Hop            M-Hop            M-Hop            M-Hop
+
+this is the first study that includes such a perspective. The
+remainder of this paper is organized as follows: the related         Gateway
+                                                                    (Internet)
+work is briefly commented on Sec. II. In Sec. III we detailed
+the TDMA architecture designed together with a theoretical
+                                                                                                                                                                  Time
+analysis of the more important parameters, whilst the ex-                             Slot             Slot             Slot             Slot             Slot
+perimental setup is presented in Sec. IV and the results are                         Node 1           Node 2           Node 3           Node 4           Node 5
+
+provided in Sec. V. Finally, conclusions and future research
+lines are discussed in Sec. VI.                                    Fig. 1. Time dimension division technique employed between the different
+                                                                   devices in the network. This ensures that nodes of the system transmit and
+                     II. R ELATED W ORK                            receive only in their corresponding slots.
+
+   In recent years, there has been a growing interest in the                        III. TDMA A RCHITECTURE
+design and implementation of LoRa multi-hop networks, due            In this section, we provide a detailed explanation of the
+to their high versatility in monitoring applications. In [10],     TDMA protocol designed, together with a theoretical analysis
+the authors proposed a LoRa multi-hop architecture where the       between frame size and throughput, which is fundamental to
+gateway is in charge of sending queries to the child nodes         correctly dimensioning the system. Then, we provide a model
+when a sampling operation is required. A significant limitation    that aims to estimate the duty cycle of devices within the multi-
+of this asynchronous design is that end nodes must be kept in a    hop network based on their position.
+reception state continuously, making it unsuitable for battery-
+powered devices. Subsequently, Abrardo et al. [11] proposed        A. Principle of Operation
+an extension of LoRaWAN architecture for monitoring un-               The multi-hop LoRa protocol we have developed consists
+derground infrastructures in Italy. However, the solution only     of a TDMA system built at the Medium Access Control
+provides a line topology, which is not representative of the       (MAC) layer on top of the LoRa physical layer (PHY).
+most common real-world underground scenarios, and there is         Fig. 1 illustrates the fundamental operational principle, which
+also a lack of experimentation, as all the reported results were   consists of a tree architecture composed of one relay node
+obtained entirely from simulations. In [12], Ebi et al. proposed   and many other regular nodes. The protocol allocates the time
+an interesting synchronous mechanism for monitoring urban          dimension, dividing it into distinct time slots, each designated
+drainage systems centered on a relay node that collects data       for specific nodes within the network. To establish seamless
+from the other devices. However, the relay requires some spe-      wireless connections, every node within the network executes
+cial hardware, i.e., a double front-end capable of handling both   the LoRa multi-hop protocol, ensuring successful communica-
+the LoRaWAN layer and the mesh protocol, impacting directly        tion with both its parent and child nodes, if any. Conversely,
+on the device’s cost. In addition, the achieved synchronization    the relay node, being the unique gateway-reachable device,
+accuracy is not optimal for the hardware employed, leading to      must also implement the LoRaWAN stack. Therefore, the relay
+longer reception times that require more energy.                   node undertakes the vital role of receiving all data packets
+   A recent study by Mugerwa et al. [13] addresses the             transmitted within the network under the multi-hop system
+challenge of packet loss in LoRaWAN networks for devices           and subsequently uploading them to the Gateway through
+that are distant from the gateway. Their approach is similar       LoRaWAN communication.
+   The multi-hop LoRa MAC layer employs a versatile frame-                      packets of a predefined maximum size (64 bytes in this study)
+work consisting of five packet types, each encapsulated                         through the PHY LoRa layer, with all devices operating under
+within the LoRa PHY layer. Among these packet types,                            the multi-hop protocol with the same spreading factor (set
+JoinRequest and JoinAccept serve the purpose of                                 to SF = 9 in our case).2 Tbcn and Tack represent beacon
+enabling devices to join the network. The former is utilized                    and acknowledgement message duration, and they are kept as
+by a joining node to indicate its chosen parent node, while                     compact as possible with the goal of minimizing radio usage.
+the latter is dispatched by the relay node containing the
+assigned time slot number within the TDMA framework, upon                          TOFFSET Tg/2      TDATA (Rx)       TOFFSET         TACK (Tx)      TOFF
+a successful joining procedure. The next two packets, named
+                                                                                    TOFFSET         TDATA (Tx)       TOFFSET Tg/2     TACK (Rx)       TOFF
+UpData and DownData, correspond to the data packets used
+for sending application information in both the uplink and                            20ms             390ms            20ms            104ms        116ms
+downlink directions, which take place only once per frame                           TOFFSET       TBCN (Tx)                         TOFF BCN
+for each device.
+   As it was mentioned previously, the notion of time is of                           20ms         104ms                               526ms
+
+paramount importance for every device in the system. In
+                                                                                Fig. 3. Slot structure for the different types of slots used for receiving (top)
+this regard, each device is equipped with a clock oscillator,                   or transmitting (middle) a data packet, or transmitting a beacon (bottom) in
+whose oscillation frequency can be customized to get a certain                  the TDMA multi-hop architecture.
+Tick time. Ideally, the tick duration should be the same for                       The final element contained within the slot is referred to as
+all devices, but real oscillators do not behave perfectly due                   Guard Time, Tg , which represents an extension of the reception
+to internal and external factors, preventing all the network’s                  window necessary in TDMA systems to compensate for clock
+nodes from achieving the same tick period. To overcome this                     imperfections. If TF denotes the frame time, which is the time
+challenge, the multi-hop LoRa system adopts a beacon-based                      between two consecutive synchronization events, and DR the
+technique that periodically corrects the reference time across                  relative drift between father and child, Tg window must satisfy
+the network elements. As exemplified in Fig. 2, the TDMA
+framework defines a frame period composed of N slots, which                                                       Tg /2 ≥ DR TF                              (1)
+are assigned to specific nodes for data or beacon exchange.                     in order to keep the framework working at all times. It is
+Each of the mentioned frames begins with the reception of                       noticeable that devices with a larger DR will require a larger
+the fifth packet type, denoted as Beacon, which provides                        Tg , which yields lower energy efficiency. To illustrate the most
+the reference to re-synchronize clocks. This packet contains                    typical synchronization cases, in Fig. 4 we depict different
+essential information such as NetworkID and SenderID. It                        scenarios that can occur when a node is receiving a beacon
+can also be noticed that one dedicated slot within each frame is                signal from its parent. The ideal case A occurs if no drift
+reserved for the LoRaWAN link, which is exclusively utilized                    is present between the devices, whilst B and D illustrate the
+by the relay node to transmit the collected data to the Gateway.                early and late cases in which the child is still able to get the
+Consequently, the throughput of the entire network is limited                   synchronization signal, with B being the worst case scenario
+to one LoRaWAN packet per frame.                                                in terms of energy, as the node needs to be in Rx state for
+                   Frame
+                                                                                the entire Tg interval before the actual reception starts. On the
+      Rx Tx                              Rx Tx                                  other hand, C is too early and E is too late to get the beacon.
+  … Bcn Bcn … Data Data LoRa
+               Up Down … WAN …
+                                                  Data Data LoRa
+                                         Bcn Bcn … Up Down … WAN …         …
+       0    1      j   j+1   j+i   N-1     0   1     j   j+1   j+i   N-1        B. Frame Size and Network Throughput
+       Rx-Tx
+      Beacon                                                                       Once the TDMA framework is established, critical param-
+                                                                                eters, such as the number of slots N within a frame or
+Fig. 2. Frames are composed of N slots. To keep synchronization, each node      the application period, must be carefully selected in order
+receives and transmits one beacon at the beginning of the frame.
+                                                                                to dimension the network properly. To analyze their impact
+   Simultaneously, each slot within the frame consists of var-
+                                                                                in terms of energy consumption, it is required to consider
+ious distinct time elements, as depicted in Fig. 3, categorized
+                                                                                the different power consumption states of the nodes, which
+based on the actions to be executed.1 When transmitting a
+                                                                                heavily depend on the hardware employed. Generally, nodes
+data packet, devices initiate the transmission and then await
+                                                                                with radio chips can operate in three main states: Transmission
+the corresponding acknowledgment (ACK) packet. Conversely,
+                                                                                State, Reception State, and Sleep State. Note that, we do not
+during packet reception, devices first handle the reception
+                                                                                distinguish between the power state of the micro-controller
+process and subsequently transmit the corresponding acknowl-
+                                                                                (µC) and that of the radio interface because, with the boards
+edgment message. Tof f set is employed as a buffer to start
+                                                                                considered in this study, the µC is activated any time the
+the reception or transmission, as radio chips always require
+                                                                                radio transceiver leaves the sleep state. Therefore, we classify
+extra time to reach the ReadyToReceive state. A slot
+Tdata (Tx and Rx ) enables nodes to transmit or receive data                       2 The framework can potentially be adjusted to host links of different
+                                                                                capacities, but this would increase the framework complexity and, in turn, the
+  1 Fig. 3 reports the parameter values used in this study, but the framework   nodes’ energy consumption. Given the typically light traffic demand of the
+can be adapted to other design choices.                                         target applications, simplicity and energy efficiency are preferred to capacity.
+                                          Slot                                   the application to be executed once per frame. However, as
+                                                         Beacon Tx               mentioned earlier, the TDMA architecture can handle only one
+                                     Tx
+                                                         by father
+                                                                                 LoRaWAN transmission from the relay node to the Gateway
+                 A)           Tg/2   Rx                  Child Rx:               per frame. Therefore, if the entire network generates more than
+                                                         ideal start
+                                                                                 one packet to be sent to the Gateway within a single frame,
+                                                         Child Rx:
+                 B)      Tg/2 Tg/2   Rx
+                                                         started early
+                                                                                 it will result in an overload situation. Hence, if n represents
+                                                         Child Rx:
+                                                                                 the number of devices within the network, Tapp is limited by
+                 C)     Tg/2 Tg/2                        too early &
+                                                         beacon lost                                      nTF ≤ Tapp ,                         (5)
+                                                         Child Rx:
+                 D)                  Rx
+                                                         started late            which, by (2), can be expressed as n ≤ k. These expressions
+                                                         Child Rx:               signify that reducing the parameter k, i.e., keeping the frame
+                 E)                  Tg/2 Tg/2           too late &
+                                                         beacon lost             as long as Tapp , yields better energy efficiency, but at the cost
+                                                    Nodes                        of imposing a limitation on the maximum number of devices
+                             Tx Starts
+                                                 synchronized                    that the network can accommodate without collapsing. In a
+                                                                                 practical setting, then, the frame size is limited by Tapp /n.
+Fig. 4. Schemes A to E exemplify the various potential states of a child node
+while receiving a beacon transmitted by its parent node. In cases A, B, and D,
+                                                                                 Alternatively, it is possible to allocate more LoRaWAN slots
+the devices achieve complete synchronization, whereas synchronization does       in the frame, slightly changing the framework.
+not occur in cases C and E.
+                                                                                 C. Duty Cycle
+                                                                                    The duty cycle is another critical parameter that restricts
+the state of the whole node, and we denote by Ps , PT x and                      radio usage in sub-GHz unlicensed bands. In Europe, for
+PRx the overall power consumption in Sleep, Transmission                         instance, ETSI established a maximum duty cycle of 1% per
+and Reception states, respectively. Additionally, we account                     channel per device. In multi-hop networks, nodes closer to
+for the energy consumed by an application running on top of                      the relay tend to be the root of larger sub-trees, resulting
+the TDMA system, indicating by Papp its power consumption                        in increased data transmissions. Consequently, duty cycle
+and by τapp its execution time. We assume the application is                     restrictions become significant for these devices within dense
+executed once every k frames, where k is an integer parameter.                   networks.
+If TSL denotes the slot duration, the application period Tapp                       If we denote the number of available (orthogonal) radio
+can hence be expressed as                                                        channels by c and the application period by Tapp , and mi
+                       Tapp = kTF = kTSL N,                               (2)    counts for the number of devices within the sub-tree rooted
+                                                                                 by the i-th device, its duty cycle DCi is given by
+where TSL depends on the maximum number of transmitted
+                                                                                                  mi Tack + (1 + mi )Tdata + kTbcn 1
+bytes per slot and the selected spreading factor SF . As both                            DCi =                                       .         (6)
+Tapp and TSL remain constant during execution, their product                                                    Tapp               c
+kN is also constant (the longer the frame, the lower the                         From this expression, the duty cycle of different devices within
+number of frames between two application executions).                            the multi-hop network can be easily estimated. Additionally,
+   The mean power Ptot absorbed by a device that receives                        as in some cases the duty cycle DC restriction can be the main
+and sends a beacon, executes the application, and enters the                     constraint for Tapp , the minimum application period will be
+sleep state during the rest of the time, can be written as:                      given by the most restrictive condition between (5) and
+                                              Tbcn                                                mi Tack + (1 + mi )Tdata + kTbcn 1
+          Ptot = Ps + (PRx + PT x − 2Ps )          +                                     Tapp ≥                                      .
+                                             TSL N                                                              DC                 c
+                                                            (3)
+                           Tg                   τapp
+             (PRx − Ps )         + (Papp − Ps )      .                                            IV. E XPERIMENTAL SETUP
+                         TSL N                  Tapp
+                                                                                    The system measurements were conducted using a Logic
+Recalling (1), the guard time is also proportional to the frame                  Analyzer (Digilent Digital Discovery) jointly with a computer
+duration. Replacing Tg in (3) with its lower bound 2DR TF ,                      and an indoor setup of LoRa-based IoT devices, as illus-
+we get                                                                           trated in Fig. 5, where attenuators of 20 dB were included
+                                              Tbcn                               on each device, i.e., 40 dB attenuation for each link, to
+          Ptot = Ps + (PRx + PT x − 2Ps )           +
+                                            TSL N            (4)                 simulate longer distances, given the challenges of accessing
+                                              τapp                               underground assets for real-world experimentation. Apart from
+           (PRx − Ps )2DR + (Papp − Ps )             .
+                                            kTSL N                               the radio link between the IoT devices, a wired connection
+From (4), it is evident that, to minimize power consumption,                     between the nodes and the Logic Analyzer was employed
+N should be increased and, since kN must remain constant,                        for the measurement of General Purpose Input/Output (GPIO)
+k should be set to 1.                                                            pin signals. The hardware components utilized in the LoRa
+  This result suggests prolonging the frame duration as much                     devices consisted of an SX1276 Radio chip and a 32-bit ARM
+as possible, such that Tapp = TF = N TSL , allowing                              architecture micro-controller running FreeRTOS operating
+                                                Logic                                                                      εsynch Node 1         εsynch Node 2         εsynch Node 3
+                      Wired
+                                               Analyzer
+                     Wireless
+                                     PC
+
+
+                                           1
+                                                                                                                      30
+                                Relay
+
+
+
+
+                                                              Children
+                                                2
+                   Gateway       0
+                  (Internet)                        3
+                                                          4                                                           20
+
+
+
+
+                                                                                                f ath - tchild [µs]
+Fig. 5. Setup of one relay and four children communicated via LoRa multi-
+hop, while a logic analyzer is wired connected to every device to facilitate                                          10
+GPIO signal measurements.
+
+
+
+
+                                                                                                         syn
+                                                                                                                       0
+
+
+
+
+                                                                                      εsynch = tsyn
+system. For the TDMA system, a 32 KHz crystal was utilized
+                                                                                                                      80
+as the time source, which leads to a tick duration of 30.5 µs.
+For the implementation, each frame comprised 90 slots of                                                              60
+21281 ticks, which results in TF = 58.5 s when using a
+constant spreading factor SF = 9.                                                                                     40
+
+                       V. R ESULTS                                                                                    20
+A. Synchronization error
+                                                                                                                       0
+   The synchronization error is a fundamental property of the
+                                                                                                                             0    10       20    30   40     50   60      70
+system that quantifies the time discrepancy between two de-                                                                                     Time [min]
+vices. To measure this parameter, both the father and children
+generate a signal through the GPIO pin at the end of the                       Fig. 6. Synchronization error with respect to the relay (Node 0) in a star
+synchronization slot. Let tsyn
+                           i    represent the time at which the                (top) and line topology (bottom).
+synchronization event slot ends for the i-th device. Thus, the
+synchronization error, εsynch , can be expressed as
+                         εsynch = tsyn      syn                                due to the four transmissions of beacons, whose Time-On-Air
+                                   f ath − tchild .
+                                                                               results in T oA = 103.4 ms. The uplink data size used in the
+Due to quantization effects, the signal generated at tsyn i   can              multi-hop network was 24 bytes, and so the T oA becomes
+only occur at multiples of the i-th device’s tick duration.                    226.3 ms, which can be identified in the figure together with
+Consequently, the maximum resolution achievable is limited                     the acknowledgment messages sent. Additionally, each frame
+to one tick duration. Fig. 6 - (top) presents the measurements                 includes a LoRaWAN transmission by the relay, which can
+of εsynch obtained for a star topology with Node 0 acting as                   be observed as the longest transmission. Although the useful
+a relay and the rest of Nodes as children, as exemplified in                   data remains the same, i.e., 24 bytes, the T oA increases to
+Fig. 5. It is evident from the plot that the synchronization error             267.26 ms due to the overhead introduced by the LoRaWAN
+is bounded to approximately 30.5 µs, which corresponds to the                  stack, which typically adds about 12 bytes of additional data,
+tick duration of the clock used. As a result, this implementation              at the best.
+represents the first LoRa multi-hop system with the maximum                       Following the experiment shown in Fig. 7, we calculated
+resolution achievable for a 32 KHz clock. Contrary to the star                 the total Tx time of the relay during the Tapp period for
+topology, Fig. 6 - (bottom) depicts the εsynch measurements                    various scenarios with different values mi , in order to measure
+obtained with devices arranged in a line topology as shown                     the relay’s duty cycle. The findings are depicted in Fig. 8,
+on Fig. 1. It must be noticed that the error is measured with                  together with the DC0 estimation obtained with the model (6)
+respect to the relay, causing an error increment towards the                   and the relative error between them. The data reflects a linear
+end of the chain. Nevertheless, as it can be recognized, the                   behaviour in m0 , as expected from (6), and the maximum rel-
+father-child error of the node pairs 0 − 1, 1 − 2 and 2 − 3 is                 ative error obtained between the model and the measurements
+always bounded to approximately 30.5 µs, proving that every                    was 1.63%, which is mainly due to the difference between
+node in the network will be able to communicate accurately                     the ideal T oA of the LoRa frames and the time employed by
+the relevant data generated by diverse monitoring applications.                the radio chip to effectively do the transmission, as the radio
+                                                                               frequency (RF) hardware and software always exhibit small
+                                                                               delays that can slightly affect the radio time.
+B. Duty Cycle
+   For duty cycle measurements, the network was configured                          VI. C ONCLUDING R EMARKS AND F UTURE W ORK
+with a star topology as displayed in Fig. 5, with Node 0 acting                   In the context of the abundance of IoT applications, cer-
+as the relay. Fig. 7 illustrates the results obtained with a sam-              tain domains remain underexplored in terms of the potential
+pling period of Tapp = 4TF and considering only one channel,                   benefits that IoT could offer them. In this research, our focus
+i.e., c = 1. The beginning of each frame is easily identifiable                was centered on addressing the need for automated wireless
+                250              Node 0                     LoRaWAN
+                                                                                                                          Multi-hop
+                                 Node 1                                                                                    uplink
+                200
+ Tx time [ms]
+
+
+                                 Node 2                     Beacons
+                150              Node 3
+                100                                                                                                       Ack
+                  50
+
+                     0
+                                        0.5                1.0                    1.5          2.0                  2.5                 3.0                  3.5
+                                                                                        Time [min]
+
+Fig. 7. Transmission time of devices connected in a star topology with Tapp = 4TF , TF = 58.5 s and SF = 9. Node 0 behaves as the relay of the network,
+while nodes 1 to 3 take on the role of children.
+
+
+
+                          0.9                                                                   and Parallel Computing (COMITCon), 2019, pp. 334–339.
+                                  Measurement                             1.54%             [2] S. Kaur, “IoT for Underground Communication Networks: A Review,”
+                          0.8
+                                  Model                                                         in Harnessing the Internet of Things (IoT) for a Hyper-Connected Smart
+                          0.7                               1.55%
+                                  Relative error                                                World, B. Indu and A. Kiran, Eds. CRC Press, Taylor & Francis group,
+                          0.6                                                                   2023, pp. 115–138.
+                DC0 [%]
+
+
+
+
+                          0.5                      1.58%                                    [3] A. E. Dursun, “Statistical analysis of methane explosions in Turkey’s
+                          0.4                                                                   underground coal mines and some recommendations for the prevention
+                                1.63%                                                           of these accidents: 2010–2017,” Natural Hazards, vol. 104, no. 1, pp.
+                          0.3                                                                   329–351, Oct 2020.
+                          0.2                                                               [4] A. E. Forooshani, S. Bashir, D. G. Michelson, and S. Noghanian,
+                          0.1                                                                   “A Survey of Wireless Communications and Propagation Modeling
+                                                                                                in Underground Mines,” IEEE Communications Surveys & Tutorials,
+                          0.0
+                                  0                  1           2           3                  vol. 15, no. 4, pp. 1524–1545, 2013.
+                                 m0 : nodes in the sub-tree rooted by the relay             [5] M. Jouhari, N. Saeed, M.-S. Alouini, and E. M. Amhoud, “A survey
+                                                                                                on scalable lorawan for massive iot: Recent advances, potentials, and
+                                                                                                challenges,” IEEE Communications Surveys & Tutorials, vol. 25, no. 3,
+Fig. 8. Measurement of the relay node duty cycle, DC0 , together with the                       pp. 1841–1876, 2023.
+corresponding calculations obtained with (6) and the relative error between                 [6] V. P. Modekurthy, A. Saifullah, and S. Madria, “Distributedhart: A
+them for a star topology. For the measurements, an application period                           distributed real-time scheduling system for wirelesshart networks,” in
+Tapp = 4TF was employed, jointly with TF = 58.5 s and SF = 9.                                   2019 IEEE Real-Time and Embedded Technology and Applications
+                                                                                                Symposium (RTAS), 2019, pp. 216–227.
+                                                                                            [7] X. Vilajosana, T. Watteyne, T. Chang, M. Vučinić, S. Duquennoy, and
+                                                                                                P. Thubert, “IETF 6TiSCH: A Tutorial,” IEEE Communications Surveys
+monitoring in the underground mining sector. To this end,                                       & Tutorials, vol. 22, no. 1, pp. 595–615, 2020.
+we have developed, implemented, and evaluated a multi-hop                                   [8] T. Beke, E. Dijk, T. Ozcelebi, and R. Verhoeven, “Time synchronization
+                                                                                                in iot mesh networks,” in 2020 International Symposium on Networks,
+TDMA protocol specifically tailored for inexpensive LoRa                                        Computers and Communications (ISNCC), 2020, pp. 1–8.
+devices. With the use of this low overhead protocol, a proven                               [9] D. Hauweele and B. Quoitin, “Toward accurate clock drift modeling
+sub 40 µs synchronization accuracy between parent-child pairs                                   in wireless sensor networks simulation,” in Conference on Modeling,
+                                                                                                Analysis and Simulation of Wireless and Mobile Systems, 2019.
+was achieved for various topologies. This, combined with                                   [10] H.-C. Lee and K.-H. Ke, “Monitoring of Large-Area IoT Sensors
+future efforts aimed at conducting field tests in underground                                   Using a LoRa Wireless Mesh Network: Design and Evaluation,” IEEE
+scenarios, could eventually establish its complete suitability                                  Transactions on Instrumentation and Measurement, vol. 67, no. 9, 2018.
+                                                                                           [11] A. Abrardo and A. Pozzebon, “A Multi-Hop LoRa Linear Sensor
+for use in such extreme assets. Furthermore, we presented a                                     Network for the Monitoring of Underground Environments: The Case of
+theoretical analysis which deals with the relationships between                                 the Medieval Aqueducts in Siena, Italy,” Sensors, vol. 19, no. 2, 2019.
+the frame size, network’s throughput, and the sampling period                              [12] C. Ebi, F. Schaltegger, A. Rüst, and F. Blumensaat, “Synchronous LoRa
+                                                                                                Mesh Network to Monitor Processes in Underground Infrastructure,”
+of applications executed on the devices. Moreover, we intro-                                    IEEE Access, vol. 7, pp. 57 663–57 677, 2019.
+duced a model to estimate the duty cycle of the different mem-                             [13] D. Mugerwa, Y. Nam, H. Choi, Y. Shin, and E. Lee, “Implicit Over-
+bers of the multi-hop network and its empirical measurements                                    hearing Node-Based Multi-Hop Communication Scheme in IoT LoRa
+                                                                                                Networks,” Sensors, vol. 23, no. 8, 2023.
+for validation. Our future work also includes the reduction of                             [14] J. M. Solé, R. P. Centelles, F. Freitag, and M. Roc, “Implementation of
+the baseline cost to keep the network synchronized, together                                    LoRa Mesh Library,” IEEE Access, vol. 10, pp. 113 158–113 171, 2022.
+with the implementation of a simulation framework which                                    [15] P. Branch and T. Cricenti, “A lora relay based system for detonating ex-
+                                                                                                plosives in underground mines,” in 2020 IEEE International Conference
+will allow us to explore how scalable the proposed protocol                                     on Industrial Technology (ICIT), 2020, pp. 259–264.
+implementation and model are when the number of devices                                    [16] S. Hong, F. Yao, Y. Ding, and S.-H. Yang, “A hierarchy-based energy-
+increases.                                                                                      efficient routing protocol for lora-mesh network,” IEEE Internet of
+                                                                                                Things Journal, vol. 9, no. 22, pp. 22 836–22 849, 2022.
+                                              R EFERENCES
+ [1] P. D. Baruah, S. Dhir, and M. Hooda, “Impact of IoT in Current Era,” in
+     2019 International Conference on Machine Learning, Big Data, Cloud
+

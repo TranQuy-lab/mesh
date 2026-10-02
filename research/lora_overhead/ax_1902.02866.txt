@@ -1,0 +1,542 @@
+                                                 Analysis of LoRaWAN Uplink with Multiple
+                                                   Demodulating Paths and Capture Effect
+                                                                     René Brandborg Sørensen, Student Member, IEEE, Nasrin Razmi,
+                                                                    Jimmy Jessen Nielsen, Member, IEEE, Petar Popovski, Fellow, IEEE
+
+
+
+                                           Abstract—Low power wide area networks (LPWANs), such as               SF results in a higher rate, which, for fixed payload, translates
+                                        the ones based on the LoRaWAN protocol, are seen as enablers of          into a shorter packet duration. This implies that the probability
+arXiv:1902.02866v1 [cs.NI] 7 Feb 2019
+
+
+
+
+                                        large number of IoT applications and services. In this work, we          to cause or experience collision (interference) for that packet
+                                        assess the scalability of LoRaWAN by analyzing the frame success
+                                        probability (FSP) of a LoRa frame while taking into account              is lowered for lower SFs. In addition, a transmission with a
+                                        the capture effect and the number of parallel demodulation               lower SF occupies a demodulation path in the demodulator
+                                        paths of the receiving gateway. We have based our model on               for a shorter time interval compared to a transmission with a
+                                        the commonly used SX1301 gateway chipset, which is capable               larger SF.
+                                        of demodulating up to eight frames simultaneously; however,                 The initial research in LoRaWAN modeled the protocol as
+                                        the results of the model can be generalized to architectures
+                                        with arbitrary number of demodulation paths. We have also                pure Aloha channels for each SF and channel pair as in [1].
+                                        introduced and investigated three policies for Spreading Factor          This work neglects inter-SF interference and capture effect.
+                                        (SF) allocation. Each policy is evaluated in terms of coverage           The performance of LoRa has been analyzed and modeled
+                                        probability, FSP, and throughput. The overall conclusion is              for a single LoRaWAN cell using stochastic geometry and
+                                        that the presence of multiple demodulation paths introduces a            considering capture effect in [2]–[6]. The authors in [2] model
+                                        significant change in the analysis and performance of the LoRa
+                                        random access schemes.                                                   the co-SF interference by considering the interference from the
+                                           Index Terms—LoRa, LoRaWAN, frame success probability                  strongest co-SF interferer device. The results show that, the
+                                        (FSP), Collision Timing, Capture-effect, SX1301.                         co-SF interference effect increases as the number of devices
+                                                                                                                 increases, such that the network becomes interference-limited.
+                                                                I. I NTRODUCTION                                 The authors in [3] provide a framework to evaluate only the co-
+                                           LoRaWAN is a popular low power wide area network                      SF interference by considering the level of overlap between the
+                                        (LPWAN) protocol. It is based on Semtechs’ proprietary LoRa              interfering packets. Inter-SF interference is modeled with the
+                                        modulation, which uses a chirp spread spectrum (CSS) to en-              Co-SF interference in [4]–[6]. The authors of [4] consider the
+                                        able long range and resilient transmissions. The access scheme           allocation of SFs in order to maximize the average coverage
+                                        of LoRaWAN resembles a pure Aloha protocol, however                      probability by assigning SFs to devices based on their dis-
+                                        LoRaWAN provides several narrow-band channels and quasi-                 tance to the gateway and SF sensitivities. The scalability and
+                                        orthogonal spreading factors (SF) to make LoRaWAN scal-                  throughput of LoRaWAN deployments have been evaluated in
+                                        able. A considerable research interest has arisen recently about         [5], [6] based on the capture effect and coverage models. Both
+                                        the obtainable link budget of LoRa transmissions, along with             papers verify that both co-SF and inter-SF transmissions have
+                                        studies of capture effect, collisions, and the non-orthogonality         a considerable effect on the capture probability, and thereby
+                                        of SFs in LoRa-based networks.                                           on the LoRaWAN scalability.
+                                           There are three mechanisms in LoRaWAN that determine                     A mechanism impacting frame reception beyond coverage
+                                        the network performance: coverage, capture effect, and the               and the capture effect was identified experimentally in [7]. The
+                                        demodulation capabilities of the receiver. All of these are              SX1276 LoRa transceiver is found to lock onto frames after
+                                        affected by the SF allocation. The coverage probability is               detecting four symbols of a preamble. The reception will fail
+                                        determined by the device location and the sensitivity of the             if another frame (even one that captures the channel) begins
+                                        SF. The capture probability is a function of the interference            transmission before the first LoRa frame has been received or
+                                        from transmissions using the same SF (co-SF interference) or             certain other timing conditions have been fulfilled.
+                                        different SFs (inter-SF interference). Finally the choice of the            In this paper, we evaluate the scalability of LoRaWAN
+                                        SF controls the tradeoff between the transmission robustness             analytically by developing a joint model for coverage, cap-
+                                        and collision probability. On one hand, the transmissions                ture effect and demodulation capabilities for LoRa transmis-
+                                        that use lower SFs are less robust to noise and interference,            sions. We build and evaluate our model on the basis of a
+                                        resulting in a worsened coverage. On the other hand, lower               SX1301 gateway; however, the model and the methodology
+                                                                                                                 can be applied for any architecture. The SX1301 is capable
+                                          This work has been supported by the European Research Council (ERC     of demodulating 8 frames, simultaneously, any transmissions
+                                        Consolidator Grant Nr. 648382 WILLOW) within the Horizon 2020 Program.
+                                          All authors are with the Department of Electronic Systems, Aalborg     beyond this will be dropped. To our knowledge, this practical
+                                        University, Denmark (Email: {rbs,razmi,jjn,petarp}@es.aau.dk).           limitation has not been included in the previous models from
+                                                                             demodulation is due to the fact that the SX1301 architecture
+    Preamble   LoRa Header     Header         Payload + Payload CRC
+                               CRC                                           separates the preamble detection from the data acquisition
+                                                                             [11], [12].
+Fig. 1. LoRa Frame structure as described in [8]. LoRaWAN frames,            B. Channel model
+consisting of header and payload, are transmitted as the payload of a LoRa
+frame.                                                                          All devices transmit with power equal to P0 = 14 [dBm].
+                                                                             Let A( fc ) be the deterministic part of the path loss model with
+                                                                             carrier frequency fc and noise power o2n = −174 + 10 log(BW)
+the literature. Finally, we evaluate the performance of several              [dBm], where the noise figure is aassumed to be 0 [dB]. With
+SF allocation schemes based on the developed model.                          the assumed bandwidth, we get A( fc ) = fc2 · 10−2.8 . We define
+   The rest of paper is organized as follows: In Section II, we              c as in [6]
+explain the scenario, assumptions, conditions and parameters                                                      P0 A( fc )
+of our analysis. The analysis is contained within Section III.                                              c=                                    (3)
+                                                                                                                     o2n
+Section IV presents the numerical results and the associated                  We denote the required receiver sensitivity for SF m by θ RXm
+discussion. Finally, the paper is concluded in Section V.                                 (i)     (i)            (i)
+                                                                             and let γm       , γco,m     and γint,m     denote the received signal
+                             II. S CENARIO                                   to noise ratio (SNR), the signal to noise plus interference
+   We consider a single LoRa channel with a bandwidth                        ratios (SINR) of only co-SF interference and only inter-
+                                                                                                                                    (i)
+BW = 125 [kHz]. Each device transmits LoRaWAN frames                         SF interferences for frame i, respectively. γco,int,m           denotes
+with payloads of size B bytes at a rate λd . A device is                     the received SINR in the presence of co-SF and inter-SF
+                                                                                                (i)    (i)     (i)           (i)
+assigned a fixed SF m to be used for transmission, where                     interferences. γm      , γco,m , γint,m  and γco,int,m  are defined as
+M = {7, 8, ..., 12} and m ∈ M as allowed in LoRaWAN [9].
+                                            2m                                                           (i)
+                                                                                                        γm   = c|hi | 2 ri−α,                                  (4)
+The symbol period for a given m is Tsm =        . A LoRA frame
+                                            BW                                                   (i)                  |hi | 2 ri−α
+uses the LoRaWAN frame as a payload. Each LoRa frame                                            γco,m =     Í                    2 −α 1
+                                                                                                                                           ,                   (5)
+                                                                                                              k ∈k co, m |hk | rk + c
+contains a preamble of 10 to 65539 symbols (default is 12), a                                                               2   −α
+                                                                                                 (i)                   |hi | ri
+LoRa header, payload and, optionally, a CRC for the payload                                     γint,m =    Í                     2 −α 1
+                                                                                                                                           ,                   (6)
+                                                                                                              k ∈k i nt, m |hk | rk + c
+as depicted in Fig. 1. The number of symbols needed for
+                                                                                      (i)                              |hi | 2 ri−α
+transmission of the LoRa header and the LoRaWAN payload                              γco,int,m =Í                    2 −α
+                                                                                                                           Í                    2 −α 1
+                                                                                                                                                          ,    (7)
+                                                                                                     k ∈k co, m |hk | rk +    k ∈k i nt, m |hk | rk + c
+using SF m can be found as (1) from [8].
+                        l (8B − 4m + 44) m                                   where α is the path loss exponent and h is the channel
+      n pktm = 8 + max                      · (CR + 4), 0 , (1)              coefficient, which is assumed to be Rayleigh distributed. k co,m
+                            (4m − 2 · IDE )
+                                                                             and kint,m denote the number of interferer users with the same
+where CR is the coding rate. CR = i for i ∈ {1, 2, 3, 4}
+                                              4                              SF and different SFs, respectively.
+corresponds to a coding rate equal to 4+i       . The indicator
+IDE = 1 if low data rate optimization is used and IDE = 0                    C. Transmission success
+otherwise. Low data rate optimization increases robustness                      A transmission must capture the channel in order to be
+towards clock drift and is mandatory for SF {11, 12}.                        successfully received. The channel is captured if the signal
+   The total number of symbols transmitted for a complete                    passess the thresholds Γm , Γco and Γint,m for capturing the
+frame with SF m is n fm = n pr em + n pktm where n pr em denotes             channel with respect to noise, co-SF interference and inter-SF
+the number of symbols in the preamble for m. Then, the total                 interference, respectively. The probabilities for these events
+transmission time is T fm = Tsm · n fm .                                     happening are:                     
+                                                                                                             (i)
+A. Deployment Model                                                                                      Pr γm   > Γm ,                                        (8)
+   We consider N devices distributed uniformly in a circular
+                                                                                                                                              
+                                                                                                 (i)
+                                                                                             Pr γco,int,m    > max(Γco, Γint,m ) ,                             (9)
+region with radius R with a gateway at the center. The                                                                
+distribution of distance r between the gateway and the devices                                              (i)
+                                                                                                     Pr γco,m    > Γco ,                                      (10)
+is defined as gR (r)                                                                                                    
+                            (                                                                             (i)
+                              2r
+                                   0≤r ≤R                                                          Pr γint,m    > Γint,m .                                    (11)
+                    gR (r) = R2                              (2)
+                              0    r≥R                                          In the case where there is no inter-SF or co-SF transmission
+ The aggregated arrival rate of all devices can be computed as               condition 2) reduces to 3) or 4), respectively. Table I lists
+                                                           1                 Γm and Γint,m for m ∈ M. Notice that Γco is 6 [dB], which
+λ = N · λd as long as λd < µd where µd is equal to                           is always larger than Γint,m so condition 2) simplifies to
+                                                      T fm /DC
+                                                                                  (i)
+and DC is the duty-cycle given as a fraction [10].                           Pr(γco,int,m > Γco ).
+   Our model is based on SX1301 gateways, which is in                           A transmission may be received by the gateway if all the
+widespread use for outdoor LoRaWAN deployments. SX1301                       conditions for capturing the channel are fulfilled. However,
+is capable of detecting preambles for all SFs for up to 8                    we must consider the demodulation capability of the receiver
+channels at a time. This discrepancy between detection and                   which affects the probability of successful reception. If all
+                                                                                            To evaluate the uplink performance, we derive the probability
+                                                                                            of a LoRa frame from device i being received successfully,
+                                                                                                                      (i)
+                                                                                            which is denoted by FSPm      .
+                                                                                                                (i)         (i)
+                                                                                                           FSPm = FCPm          · (1 − F DP (i) ),  (12)
+                                                                                                         (i)
+                                                                                            where FCPm denotes the probability that the frame captures
+                                                                                            the channel. F DP (i) is the probability a frame being dropped
+                                                 l
+                                                                                            due to all demodulation paths being busy.
+                                                     7
+                                                                                                                     (i)
+                                    l   8
+                                                                                               To evaluate FCPm           and F DP (i) , we need to describe the
+                           l   9
+                                                                                            number of packets which collide with the desired packet.
+                                                                                            Let k co,m and kint, m denote the number of co-SF and inter-
+                           l   10
+                                                                                            SF frame transmissions, respectively, which interfere with
+                                                                                            the transmission of frame i using SF m. Notice that we
+                                        l   11
+                                                                                            implicitly assume that all interfering frames overlap in time
+                                                                   l   12
+                                                                                            by evaluating the total number of interfering frames over a
+                                                                                            an entire frame. Realistically, several low SF frames could be
+                                                                                            placed non-overlapping times within the duration of a high SF
+Fig. 2. SF allocation scheme based on annuli in a single gateway LoRaWAN                                                                                    (i)
+                                                                                            frame. Therefore, we derive a lower bound on the FCPm               .
+cell.
+                                                                                               We define the traffic load for each source of co-SF and
+                                                                                            inter-SF interference loads over a period τ by Lco,m (τ) and
+demodulation paths are busy, then any additional detected                                   Lint,m (τ), respectively. When we evaluate the load over a
+frame is dropped. A demodulation path will be assigned                                      period τ, Lco,m (τ) = (T fm + τ) · λ · δm such that we take
+to a frame after its preamble has been detected, i.e. four                                  into account interference from frame transmissions, which
+consecutive symbols of the preamble are detected. The header                                had begun before the start of the observed period τ, but
+will then be demodulated and if it is correct, so will the rest                             have not ended yet. By equivalent definition, Lint,m (τ) =
+                                                                                            Í
+of the frame. Therefore, the timing of the transmissions must                                 p ∈M, p,m (T fp + τ) · λ · δ p is the inter-SF load where p denotes
+be carefully accounted for in the model.                                                    all SFs different from m. Omitting τ in the notation, the
+                                                                                            distributions of k co,m and kint, m are given as:
+D. SF Allocation
+  SFs are allocated according to a scheme that is based on                                                             (Lco,m )kco, m · exp(−Lco,m )
+                                                                                                         Pkco, m =                                   .       (13)
+annuli, i.e. the radial distance of the device from the BS. Each                                                                  k co,m !
+annuli begins at the radial distance lm−1 from the center of                                                           (Lint,m )ki nt, m · exp(−Lint,m )
+the cell and goes to lm , such that l12 = R, as depicted in                                              Pki nt, m =                                     .   (14)
+                                                                                                                                    kint, m !
+Fig. 2. Let δm denote the fraction of the device population
+                                                                                                                     (i)
+assigned to m and let gm (r) be the device density distribution                             A. Derivation of FCPm
+for SF m. We define ∆X as a set of mapping parameters                                          To derive the probability of capturing the channel, we
+∆X = {{δ7, δ8, ..., δ12 }, {l7, l8, ..., l12 }, {g7, g8, ..., g12 }} for the                evaluate the 4 conditions for capture effect from Sec.II-C
+SF allocation scheme X. We present three different allocation                                  1) k co,m + kint, m = 0: The probability of a single transmis-
+schemes and compute ∆ in Sec. III-C.                                                        sion being transmitted in the channel, is the probability of the
+                                                                                            devices in our deployment not generating a packet within two
+             III. U PLINK PERFORMANCE ANALYSIS                                              packet times.                                            !
+  In this section, we first analyze the FSP by taking into                                                                Õ
+account the capture effect and the timing of collisions. Then,                                         Pnocolm = exp −        (T fm + T fp ) · δp · λ .  (15)
+we investigate different SF allocation schemes.                                                                               p ∈M
+  A frame is received successfully if it captures the channel                               Then the probability of successfully transmitting the frame is
+and is not dropped due to all demodulation paths being in use.                              equal to
+                                                                                                             Ps(i)nocol = Pnocolm · CPm
+                                                                                                                                      (i)
+                                                                                                                                         ,            (16)
+                                                                                            where the probability of capturing the channel is the coverage
+                                                 TABLE I                                                      (i)
+            C HANNEL CAPTURE THRESHOLD PARAMETERS [6]                                       probability, CPm      , which can be determined as
+                                                                                                          (i)         (i)
+                                                                                                       CPm = Pr(γm        > Γm ) = Pr(c|hi | 2 ri−α ≥ Γm )
+             SF     θ R X m [dBm]                        Γm [dB]            Γi nt, m [dB]
+                                                                                                                        Γm riα
+                                                                                                         ∫ lm
+             7          -123                                -6                  -7.5                   =        exp(−          )gm (ri )dri .              (17)
+             8          -126                                -9                   -9                       lm−1            c
+             9          -129                               -12                 -13.5
+             10         -132                               -15                  -15         Eq. (17) can be derived easily based on |hi | 2 being exponen-
+             11        -134.5                             -17.5                 -18         tially distributed under our Rayleigh assumption and the PDF
+             12         -137                               -20                 -22.5        of the population to ri being gm (ri ).
+                                                                                                      (i)
+   2) kint,m = 0: In the case that there is solely co-SF                                     Then, FCPm   is given by
+interference, we can express the probability of capturing the
+channel as                                                                                                       (i)
+                                                                                                              FCPm   = Pcapm (τ = T fm ).            (25)
+       (i)                            |hi | 2 ri−α
+  CPco,m    (k co,m ) = Pr( Ík                             ≥ Γco |k co,m )
+                                 co, m
+                                k=1
+                                        |hk | 2 rk−α + c1                                  B. Calculation of F DP(i) and Throughput
+                                                                           (18)
+                   Γco riα
+  ∫ lm
+                                              k co, m
+           exp(−           )gm (ri )[I(ri )]          dri,                                    A SX1276 based LoRa receiver will ’lock onto’ a frame
+    lm−1              c
+                                                                                           once it has received 4 preambles as supported by [7], [8].
+where I(ri ) is equal to                                                                   Preamble detection and frame demodulation are separated in
+                            ∫ lm
+                                             1                                             the SX1301 and while it is capable of demodulating 8 frames
+                   I(ri ) =                       ri α gm (r)dr.           (19)
+                             lm−1 1 + Γco ( r )                                            simultaneously as supported by [11], [12], it is able to detect
+   3) k co,m = 0: In this case, there is no co-SF interference,                            48 preambles at once, i.e. a preamble for every SF and channel
+    (i)
+CPint,m    (kint, m ) can be expressed as                                                  combination.
+                                                                                              Since the preamble symbols and the 4 concurrent symbols
+    (i)                                      |hi | 2 ri−α                                  needed for detection only constitute a small fraction of the
+  CPint,m (kint, m ) = Pr( Ík                                         ≥ Γint,m |kint,m )
+                                        i nt, m
+                                                  |hk | 2 rk−α + c1                        total frame size, we approximate the capture probability as
+                                       k=1
+                                                                                           the coverage probability.
+                       Γint,m riα
+  ∫ lm
+              exp(−                          ˜ i )]ki nt, m dri,
+                                  )gm (ri )[ I(r
+    lm−1                   c                                                                                        (i)         (i)
+                                                                                    (20)                          CPpr  e m ≈ CPm .                  (26)
+   ˜ i ) is defined as
+   I(r               ∫
+                     ˜ i) =                          1                                        We evaluate the FDP using the CDF of the Poisson dis-
+                     I(r                            ri α g p (r)dr,                 (21)
+                                 R\R m 1 + Γint,m ( r )                                    tributed number of frames
+                                                                                                                Í received by the demodulator at any
+   4) k co,m · kint, m , 0 : In case both co-SF and inter-SF                               given instant, k M = 12m=7 k m where k m denotes the number
+                             (i)                                                           of frames being received using m such that
+interference are present. CPint,m ((kint, m )) can be expressed as
+                                                                                                                                        (i)
+                                                                                           L M = 12
+                                                                                                  Í
+                                                                                                    m=7 Lm where Lm = λ · δm · T fm · CPpr e m ·(1 − F DP)
+        (i)
+  CPco,int,m (k co,m, kint,m ) =
+                                                                                                                                      7
+                          |hi | 2 ri−α
+                                                                                                                                      Õ (L M )k
+  pr Ík                                                                                                 F DP (i) = 1 − exp(−L M ) ·                  (27)
+                               Íki nt, m                                                                                                    k!
+        co, m
+      k=1
+              |hk | 2 rk−α + j=1         |h j | 2 r j−α + c1                                                                          k=0
+                                            !                                       (22)
+   ≥ max(Γco, Γint,m )|kint,m, k co,m                                                         Eq. (27) can be interpreted as the probability of there not
+                                                                                           being 7 or less concurrent frame receptions at the beginning
+                                                                                                                                 (i)
+                Γco riα
+       ∫ lm
+                                                                                           of the reception of a new frame. FSPm is now computable as
+   =            exp(−   )gm (ri )[I(ri )]kco, m [I ′(ri )]ki nt, m dri,                    Eq. (12) by using Eq. (25) and Eq. (27).
+      lm−1          c
+ where max(Γco, Γint,m ) is always equal to Γco . I ′ (ri ) is defined                        The throughput of the cell can then be calculated as
+as                    ∫
+             ′                        1                                                                               Õ
+                                                                                                                               (i)
+            I (ri ) =                     ri α g p (r)dr.               (23)                            T∆S cheme =         FSPm   · δm · λ · B      (28)
+                        R\R m 1 + Γco ( r )
+                                                                                                                      m∈M
+  Then the probability of capturing the channel can be ex-
+pressed as a weighed sum of the derived capture probabilities,                              where the throughput is defined as successfully received bytes
+where the weights are the probabilities of the particular capture                          of LoRaWAN payload per second.
+scenario taking place.
+                           (i)
+                                                                                           C. SF Allocation
+  Pcapm = Pnocolm · CPm
+      ∞
+      Õ                                                                                      In this subsection, we compute δm , lm and gm (r) for m ∈ M
+                                       (i)
+  +       P(ki nt, m =0) · Pkco, m · CPco,m (k co,m )                                      for three SF allocation schemes. The cell center and edge for
+       k co, m =1                                                                          every scheme are defined as l6 = 0 and l12 = R. All parameters
+          Õ∞                                                                               for ∆ which are presented in this subsection, can be found in
+                                                  (i)
+   +                 P(kco, m =0) · Pki nt, m · CPint,m (kint,m )                          Tab. II.
+       ki nt, m =1                                                                           1) Uniform: In this scheme, the cell is not divided into
+            ∞          ∞
+          Õ            Õ
+                                                        (i)                                annuli and instead SFs are assigned to devices uniformly. We
+   +                            Pkco, m · Pki nt, m · CPco,int,m (k co,m, kint,m )         denote the SF allocation set for this scheme by ∆Uni . Thus,
+       ki nt, m =1 k co, m =1                                                                    1
+                                                                                    (24)   δm = and gm (r) = gR (r). In this case, lm = R and lm−1 = 0
+                                                                                                 6
+                                                                                           for m ∈ M is used in the model.
+                            TABLE II
+                     SF A LLOCATION SCHEMES                                              1
+
+                                                                                                                                      FCP
+                                                                                        0.9                                                 7
+           SF    ∆U ni f or m   ∆ Di s t a n c e   ∆E q l o a d                                                                       FCP10
+                 δm      lm     δm       lm        δm      lm                           0.8                                           FCP
+                                                                                                                                            12
+           7     1/6     -      .2       .45       .47     .45                                                                        FDP
+           8     1/6     -      .08      .54       .25     .54                          0.7
+
+           9     1/6     -      .11      .64       .14     .64                          0.6
+
+
+
+
+                                                                          Probability
+           10    1/6     -      .17      .76       .08     .76
+           11    1/6     -      .19      .88       .04     .88                          0.5
+           12    1/6     -      .25      1         .02     1
+                                                                                        0.4
+
+                                                                                        0.3
+
+  2) Distance: We denote the SF allocation set for this                                 0.2
+
+scheme by ∆Dist . We compute the borders of each annulus                                0.1
+based on the deterministic path loss and the receiver sensitivity
+                                                                                         0
+                               1                                                            0   200      400         600      800              1000
+                    P0 · A( fc ) α                                                                       Number of devices, N
+such that lm =                      . Then, we calculate δm as a
+                      θ RXm
+function of the area of a given annulus to the total cell area      Fig. 3. Contribution of SFs 7, 10 and 12 on frame capture probability and
+        Nm       Am                                                 frame drop probability for ∆ Di s t . The traffic model considered was an mean
+δm =         =       . Nm is the number of devices that are         inter-frame generation time of every tenth minute for each device and a
+         N        A                                                 payload size of 50 Bytes. This traffic model is assumed to be the same for
+assigned SF m and Am denotes the area of the annuli m. This         the 8 channels, which are considered.
+                       gR (r)
+means that gm (r) =           .
+                        δm
+  3) Equivalent load: We let the lm be the same as for ∆Dist .      The FCP is also lower for the higher SF frames, which have a
+In this allocation scheme, denoted ∆Eqload , we calculate T fm      greater chance of experiencing interference. A higher coverage
+for each SF and assign SFs to keep the load equal for each SF       probability is seen for SF 7, which can be explained by SF
+                       1/T fm
+such that δm = Í                   . We keep the device density     7 being allocated to devices in a punctured disc around the
+                      s=M 1/T fs                                    gateway.
+uniform throughout each annulus, but we assume a higher
+                                                                       In Fig. 4 and Fig. 5, we observe that the coverage probability
+device density in the annuli closer to the gateway such that
+Í                                                                   for ∆Dist and ∆Eqload are .84 and .88, respectively. The slight
+  m∈M (δm |lm ) = 1.
+                                                                    increase in coverage probability from ∆Dist to ∆Eqload can
+                IV. R ESULTS AND DISCUSSION                         be explained by the allocation of more devices in the SF 7
+                                                                    annulus. It is also evident that the FDP has a non-negligible
+   We have evaluated CP, FCP, FDP and FSP analytically
+                                                                    effect on the FSP especially when more devices are allocated
+using Eq. (17), Eq. (25), Eq. (27) and Eq. (12), which are
+                                                                    to higher SFs, which is the case for ∆Dist .
+derived in Sec. III. Furthermore, a Matlab-based simulation                                      (i)         (i)
+                                                                       Results for the CP, FCPm      and FSPm    are not plotted for the
+of the unacknowledged LoRaWAN uplink was implemented
+                                                                    uniform allocation scheme because the frame-based evaluation
+and results were simulated. In the simulation, the reception                                                                   (i)
+                                                                    of interference results in a very low bound for FCPm           . This
+conditions 1-4 are evaluated at the symbol level, whereas
+                                                                    is due to the mixture of frames of both high and low SFs in
+the analytical approximation is evaluated at the frame-level
+                                                                    the uniform allocation scheme.
+due to (13) and (14). This results in the FCP approximation
+                                                                       The throughput of the three allocation schemes are depicted
+being lower-bound. SX1301 is capable of parallel reception
+                                                                    Fig. 6. While the ∆Dist provides better coverage than ∆Uni , it
+on 8 LoRa channels, 1 ≤ Nc ≤ 8. In this article we have
+                                                                    does not provide a much larger throughput on a cell basis since
+assumed that the frequency of all Nc channels is the same
+                                                                    many devices are assigned to higher SFs. The equivalent-load
+for the evaluation of FCP, which is a fair assumption since
+                                                                    allocation scheme assumes an uneven distribution of devices,
+all LoRaWAN channels in the EU 863-870MHz ISM Band
+                                                                    which may not be the case often in actual deployments, but we
+are fairly close in frequency. The channels are still considered
+                                                                    see that the throughput is much larger in this case. This hints to
+orthogonal to each-other when evaluating the FCP. The FDP
+                                                                    cooperative assignment of SFs between gateways may possibly
+takes into account traffic on all channels as discerned LoRa
+                                                                    provide remarkable throughput improvements in LoRaWAN.
+frames compete for the same demodulation paths. The FCPs
+of SF {7, 10, 12} are plotted in Fig. 3 for ∆Dist . Calculating
+the load contribution on the FDP for each SF m, Lm /L M ,                                               V. C ONCLUSION
+we get .59 for SF 12, .1 for SF 10 and .015 for SF 7.                 We have evaluated the uplink performance of a single
+Although calculated for a specific allocation scheme, we can        gateway LoRaWAN deployment in terms of coverage, frame
+make some general assertions with regards to the impact of          reception success probability and throughput. Collisions are
+different SFs on the reception probability. The higher SFs take     evaluated in the time domain based on a traffic model in
+up demodulations paths for much longer time, which makes            contrast to other works on capture effect in LoRaWAN, which
+any transmission for SF m ∈ M more likely to be dropped.            evaluate capture effect for a fixed number of concurrent
+                                                                                                     transmissions. Unlike previous works, we have considered
+                            1                                                                        the demodulation capabilities of the gateway and specifically
+                                                                                   CP Sim
+                           0.9                                                     CP
+                                                                                                     evaluated SX1301, although the model is applicable to any
+                                                                                        Ana
+
+                           0.8
+                                                                                   FCP
+                                                                                         Sim
+                                                                                                     chipset. We showed that the demodulation capabilities of the
+                                                                                   FCPAna            receiver have a large impact on the probability of receiving
+                           0.7                                                     FDP
+                                                                                   FDP
+                                                                                         Sim         frames successfully.
+                           0.6                                                           Ana
+      Probability
+
+
+
+
+                                                                                   FSP Sim
+                           0.5                                                     FSP
+                                                                                                                                 R EFERENCES
+                                                                                         Ana
+                                                                                                      [1] F. Adelantado, X. Vilajosana, P. Tuset-Peiro, B. Martinez, J. Melia-
+                           0.4
+                                                                                                          Segui, and T. Watteyne, “Understanding the limits of lorawan,” IEEE
+                           0.3                                                                            Communications Magazine, vol. 55, no. 9, pp. 34–40, 2017.
+                                                                                                      [2] O. Georgiou and U. Raza, “Low power wide area network analysis: Can
+                           0.2                                                                            lora scale?” IEEE Wireless Communications Letters, vol. 6, no. 2, pp.
+                           0.1
+                                                                                                          162–165, April 2017.
+                                                                                                      [3] Z. Li, S. Zozor, J. Drossier, N. Varsier, and Q. Lampin, “2d time-
+                            0                                                                             frequency interference modelling using stochastic geometry for per-
+                                 0        200           400         600      800              1000        formance evaluation in low-power wide-area networks,” in 2017 IEEE
+                                                      Number of devices, N                                International Conference on Communications (ICC), May 2017, pp. 1–
+                                                                                                          7.
+Fig. 4. Probabilities associated with frame capture for ∆ Di s t .                                    [4] J. Lim and Y. Han, “Spreading factor allocation for massive connectivity
+λ d = 1/600, B = 50 and N c = 8 .                                                                         in lora systems,” IEEE Communications Letters, vol. 22, no. 4, pp. 800–
+                                                                                                          803, April 2018.
+                                                                                                      [5] A. Mahmood, E. G. Sisinni, L. Guntupalli, R. Rondon, S. A. Hassan,
+                                                                                                          and M. Gidlund, “Scalability analysis of a lora network under imperfect
+                            1                                                                             orthogonality,” IEEE Transactions on Industrial Informatics, pp. 1–1,
+                                                                                                          2018.
+                           0.9
+                                                                                                      [6] A. Waret, M. Kaneko, A. Guitton, and N. E. Rachkidy, “Lora throughput
+                           0.8                                                                            analysis with imperfect spreading factor orthogonality,” IEEE Wireless
+                                                                                                          Communications Letters, pp. 1–1, 2018.
+                           0.7                                                                        [7] A. Rahmadhani and F. Kuipers, “When lorawan frames collide,” Proc.
+                                     CP Sim                                                               of the 12th International Workshop on Wireless Network Testbeds,
+                           0.6
+      Probability
+
+
+
+
+                                     CP
+                                          Ana
+                                                                                                          Experimental Evaluation & Characterization (ACM WiNTECH 2018),
+                           0.5       FCP
+                                           Sim
+                                                                                                          2018.
+                                     FCPAna                                                           [8] Semtech, SX1276/77/78/79 Datasheet, rev. 5 ed., Aug. 2016.
+                           0.4                                                                        [9] L. A. T. Committee, LoRaWAN Specification, v1.1 ed., LoRa Alliance,
+                                     FDP
+                                           Sim
+
+                           0.3       FDP
+                                           Ana
+                                                                                                          Oct. 2017.
+                                     FSP Sim                                                         [10] R. B. Sørensen, D. M. Kim, J. J. Nielsen, and P. Popovski, “Analysis of
+                           0.2       FSP                                                                  latency and mac-layer performance for class a lorawan,” IEEE Wireless
+                                           Ana
+                                                                                                          Communications Letters, vol. 6, no. 5, pp. 566–569, Oct 2017.
+                           0.1
+                                                                                                     [11] Semtech, SX1301 Datasheet, v2.4 ed., June 2017.
+                            0                                                                        [12] S. Co. (2017) Demodulation capacity of the sx1301. [Online]. Available:
+                                 0        200           400         600      800              1000        https://semtech.force.com/lora/articles/FAQ/Demodulation-capacity-of-the-SX1301.
+                                                      Number of devices, N
+
+
+Fig. 5. Probabilities associated with frame capture for ∆ E q l o a d.
+λ d = 1/600, B = 50 and N c = 8 .
+
+
+
+                           50
+                                     T Uni,Sim
+                           45
+                                     T
+                                         Dist,Sim
+                           40        T Dist,Ana
+                                     T EqLoad,Sim
+                           35        T
+                                         EqLoad,Ana
+        Throughput [B/s]
+
+
+
+
+                           30
+
+                           25
+
+                           20
+
+                           15
+
+                           10
+
+                            5
+
+                            0
+                                 0        200           400         600      800              1000
+                                                      Number of devices, N
+
+
+Fig. 6. Throughput for the LoRaWAN payload [B/s].
+λ d = 1/600, B = 50 and N c = 8 .
+

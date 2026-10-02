@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/5voe33Cc8r7j/8w4Ra2B+sDaRaQ</id>
+  <title>arXiv Query: search_query=all:"LoRa" AND all:"duty cycle" AND all:"throughput"&amp;id_list=&amp;start=0&amp;max_results=6</title>
+  <updated>2026-09-30T16:32:06Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22LoRa%22+AND+(all:%22duty+cycle%22+AND+all:%22throughput%22)&amp;start=0&amp;max_results=6&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>6</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1904.12300v2</id>
+    <title>Achieving Max-Min Throughput in LoRa Networks</title>
+    <updated>2020-09-02T02:31:26Z</updated>
+    <link href="https://arxiv.org/abs/1904.12300v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.12300v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With growing popularity, LoRa networks are pivotally enabling Long Range connectivity to low-cost and power-constrained user equipments (UEs). Due to its wide coverage area, a critical issue is to effectively allocate wireless resources to support potentially massive UEs in the cell while resolving the prominent near-far fairness problem for cell-edge UEs, which is challenging to address due to the lack of tractable analytical model for the LoRa network and its practical requirement for low-complexity and low-overhead design. To achieve massive connectivity with fairness, we investigate the problem of maximizing the minimum throughput of all UEs in the LoRa network, by jointly designing high-level policies of spreading factor (SF) allocation, power control, and duty cycle adjustment based only on average channel statistics and spatial UE distribution. By leveraging on the Poisson rain model along with tailored modifications to our considered LoRa network, we are able to account for channel fading, aggregate interference and accurate packet overlapping, and still obtain a tractable and yet accurate closed-form formula for the packet success probability and hence throughput. We further propose an iterative balancing (IB) method to allocate the SFs in the cell such that the overall max-min throughput can be achieved within the considered time period and cell area. Numerical results show that the proposed scheme with optimized design greatly alleviates the near-far fairness issue, and significantly improves the cell-edge throughput.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-28T10:36:39Z</published>
+    <arxiv:comment>6 pages, 4 figures, published in Proc. International Conference on Computing, Networking and Communications (ICNC), 2020. This paper proposes stochastic-geometry based analytical framework for a single-cell LoRa network, with joint optimization to achieve max-min throughput for the users. Extended journal version for large-scale multi-cell LoRa network: arXiv:2008.07438</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <arxiv:journal_ref>2020 International Conference on Computing, Networking and Communications (ICNC), Big Island, HI, USA, 2020, pp. 471-476. [Online] https://ieeexplore.ieee.org/document/9049729</arxiv:journal_ref>
+    <author>
+      <name>Jiangbin Lyu</name>
+    </author>
+    <author>
+      <name>Dan Yu</name>
+    </author>
+    <author>
+      <name>Liqun Fu</name>
+    </author>
+    <arxiv:doi>10.1109/ICNC47757.2020.9049729</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICNC47757.2020.9049729" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.07438v3</id>
+    <title>Analysis and Optimization for Large-Scale LoRa Networks: Throughput Fairness and Scalability</title>
+    <updated>2021-11-05T13:57:39Z</updated>
+    <link href="https://arxiv.org/abs/2008.07438v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.07438v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LoRa networks are pivotally enabling Long Range connectivity to low-cost and power-constrained user equipments (UEs) in a wide area, whereas a critical issue is to effectively allocate wireless resources to support potentially massive UEs while resolving the prominent near-far fairness issue, which is challenging due to the lack of tractable analytical model and the practical requirement for low-complexity and low-overhead design. Leveraging on stochastic geometry, especially the Poisson rain model, we derive (semi-) closed-form formulas for the aggregate interference distribution, packet success probability and hence system throughput in both single-cell and multi-cell setups with frequency reuse, by accounting for channel fading, random UE distribution, partial packet overlapping, and/or multi-gateway packet reception. The analytical formulas require only average channel statistics and spatial UE distribution, which enable tractable network performance evaluation and incubate our proposed Iterative Balancing (IB) method that quickly yields high-level policies of joint spreading factor (SF) allocation, power control, and duty cycle adjustment for gauging the average max-min UE throughput or supported UE density with rate requirements. Numerical results validate the analytical formulas and the effectiveness of our proposed optimization scheme, which greatly alleviates the near-far fairness issue and reduces the spatial power consumption, while significantly improving the cell-edge throughput as well as the spatial (sum) throughput for the majority of UEs, by adapting to the UE/gateway densities.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-08-17T15:56:43Z</published>
+    <arxiv:comment>To appear in IEEE IOT Journal. Stochastic geometry-based framework to model/analyze large-scale LoRa networks with channel fading/aggregate interference/packet overlapping/multi-GW reception. Jointly optimize SF/Tx-power/duty-cycle based on channel statistics and UE distribution. Achieve both fairness/power savings and improve cell-edge throughput and spatial (sum) throughput for majority of UEs. arXiv admin note: text overlap with arXiv:1904.12300</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Jiangbin Lyu</name>
+    </author>
+    <author>
+      <name>Dan Yu</name>
+    </author>
+    <author>
+      <name>Liqun Fu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.03714v1</id>
+    <title>A Position- and Energy-Aware Routing Strategy for Subterranean LoRa Mesh Networks</title>
+    <updated>2025-10-04T07:25:13Z</updated>
+    <link href="https://arxiv.org/abs/2510.03714v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.03714v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although LoRa is predominantly employed with the single-hop LoRaWAN protocol, recent advancements have extended its application to multi-hop mesh topologies. Designing efficient routing for LoRa mesh networks remains challenging due to LoRa's low data rate and ALOHA-based MAC. Prior work often adapts conventional protocols for low-traffic, aboveground networks with strict duty cycle constraints or uses flooding-based methods in subterranean environments. However, these approaches inefficiently utilize the limited available network bandwidth in these low-data-rate networks due to excessive control overhead, acknowledgments, and redundant retransmissions. In this paper, we introduce a novel position- and energy-aware routing strategy tailored for subterranean LoRa mesh networks aimed at enhancing maximum throughput and power efficiency while also maintaining high packet delivery ratios. Our mechanism begins with a lightweight position learning phase, during which LoRa repeaters ascertain their relative positions and gather routing information. Afterwards, the network becomes fully operational with adaptive routing, leveraging standby LoRa repeaters for recovery from packet collisions and losses, and energy-aware route switching to balance battery depletion across repeaters. The simulation results on a representative subterranean network demonstrate a 185% increase in maximum throughput and a 75% reduction in energy consumption compared to a previously optimized flooding-based approach for high traffic.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-04T07:25:13Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Nalith Udugampola</name>
+    </author>
+    <author>
+      <name>Xiaoyu Ai</name>
+    </author>
+    <author>
+      <name>Binghao Li</name>
+    </author>
+    <author>
+      <name>Henry Gong</name>
+    </author>
+    <author>
+      <name>Aruna Seneviratne</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.09403v2</id>
+    <title>WIP: Exploring DSME MAC for LoRa -- A System Integration and First Evaluation</title>
+    <updated>2022-04-22T09:27:23Z</updated>
+    <link href="https://arxiv.org/abs/2112.09403v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.09403v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LoRa is a popular wireless technology that enables low-throughput (bytes) long-range communication (km) at low energy consumption (mW). Its transmission, though, is on one side prone to interference during long on-air times, and on the other side subject to duty cycle restrictions. LoRaWAN defines a MAC and a vertical stack on top of LoRa. LoRaWAN circumvents the above limitations by imposing a centralized network architecture, which heavily reduces downlink capacity and prevents peer-to-peer communication. This makes it unusable for many deployments. The Deterministic and Synchronous Multichannel Extension (DSME) of IEEE 802.15.4e benefits of time-slotted communication and peer-to-peer communication and has the potential to overcome LoRaWAN limitations. In this work, we implement DSME on top of LoRa in the open source IoT OS RIOT and open the field for first evaluation experiments on real hardware. Initial results indicate that DSME-LoRa not only enables reliable peer-to-peer communication for constrained IoT devices, but also scales with an increasing number of nodes.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-17T09:30:17Z</published>
+    <arxiv:comment>4 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>José Álamos</name>
+    </author>
+    <author>
+      <name>Peter Kietzmann</name>
+    </author>
+    <author>
+      <name>Thomas C. Schmidt</name>
+    </author>
+    <author>
+      <name>Matthias Wählisch</name>
+    </author>
+    <arxiv:doi>10.1109/WoWMoM54355.2022.00050</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/WoWMoM54355.2022.00050" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.20515v1</id>
+    <title>LoRa Multi-Hop Networks for Monitoring Underground Mining Environments</title>
+    <updated>2023-10-31T14:55:55Z</updated>
+    <link href="https://arxiv.org/abs/2310.20515v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.20515v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Internet of Things applications have gained widespread recognition for their efficacy in typical scenarios, such as smart cities and smart healthcare. Nonetheless, there exist numerous unconventional situations where IoT technologies have not yet been massively applied, though they can be extremely useful. One of such domains is the underground mining sector, where enhancing automation monitoring through wireless communications is of essential significance. In this paper, we focus on the development, implementation, and evaluation of a LoRa-based multi-hop network tailored specifically for monitoring underground mining environments, where data traffic is sporadic, but energy efficiency is of paramount importance. We hence define a synchronization framework that makes it possible for the nodes to sleep for most of the time, waking up only when they need to exchange traffic. Notably, our network achieves a sub 40us proven synchronization accuracy between parent-child pairs with minimum overhead for diverse topologies, rendering it highly viable for subterranean operations. Furthermore, for proper network dimensioning, we model the interplay between network's throughput, frame size, and sampling periods of potential applications. Moreover, we propose a model to estimate devices' duty cycle based on their position within the multi-hop network, along with empirical observations for its validation. The proposed models make it possible to optimize the network's performance to meet the specific demands that can arise from the different subterranean use cases, in which robustness, low power operation, and compliance with radio-frequency regulations are key requirements that must be met.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-31T14:55:55Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Luca Scalambrin</name>
+    </author>
+    <author>
+      <name>Andrea Zanella</name>
+    </author>
+    <author>
+      <name>Xavier Vilajosana</name>
+    </author>
+  </entry>
+</feed>

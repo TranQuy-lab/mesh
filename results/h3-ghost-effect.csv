@@ -1,0 +1,4 @@
+n_nodes,recover_C_expiry_on,recover_D_expiry_off,ghost_effect,no_route_C,no_route_D,baseline_A,baseline_B
+50,6.433,6.367,0.066,19.53,0.13,6.533,6.383
+100,6.522,6.278,0.244,49.29,0.26,6.522,6.278
+200,5.1,4.978,0.122,58.1,0.22,5.2,4.944

@@ -1,0 +1,1689 @@
+    ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+
+HARMONISED EUROPEAN STANDARD
+
+
+
+
+              Short Range Devices (SRD) operating
+          in the frequency range 25 MHz to 1 000 MHz;
+  Part 2: Harmonised Standard for access to radio spectrum
+                 for non specific radio equipment
+                                                                  2                           ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+
+                                                            Reference
+                                                     REN/ERM-TG28-535
+
+                                                            Keywords
+                                          harmonised standard, radio, SRD, testing
+
+
+
+
+                                                               ETSI
+
+                                                  650 Route des Lucioles
+                                         F-06921 Sophia Antipolis Cedex - FRANCE
+
+                                      Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
+
+                                             Siret N° 348 623 562 00017 - NAF 742 C
+                                            Association à but non lucratif enregistrée à la
+                                            Sous-Préfecture de Grasse (06) N° 7803/88
+
+
+
+
+                                                     Important notice
+
+                                     The present document can be downloaded from:
+                                          http://www.etsi.org/standards-search
+
+The present document may be made available in electronic versions and/or in print. The content of any electronic and/or
+print versions of the present document shall not be modified without the prior written authorization of ETSI. In case of any
+  existing or perceived difference in contents between such versions and/or in print, the only prevailing document is the
+       print of the Portable Document Format (PDF) version kept on a specific network drive within ETSI Secretariat.
+
+   Users of the present document should be aware that the document may be subject to revision or change of status.
+                   Information on the current status of this and other ETSI documents is available at
+                                 https://portal.etsi.org/TB/ETSIDeliverableStatus.aspx
+
+         If you find errors in the present document, please send your comment to one of the following services:
+                                  https://portal.etsi.org/People/CommiteeSupportStaff.aspx
+
+                                                Copyright Notification
+
+  No part may be reproduced or utilized in any form or by any means, electronic or mechanical, including photocopying
+                          and microfilm except as authorized by written permission of ETSI.
+            The content of the PDF version shall not be modified without the written authorization of ETSI.
+                    The copyright and the foregoing restriction extend to reproduction in all media.
+
+                                                        © ETSI 2018.
+                                                     All rights reserved.
+
+DECTTM, PLUGTESTSTM, UMTSTM and the ETSI logo are trademarks of ETSI registered for the benefit of its Members.
+            3GPPTM and LTETM are trademarks of ETSI registered for the benefit of its Members and
+                                   of the 3GPP Organizational Partners.
+                         oneM2M logo is protected for the benefit of its Members.
+            GSM® and the GSM logo are trademarks registered and owned by the GSM Association.
+
+
+
+
+                                                               ETSI
+                                                                                        3                                    ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Contents
+Intellectual Property Rights ................................................................................................................................6
+Foreword.............................................................................................................................................................6
+Modal verbs terminology....................................................................................................................................7
+Introduction ........................................................................................................................................................7
+1         Scope ........................................................................................................................................................8
+2         References ................................................................................................................................................8
+2.1           Normative references ......................................................................................................................................... 8
+2.2           Informative references ........................................................................................................................................ 9
+3         Definitions, symbols and abbreviations ...................................................................................................9
+3.1           Definitions .......................................................................................................................................................... 9
+3.2           Symbols ............................................................................................................................................................ 10
+3.3           Abbreviations ................................................................................................................................................... 10
+4         Technical requirements specifications ...................................................................................................10
+4.1           Environmental profile....................................................................................................................................... 10
+4.2           All equipment conformance requirements ....................................................................................................... 10
+4.2.0             Compliance ................................................................................................................................................. 10
+4.2.1             Operating frequency ................................................................................................................................... 10
+4.2.1.0              Applicability.......................................................................................................................................... 10
+4.2.1.1              Description ............................................................................................................................................ 11
+4.2.1.2              Limits .................................................................................................................................................... 11
+4.2.1.3              Conformance ......................................................................................................................................... 11
+4.2.2             Unwanted emissions in the spurious domain .............................................................................................. 11
+4.2.2.0              Applicability.......................................................................................................................................... 11
+4.2.2.1              Description ............................................................................................................................................ 11
+4.2.2.2              Limits .................................................................................................................................................... 11
+4.2.2.3              Conformance ......................................................................................................................................... 11
+4.3           Transmitters conformance requirements .......................................................................................................... 11
+4.3.1             Effective Radiated Power ........................................................................................................................... 11
+4.3.1.0              Applicability.......................................................................................................................................... 11
+4.3.1.1              Description ............................................................................................................................................ 11
+4.3.1.2              Limits .................................................................................................................................................... 11
+4.3.1.3              Conformance ......................................................................................................................................... 11
+4.3.2             Maximum e.r.p. power spectral density ...................................................................................................... 12
+4.3.2.0              Applicability.......................................................................................................................................... 12
+4.3.2.1              Description ............................................................................................................................................ 12
+4.3.2.2              Limits .................................................................................................................................................... 12
+4.3.2.3              Conformance ......................................................................................................................................... 12
+4.3.3             Duty Cycle .................................................................................................................................................. 12
+4.3.3.0              Applicability.......................................................................................................................................... 12
+4.3.3.1              Description ............................................................................................................................................ 12
+4.3.3.2              Limits .................................................................................................................................................... 12
+4.3.3.3              Conformance ......................................................................................................................................... 12
+4.3.4             Occupied Bandwidth................................................................................................................................... 12
+4.3.4.0              Applicability.......................................................................................................................................... 12
+4.3.4.1              Description ............................................................................................................................................ 12
+4.3.4.2              Limits .................................................................................................................................................... 13
+4.3.4.3              Conformance ......................................................................................................................................... 13
+4.3.5             Tx Out of Band Emissions .......................................................................................................................... 13
+4.3.5.0              Applicability.......................................................................................................................................... 13
+4.3.5.1              Description ............................................................................................................................................ 13
+4.3.5.2              Limits .................................................................................................................................................... 13
+4.3.5.3              Conformance ......................................................................................................................................... 13
+4.3.6             Transient power .......................................................................................................................................... 13
+4.3.6.0              Applicability.......................................................................................................................................... 13
+
+
+
+                                                                                     ETSI
+                                                                                      4                                  ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.6.1          Description ............................................................................................................................................ 13
+4.3.6.2          Limits .................................................................................................................................................... 13
+4.3.6.3          Conformance ......................................................................................................................................... 13
+4.3.7       Adjacent Channel Power ............................................................................................................................ 13
+4.3.7.0          Applicability.......................................................................................................................................... 13
+4.3.7.1          Description ............................................................................................................................................ 14
+4.3.7.2          Limits .................................................................................................................................................... 14
+4.3.7.3          Conformance ......................................................................................................................................... 14
+4.3.8       TX behaviour under Low Voltage Conditions ............................................................................................ 14
+4.3.8.0          Applicability.......................................................................................................................................... 14
+4.3.8.1          Description ............................................................................................................................................ 14
+4.3.8.2          Limits .................................................................................................................................................... 14
+4.3.8.3          Conformance ......................................................................................................................................... 14
+4.3.9       Adaptive Power Control ............................................................................................................................. 14
+4.3.9.0          Applicability.......................................................................................................................................... 14
+4.3.9.1          Description ............................................................................................................................................ 14
+4.3.9.2          Limits .................................................................................................................................................... 14
+4.3.9.3          Conformance ......................................................................................................................................... 14
+4.3.10      FHSS equipment ......................................................................................................................................... 15
+4.3.10.0         Applicability.......................................................................................................................................... 15
+4.3.10.1         Description ............................................................................................................................................ 15
+4.3.10.2         Limits .................................................................................................................................................... 15
+4.3.10.3         Conformance ......................................................................................................................................... 15
+4.3.11      Short term behaviour .................................................................................................................................. 16
+4.3.11.0         Applicability.......................................................................................................................................... 16
+4.3.11.1         Description ............................................................................................................................................ 16
+4.3.11.2         Limits .................................................................................................................................................... 16
+4.3.11.3         Conformance ......................................................................................................................................... 16
+4.4      Receivers conformance requirements ............................................................................................................... 16
+4.4.1       RX sensitivity ............................................................................................................................................. 16
+4.4.1.0          Applicability.......................................................................................................................................... 16
+4.4.1.1          Description ............................................................................................................................................ 16
+4.4.1.2          Limits .................................................................................................................................................... 16
+4.4.1.3          Conformance ......................................................................................................................................... 16
+4.4.2       Blocking...................................................................................................................................................... 16
+4.4.2.0          Applicability.......................................................................................................................................... 16
+4.4.2.1          Description ............................................................................................................................................ 16
+4.4.2.2          Limits .................................................................................................................................................... 17
+4.4.2.3          Conformance ......................................................................................................................................... 17
+4.5      Polite spectrum access conformance requirement ............................................................................................ 17
+4.5.1       Description.................................................................................................................................................. 17
+4.5.2       Clear Channel Assessment threshold .......................................................................................................... 17
+4.5.2.0          Applicability.......................................................................................................................................... 17
+4.5.2.1          Description ............................................................................................................................................ 17
+4.5.2.2          Limits .................................................................................................................................................... 17
+4.5.2.3          Conformance ......................................................................................................................................... 17
+4.5.3       Polite spectrum access timing parameters .................................................................................................. 17
+4.5.3.1          Applicability.......................................................................................................................................... 17
+4.5.3.2          Limits .................................................................................................................................................... 17
+4.5.3.3          Conformance ......................................................................................................................................... 17
+4.5.4       Adaptive Frequency Agility........................................................................................................................ 18
+4.5.4.0          Applicability.......................................................................................................................................... 18
+4.5.4.1          Description ............................................................................................................................................ 18
+4.5.4.2          Limits .................................................................................................................................................... 18
+4.5.4.3          Conformance ......................................................................................................................................... 18
+
+Annex A (informative):                          Relationship between the present document and the essential
+                                                requirements of Directive 2014/53/EU .........................................................19
+Annex B (normative):                            EU wide harmonised national radio interfaces from 25 MHz to
+                                                1 000 MHz .......................................................................................................21
+
+
+
+                                                                                   ETSI
+                                                                                   5                                ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+Annex C (informative):                        National Radio Interfaces not EU wide harmonised ..................................23
+Annex D (informative):                        Application form for testing..........................................................................28
+D.1      Introduction ............................................................................................................................................28
+D.2      Information to declare according to ETSI EN 300 220-2 ......................................................................28
+Annex E (informative):                        Selection of technical parameters .................................................................30
+E.1      Introduction ............................................................................................................................................30
+E.2      Receiver parameters ...............................................................................................................................30
+Annex F (informative):                        Bibliography ...................................................................................................31
+Annex G (informative):                        Change history ...............................................................................................32
+History ..............................................................................................................................................................33
+
+
+
+
+                                                                                ETSI
+                                                              6                        ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Intellectual Property Rights
+Essential patents
+
+IPRs essential or potentially essential to normative deliverables may have been declared to ETSI. The information
+pertaining to these essential IPRs, if any, is publicly available for ETSI members and non-members, and can be found
+in ETSI SR 000 314: "Intellectual Property Rights (IPRs); Essential, or potentially Essential, IPRs notified to ETSI in
+respect of ETSI standards", which is available from the ETSI Secretariat. Latest updates are available on the ETSI Web
+server (https://ipr.etsi.org/).
+
+Pursuant to the ETSI IPR Policy, no investigation, including IPR searches, has been carried out by ETSI. No guarantee
+can be given as to the existence of other IPRs not referenced in ETSI SR 000 314 (or the updates on the ETSI Web
+server) which are, or may be, or may become, essential to the present document.
+
+Trademarks
+
+The present document may include trademarks and/or tradenames which are asserted and/or registered by their owners.
+ETSI claims no ownership of these except for any which are indicated as being the property of ETSI, and conveys no
+right to use or reproduce any trademark and/or tradename. Mention of those trademarks in the present document does
+not constitute an endorsement by ETSI of products, services or organizations associated with those trademarks.
+
+
+
+Foreword
+This Harmonised European Standard (EN) has been produced by ETSI Technical Committee Electromagnetic
+compatibility and Radio spectrum Matters (ERM).
+
+The present document has been prepared under the Commission's standardisation request C(2015) 5376 final [i.5] to
+provide one voluntary means of conforming to the essential requirements of Directive 2014/53/EU on the harmonisation
+of the laws of the Member States relating to the making available on the market of radio equipment and repealing
+Directive 1999/5/EC [i.2].
+
+Once the present document is cited in the Official Journal of the European Union under that Directive, compliance with
+the normative clauses of the present document given in table A.1 confers, within the limits of the scope of the present
+document, a presumption of conformity with the corresponding essential requirements of that Directive and associated
+EFTA regulations.
+
+The present document is part 2 of a multi-part deliverable. Full details of the entire series can be found in part 1 [1].
+
+For non EU countries the present document may be used for regulatory (Type Approval) purposes.
+
+
+                                            National transposition dates
+ Date of adoption of this EN:                                                         15 June 2018
+ Date of latest announcement of this EN (doa):                                        30 September 2018
+ Date of latest publication of new National Standard
+ or endorsement of this EN (dop/e):                                                   31 March 2019
+ Date of withdrawal of any conflicting National Standard (dow):                       31 March 2020
+
+
+
+
+                                                            ETSI
+                                                           7                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Modal verbs terminology
+In the present document "shall", "shall not", "should", "should not", "may", "need not", "will", "will not", "can" and
+"cannot" are to be interpreted as described in clause 3.2 of the ETSI Drafting Rules (Verbal forms for the expression of
+provisions).
+
+"must" and "must not" are NOT allowed in ETSI deliverables except when used in direct citation.
+
+
+
+Introduction
+The present document is part 2 of a multi-part deliverable covering Short Range Devices (SRD) operating in the
+frequency range 25 MHz to 1 000 MHz.
+
+The present document is structured as follows:
+
+Clause 2 provides references.
+
+Clause 3 provides definitions of terms and abbreviations used.
+
+Clause 4 provides technical requirements.
+
+Annex A (informative) provides a relationship between the present document and the essential requirements of
+Directive 2014/53/EU [i.2].
+
+Annex B (normative): EU wide harmonised national radio interfaces from 25 MHz to 1 000 MHz.
+
+Annex C (informative): National Radio Interfaces not EU wide harmonised.
+
+Annex D (informative): Application form for testing.
+
+Annex E (informative): Selection of parameters.
+
+Annex F (informative): Bibliography.
+
+Annex G (informative): Change history.
+
+
+
+
+                                                         ETSI
+                                                            8                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+1             Scope
+The present document specifies technical characteristics and methods of measurements for Non-specific Short Range
+Devices category equipment types.
+
+Non specific SRDs category is defined by the EU Commission Decision 2013/752/EU [i.3] as:
+
+"The non-specific short-range device category covers all kinds of radio devices, regardless of the application or the
+purpose, which fulfil the technical conditions as specified for a given frequency band. Typical uses include telemetry,
+telecommand, alarms, data transmissions in general and other applications".
+
+The present document covers equipment intended for fixed, portable, mobile or nomadic use, including:
+
+    •    stand-alone radio equipment;
+
+    •    plug-in radio devices intended for use with or within a variety of host systems;
+
+    •    plug-in radio devices intended for use within combined equipment.
+
+These radio equipment types are capable of operating in all or any part of the frequency bands given in table 1.
+
+                                         Table 1: SRDs frequency ranges
+
+                                                               Short Range Devices frequency ranges
+                   Transmit and receive                               26,957 MHz to 27,283 MHz
+                   Transmit and receive                               40,660 MHz to 40,700 MHz
+                   Transmit and receive                                138,2 MHz to 138,45 MHz
+                   Transmit and receive                              169,4 MHz to 169,8125 MHz
+                   Transmit and receive                              433,040 MHz to 434,790 MHz
+                   Transmit and receive                                  863 MHz to 876 MHz
+                   Transmit and receive                                  915 MHz to 921 MHz
+        NOTE:      It should be noted that not all frequency bands in table 1 are implemented in all European
+                   countries. Annex B provides an overview of radio interfaces which are harmonised in the
+                   European Union. Annex C provides an overview of national radio interfaces not harmonised in
+                   the European Union.
+
+
+It is noted that in the European Commission Decision on Short Range Devices [i.3], some harmonised frequency bands
+may be subject to usage restrictions such as the exclusion of video or audio use.
+
+Equipment transmitting voice with analog modulation are excluded from the present document.
+
+    NOTE:     The relationship between the present document and essential requirements of article 3.2 of Directive
+              2014/53/EU [i.2] is given in annex A.
+
+
+
+2             References
+
+2.1           Normative references
+References are specific, identified by date of publication and/or edition number or version number. Only the cited
+version applies.
+
+Referenced documents which are not found to be publicly available in the expected location might be found at
+https://docbox.etsi.org/Reference/.
+
+    NOTE:     While any hyperlinks included in this clause were valid at the time of publication, ETSI cannot guarantee
+              their long term validity.
+
+
+
+
+                                                          ETSI
+                                                              9                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+The following referenced documents are necessary for the application of the present document.
+
+    [1]               ETSI EN 300 220-1 (V3.1.1) (02-2017): "Short Range Devices (SRD) operating in the frequency
+                      range 25 MHz to 1 000 MHz; Part 1: Technical characteristics and methods of measurement".
+
+    [2]               Commission Decision 2017/1483/EU Commission Implementing Decision (EU) 2017/1483 of
+                      8 August 2017 amending Decision 2006/771/EC on harmonisation of the radio spectrum for use
+                      by short-range devices and repealing Decision 2006/804/EC on harmonisation of the radio
+                      spectrum for use by short-range devices as amended by subsequent Commission Decisions.
+
+
+2.2           Informative references
+References are either specific (identified by date of publication and/or edition number or version number) or
+non-specific. For specific references, only the cited version applies. For non-specific references, the latest version of the
+referenced document (including any amendments) applies.
+
+    NOTE:     While any hyperlinks included in this clause were valid at the time of publication, ETSI cannot guarantee
+              their long term validity.
+
+The following referenced documents are not necessary for the application of the present document but they assist the
+user with regard to a particular subject area.
+
+    [i.1]             CEPT/ERC/REC 70-03: "Relating to the use of Short Range Devices (SRD)".
+
+    NOTE:     Available at https://www.ecodocdb.dk/download/25c41779-cd6e/Rec7003e%20May%202018.pdf.
+
+    [i.2]             Directive 2014/53/EU of the European Parliament and of the Council of 16 April 2014 on the
+                      harmonisation of the laws of the Member States relating to the making available on the market of
+                      radio equipment and repealing Directive 1999/5/EC.
+
+    [i.3]             Commission Decision 2013/752/EU on harmonisation of the radio spectrum for use by short-range
+                      devices as amended by subsequent Commission Decisions.
+
+    [i.4]             ETSI EG 203 336: "Electromagnetic compatibility and Radio spectrum Matters (ERM); Guide for
+                      the selection of technical parameters for the production of Harmonised Standards covering
+                      article 3.1(b) and article 3.2 of Directive 2014/53/EU".
+
+    [i.5]             Commission Implementing Decision C(2015) 5376 final of 4.8.2015 on a standardisation request
+                      to the European Committee for Electrotechnical Standardisation and to the European
+                      Telecommunications Standards Institute as regards radio equipment in support of Directive
+                      2014/53/EU of the European Parliament and of the Council.
+
+    [i.6]             ECC Report 200: "Co-existence studies for proposed SRD and RFID applications in the frequency
+                      band 870-876 MHz and 915-921 MHz", September 2013.
+
+    [i.7]             Commission Decision 2000/299/EC: "Commission Decision of 6 April 2000 establishing the
+                      initial classification of radio equipment and telecommunications terminal equipment and
+                      associated identifiers (notified under document number C(2000) 938) (Text with EEA relevance)".
+
+
+
+3             Definitions, symbols and abbreviations
+
+3.1           Definitions
+For the purposes of the present document, the terms and definitions given in RE-Directive [i.2], ETSI EN 300 220-1 [1]
+and the following apply:
+
+dwell time: time period the equipment stays on channel before hopping to the next hop channel
+
+epoch: value of 4 times the dwell time times the number of hop channels
+
+nomadic use: the location of the equipment may change but is stationary while in use
+
+
+
+                                                            ETSI
+                                                          10                         ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+non overlapping channels: hopping positions separated by channel bandwidth of 90 % or more below the maximum
+power as measured with a spectrum analyser
+
+number of hop channels: number of non-overlapping channels used by an FHSS equipment
+
+portable use: equipment intended to be carried, attached or implanted while in use
+
+return time to a hop channel: maximum period of time within which a specific hop channel is reused
+
+
+3.2           Symbols
+For the purposes of the present document, the symbols given in ETSI EN 300 220-1 [1] apply.
+
+
+3.3           Abbreviations
+For the purposes of the present document, the abbreviations given in ETSI EN 300 220-1 [1] and the following apply:
+
+    DSSS               Direct Sequence Spread Spectrum
+    NRI                National Radio Interface
+
+
+
+4             Technical requirements specifications
+
+4.1           Environmental profile
+The technical requirements of the present document apply under the environmental profile for operation of the
+equipment, which shall be declared by the manufacturer. The equipment shall comply with all the technical
+requirements of the present document which are identified as applicable in annex A at all times when operating within
+the boundary limits of the declared operational environmental profile. Normal and extreme tests conditions are defined
+in ETSI EN 300 220-1 [1], clauses 4.3.3 and 4.3.4.
+
+
+4.2           All equipment conformance requirements
+4.2.0         Compliance
+When an operational frequency band is selected:
+
+    1)    from table B.1:
+
+          the equipment shall comply with all parameters, exclusions and notes from the corresponding row in table B.1;
+
+    2)    otherwise:
+
+          the present document may be used in conjunction with a National Radio Interface in which case some
+          parameters may be modified according to the NRI.
+
+    NOTE:     Where NRI has been applied there may be restrictions on the use of equipment in some countries.
+
+Some examples of NRI parameters are given in annex C but this is not an exhaustive list.
+
+
+4.2.1         Operating frequency
+
+4.2.1.0           Applicability
+Clause 4.2.1 applies to all equipment.
+
+
+
+
+                                                         ETSI
+                                                          11                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.2.1.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.1.1 applies.
+
+4.2.1.2           Limits
+The manufacturer may declare either one or more operating frequencies and operating channels.
+
+Operating channel(s) shall be entirely within operational frequency bands allowed by annex B or any NRI.
+
+4.2.1.3           Conformance
+The conformance for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.1.2.
+
+
+4.2.2         Unwanted emissions in the spurious domain
+
+4.2.2.0           Applicability
+Clause 4.2.2 applies to all equipment.
+
+4.2.2.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.9.1 applies.
+
+4.2.2.2           Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.9.2 under normal test
+conditions.
+
+4.2.2.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.9.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.3           Transmitters conformance requirements
+4.3.1         Effective Radiated Power
+
+4.3.1.0           Applicability
+Effective radiated power applies only to transmitters.
+
+4.3.1.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.2.1 applies.
+
+4.3.1.2           Limits
+The effective radiated power shall not be greater than the value allowed in annex B or in any NRI for the chosen
+operational frequency band(s).
+
+4.3.1.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.2.2.
+
+Conformance shall be established under normal and extreme test conditions.
+
+
+
+                                                         ETSI
+                                                           12                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.2         Maximum e.r.p. power spectral density
+
+4.3.2.0          Applicability
+Maximum e.r.p. power spectral density applies to transmitters using annex B bands I.
+
+Maximum e.r.p. power spectral density applies to transmitters using DSSS or wideband techniques other than FHSS
+modulation, in annex C band W, AA or AC.
+
+4.3.2.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.3.1 applies.
+
+4.3.2.2          Limits
+The Maximum e.r.p. power spectral density shall not be greater than the value allowed in annex B or any NRI for the
+chosen operational frequency band(s).
+
+4.3.2.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.3.2.
+
+Conformance shall be established under normal test conditions.
+
+
+4.3.3         Duty Cycle
+
+4.3.3.0          Applicability
+Duty cycle applies to all transmitters except EUT with polite spectrum access (described in clause 4.5) where permitted
+in annex B, table B.1 or annex C, table C.1 or any NRI.
+
+4.3.3.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.4.1 applies.
+
+4.3.3.2          Limits
+The Duty Cycle at the operating frequency shall not be greater than values in annex B or any NRI for the chosen
+operational frequency band(s).
+
+4.3.3.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.4.2.
+
+
+4.3.4         Occupied Bandwidth
+
+4.3.4.0          Applicability
+Maximum occupied bandwidth applies to all transmitters.
+
+4.3.4.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.6.1 applies.
+
+
+
+
+                                                          ETSI
+                                                          13                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.4.2           Limits
+The occupied bandwidth of the EUT according to ETSI EN 300 220-1 [1], clause 5.6.2 shall comply with the limits in
+annex B or any NRI for the chosen operational frequency band(s).
+
+4.3.4.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.6.3.
+
+Conformance shall be established under normal and extreme test conditions.
+
+
+4.3.5         Tx Out of Band Emissions
+
+4.3.5.0           Applicability
+TX Out of Band Emissions applies to all transmitters with OCW > 25 kHz.
+
+4.3.5.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.8.1 applies.
+
+4.3.5.2           Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.8.2.
+
+4.3.5.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.8.3.
+
+Conformance shall be established under normal and extreme test conditions.
+
+
+4.3.6         Transient power
+
+4.3.6.0           Applicability
+Transient power applies to all transmitters.
+
+4.3.6.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.10.1 applies.
+
+4.3.6.2           Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.10.2.
+
+4.3.6.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.10.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.3.7         Adjacent Channel Power
+
+4.3.7.0           Applicability
+Adjacent channel power applies to all transmitters with OCW ≤ 25 kHz.
+
+
+
+
+                                                         ETSI
+                                                          14                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.7.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.11.1 applies.
+
+4.3.7.2          Limits
+Where the Operating Channel Width is less than or equal to 25 kHz, the power in the adjacent channels shall not exceed
+the reference limits defined in ETSI EN 300 220-1 [1], clause 5.11.2.
+
+4.3.7.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.11.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.3.8         TX behaviour under Low Voltage Conditions
+
+4.3.8.0          Applicability
+TX behaviour under low voltage condition applies to battery powered EUT.
+
+4.3.8.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.12.1 applies.
+
+4.3.8.2          Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.12.2.
+
+4.3.8.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.12.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.3.9         Adaptive Power Control
+
+4.3.9.0          Applicability
+Adaptive power control applies to all EUT with adaptive power control using annex C band AF.
+
+4.3.9.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.13.1 applies.
+
+4.3.9.2          Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.13.2.
+
+4.3.9.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.13.3.
+
+Conformance shall be established under normal test conditions.
+
+
+
+
+                                                         ETSI
+                                                             15                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.10          FHSS equipment
+
+4.3.10.0           Applicability
+Applies to all FHSS equipment operating in the range 863 MHz to 870 MHz.
+
+4.3.10.1           Description
+Frequency Hopping Spread Spectrum (FHSS) is a technique where each transmission is spread over multiple Operating
+Frequencies known as (hop channels).
+
+4.3.10.2           Limits
+FHSS equipment shall meet the following limits:
+
+   a)   FHSS equipment shall not transmit in the frequency bands for LDC/HR devices as defined in European
+        Commission Decision 2017/1483/EC [2].
+
+   b)   The number of hopping channels shall be greater than or equal to the values given in table 2.
+
+                                            Table 2: Number of Hop Channels
+
+Operational frequency          Number of hop        Maximum occupied bandwidth                  Specific requirements
+        band                     channels               per hopping channel
+ 865 MHz to 868 MHz                                                                              < 1 % TX duty cycle
+                                     ≥ 58                         ≤ 50 kHz
+                                                                                                      (see note)
+  863 MHz to 870 MHz                                                                            < 0,1 % TX duty cycle
+                                     ≥ 47                         ≤ 100 kHz
+                                                                                                      (see note)
+NOTE:        The duty cycle applies to the entire transmission (not at each hopping channel).
+
+
+   c)   For FHSS transmissions with a dwell time less than 10 ms, a 0,1 % duty cycle restriction applies.
+
+   d)   Each hopping channel of the sequence shall be occupied at least once during an epoch.
+
+   e)   The return time to a hop channel shall be less than or equal to the lower of an epoch or 20 seconds.
+
+   f)   The dwell time shall not exceed 400 ms.
+
+   g)   CCA if used shall be applied:
+
+        i)      at each hop channel; or
+
+        ii)     on the first frequency corresponding to frame preamble transmissions. In this case the Duty Cycle limit
+                applies to the remainder of the FHSS Transmission, i.e. preamble excluded.
+
+   h)   When CCA access is used the requirement of clause 4.5.2 and clause 4.5.3 shall apply.
+
+4.3.10.3           Conformance
+The following declarations for FHSS shall be made by the manufacturer:
+
+   a)   The number of non-overlapping hopping channels.
+
+   b)   The hop channel bandwidth.
+
+   c)   The dwell time.
+
+   d)   The return time to a hop channel.
+
+
+
+
+                                                            ETSI
+                                                           16                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.3.11        Short term behaviour
+
+4.3.11.0          Applicability
+Short term behaviour applies to EUT for operation in bands where Ton or Toff limits are specified in annex C, table C.1
+or NRI.
+
+4.3.11.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.5.1 applies.
+
+4.3.11.2          Limits
+The short term behaviour shall comply with Ton/Toff values specified in annex C, table C.1 or NRI for the operational
+frequency(ies) band(s) used.
+
+4.3.11.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.5.2.
+
+Conformance shall be established under normal test conditions.
+
+
+4.4           Receivers conformance requirements
+4.4.1         RX sensitivity
+
+4.4.1.0           Applicability
+Rx sensitivity requirement is applicable to all EUT employing polite spectrum access as set out in clause 4.5.1.
+
+4.4.1.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.14.1 applies.
+
+4.4.1.2           Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.14.2.
+
+4.4.1.3           Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.14.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.4.2         Blocking
+
+4.4.2.0           Applicability
+Blocking applies to all receivers.
+
+4.4.2.1           Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.18.1 applies.
+
+
+
+
+                                                          ETSI
+                                                           17                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.4.2.2          Limits
+The blocking level shall be better or equal to category 2 reference limits level defined in ETSI EN 300 220-1 [1],
+clause 5.18.3.
+
+4.4.2.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.18.6.
+
+Conformance shall be established under normal test conditions.
+
+
+4.5           Polite spectrum access conformance requirement
+4.5.1         Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.21.1 applies.
+
+
+4.5.2         Clear Channel Assessment threshold
+
+4.5.2.0          Applicability
+Clear channel Assessment clause applies to EUT with polite spectrum access instead of duty cycle where permitted by
+table B.1 in annex B, or table C.1 in annex C or any NRI.
+
+4.5.2.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.21.2.1 applies.
+
+4.5.2.2          Limits
+The CCA threshold shall not exceed the limits given in ETSI EN 300 220-1 [1], clause 5.21.2.2.
+
+4.5.2.3          Conformance
+The conformance tests for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.21.2.3.
+
+Conformance shall be established under normal test conditions.
+
+
+4.5.3         Polite spectrum access timing parameters
+
+4.5.3.1          Applicability
+Polite spectrum access timing parameters clause applies to EUT with polite spectrum where permitted by table B.1 in
+annex B, or table C.1 in annex C or any NRI.
+
+4.5.3.2          Limits
+The EUT shall comply with reference limits defined in ETSI EN 300 220-1 [1], clause 5.21.3.1.
+
+4.5.3.3          Conformance
+The conformance for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.21.3.2.
+
+Conformance shall be established under normal conditions.
+
+
+
+
+                                                          ETSI
+                                                          18                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+4.5.4         Adaptive Frequency Agility
+
+4.5.4.0          Applicability
+Adaptive Frequency Agility clause applies to EUT with AFA.
+
+4.5.4.1          Description
+For the purpose of the present document, the description in ETSI EN 300 220-1 [1], clause 5.21.4.1 applies.
+
+4.5.4.2          Limits
+The use of overlapping operating channels is not permitted.
+
+4.5.4.3          Conformance
+The conformance for this requirement shall be as defined in ETSI EN 300 220-1 [1], clause 5.21.4.2.
+
+
+
+
+                                                         ETSI
+                                                           19                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Annex A (informative):
+Relationship between the present document and the
+essential requirements of Directive 2014/53/EU
+The present document has been prepared under the Commission's standardisation request C(2015) 5376 final [i.5] to
+provide one voluntary means of conforming to the essential requirements of Directive 2014/53/EU on the harmonisation
+of the laws of the Member States relating to the making available on the market of radio equipment and repealing
+Directive 1999/5/EC [i.2].
+
+Once the present document is cited in the Official Journal of the European Union under that Directive, compliance with
+the normative clauses of the present document given in table A.1 confers, within the limits of the scope of the present
+document, a presumption of conformity with the corresponding essential requirements of that Directive, and associated
+EFTA regulations.
+
+                        Table A.1: Relationship between the present document and
+                            the essential requirements of Directive 2014/53/EU
+
+                                     Harmonised Standard ETSI EN 300 220-2
+                             Requirement                                   Requirement Conditionality
+                                         Essential   Clause(s) of
+No              Description            requirements  the present    U/C                   Condition
+                                        of Directive  document
+1     Operating frequency                   3.2          4.2.1       U
+      Unwanted emissions in the
+2                                           3.2          4.2.2       U
+      spurious domain
+3     TX effective radiated power           3.2          4.3.1       U
+                                                                           Applies to EUT using annex B band I.
+                                                                           Applies to EUT using DSSS or
+      TX Maximum e.r.p. spectral
+4                                           3.2          4.3.2       C     wideband techniques other than FHSS
+      density
+                                                                           modulation, using annex C band W,
+                                                                           AA or AC.
+                                                                           Not applicable to EUT with polite
+5     TX Duty cycle                         3.2          4.3.3       C     spectrum access where permitted in
+                                                                           annex B, table B.1.
+6     TX Occupied bandwidth                 3.2          4.3.4       U
+7     TX out of band emissions              3.2          4.3.5       C     Applies to EUT with OCW > 25 kHz.
+8     TX Transient                          3.2          4.3.6       U
+9     TX Adjacent channel power             3.2          4.3.7       C     Applies to EUT with OCW ≤ 25 kHz.
+      TX behaviour under low voltage
+10                                          3.2          4.3.8       C     Applies to battery powered EUT.
+      conditions
+                                                                           Applies to EUT with adaptive power
+11    TX Adaptive power control             3.2          4.3.9       C
+                                                                           control using annex C band AF.
+                                                                           Applies to FHSS EUT using the band
+12    TX FHSS                               3.2         4.3.10       C
+                                                                           863 MHz to 870 MHz.
+                                                                           Applies to EUT using annex C bands
+13    TX Short term behaviour               3.2         4.3.11       C
+                                                                           AD, AE, AF, AG, AH, or AI.
+                                                                           Applies to EUT employing polite
+14    RX sensitivity                        3.2          4.4.1       C
+                                                                           spectrum access.
+15    RX Blocking                           3.2          4.4.2       U
+      Clear channel assessment                                             Applies to EUT employing polite
+16                                          3.2          4.5.2       C
+      threshold                                                            spectrum access.
+      Polite spectrum access timing                                        Applies to EUT employing polite
+17                                          3.2          4.5.3       C
+      parameters                                                           spectrum access.
+18    Adaptive Frequency Agility            3.2          4.5.4       C     Applies to EUT with AFA.
+
+
+Key to columns:
+
+Requirement:
+
+     No              A unique identifier for one row of the table which may be used to identify a requirement.
+
+     Description     A textual reference to the requirement.
+
+
+
+                                                         ETSI
+                                                            20                        ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+   Essential requirements of Directive
+
+                     Identification of article(s) defining the requirement in the Directive.
+
+   Clause(s) of the present document
+
+                     Identification of clause(s) defining the requirement in the present document unless another
+                     document is referenced explicitly.
+
+Requirement Conditionality:
+
+   U/C               Indicates whether the requirement is unconditionally applicable (U) or is conditional upon the
+                     manufacturer's claimed functionality of the equipment (C).
+
+   Condition         Explains the conditions when the requirement is or is not applicable for a requirement which is
+                     classified "conditional".
+
+Presumption of conformity stays valid only as long as a reference to the present document is maintained in the list
+published in the Official Journal of the European Union. Users of the present document should consult frequently the
+latest list published in the Official Journal of the European Union.
+
+Other Union legislation may be applicable to the product(s) falling within the scope of the present document.
+
+
+
+
+                                                           ETSI
+                                                                                    21                                                 ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+
+Annex B (normative):
+EU wide harmonised national radio interfaces from 25 MHz to 1 000 MHz
+Table B.1 summarizes the harmonised frequency bands and their technical key parameters for non specific short-range devices from EC Decision 2017/1483/EU [2].
+
+                                     Table B.1: EU wide harmonised national radio interfaces from 25 MHz to 1 000 MHz
+
+                                                                          Channel access and
+                                                    Maximum effective                                 Maximum                            Band number
+                                                                            occupation rules                          Other usage
+                  Operational Frequency Band         radiated power,                                  occupied                         from EC Decision
+                                                                           (e.g. Duty cycle or                        restrictions
+                                                          e.r.p.                                      bandwidth                         2017/1483/EU [2]
+                                                                               LBT + AFA)
+                        26,957 MHz to
+                   A                                10 mW e.r.p.          No requirement            The whole band                            28
+                        27,283 MHz
+                                                                                                                     Model control
+                        26,995 MHz, 27,045 MHz,                                                                      devices may
+                   B    27,095 MHz, 27,145 MHz,     100 mW e.r.p.         ≤ 0,1 % duty cycle        10 kHz           operate without   29, 30, 31, 32, 33
+                        27,195 MHz                                                                                   duty cycle
+                                                                                                                     restrictions.
+                                                                                                                     Video
+                        40,660 MHZ to
+                   C                                10 mW e.r.p.          No requirement            The whole band   applications             35
+                        40,700 MHz
+                                                                                                                     excluded.
+                                                                          ≤ 1,0 % duty cycle
+                        169,400 MHz to
+                   D                                500 mW e.r.p.         For metering devices     50 kHz                                     37c
+                        169,475 MHz
+                                                                          duty cycle limit is 10 %
+                        169,4000 MHz to
+                   E                                10 mW                 ≤ 0,1 % duty              The whole band                            38
+                        169,4875 MHz
+                                                                                                                     Equipment that
+                                                                          ≤ 0,001 % duty cycle
+                                                                                                                     concentrates or
+                                                                          Between 00.00 and
+                        169,4875 MHZ to                                                                              multiplexes
+                   F                                10 mW                 06.00 local time a duty   The whole band                            39b
+                        169,5875 MHz                                                                                 individual
+                                                                          cycle limit of 0,1 %
+                                                                                                                     equipment is
+                                                                          may be used
+                                                                                                                     excluded.
+                        169,5875 MHz to
+                   G                                10 mW                 ≤ 0,1 % duty cycle        The whole band                            40
+                        169,8125 MHz
+                        433,050 MHz to
+                   H                                10 mW                 10 %                      The whole band                         44b, 45b
+                        434,790 MHz
+
+
+
+
+                                                                                  ETSI
+                                                          22                                                  ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+                                                 Channel access and
+                             Maximum effective                              Maximum                             Band number
+                                                   occupation rules                         Other usage
+Operational Frequency Band    radiated power,                               occupied                          from EC Decision
+                                                  (e.g. Duty cycle or                       restrictions
+                                   e.r.p.                                   bandwidth                          2017/1483/EU [2]
+                                                      LBT + AFA)
+                             1 mW e.r.p.
+                             -13 dBm/10 kHz
+                             power spectral                                                Audio and video
+     433,050 MHz to
+I                            density for         No requirement           The whole band   applications are       44a, 45a
+     434,790 MHz
+                             bandwidth                                                     excluded.
+                             modulation larger
+                             than 250 kHz
+                                                                                           Audio and video
+     434,040 MHz to
+J                            10 mW               No requirement           25 kHz           applications are         45c
+     434,790 MHz
+                                                                                           excluded.
+                                                                        The whole band
+                                                                        except for audio
+                                                 ≤ 0,1 % duty cycle or  & video
+K    863 MHz to 865 MHz      25 mW e.r.p.                                                                           46a
+                                                 polite spectrum access applications
+                                                                        limited to
+                                                                        300 kHz
+                                                 ≤ 1 % duty cycle or
+L    865 MHz to 868 MHz      25 mW e.r.p.                               The whole band                               47
+                                                 polite spectrum access
+     868,000 MHz to                              ≤ 1 % duty cycle or
+M                            25 mW e.r.p.                               The whole band                               48
+     868,600 MHz                                 polite spectrum access
+     868,700 MHz to                              ≤ 0,1 % duty cycle or  The whole
+N                            25 mW e.r.p.                                                                            50
+     869,200 MHz                                 polite spectrum access sub-band
+     869,400 MHz to                              ≤ 10 % duty cycle or
+P                            500 mW e.r.p.                              The whole band                               54
+     869,650 MHz                                 polite spectrum access
+                                                                                           Audio and video
+     869,700 MHz to
+P                            5 mW e.r.p.         No requirement           The whole band   applications are         56a
+     870,000 MHz
+                                                                                           excluded.
+                                                                                           Analogue audio
+                                                                                           applications are
+     869,700 MHz to                              ≤ 1 % duty cycle or                       excluded.
+Q                            25 mW e.r.p.                                 The whole band                            56b
+     870,000 MHz                                 polite spectrum access                    Analogue video
+                                                                                           applications are
+                                                                                           excluded.
+
+
+
+
+                                                         ETSI
+                                                                                      23                                                   ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+Annex C (informative):
+National Radio Interfaces not EU wide harmonised
+In addition to EU wide harmonised radio interfaces listed in annex B, nations may implement NRIs with associated technical requirements to ensure spectrum compatibility.
+Usually these requirements come from CEPT/ERC/REC 70-03 [i.1] which sets out the general position on spectrum designations for Short Range Devices (SRDs) for countries
+within the CEPT. It is also used as a reference document by the CEPT member countries when preparing their national regulations in order to keep in line with the provisions of
+the Radio Equipment Directive [i.2]. Appendix 1 in CEPT/ERC/REC 70-03 [i.1] provides an indicative overview of the implementation status in European countries.
+
+Table C.1 provides an indicative list of these NRIs which might be available in some EU countries. Manufacturers are advised to check the most recently published version of
+any given NRI.
+
+                                                   Table C.1: National Radio Interfaces not EU wide harmonised
+
+                                                                         Channel access          Additional          Maximum                         Band number in
+                                                 Maximum Effective                                                                  Other usage
+            Operational Frequency Band                                   and occupation       spectrum access        occupied                        CEPT/ERC/REC
+                                                  Radiated Power                                                                     restriction
+                                                                              rules             parameters           bandwidth                         70-03 [i.1]
+                                                                                                                                   Only for Flying
+        R    34,995 MHz to 35,225 MHz           100 mW e.r.p.           No requirement                             10 kHz                               Annex 8; b
+                                                                                                                                   radio models
+             40,665 MHz, 40,675 MHz,                                                                                               Only for Radio        Annex 8,
+        S                                       100 mW e.r.p.           No requirement                             10 kHz
+             40,685 MHz, 40,695 MHz                                                                                                models              c1, c2, c3, c4
+                                                                                                                   The whole
+        T    138,20 MHz to 138,45 MHz           10 mW e.r.p.            ≤ 1,0 % duty cycle                                                              Annex 1; e
+                                                                                                                   band
+                                                                                                                                   Applies only to
+                                                                        ≤ 1 % duty cycle or                        50 kHz for 58
+                                                                                                                                   equipment          Annex 1; h1.1
+        U    865 MHz to 868 MHz                 25 mW e.r.p.            polite spectrum                            or more
+                                                                                                                                   using FHSS        (Notes 1, 2, 4, 5)
+                                                                        access                                     channels
+                                                                                                                                   technique
+                                                                                                                   3 MHz
+                                                                                                                                   Applies only to
+                                                                                                                   except for
+                                                                                                                                   equipment
+                                                25 mW e.r.p.                                                       audio and
+                                                                        ≤ 0,1 % duty cycle                                         using DSSS
+                                                Power spectral                                                     video limited                       Annex 1; h1.2
+        V    865 MHz to 868 MHz                                         or polite spectrum                                         and any
+                                                density:                                                           to 300 kHz                          (Notes 1, 4, 7)
+                                                                        access                                                     techniques
+                                                +6,2 dBm/100 kHz.                                                  and voice
+                                                                                                                                   other than
+                                                                                                                   limited to
+                                                                                                                                   FHSS
+                                                                                                                   25 kHz
+                                                                                                                                   Applies only to
+                                                                                                                   3 MHz           equipment
+                                                                        ≤ 1 % duty cycle or   Minimum occupied     except for      using DSSS
+                                                                                                                                                       Annex 1; h1.2
+        W    865 MHz to 868 MHz                 10 mW e.r.p.            polite spectrum          bandwidth is      audio and       and any
+                                                                                                                                                       (Notes 1, 4, 6)
+                                                                        access                     200 kHz         video limited   techniques
+                                                                                                                   to 300 kHz      other than
+                                                                                                                                   FHSS
+
+
+
+
+                                                                                     ETSI
+                                                                    24                                               ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+                                                       Channel access          Additional       Maximum                         Band number in
+                                  Maximum Effective                                                            Other usage
+     Operational Frequency Band                        and occupation       spectrum access     occupied                        CEPT/ERC/REC
+                                   Radiated Power                                                               restriction
+                                                            rules             parameters        bandwidth                         70-03 [i.1]
+                                                                                              300 kHz
+                                                      ≤ 1 % duty cycle or
+                                                                                              except for                         Annex 1; h1.3
+X     865 MHz to 868 MHz          25 mW e.r.p.        polite spectrum
+                                                                                              voice limited                     (Notes 1, 3, 4, 5)
+                                                      access
+                                                                                              to 25 kHz
+                                                                                                              Applies only to
+                                                                                                              equipment
+                                                                                                              using FHSS
+                                                                                                              technique
+
+                                                                                                             Sub-bands for
+                                                      ≤ 0,1 % duty cycle                      100 kHz        alarms
+                                                                                                                                 Annex 1; h1.1
+ZY    863 MHz to 870 MHz          25 mW e.r.p.        or polite spectrum                      for 47 or more [868,6 MHz to
+                                                                                                                                (Notes 1, 2, 3, 4)
+                                                      access                                  channels       868,7 MHz],
+                                                                                                             [869,250 MHz
+                                                                                                             to 869,4 MHz],
+                                                                                                             [869,650 MHz
+                                                                                                             to
+                                                                                                             869,700 MHz]
+                                                                                                             are excluded
+                                                                                                             Applies only to
+                                                                                                             equipment
+                                                                                                             using DSSS
+                                                                                                             and any
+                                                                                                             techniques
+                                                                                                             other than
+                                                                                              7 MHz except
+                                                                                                             FHSS
+                                                                                              for audio &
+                                  25 mW e.r.p.
+                                                      ≤ 0,1 % duty cycle                      video limited
+                                  Power spectral                                                             Sub-bands           Annex 1; h1.2
+Z     863 MHz to 870 MHz                              or polite spectrum                      to 300 kHz
+                                  density:                                                                   [868,6 MHz to      (Notes 1, 3, 4, 7)
+                                                      access                                  and voice
+                                  -4,5 dBm/100 kHz.                                                          868,7 MHz],
+                                                                                              limited to
+                                                                                                             [869,250 MHz
+                                                                                              25 kHz
+                                                                                                             to 869,4 MHz],
+                                                                                                             [869,650 MHz
+                                                                                                             to
+                                                                                                             869,700 MHz]
+                                                                                                             for alarms are
+                                                                                                             excluded
+
+
+
+
+                                                                   ETSI
+                                                                      25                                              ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+                                                        Channel access            Additional      Maximum                        Band number in
+                                   Maximum Effective                                                            Other usage
+     Operational Frequency Band                         and occupation         spectrum access    occupied                       CEPT/ERC/REC
+                                    Radiated Power                                                               restriction
+                                                             rules               parameters       bandwidth                        70-03 [i.1]
+                                                                                                               Sub-bands
+                                                                                                               [868,6 MHz to
+                                                                                                               868,7 MHz],
+                                                                                                 300 kHz
+                                                       ≤ 0,1 % duty cycle                                      [869,250 MHz
+                                                                                                 except for                       Annex 1; h1.3
+AA    863 MHz to 870 MHz           25 mW e.r.p.        or polite spectrum                                      to 869,4 MHz],
+                                                                                                 voice limited                    (Notes 1, 3, 4)
+                                                       access                                                  [869,650 MHz
+                                                                                                 to 25 kHz
+                                                                                                               to 869,700
+                                                                                                               MHz] for alarms
+                                                                                                               are excluded
+                                                                                                               Applies only to
+                                                                                                               equipment
+                                                                                                               using DSSS
+                                                                                                               and any
+                                                                                                               techniques
+                                                                                                               other than
+                                                                                                 5 MHz except
+                                                                                                               FHSS
+                                                                                                 for audio &
+                                   25 mW e.r.p.
+                                                       ≤ 0,1 % duty cycle                        video limited
+                                   Power spectral                                                              Sub-bands          Annex 1; h1.2
+AB    865 MHz to 870 MHz                               or polite spectrum                        to 300 kHz
+                                   density:                                                                    [868,6 MHz to     (Notes 1, 3, 4, 7)
+                                                       access                                    and voice
+                                   -0,8 dBm/100 kHz.                                                           868,7 MHz],
+                                                                                                 limited to
+                                                                                                               [869,250 MHz
+                                                                                                 25 kHz
+                                                                                                               to 869,4 MHz],
+                                                                                                               [869,650 MHz
+                                                                                                               to
+                                                                                                               869,700 MHz]
+                                                                                                               for alarms are
+                                                                                                               excluded
+                                                       ≤ 1 % duty cycle
+
+                                                       For ER-GSM
+                                                       protection
+                                                       (873 MHz to
+AC    870,000 MHz to 875,800 MHz   25 mW e.r.p.        875,8 MHz, where                          600 kHz          See note        Annex 1; h2.1
+                                                       applicable), the
+                                                       duty cycle is limited
+                                                       to ≤ 0,01 % and
+                                                       Ton_max is limited
+                                                       to 5 ms/1 s
+
+
+
+
+                                                                     ETSI
+                                                                          26                                                 ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+                                                             Channel access           Additional         Maximum                         Band number in
+                                    Maximum Effective                                                                 Other usage
+     Operational Frequency Band                              and occupation       spectrum access        occupied                        CEPT/ERC/REC
+                                     Radiated Power                                                                    restriction
+                                                                  rules              parameters          bandwidth                         70-03 [i.1]
+                                                                                 DCT with
+                                                                                 Ton_max ≤ 200 ms,
+                                                           ≤ 0,1 % duty cycle
+                                                                                 Toff_min ≥ 200 ms
+                                                           For ER-GSM
+                                                           protection            Alternatively
+AD    875,8 MHz to 876 MHz          25 mW e.r.p.           where applicable,                            200 kHz      See note              Annex 1; h2
+                                                           the duty cycle is       DCT with
+                                                           limited to ≤ 0,01 %     Ton_cum = 10 s
+                                                           and Ton_max is          Tobs = 24h
+                                                           limited to 5 ms/1 s     Ton_max ≤ 800 ms,
+                                                                                   Toff_min ≥ 200 ms
+                                                             ≤ 0,1 % duty cycle Adaptive Power
+                                                                                   Control (APC) is
+                                    500 mW e.r.p.            For ER-GSM            required.
+                                                             protection            The APC is able to                Only for
+                                    restricted to vehicle-
+                                                             (873 MHz to           reduce a link's                   tracking, tracing
+                                    to-vehicle
+                                                             875,8 MHz, where transmit power from                    and data
+AE     870,000 MHz to 875,800 MHz   applications.                                                       500 kHz                            Annex 5; a
+                                                             applicable), the      its maximum to                    acquisition
+                                    100 mW e.r.p. is
+                                    restricted to in-vehicle duty cycle is limited ≤ 5 mW
+                                                             to ≤ 0,01 % and                                         See note
+                                    applications.
+                                                             Ton_max is limited
+                                                             to 5 ms/1 s
+                                                                                   DCT with
+                                                                                   Ton_max ≤ 200 ms,
+                                                                                   Toff_min ≥ 200 ms
+
+                                                                                 Alternatively
+AF    915 MHz to 915,2 MHz          25 mW e.r.p.           ≤ 0,1 % duty cycle                           200 kHz      See note              Annex 1; h3
+                                                                                 DCT with
+                                                                                 Ton_cum = 10 s
+                                                                                 Tobs = 24h
+                                                                                 Ton_max ≤ 800 ms,
+                                                                                 Toff_min ≥ 200 ms
+
+
+
+
+                                                                        ETSI
+                                                                                   27                                                 ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+                                                                      Channel access            Additional      Maximum                         Band number in
+                                               Maximum Effective                                                               Other usage
+          Operational Frequency Band                                  and occupation        spectrum access     occupied                        CEPT/ERC/REC
+                                                Radiated Power                                                                  restriction
+                                                                           rules               parameters       bandwidth                         70-03 [i.1]
+                                                                                           DCT with
+                                                                                           Ton_max ≤ 200 ms,
+                                                                     ≤ 0,1 % duty cycle
+                                                                                           Toff_min ≥ 200 ms
+                                                                     For ER-GSM
+                                                                     protection            Alternatively
+       AG 920,8 MHz to 921 MHz                25 mW e.r.p.           where applicable,                         200 kHz        See note            Annex 1; h3
+                                                                     the duty cycle is     DCT with
+                                                                     limited to ≤ 0,01 %   Ton_cum = 10 s
+                                                                     and Ton_max is        Tobs = 24h
+                                                                     limited to 5 ms/1 s   Ton_max ≤ 800 ms,
+                                                                                           Toff_min ≥ 200 ms
+                                                                                                                 600 kHz
+                                                                                                                 except for the
+                                            25 mW e.r.p. except       ≤ 1 % duty cycle                           4 channels
+                                            for the 4 channels for                                               identified in
+                                            the 4 channels            For ER-GSM                                 channel with
+                                            identified in channel     protection                                 centre
+                                            with centre               (918 MHz to                                frequencies at
+                                            frequencies at            920,8 MHz, where                           916,3 MHz,
+      AH 915,200 MHz to 920,800 MHz                                                                                              See note           Annex 1; h3.1
+                                            916,3 MHz,                applicable), the                           917,5 MHz,
+                                            917,5 MHz,                duty cycle is limited                      918,7 MHz
+                                            918,7 MHz and             to ≤ 0,01 % and                            and
+                                            919,9 MHz, where          Ton_max is limited                         919,9 MHz.
+                                            100 mW e.r.p.                                                        The channel
+                                            applies.                  to 5 ms/1 s                                bandwidth is
+                                                                                                                 limited to
+                                                                                                                 400 kHz
+      NOTE:  To bands AD to AI: Use of all or part of sub-bands AD to AI may be denied in some European countries that use all or part of these sub-bands for
+             defence/governmental systems. In some member states the upper sub-bands 873 MHz to 876 MHz and 918 MHz to 921 MHz are allocated to the
+             railways for ER-GSM. For the case that a frequency allocation is available in those countries for SRDs, sharing of these sub-bands by SRDs with
+             ER-GSM is permitted provided SRD systems operate in accordance with agreed mitigation measures such as transmission timing limitations as set out
+             in ECC Report 200 [i.6]. The required timing restrictions are included in the column "Channel access and occupation rules". See Appendix 3 of
+             CEPT/ERC/REC 70-03 [i.1] for national implementation concerning ER-GSM and defence/governmental services.
+
+
+The adjacent frequency bands below 862 MHz and above 870 MHz may be used by high power systems. The same applies to the bands below 915 MHz and above 876 MHz as
+well as above 921 MHz. Manufacturers should take this into account in the design of equipment and choice of power levels.
+
+
+
+
+                                                                                  ETSI
+                                                          28                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+
+Annex D (informative):
+Application form for testing
+
+D.1           Introduction
+Notwithstanding the provisions of the copyright clause related to the text of the present document, ETSI grants that
+users of the present document may freely reproduce the application form in this annex so that it can be used for its
+intended purposes and may further publish the completed application form. The form contained in this annex may be
+used by the manufacturer to comply with the requirement contained in clause 4 to provide the necessary information
+about the equipment to the test laboratory prior to the testing. It contains product information as well as other
+information which might be required to define which configurations are to be tested, which tests are to be performed as
+well the test conditions. This application form should form an integral part of the test report.
+
+
+
+D.2           Information to declare according to ETSI
+              EN 300 220-2
+   a)    The name of the manufacturer or his trademark
+
+         …………………………
+
+   b)    The type equipment designation
+
+         …………………………
+
+   c)    The application(s) of the equipment
+
+         …………………………
+
+         …………………………
+
+   d)    The operating channel OC or channels
+
+         (nominal centre frequency, Flow and Fhigh of each OC)
+
+         …………………………
+
+         …………………………
+
+   e)    The operational frequency band(s)
+
+         …………………………
+
+         …………………………
+
+   f)    The operating channel(s) width(s)
+
+        …………………………
+         …………………………
+
+         The operating channel is less than or equal to 25 kHz?
+
+   g)    Maximum radio-frequency power transmitted in the frequency band(s) in which the radio equipment
+         operates. Where multiple powers are possible, also state rated power for each level or range of levels
+
+         …………………………
+
+
+
+
+                                                         ETSI
+                                                          29                ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+h)   Upper and lower temperatures of the operational profile
+
+      …………………………
+
+i)   Upper and lower extreme test voltages
+
+      …………………………
+
+j)   Antenna maximum gain if EUT has a permanent RF connector
+
+…………………………
+
+k)   What is the spectrum access mechanism of the equipment?
+
+         Duty cycle
+
+         Polite spectrum access
+
+l)   In case of polite spectrum access:
+
+     The CCA time implemented by the equipment is......... ms.
+
+     The minimal unit of deferral period is: ……..
+
+     The deadtime TDIS is ……………ms.
+
+m)   Is the equipment battery powered?
+
+       Yes      No
+
+n)   Is the equipment frequency agile?
+
+       Yes      No
+
+o)   Is the equipment declared as FHSS?
+
+       Yes      No
+
+p)   In case of FHSS equipment:
+
+     The declared hop channel bandwidth is …….kHz.
+
+     The number of non-overlapping channels or hopping positions separated by the declared hop channel
+     bandwidth is.........
+
+     The dwell time per channel is ….. ms.
+
+     The return time to a hop channel is ….. ms.
+
+     Is CCA implemented in the equipment?          Yes          No
+
+
+
+
+                                                         ETSI
+                                                            30                       ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Annex E (informative):
+Selection of technical parameters
+
+E.1           Introduction
+ETSI EG 203 336 [i.4] lists candidate technical parameters to be included in a Harmonised Standard aimed at providing
+a presumption of conformity of radio equipment with the essential requirements in articles 3.1(b) and 3.2 of the Radio
+Equipment Directive 2014/53/EU [i.2].
+
+Essential requirements are high level objectives described in European Directives. The purpose of the Harmonised
+Standard is to translate those high level objectives into detailed technical specifications.
+
+This annex provides information regarding selected parameters that may be in or not in the present document.
+
+
+
+E.2           Receiver parameters
+Adjacent channel selectivity is not specified in the present document because it is only applicable to category 1
+receivers.
+
+Receiver saturation is not specified in the present document because it is only applicable to category 1 receivers.
+
+Spurious response rejection is not specified in the present document because it is only applicable to category 1
+receivers.
+
+It has also to be noted that non specific SRDs are not operating in channelized band.
+
+Many receiver requirements fall under the general heading of linearity and these are covered in the present document by
+requirements on blocking performance.
+
+Intermodulation performance is not specified in order to simplify testing. The risk of failure due to second order
+intermodulation products is considered low because the blocking specification leads to the ability to handle strong out
+of band signals. Manufacturers should assess the risk of intermodulation products when operating adjacent to high
+occupancy bands.
+
+
+
+
+                                                           ETSI
+                                                      31                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Annex F (informative):
+Bibliography
+ •   Ketterling, H-P: "Verification of the performance of fully and semi-anechoic chambers for radiation
+     measurements and susceptibility/immunity testing", 1991, Leatherhead/Surrey.
+
+ •   ETSI TR 102 313 (V1.1.1): "Electromagnetic compatibility and Radio Spectrum Matters (ERM);
+     Frequency-agile Generic Short Range Devices using listen-Before-Transmit (LBT); Technical Report".
+
+ •   ECO Frequency Information System.
+
+ NOTE:   Available at http://www.efis.dk/.
+
+
+
+
+                                                    ETSI
+                                                       32                      ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+Annex G (informative):
+Change history
+ Version                                         Information about changes
+           First published version covering Directive 2014/53/EU [i.2].
+           Major change is:
+  3.1.1
+                •    New multi-part structure of ETSI EN 300 220 which is described in ETSI EN 300 220-1 [1],
+                     clause "Foreword".
+           Published version covering Directive 2014/53/EU [i.2] with removal of receiver category 3.
+  3.2.1
+           Minimum receiver category for compliance to Directive 2014/53/EU article 3.2 is set to category 2.
+
+
+
+
+                                                      ETSI
+                                                  33                    ETSI EN 300 220-2 V3.2.1 (2018-06)
+
+
+
+History
+                                           Document history
+Edition 1   October 1993     Publication as ETSI I-ETS 300 220
+
+V1.2.1      November 1997    Publication
+
+V1.3.1      September 2000   Publication
+
+V2.1.1      April 2006       Publication
+
+V2.1.2      June 2007        Publication
+
+V2.3.1      February 2010    Publication
+
+V2.4.1      May 2012         Publication
+
+V3.1.1      February 2017    Publication
+
+V3.2.0      September 2017   EN Approval Procedure               AP 20171211:   2017-09-12 to 2017-12-11
+
+V3.2.1      April 2018       Vote                                V 20180615:    2018-04-16 to 2018-06-15
+
+V3.2.1      June 2018        Publication
+
+
+
+
+                                                 ETSI
+

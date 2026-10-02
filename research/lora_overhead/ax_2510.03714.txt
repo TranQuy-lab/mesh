@@ -1,0 +1,541 @@
+                                        A Position- and Energy-Aware Routing Strategy for
+                                                Subterranean LoRa Mesh Networks
+                                                       Nalith Udugampola∗ , Xiaoyu Ai∗ , Binghao Li∗ , Henry Gong† , and Aruna Seneviratne∗
+                                                  ∗ University of New South Wales, Australia, {n.udugampola, x.ai, binghao.li, a.seneviratne}@unsw.edu.au
+                                                                              † Roobuck Pty Ltd, Australia, henryg@roobuck.com.au
+
+
+
+                                           Abstract—Although LoRa is predominantly employed with             networks, formed by arranging LoRa repeaters in a linear or
+                                        the single-hop LoRaWAN protocol, recent advancements have            sequential layout, have gained significant attention due to their
+                                        extended its application to multi-hop mesh topologies. Designing     suitability for large underground environments with limited
+                                        efficient routing for LoRa mesh networks remains challenging
+                                        due to LoRa’s low data rate and ALOHA-based MAC. Prior work          internet infrastructure, such as underground mines, pipelines,
+arXiv:2510.03714v1 [cs.NI] 4 Oct 2025
+
+
+
+
+                                        often adapts conventional protocols for low-traffic, aboveground     and tunnels, where deployment of a LoRaWAN network with
+                                        networks with strict duty cycle constraints or uses flooding-        multiple gateways is not feasible [2]–[7].
+                                        based methods in subterranean environments. However, these              In our research, we focus on subterranean networks that
+                                        approaches inefficiently utilize the limited available network       span complex systems of interconnected underground mine
+                                        bandwidth in these low-data-rate networks due to excessive
+                                        control overhead, acknowledgments, and redundant retransmis-         tunnels. Despite the growing interest in underground LoRa
+                                        sions. In this paper, we introduce a novel position- and energy-     mesh networks, many existing deployments remain custom-
+                                        aware routing strategy tailored for subterranean LoRa mesh           built for specific applications, typically using only a few
+                                        networks aimed at enhancing maximum throughput and power             repeaters and simple algorithms, without any standardized
+                                        efficiency while also maintaining high packet delivery ratios. Our   routing protocol to support dense networks with a large
+                                        mechanism begins with a lightweight position learning phase,
+                                        during which LoRa repeaters ascertain their relative positions       number of repeaters [2]–[7].
+                                        and gather routing information. Afterwards, the network be-             Developing a robust routing protocol for LoRa mesh net-
+                                        comes fully operational with adaptive routing, leveraging standby    works is challenging due to many factors. One factor is LoRa’s
+                                        LoRa repeaters for recovery from packet collisions and losses,       reliance on an ALOHA-based Medium Access Control (MAC)
+                                        and energy-aware route switching to balance battery depletion        layer, which complicates the design and implementation of
+                                        across repeaters. The simulation results on a representative
+                                        subterranean network demonstrate a 185% increase in maxi-            such a protocol. Another factor is LoRa’s low data rate,
+                                        mum throughput and a 75% reduction in energy consumption             which makes the use of methods that rely heavily on ac-
+                                        compared to a previously optimized flooding-based approach for       knowledgments (ACKs) and control signals unsuitable. These
+                                        high traffic.                                                        challenges are further exacerbated by regulatory restrictions,
+                                           Index Terms—underground LoRa mesh networks, position              as LoRa devices operating in unlicensed Industrial, Scientific,
+                                        learning, energy-aware routing, standby repeaters
+                                                                                                             and Medical (ISM) bands are often subject to a 1% duty cycle,
+                                                                                                             limiting transmissions to just 1% of the time. However, since
+                                                              I. I NTRODUCTION
+                                                                                                             our research focuses on networks operating within enclosed
+                                           Low Power Wide Area Networks (LPWANs), known for                  subterranean environments with minimal risk of interference
+                                        their low power consumption, long-range capabilities, and            to other spectrum users, the full 100% duty cycle can be
+                                        cost-effective deployment, are widely used in Internet of            utilized, allowing continuous communication and maximizing
+                                        Things (IoT) applications [1]. LoRa (Long Range) is one              network bandwidth utilization to support applications that
+                                        of the most popular LPWAN technologies, typically used               require higher throughput.
+                                        in LoRaWAN, a well-established, standardized protocol that              Prior work has largely focused on adapting conventional
+                                        enables low-power IoT devices to communicate with internet-          protocols, such as Ad hoc On-Demand Distance Vector Rout-
+                                        connected gateways (GWs) in a single-hop star-type network           ing (AODV) [8]–[10], as they are simple to implement and suf-
+                                        topology. Although LoRaWAN can be scaled across large                ficient for very low-traffic networks operating under strict duty
+                                        geographical areas by deploying multiple gateways that form          cycle limitations. However, these proposals are not suitable
+                                        interconnected star clusters, this architecture relies heavily       for large-scale networks with applications that have high data
+                                        on the availability of reliable internet connectivity at each        demands, due to their limited scalability and high control over-
+                                        gateway. However, in rural and subterranean environments,            head, which restricts the maximum achievable throughput. Past
+                                        deploying and maintaining such LoRaWAN networks is often             work on underground linear LoRa mesh networks employs
+                                        impractical due to limited telecommunication infrastructure          simple packet broadcasting and flooding techniques, where
+                                        and challenging terrain. As a result, multi-hop and mesh             each repeater retransmits received messages, incurring min-
+                                        LoRa networks, enabled by LoRa repeaters (RPs), have been            imal control overhead, making them better suited to support
+                                        emerging as a promising alternative to extend coverage in these      applications that demand higher network bandwidth [3]–[6].
+                                        challenging environments [2]. In particular, linear LoRa mesh        Although this approach simplifies implementation, enhances
+network robustness, and provides better network bandwidth            LoRa Alliance is a step in that direction, but it only supports
+utilization compared to adaptations of conventional routing          a single-hop extension between a gateway and an end device
+protocols, the retransmission of every received packet by each       and does not support chaining multiple relays [19].
+repeater still results in excessive network bandwidth usage             Several studies have investigated routing protocols for LoRa
+and, most importantly, high power consumption, ultimately            mesh networks. In [8], de Farias Medeiros et al. evalu-
+degrading overall network performance.                               ated conventional routing methods: Distance Vector Routing
+   In our previous work [11], we presented a comprehensive           (DVR), Ad Hoc On-Demand Distance Vector (AODV), and
+analysis of the scalability of underground linear LoRa mesh          Dynamic Source Routing (DSR), by simulating a 25-node
+networks based on packet broadcasting and flooding, and              single-gateway LoRa mesh network in an urban setting. De-
+proposed optimizations to support a large number of repeaters,       spite LoRa’s inherent limitations, such as low data rates and
+end devices, and high traffic loads. In this paper, we build upon    duty cycle restrictions, these routing protocols rely heavily on
+those optimisations by introducing a more intelligent routing        frequent control messages (e.g., HELLOs, RREQs, RREPs),
+strategy that replaces the original broadcasting and flooding        route discovery processes, and acknowledgments (ACKs), all
+mechanism. We focus on networks where LoRa gateways and              of which severely reduce available network bandwidth, a
+repeaters are installed at fixed locations, while end devices        problem that becomes particularly pronounced in larger, denser
+may be static or mobile and located anywhere within the              networks. Similarly, in [9], Huang et al. proposed an AODV-
+coverage area.                                                       based routing protocol for smart grid applications, using
+   We make the following contributions:                              Received Signal Strength Indicator (RSSI) values. However,
+   • Introduce a lightweight mechanism for learning the po-          this approach also suffers from high control overhead due to
+      sition of repeaters that enables the estimation of their       its reliance on route discovery and maintenance, making it
+      positions in underground LoRa mesh networks.                   suitable only for low data rate scenarios.
+   • Introduce a routing mechanism that uses the learned                Customized Gateway-to-Gateway (G2G) routing protocols
+      positions and enhances maximum throughput and power            aim to extend LoRa network coverage in scenarios where some
+      efficiency while maintaining a high packet delivery ratio      gateways lack direct Internet connectivity. For example, in
+      (PDR). Specifically, our routing mechanism:                    [10], Lundell et al. proposed a G2G mesh routing protocol
+        – Features a standby repeater mechanism, where               based on the Hybrid Wireless Mesh Protocol (HWMP) to
+           standby repeaters passively monitor transmissions         extend LoRa coverage, where disconnected gateways forward
+           and intervene only to recover lost or collided packets,   packets to other gateways with internet access. By limiting
+           thereby maintaining a high network PDR and low            routing responsibilities to only gateways and using custom
+           power consumption.                                        headers, they reduced control overhead. Similar G2G protocols
+        – Incorporate energy-aware routing that dynamically          were introduced in [20] and [21] to improve connectivity in
+           adjusts transmission responsibilities among repeaters     LoRa networks lacking full internet coverage. However, these
+           based on their remaining battery levels, ensuring bal-    protocols still incur notable control overhead, lack contention
+           anced energy consumption and effectively extending        management, are suitable only for a few hops, and support
+           the operational lifetime of the network.                  only uplink transmissions- limitations addressed by our pro-
+   The remainder of the paper is structured as follows: Section      posed method.
+2 reviews related work; Section 3 describes the proposed                LoRa mesh networks deployed in subterranean environ-
+position learning and routing mechanisms; Section 4 evalu-           ments, such as tunnels and underground mines, are of par-
+ates performance through network simulations; and Section 5          ticular interest to the mining and civil engineering sectors.
+concludes the paper.                                                 However, research in this domain remains limited and typically
+                                                                     relies on basic flooding mechanisms. Branch et al. [4], [5]
+                     II. R ELATED W ORK                              were pioneers in investigating linear LoRa mesh networks
+   Cotrim and Kleinschmidt [7] and Wong et al. [2] have              for underground mines, and used simple packet forwarding
+surveyed recent advancements in multi-hop and mesh LoRa              through LoRa repeaters where data traverses a chain of re-
+networks, highlighting their growing relevance and advan-            peaters using a flooding-based approach. Similarly, Abrardo
+tages over traditional LoRaWAN architecture. These surveys           et al. [6] implemented a chain-type linear sensor network for
+highlight how mesh networks address several limitations of           monitoring underground medieval aqueducts in Siena, Italy.
+standard LoRaWAN, such as restricted coverage, challenges               In our previous work on the scalability of such subterranean
+in rural or subterranean installations where the telecommu-          linear LoRa mesh networks [11], we enhanced the flooding-
+nication infrastructure is scarce [4], [5], [12], [13], high         based approach to support high data rates by optimizing re-
+energy consumption under suboptimal conditions [14]–[17],            peater density, utilizing multiple frequency channels, applying
+and dependence on the main telecommunication infrastructure          faster LoRa configurations (SF7, BW 500 kHz, CR 4/5),
+which limits the applicability of LoRaWAN for disaster and           enabling carrier sensing by repeaters, and refining random
+emergency scenarios [18].                                            waiting periods in the algorithm. These enhancements enable
+   However, there is still no standardized protocol for multi-       large-scale LoRa mesh networks with high traffic, where
+hop LoRa networks. The LoRaWAN Relay standard by the                 packet traversal through the repeaters remains lossless. In
+this paper, we benchmark the performance of our proposed                 End devices transmit on a frequency channel that is separate
+position- and energy-aware routing mechanism against our                 from the one used by repeaters, preventing collisions with
+previous flooding-based approach optimized for high through-             packets already propagating through the repeater network. All
+put.                                                                     transmissions use the fastest LoRa configuration: Spreading
+                                                                         factor 7, 500 kHz bandwidth, and coding rate 4/5.
+                         III. A PPROACH                                     Our approach consists of two main phases: a Position
+   This section outlines our position-learning and routing               Learning Phase and an Operational Phase, which includes
+mechanisms tailored for underground LoRa mesh networks.                  energy-aware routing and recovery logic.
+The aim of the proposed approach is to improve network
+                                                                         A. Position Learning Phase
+bandwidth utilization and power efficiency while maintaining a
+higher network PDR than those achievable by the conventional                The primary objective of this phase is to assign a distance
+packet broadcasting and flooding method.                                 value to each repeater based on its proximity to the nearest
+   To demonstrate our approach, without loss of generality,              gateway.
+we refer to an underground LoRa mesh network shown in                       STEP 1: To initiate the process, all gateways broadcast
+Figure 1. The numbers indicate the unique identifiers (UIDs)             special downlink packets throughout the network. These pack-
+of the gateways (UIDs- 0 and 18) and repeaters. Both gateways            ets flood the network, with each repeater forwarding every
+and repeaters are deployed at fixed locations. IoT (end) devices         received packet using a common transmission power, Ptx ,
+connect to these gateways and repeaters. For clarity, only gate-         known to all devices. As a result, each repeater receives
+ways and repeaters are shown in the network illustrations; end           transmissions from its neighboring repeaters within the com-
+devices are omitted. The end devices can be static or mobile,            munication range. During this phase, each repeater records
+and can be carried by people and vehicles, as well as attached           information about its neighbors, including their UIDs and the
+to sensors and equipment. This network includes multiple                 average received signal power, Prx . The received signal power
+gateways and LoRa repeaters deployed along underground                   serves as a coarse indicator of relative distance.
+tunnels at varying distances that lead to different repeater                Each repeater can estimate the distance to its neighbors by
+densities in the tunnels. As defined in our previous work                assuming the well-known log-distance path loss model [22],
+[11], repeater density is a metric that indicates the number of          [23], given by:
+adjacent repeaters reachable in a single transmission in a linear                                                 
+                                                                                                                    d
+LoRa mesh network. For example, with a repeater density of                         Lpl (d) = Lpl (d0 ) + 10γ log        + Xσ         (1)
+1, a repeater transmission reaches only its immediate front and                                                    d0
+back neighbors. With a density of 2, the transmission reaches               where Lpl (d) is the path loss at a distance d between the
+two repeaters in each direction.                                         transmitter and the receiver, Lpl (d0 ) denotes the average path
+                                                                         loss at a reference distance d0 , γ is the path loss exponent,
+                                                                         and Xσ ∼ N (0, σ 2 ) represents the shadowing effect, which
+                                                                         is negligible in underground LoRa mesh networks and can
+                                                                         therefore be ignored [23].
+                                                                            Since the repeater knows Ptx and Prx , the distance, d, to
+                                                                         a nearby repeater can be calculated by substituting Lpl (d) =
+                                                                         Prx − Ptx and solving equation 1 for d, i.e.,
+                                                                                                                               
+                                                                                                         Lpl (d)−Lpl (d0 )−Xσ
+                                                                                                                 10γ
+                                                                                       d = d0 · 10
+                                                                                                     
+                                                                                                         Ptx −Prx −Lpl (d0 )−Xσ
+                                                                                                                                       (2)
+                                                                                                                  10γ
+                                                                                         = d0 · 10
+
+Fig. 1. A representative underground LoRa mesh network. Nodes 1–17 are
+                                                                            For instance, Figure 2 illustrates how repeaters 12 and 6
+repeaters; nodes 0 and 18 are gateways with internet access.             in our representative network (Figure 1) record the estimated
+                                                                         relative distances to their neighboring repeaters. These indi-
+   LoRa repeaters in the network are based on LoRa concentra-            vidual records by repeaters represent segments of the global
+tor modules that can simultaneously receive multiple packets             network graph.
+with varying spreading factors, bandwidths, and frequencies.                STEP 2: After the initial downlink broadcasts conclude,
+A repeater waits for a randomized time interval before a trans-          each repeater forwards its locally recorded neighborhood data
+mission and also performs carrier sensing with a randomized              to the server side by transmitting uplink packets to the gate-
+backoff to avoid packet collisions. Also, if a repeater is in            ways, using the same packet broadcasting and flooding mech-
+transmission mode, it will miss any incoming packets. The                anism. Consequently, on the server side, the global network
+network follows an asynchronous architecture with no time                graph is then constructed by aggregating all individual neigh-
+scheduling where end devices transmit packets on demand.                 borhood graphs, resulting in a comprehensive representation of
+                                                                                                            TABLE I
+                                                                                           L EARNED P OSITION & ROUTING I NFORMATION
+
+                                                                                  Device ID     Distance Value   Next RP/GW       Next RPs
+                                                                                                                  (Upstream)    (Downstream)
+                                                                                      0                0               -              2
+                                                                                      1               40               0              3
+                                                                                      2               85               0              4
+                                                                                      3               124              1            5, 11
+                                                                                      4               170              2            5, 12
+                                                                                      5               218              3              -
+                                                                                      6               199             14              -
+                                                                                      7               175             14            6, 10
+                                                                                      8               166             15            6, 10
+                                                                                      9               176             14             10
+                                                                                     10               194             14              -
+                                                                                     11               193              3             13
+                                                                                     12               242              4             13
+                                                                                     13               289             11              -
+                                                                                     14               123             16            6, 10
+Fig. 2. Individual network graphs recorded by Repeater 12 and 6. The values
+                                                                                     15               82              18              8
+on the arrows represent the calculated distances to the neighbours.
+                                                                                     16               59              18             14
+                                                                                     17               28              18             15
+                                                                                     18                0               -             15
+
+
+                                                                                                         TABLE II
+                                                                                   G LOBAL K NOWLEDGE L EARNED BY R EPEATER 3 A BOUT ITS
+                                                                                                     N EIGHBORHOOD
+
+                                                                                          Device ID   Distance Value   Is Next Address?
+                                                                                           3 (self)        126
+                                                                                              1             52            Upstream
+                                                                                              2             76
+                                                                                              4            148
+                                                                                              5            188           Downstream
+                                                                                             11            200           Downstream
+
+
+
+                                                                              to which data should be forwarded).
+                                                                                 In the case of a downlink transmission, all gateways send
+                                                                              the same downlink packet to spread throughout the network,
+                                                                              assuming that the targeted end device could be located any-
+                                                                              where within the network, especially if it is a mobile node.
+                                                                              Repeaters that share the same nearest gateway are grouped
+        Fig. 3. Global network graph considering all Rx-Tx pairs              together to form a subgraph. Accordingly, the entire network
+                                                                              graph can be divided into subgraphs, with the number of
+                                                                              subgraphs equal to the number of gateways. By running graph
+the entire underground LoRa mesh network topology. Figure                     traversal algorithms, the server determines which neighboring
+3 illustrates a rough sketch of this global network graph for                 repeaters each repeater should forward a received downlink
+our example network, showing links between all transmitter                    packet to, in order to cover the whole area represented by the
+(Tx)–receiver (Rx) pairs.                                                     subgraph it belongs to.
+   Once the network graph is generated, the server can ap-                       Table I summarizes the derived position and routing infor-
+ply Dijkstra’s algorithm to compute the shortest paths from                   mation for our example network.
+each gateway to all repeaters, effectively forming minimum                       STEP 3: As the next step, all gateways initiate a downlink
+spanning trees rooted at the gateways. Based on these paths,                  broadcast to disseminate this information to all repeaters in
+a distance value can be calculated for each repeater as an                    the network, using the same packet broadcasting and flooding
+estimate of its distance to the nearest gateway. Subsequently,                mechanism as before. During this downlink transmission, each
+based on the network graph and the calculated distance values,                repeater extracts only the subset of information relevant to its
+the server generates all the routing information required by the              operation, thereby gaining global knowledge of the network.
+repeaters for the network’s operation.                                        Specifically, each repeater records its own distance value, the
+   For each repeater, neighboring repeaters with lower distance               distance values of its neighbors, and the next-hop addresses
+values are considered to be closer to a gateway. Among these                  to forward downlink and uplink packets. For example, the
+neighbors, the one with the lowest distance value is selected                 position and routing information extracted by Repeater 3 in the
+as the next uplink address (i.e., the UID of the next repeater                considered network is summarized in Table II. This concludes
+the position learning phase.                                             a neighboring repeater with a higher distance value, addressed
+                                                                         to a neighboring repeater with a lower distance value, it oper-
+B. Operational Phase with Routing                                        ates as a standby repeater. The standby repeater then monitors
+   After the position-learning phase, the network can operate            whether the intended neighbor with the lower distance value
+more efficiently by employing the routing mechanism instead              forwards the packet. If the packet is not forwarded, the standby
+of packet broadcasting and flooding. When forwarding a                   repeater assumes a collision has occurred, leading to packet
+packet, a repeater simply addresses it to the next hop based             loss, and thus takes over the transmission to forward the packet
+on whether it is an uplink or downlink packet. As noted                  itself. In this example, since Repeater 4, acting as the standby
+earlier, uplink and downlink addresses are learned during the            repeater, does not hear Repeater 3 forwarding the packet, it
+position-learning phase. With routing information, both uplink           assumes a packet loss. Therefore, after a timeout at T = t2 ,
+and downlink transmissions are achieved with a minimal                   Repeater 4 takes over the transmission and forwards the packet
+number of packet retransmissions by repeaters, resulting in              to its next uplink address.
+lower channel utilization and reduced power consumption                     In our network protocol, a repeater can function as a
+compared to flooding-based mechanisms, where each repeater               standby repeater for multiple transmissions simultaneously,
+retransmits.                                                             while also receiving or forwarding packets addressed to itself.
+   Our routing approach also includes two additional features:           Furthermore, multiple standby repeaters can monitor the same
+a standby repeater algorithm and an energy-aware routing                 packet forwarding, each with a randomly distributed standby
+mechanism.                                                               timeout. In the event of packet loss, the first standby repeater
+                                                                         to complete its timeout (i.e., the one with the shortest standby
+C. Standby Repeater Algorithm
+                                                                         interval) will take over the transmission and forward the
+                                                                         packet, forcing the others to back off.
+                                                                         D. Energy-Aware Routing Mechanism
+                                                                            With only the basic routing algorithm, packets generated
+                                                                         by an end device at a fixed location would always traverse the
+                                                                         same route. Depending on the locations of the end devices,
+                                                                         packet flows may become concentrated along certain routes,
+                                                                         causing some repeaters to handle most of the forwarding,
+                                                                         while others mostly serve as standby repeaters. This results
+                                                                         in imbalanced battery depletion across the network, with
+                                                                         heavily utilized repeaters depleting more quickly, ultimately
+                                                                         reducing the overall network longevity. To address this issue,
+Fig. 4. Repeater 4 serving as a standby repeater for the uplink packet
+transmission from repeater 5 addressing repeater 3                       we incorporate an adaptive route adjustment mechanism based
+                                                                         on the battery levels of the repeaters, aiming to achieve more
+   As established in our previous work [11], we employ a                 balanced energy consumption and improve the network’s lifes-
+robust MAC layer where separate frequency channels are                   pan, thereby making our routing mechanism energy-aware.
+used for end devices and repeaters, with repeaters performing               When a repeater’s battery level drops by one unit, during
+carrier sensing and utilizing randomized waiting periods with            its next packet forwarding, it attaches its current battery level
+backoff before retransmissions to manage contention. As a re-            to that packet, allowing neighboring repeaters to update their
+sult, any two repeaters within the same neighborhood that can            records. Thus, no additional packets are required to com-
+hear each other will not transmit at the same time. However,             municate battery levels, and this information is shared only
+due to the hidden node problem in wireless communication,                once per battery level change for each repeater, minimizing
+two transmissions from repeaters that cannot hear each other             overhead. In our simulations, we used 100 discrete battery
+may still collide at a receiver in the middle.                           levels, representing the battery percentage.
+   For example, in Figure 4, at time T = t1 , when Repeater 5               Route adjustments are triggered based on these battery
+is forwarding an uplink packet to Repeater 3, neither Repeater           levels under two scenarios. The first scenario is illustrated
+3 nor 4 transmits due to the carrier sensing mechanism. How-             in Figure 5, where Repeater E, acting as a standby repeater,
+ever, Repeater 5’s transmission may still collide at Repeater            monitors whether Repeater F forwards the packet sent by D to
+3 due to simultaneous transmissions from other out-of-range              F. In this case, Repeater F’s battery level has recently dropped
+repeaters, such as Repeater 1 or 2. Despite this, due to the             by one unit. Therefore, in Figure 5.b, when F forwards the
+capture effect of LoRa [24], Repeater 5’s transmission is                packet, it includes its 40% battery level, allowing its neighbors
+more likely to be successfully received by Repeater 4, which             to update their records.
+is closer to Repeater 5 and therefore experiences a stronger                While the standby repeater E confirms the packet forward-
+signal.                                                                  ing, it also checks a specific condition: if F’s updated battery
+   For this specific transmission, Repeater 4 acts as a standby          level is a multiple of 10 (i.e., F’s battery level mod 10 = 0)
+repeater. When a repeater receives an uplink transmission from           and both the battery levels of E and E’s original next-hop
+            Fig. 5. Energy Aware Route Switching Case 1                          Fig. 6. Energy Aware Route Switching Case 2
+
+
+
+                                                                                      IV. S IMULATION R ESULTS
+repeater (in this case, G) are more than 10 levels higher than          This section presents simulation results evaluating the per-
+F’s battery level, E sends a special packet to D, instructing        formance of the representative network shown in Figure 1,
+it to change its next hop address to E (Figure 5.c). If E            using both the proposed routing mechanism and our previous
+had previously altered its next-hop address, it will also revert     flooding-based approach optimized for high-throughput appli-
+it back to the original address assigned during the position         cations [11]. To conduct these experiments, we extended our
+learning phase. Thereafter, as shown in Figure 5.d, subsequent       LoRaMeshSimulator framework, originally introduced in [11],
+upstream packets forwarded by D will follow the new route,           which consists of Python-based simulation scripts developed
+bypassing Repeater F with the low battery level, causing F           using SimPy, a discrete-event simulation library. While this
+to merely act as a standby repeater for these packets. As per        work focuses on the proposed routing mechanism, it builds
+the checked condition, route switching occurs only when a            on the core repeater logic from our previous work in [11],
+repeater announces a lower battery level that is also a multiple     which serves as the foundation for our network protocol. All
+of 10, effectively limiting the frequency of energy-aware route      Python code used in the presented experiments is publicly
+switches and thus resulting in negligible overhead.                  available in [25], which also serves as a complete reference
+                                                                     for the network protocol and configuration details, supporting
+   The second scenario of energy-aware route adjustments             full reproducibility.
+is illustrated in Figure 6. This scenario may arise due to
+                                                                        The experiments presented focus solely on upstream trans-
+prior route changes in the network. In this case, Repeater E
+                                                                     missions, where each end device (not shown in Figure 1 for
+overhears an upstream packet transmission from its neighbor
+                                                                     clarity) periodically transmits packets at uniformly distributed
+C to neighbor D, both of which have higher distance values
+                                                                     intervals with a specified mean.
+than E. Additionally, Repeater D’s battery level has recently
+decreased by one unit, so when it forwards the packet, it            A. Network PDR and Latency
+includes its updated battery level to notify its neighbors (Figure
+                                                                        In the first experiment, the end devices were evenly dis-
+6.b). Repeater E then checks another condition: if D’s updated
+                                                                     tributed, placing one near each repeater in the network shown
+battery level is a multiple of 10 and E’s battery level is higher
+                                                                     in Figure 1. The network was simulated with and without
+than D’s, E sends a special packet to C, instructing it to
+                                                                     the routing mechanism for 10000 upstream packets (each 20
+change its next-hop address to E instead of D (Figure 6.c).
+                                                                     bytes in size), with each end device periodically transmitting
+Consequently, as shown in Figure 6.d, subsequent upstream
+                                                                     packets at a mean interval of 2 seconds, thereby creating a
+packets forwarded by C will follow the new route, bypassing
+                                                                     very high-throughput scenario relative to typical LoRa network
+Repeater D with the low battery level.
+                                                                     conditions.
+   Although we only describe upstream examples here, down-              Figure 7 illustrates the duty cycle (i.e., the percentage of
+stream transmissions follow the same logic, with the order of        time spent in the transmission state) of each repeater in the
+distance values reversed.                                            network under both the proposed routing mechanism and the
+flooding-based approach. In the flooding method, since each             Additionally, in these simulations, the average latency in
+repeater retransmits every packet duty cycles exceeded 10%            the network with the flooding-based mechanism was 1271
+for all repeaters. In contrast, when simulating with the routing      ms, while it was only 581 ms with the routing mechanism,
+mechanism, only the minimum number of repeaters partic-               representing a 54% reduction.
+ipated in forwarding each packet, resulting in significantly
+                                                                      B. Load Testing
+lower duty cycles ranging from 0.7% to 3.7%.
+                                                                         In this experiment, we simulated the same network arrange-
+                                                                      ment while increasing the network traffic by reducing the
+                                                                      mean time period of packet transmissions by the end devices.
+                                                                      As shown in Figures 8 and 9, for each packet input rate
+                                                                      (indicated by the mean transmission period of an end device in
+                                                                      the graphs), we conducted multiple simulations, increasing the
+                                                                      total number of simulated packets in the network and observed
+                                                                      the average network latency.
+                                                                         According to the graphs in Figure 8, when using the
+                                                                      flooding-based mechanism, average latency begins to increase
+                                                                      with the number of simulated packets once the mean period
+                                                                      of an end device transmitting packets drops below 2 seconds,
+                                                                      instead of remaining stable. This occurs when the Packet Input
+                                                                      Rate (PIR) from all 17 end devices exceeds the maximum
+     Fig. 7. Repeater duty cycle with and without routing algorithm   tolerable Packet Output Rate (POR) of the network. As a
+                                                                      result, packets increasingly queue in repeater buffers, causing
+   According to Table III, which summarizes simulation re-            network latency to rise over time.
+sults, when using the flooding-based method, the network’s
+PDR is 88.7%, with 1128 packets lost out of 10000. Of these,
+1061 were lost during the initial transmissions by the end
+devices as the repeaters they reached were in transmitting
+state at the time, preventing them from being received by the
+repeaters. However, in the flooding-based method, when all
+repeaters forward the same packet, despite packet collisions,
+there is still a higher chance for the packet to reach a gateway,
+making packet losses during retransmissions (67 according to
+Table III) minimal.
+
+                            TABLE III
+                  S UMMARY OF S IMULATION R ESULTS
+
+   Metric                              Traditional       Routing
+                                     Packet Flooding    Mechanism
+   Total Generated Packets               10,000          10,000
+   Total Lost Packets                     1,128            329
+   Lost at Initial ED Transmission        1,061            193
+   Lost at Intermediate Repetition         67              136         Fig. 8. Load testing the network with packet flooding-based mechanism
+   Overall PDR                           0.8872          0.9671
+   Average Latency                      1271 ms          581 ms
+                                                                         In contrast, as shown in Figure 9, when using the routing
+                                                                      mechanism, this rise in latency occurs only after the mean
+   In comparison, the simulation results for the routing mech-        transmission interval of an end device drops below 0.7 sec-
+anism, shown in Table III, indicate a network PDR of 96.7%,           onds. Considering the PIR threshold at which latency begins
+with only 329 lost packets out of 10000. Here, because of             to rise for both mechanisms, the proposed routing mechanism
+the lower duty cycles by repeaters, the likelihood of packet          achieves a 185% improvement in maximum throughput com-
+collisions during initial transmissions from end devices was          pared to traditional flooding in this particular network.
+significantly reduced. However, with the routing mechanism,
+since only a few repeaters forward a packet to the nearest gate-      C. Energy-Aware Routing & Energy Consumption
+way, the number of packets lost during repetition was higher            In this experiment, we again used the same network shown
+than in the flooding-based method. Nevertheless, this increase        in Figure 1, but placed only two end devices: one near
+was mitigated by the standby repeater functionality, without          Repeater 10 and another near Repeater 13. Both end devices
+which the losses would have been considerably greater. Over-          periodically transmit packets at a mean interval of 2 seconds.
+all, the total packet loss with the routing mechanism remains           For this experiment, the repeaters were assumed to be
+substantially lower.                                                  powered by 100 mAh batteries, drawing 500 mA during
+                                                                               Fig. 11. Battery depletion over time for four selected adjacent repeaters in
+       Fig. 9. Load testing the network with the routing mechanism             the network (energy-aware mechanism enabled)
+
+
+
+                                                                               tently followed fixed routes, with some repeaters frequently
+                                                                               forwarding packets, while others mostly remained in standby
+                                                                               mode. With energy-aware route switching, repeater roles were
+                                                                               adjusted based on battery levels, distributing traffic more
+                                                                               evenly, and promoting network longevity with more balanced
+                                                                               battery depletion.
+                                                                                  Additionally, based on the current draw values mentioned
+                                                                               above, we calculated the total power consumption of the
+                                                                               repeaters in the first experiment with 17 evenly distributed
+                                                                               end devices. When using the packet broadcasting and flooding
+                                                                               mechanism, the total power consumption was 2936 mAh,
+                                                                               compared to just 712 mAh with the routing mechanism,
+                                                                               resulting in a 75% reduction in energy usage.
+
+Fig. 10. Battery depletion over time for four selected adjacent repeaters in                              V. C ONCLUSION
+the network (energy-aware mechanism disabled)
+                                                                                  This paper presented a novel position- and energy-aware
+                                                                               routing mechanism tailored for subterranean LoRa mesh
+transmission, 50 mA while receiving packets, and operating                     networks, designed to support high-throughput and energy-
+in a low-power receive mode, consuming 1 mA the rest of the                    efficient operations in challenging underground environments.
+time. This low power mode corresponds to LoRa’s Channel                        The proposed strategy introduces a lightweight position-
+Activity Detection (CAD) feature, as described in [26].                        learning phase and leverages two key innovations: a standby
+   First, we simulated the network with a total of 10000                       repeater mechanism for mitigating packet losses due to colli-
+packets, using only the core routing mechanism, including                      sions, and an energy-aware routing algorithm that dynamically
+the standby repeater function, while the energy-aware route                    balances energy consumption across the network.
+switching feature was disabled. As shown in Figure 10,                            The simulation results demonstrate that the proposed rout-
+the battery levels of four adjacent repeaters (UIDs: 8, 14,                    ing approach significantly outperforms an optimized packet
+15, and 16) along the path to the gateway with UID 18                          flooding-based baseline. Specifically, for a representative LoRa
+declined unevenly, limiting the network’s operational time to                  mesh network, it achieved a 185% improvement in maximum
+approximately 130 minutes.                                                     throughput, a 75% reduction in total energy consumption, a
+   We then repeated the experiment with the energy-aware                       54% decrease in average latency, and an increase in packet
+route switching feature enabled. Consequently, Figure 11                       delivery ratio from 88.7% to 96.7%. These results underscore
+shows a more balanced battery depletion across the same                        the effectiveness of integrating topology awareness and en-
+repeaters, with route changes dynamically triggered based on                   ergy adaptivity into LoRa mesh routing design, offering a
+battery levels. This extended the network’s operational time to                scalable and resilient communication solution for mission-
+over 160 minutes.                                                              critical applications in underground mines, tunnels, and other
+   Without the energy-aware routing feature, packets consis-                   constrained environments.
+                               R EFERENCES                                          [19] LoRa Alliance, “Lorawan relay specification ts011-1.0.0,” LoRa
+                                                                                         Alliance, Fremont, CA, USA, Tech. Rep., 2022, available at
+ [1] J. P. S. Sundaram, W. Du, and Z. Zhao, “A survey on lora networking:                https://resources.lora-alliance.org/technical-specifications/ts011-1-0-
+     Research problems, current solutions, and open issues,” IEEE Commu-                 0-relay.
+     nications Surveys & Tutorials, vol. 22, no. 1, pp. 371–388, 2019.              [20] M. H. Dwijaksara, W. Sook Jeon, and D. G. Jeong, “Multihop gateway-
+ [2] A. W.-L. Wong, S. L. Goh, M. K. Hasan, and S. Fattah, “Multi-hop and                to-gateway communication protocol for lora networks,” in 2019 IEEE
+     mesh for lora networks: Recent advancements, issues, and recommended                International Conference on Industrial Technology (ICIT), 2019, pp.
+     applications,” ACM Computing Surveys, vol. 56, no. 6, pp. 1–43, 2024.               949–954.
+ [3] R. M. Liaqat, P. Branch, and J. But, “Lora based linear network                [21] M. S. Aslam, A. Khan, A. Atif, S. A. Hassan, A. Mahmood, H. K.
+     applications, design considerations and open challenges: A review,” in              Qureshi, and M. Gidlund, “Exploring multi-hop lora for green smart
+     Proceedings of the 20th ACM Conference on Embedded Networked                        cities,” IEEE Network, vol. 34, no. 2, pp. 225–231, 2020.
+     Sensor Systems, ser. SenSys ’22. New York, NY, USA: Association                [22] P. Sharma and R. K. Singh, “Comparative analysis of propagation
+     for Computing Machinery, 2023, p. 913–917. [Online]. Available:                     path loss models with field measured data,” International Journal of
+     https://doi.org/10.1145/3560905.3568111                                             Engineering Science and Technology, vol. 2, 06 2010.
+                                                                                    [23] P. Branch, “Measurements and models of 915 mhz lora radio propagation
+ [4] P. Branch, B. Li, and K. Zhao, “A lora-based linear sensor network for
+                                                                                         in an underground gold mine,” Sensors, vol. 22, no. 22, 2022.
+     location data in underground mining,” in Telecom, vol. 1, no. 2. MDPI,
+                                                                                    [24] A. Rahmadhani and F. Kuipers, “When lorawan frames collide,”
+     2020, p. 6.
+                                                                                         ser. WiNTECH ’18. New York, NY, USA: Association for
+ [5] P. Branch and T. Cricenti, “A lora relay-based system for detonating ex-
+                                                                                         Computing Machinery, 2018, p. 89–97. [Online]. Available:
+     plosives in underground mines,” in 2020 IEEE International Conference
+                                                                                         https://doi.org/10.1145/3267204.3267212
+     on Industrial Technology (ICIT). IEEE, 2020, pp. 259–264.
+                                                                                    [25] N. Udugampola, “Underground-lora-mesh-routing: underground-
+ [6] A. Abrardo and A. Pozzebon, “A multi-hop lora linear sensor network                 lora-mesh-routing-scripts-v1.0,”       2025.      [Online].      Available:
+     for the monitoring of underground environments: The case of the                     https://doi.org/10.5281/zenodo.15300554
+     medieval aqueducts in siena, italy,” Sensors, vol. 19, no. 2, 2019.            [26] Semtech Corporation, “Cad: Ensuring lora packets are transmitted with-
+     [Online]. Available: https://www.mdpi.com/1424-8220/19/2/402                        out collision,” https://www.semtech.com/uploads/technology/LoRa/cad-
+ [7] J. R. Cotrim and J. H. Kleinschmidt, “Lorawan mesh networks:                        ensuring-lora-packets.pdf, 2017, accessed: 2025-04-30.
+     A review and classification of multihop communication,” Sensors,
+     vol. 20, no. 15, 2020. [Online]. Available: https://www.mdpi.com/1424-
+     8220/20/15/4273
+ [8] D. de Farias Medeiros, M. R. Villarim, F. B. S. de Carvalho, and C. P.
+     de Souza, “Implementation and analysis of routing protocols for lora
+     wireless mesh networks,” in 2020 11th IEEE Annual Information Tech-
+     nology, Electronics and Mobile Communication Conference (IEMCON),
+     2020, pp. 0020–0025.
+ [9] H.-Y. Huang, K.-S. Tseng, Y.-L. Chiang, J.-C. Wang, Y.-C. Yang, C.-Y.
+     Chou, and J.-A. Jiang, “A lora-based optimal path routing algorithm
+     for smart grid,” in 2018 12th International Conference on Sensing
+     Technology (ICST), 2018, pp. 71–76.
+[10] D. Lundell, A. Hedberg, C. Nyberg, and E. Fitzgerald, “A routing
+     protocol for lora mesh networks,” in 2018 IEEE 19th International
+     Symposium on ”A World of Wireless, Mobile and Multimedia Networks”
+     (WoWMoM), 2018, pp. 14–19.
+[11] N. Udugampola, X. Ai, B. Li, and A. Seneviratne, “Scalability analysis
+     of linear lora mesh networks,” in 2024 32nd International Conference on
+     Modeling, Analysis and Simulation of Computer and Telecommunication
+     Systems (MASCOTS), 2024, pp. 1–8.
+[12] A. Marahatta, Y. Rajbhandari, A. Shreshta, A. Singh, A. Thapa, and
+     S. Shin, “Lora mesh network for smart metering in rural electrification,”
+     in The 9th International Conference on Smart Media and Applications,
+     2020, pp. 319–324.
+[13] A. Marahatta, Y. Rajbhandari, A. Shrestha, A. Singh, A. Thapa,
+     F. Gonzalez-Longatt, P. Korba, and S. Shin, “Evaluation of a lora mesh
+     network for smart metering in rural locations,” Electronics, vol. 10, no. 6,
+     p. 751, 2021.
+[14] M. Anedda, C. Desogus, M. Murroni, D. D. Giusto, and G.-M. Muntean,
+     “An energy-efficient solution for multi-hop communications in low
+     power wide area networks,” in 2018 IEEE International Symposium on
+     Broadband Multimedia Systems and Broadcasting (BMSB). IEEE, 2018,
+     pp. 1–5.
+[15] M. S. Aslam, A. Khan, A. Atif, S. A. Hassan, A. Mahmood, H. K.
+     Qureshi, and M. Gidlund, “Exploring multi-hop lora for green smart
+     cities,” IEEE Network, vol. 34, no. 2, pp. 225–231, 2019.
+[16] S. Barrachina-Muñoz, T. Adame, A. Bel, and B. Bellalta, “Towards
+     energy efficient lpwans through learning-based multi-hop routing,” in
+     2019 IEEE 5th World Forum on Internet of Things (WF-IoT). IEEE,
+     2019, pp. 644–649.
+[17] M. Bezunartea, R. Van Glabbeek, A. Braeken, J. Tiberghien, and
+     K. Steenhaut, “Towards energy efficient lora multihop networks,” in
+     2019 IEEE International Symposium on Local and Metropolitan Area
+     Networks (LANMAN). IEEE, 2019, pp. 1–3.
+[18] K. C. V. G. Macaraeg, C. A. G. Hilario, and C. D. C. Ambatali, “Lora-
+     based mesh network for off-grid emergency communications,” in 2020
+     IEEE Global Humanitarian Technology Conference (GHTC). IEEE,
+     2020, pp. 1–4.
+

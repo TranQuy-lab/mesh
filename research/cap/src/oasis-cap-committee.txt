@@ -1,0 +1,322 @@
+ 
+ OASIS Emergency Management TC — Subcommittee | OASIS 
+ OASIS Emergency Management TC 
+ Enabling information exchange to advance incident preparedness and response to emergency situations 
+ Table of Contents 
+ Announcements 
+ Overview 
+ Subcommittees 
+ TC Liaisons 
+ TC Tools and Approved Publications 
+ Technical Work Produced by the Committee 
+ Expository Work Produced by the Committee 
+ External Resources 
+ Mailing Lists and Comments 
+ Additional Information 
+ Announcements 
+ Tweet #EDXL 
+***
+From Nov. 3, 2023 to Nov. 9, 2023 the 2023 Annual Conference of The International Association of Emergency Managers (IAEM) was held in Long Beach, California. 
+ The OASIS Open Emergency Management Technical Committee (EMTC) hosted a booth at IAEM. 
+ The booth was setup with banners with a large TV playing a loop of the CAP and EDXL videos. Handouts on CAP and EDXL were available at the front desk. 
+ Jacob Westfall was the OASIS EMTC CAP-SC representative at IAEM. He split his time between two booths and had a sign on the table directing interested attendees to come to his other booth to talk to him when he wasn't available in the OASIS EMTC booth.
+ The audience for this conference, the attendees, was different than last year's -- while many of the same vendors were there. Jacob noticed there were fewer alerting devices and hands-on demos. There were more online virtual informational presentations instead. 
+ Jacob spoke about CAP and OASIS with IAEM attendees from the 
+ National Oceanic and Atmospheric Agency National Weather Service (NOAA, NWS)
+ The Federal Emergency Management Agency Integrated Public Alert and Warning System (FEMA, IPAWS)
+ The International Association of Red Cross and Red Crescent Societies
+ The Public Broadcast System (PBS)
+ The University of Massachusetts Lowell
+ Northern Arizona University
+ Environmental Systems Research Institute (Esri)
+ Rave Mobile Safety (RAVE)
+ Juvare, a company that provides software for emergency preparedness and response. 
+ Genesys Telecommunications Laboratories Inc
+ Boston CONSULTING company (BCG), and
+ The Country of Nigeria.
+* * *
+ On October 10-12, 2023 The annual Common Alert Protocol (CAP) Implementation Workshop was held in Geneva Switzerland. The Workshop was hosted by the United States Agency for
+International Development (USAID) and AlertHub.Org CIC. The events were
+co-sponsored by the International Association of Emergency Managers (IAEM) and the OASIS
+standards organization.
+ The Workshop was intended solely for information sharing among experts. Accordingly, Workshop participants represented themselves rather than the organizations with which they were affiliated.
+ The Workshop and Training events had more than 1,000 persons registered as participants. They were from 162 countries/territories, 44 international organizations, and 116 commercial companies, academic institutions, or other non-governmental organizations. About 60 people participated in person at the Movenpick Hotel in Geneva.
+ Recordings of the 2023 CAP Workshop and Training Webinars can be accessed at the following links. Enter the given passcode when prompted, and note that sound for 10 October session starts at one minute.
+ Training Day: 10 October link – when prompted, enter passcode: !09EF%.p
+Workshop Day One: 11 October link – when prompted, enter passcode: QSQv9TP!
+Workshop Day Two: 12 October link – when prompted, enter passcode: 08C=z=Cw
+ The following informational documents might be also of interest:
+ The Programme lists all of the Workshop agenda topics and links to the presentations;
+ The list of Speakers includes speaker biographies, portraits and links to the presentations;
+ The list of Participants gives name and organizational affiliation of registered participants. 
+You can access the report itself here 
+* * * 
+The OASIS Open Emergency Management Technical Committee (EMTC) announces this update of information about the 2023 CAP Implementation Workshop:
+The United States Agency for International Development (USAID) and Alert-Hub.Org Community Interest Company are hosting the 2023 Common Alerting Protocol (CAP) Implementation Workshop and Training. Both events will be in the Lindbergh Room at the Movenpick Hotel, Rte de Pré-Bois 20, 1215 Geneva, Switzerland. The Training will be 10 October, 9:30-17:30 CEST; the Workshop will be 11 - 12 October, 9:30-17:30 CEST. Click here to register.
+ For further updates see the 2023 Common Alerting Protocol Implementation Workshop Flyer .
+ ****
+The OASIS EMTC is pleased to announce the publication by the EU CEN-CENELEC of documents from the STRATEGY Project in which Rex Brooks participated on behalf of the EM TC. These two documents are: 
+ Semantic layer definition and suitability of OASIS EDXL-CAP and OASIS EDXL-SitRep standards for crisis management in critical infrastructures and 
+ Emergency management - Incident situational reporting for critical infrastructures. 
+ CEN and CENELEC are business catalysts in Europe, removing trade barriers for European Industry and consumers in order to foster the European economy in global trading, the welfare of European citizens and the environment. 
+ CEN, the European Committee for Standardization and CENELEC, the European Electrotechnical Committee for Standardization, are two of three European Standardization Organizations (together with ETSI) that have been officially recognized by the European Union and by the European Free Trade Association (EFTA) as being responsible for developing and defining voluntary standards at European level.
+ It is important to understand that these two documents, and others that we were not directly involved in, but in which we have keen interest, are specifically “Pre-Standardization” documents meant to be instrumental in identifying standards, such as our EDXL standards for eventual recommendations for official use throughout the European Union.
+ ****
+The OASIS Emergency Management Committee is proud to announce the initial publication of "Mobile Alerting Practices Version 1.0," a Committee Note. It can be found here. 
+From the Abstract: “One method of reaching people with emergency alert messages is via their personal mobile devices, such as mobile phones and tablets. Access to these devices is via the Mobile Network to which they are currently attached. However, the need to make a large-scale distribution in a specific geographic area without crashing the control channel, and the need to reach roamers, whose devices may retain their default behavior from their home network, needs consideration by those mobile networks. This document discusses how practitioners have considered this matter.” 
+This work will be highlighted at the 2023 Common Alerting Protocol (CAP) Implementation Workshop and Training 10-12 October in Geneva. and at The 2023 IAEM Conference and EMEX in Long Beach, California 
+ ****
+ On 10-12 October 2023 the International Federation of Red Cross and Red Crescent Societies (IFRC) is hosting the 2023 Common Alerting Protocol (CAP) Implementation Workshop and Training. Both events will be held at the IFRC headquarters in Geneva, Switzerland. Training will be 10 October, 9:00-17:00 CEST and the Workshop will be 11 - 12 October, 9:00-17:00 CEST. 
+This Workshop is co-sponsored by the International Association of Emergency Managers (IAEM) , IFRC, the International Telecommunication Union (ITU) , the OASIS standards organization and the World Meteorological Organization (WMO) . 
+You can register here. If you wish to attend in person in Geneva, you will be put on a wait list because the capacity of the meeting room has been reached. 
+You can access the CAP Implementation Workshop Programme here. 
+You can access the List of Speakers here. 
+You can access the 2023 CAP Implementation Workshop Information flyer here. 
+All presentations can be reached through the links provided within the programme. 
+ ****
+ The OASIS Open Emergency Management Technical committee (EMTC) is pleased to announce that: 
+Mark and Thomas Wood attended the GSMA Mobile World Congress (MWC) 2023 in Barcelona, Spain Feb 27-March 2 as members of the OASIS Emergency Management Technical Committee (EMTC) Common Alerting Protocol Subcommittee (CAP SC). Over 80,000 persons attended over four days. There were eight halls of exhibits with about 100 booths per hall. The International Telecommunication Union (ITU), a big proponent of CAP, initially recommended attendance at the MWC. CAP was announced as the underlying alerting standard by the UN Early Warnings for All (EW4A) initiative. The ITU has responsibility for Pillar 3 in the EW4A Initiative. They presented their role in working with their members consisting of many communication regulators and mobile operators to understand the value of cell broadcast for mobile alerting. They spoke both about CAP and the work of the Subcommittee regarding cell broadcast. 
+ This work is the development of a Committee Note documenting Mobile Alerting Practices (MAP) used throughout the world. This note will guide new implementers of cell broadcast technology by providing awareness of guidance and practice from neighboring jurisdictions. The goal is to raise awareness and understanding so that good choices can be made by the stakeholders.
+ The MWC served as an excellent venue to meet with the ITU presenters, Regulatory Advisors, Mobile Operators, and other stakeholders for a successful EW4A. Interested parties were shown copies of the current MAP draft with plans for follow up and an invitation to participate in the OASIS work. 
+ ****
+ On 7 November 2022 at Sharm el-Sheikh, Egypt the 27th United Nations Climate Change conference or Conference of the Parties of The United Nations Framework Convention on Climate Change (UNFCCC), more commonly referred to as COP27 , the Executive Action Plan for the Early Warnings for All Initiative was unveiled. 
+ Elysa, Chair of the EMTC, along with Jacob Westfall, chair of the CAP Subcommittee (SC), Mark Wood, Tom Wood of the CAP SC and Mike Gerber of the NWS provided a full day pre-conference session entitled “Crash Course in Mobile Alerting.” The audience maintained keen interest and asked many questions to better understand the components of mobile alerting. Mark, Tom and Jacob also staffed the OASIS EMTC booth during the Expo. 
+ The Emergency Warnings For All work will be done with the United Nations Office of Disaster Risk Reduction (UNDRR) and is budgeted for initial new targeted investments between 2023 and 2027 of US$ 3.1 billion – a sum which would be dwarfed by the benefits. This is a small fraction (about 6 percent) of the requested US$ 50 billion in adaptation financing. It would cover the four pillars for success:
+ observations and forecasting
+ preparedness and response
+ communication of early warnings
+ disaster risk knowledge 
+CAP, the first of the Emergency Data Exchange Language (EDXL) set of Emergency IT messaging standards and Specifications and a vital part of this initiative brings to this initiative a global coverage of 83% of the world population to the extent their country’s alert and warning systems are operational. The EMTC is humbly proud of this accomplishment. 
+ ****
+EMTC was represented at IAEM’s 2022 Annual Conference and Exposition Nov. 11-17, 2022 in Savannah, Georgia in an in-person event. This year’s IAEM Conference Theme is “Emergency Management Unmuted” The EMTC will put its spotlight on the Emergency Management Framework Open Repository and the OASIS Open Europe Foundation (OOEF) collaboration with the EMTC's participation on the STRATEGY EU" Project.
+From 19 October - 21 October 2022 in Amsterdam, Netherlands, the 2022 CAP Implementation Workshop and Training was held as an in-person event for the first time since the advent of the Covid-19 Pandemic. 
+ The OASIS Emergency Management Technical Committee was represented by Mark Wood and Thomas Wood in the Sept. 21, 2022 Training Day presentations they gave on the work of the EM CAP Subcommittee to create a new Committee Note on Mobile Alerting Practices. Elysa Jones attended remotely, and with Mark Wood gave an update on the ongoing work of the EMTC.
+The following documents may be also of interest:
+ The Programme lists all of the Workshop agenda topics and links to the presentations;
+ The list of Speakers includes speaker biographies, portraits and links to the presentations;
+ The list of Participants gives name and organizational affiliation of each participant.
+ Our extensive work was largely well received. 
+The EMTC also had a Training Day focusing on the EM CAP Subcommittee’s current work developing a Committee Note for Mobile Alerting Practices. 
+EMTC Chairperson Elysa gave a brief report and an introduction for Mark Wood, the principal author and editor for this very important work. He was on hand to facilitate the Training. Mr. Wood resides in the UK, has personal experience with the issues that the Committee Note will address, while the EM-CAP SC has contributors associated with Canada’s Alerting authorities, as well as DHS-FEMA Integrated Public Alert and Warning System (IPAWS) in the US. EMTC Chairperson Elysa has personal experience working with smaller countries, such as Mauritius in the Indian Ocean, for whom cell broadcast for Mobile Alerting was chosen for their primary alerting service. 
+ A Zoom Webinar was also offered by the World Meteorological Organization (WMO) Conference Services for those who could not participate in person. Both events were hosted by Alert-Hub.Org CIC and Everbridge. They were co-sponsored by the International Association of Emergency Managers (IAEM), the International Federation of Red Cross and Red Crescent Societies (IFRC), the International Telecommunication Union (ITU), the OASIS standards organization, and WMO. 
+The EMTC is also pleased to announce that The World Health Organization (WHO) Member States just agreed to develop a legally binding Pandemic Accord, starting with a zero draft in early 2023. According to Eliot Christian, leader of the international Alert Hub CIC> Community Interest Company, a small non-profit company with a worldwide goal: help countries assure that people in harm's way get timely and effective emergency alerts. Today, 83% of the world’s population lives in a country with a national-level CAP alert feed, either operational (83%) or in testing (10%). CAP uptake is on track to reach 100% by 2025, in line with the global-scale “Call to Action on Emergency Alerting” 
+On Jan. 20, 2021 – OASIS Open, the international open source and open standards consortium announced the launch of the OASIS Open Europe Foundation (OOEF) . The foundation provides a strong and dedicated European focus in setting standards for open collaboration and allows OASIS to help provide long-term sustainability for European Union projects.
+ In early February 2021 OOEF was invited to participate in an ongoing EU Project: STRATEGY EU . The EMTC was invited to participate actively, and accepted the opportunity. EMTC Secretary Rex Brooks has joined the effort and reports that the use of EMTC Standards and Specifications are being intensively considered as part of the set of solutions that will eventually be recommended following the current pre-standardization process.
+ On Dec. 17, 2021 The Emergency Management Technical Committee inaugurated the OASIS TC Open Repository: emergency-emf This is a part of the overall Emergency Management Framework that makes up a set of resources that are available to the public, and which the EMTC has established as part of our effort to build an open source community and attract software developers to adopt and implement our standards and specifications.
+ Statement of Purpose: The OASIS Emergency Management Framework (EMF) is a reference implementation and toolkit for enabling standardized emergency information exchange using the OASIS Emergency Data Exchange Language (EDXL). With the EMF, developers and users can create, send, store, template, visualize, search, and organize emergency messages. EDXL provides standardized alerting, resource sharing, situation reporting, tracking of emergency patients and clients, hospital availability, as well as packaging and addressing of emergency messages and attachments.
+ On 13-14 October 2021 from 13:00 to 17:15 CEST (Geneva time) each day, the international 2021 CAP Implementation Workshop was conducted for the second successive year as an online Video Webinar. Elysa Jones, Chair of the OASIS Emergency Management Technical Committee (EMTC) participated and gave a presentation you can access here . She updated the latest work of the EMTC, which includes a Committee Note: Event Terms List Version 1.0 Committee Note 02 0212 October 2021 You can access this Committee Note in the link provided. Norm Paulsen from Environment Canada, and a member of the EMTC's EM CAP Subcommittee gave a presentation titled CAP and Wireless Public Alerting Canada . You can access the Workshop Speakers as confirmed by 21 April 2021.
+ For the provisional list of participants from the same date, see Participants. You can can access the Information Flyer for the 2021 CAP Implementation Workshop here. The OASIS EMTC is pleased to draw attention to the international Call to Action on Emergency Alerting This website includes brief statements by the international organizations, international NGOs, and international companies who have endorsed this effort so far. The goal is To scale up efforts to ensure that all countries have the capability for effective, authoritative emergency alerting that leverages the Common Alerting Protocol (CAP) suitable for all media and all hazards. 
+ On July 22, 2021, Elysa Jones, Chair of the Emergency Management Technical Committee (EMTC) participated in and gave a presentation on the work of the EMTC in OASIS to the National Alliance for Public Safety GIS (NAPSG) Foundation in their virtual PrepTech Talk titled “Innovations in Resource Management & Mutual Aid Technology.” The participants and presenters in this webinar discussed the latest developments in nationally available technology tools and standards that increase resource management preparedness and improve efficiencies in managing incidents. 
+ You can access the recorded session from July 22, 2021 here. This page of the NAPSG website allows you to listen to the entire session either on that page or from YouTube through the link included on that page. If you prefer to listen to Elysa’s EMTC presentation, you have the controls to do that in the YouTube site if you use their controls to go to the timestamp of 50.05 / 1:14:10 within the webinar recording. 
+ January 8, 2021, The OASIS Emergency Management Technical Committee’s Common Alerting Protocol Subcommittee (EMTC EM-CAP SC) hosted the first of two Special Informal Zoom Meetings for Subject Matter Experts. These meetings were arranged to gather feedback on the Event Terms List that the CAP SC has been working on since Q4 of 2016. 
+ You can access the recorded session from January 8, 2021 here 
+ On January 15, 2021, The EMTC’s EM-CAP SC hosted the Second Special Informal Zoom Meeting for Subject Matter Experts to gather feedback on the Event Terms List. 
+ You can access the recorded session from January 15, 2021 here 
+ On 13-14 October 2021 from 13:00 to 17:15 CEST (Geneva time) each day, the 2021 CAP Implementation Workshop will be conducted as an online Webinar - Call-in instructions will be sent to all registered participants.
+ You can access the 2021 CAP Implementation Workshop Information flyer”> here.
+ From 28 September 2020 – 30 September 2020 the international 2020 CAP Implementation Workshop was held as a virtual event. The event was conducted as a Zoom webinar. Due to the ongoing COVID-19 Pandemic, this was the first CAP Workshop to be conducted as a virtual edition of the annual event. 
+ You can access the 2020 CAP Implementation Workshop Report here . 
+ You can access the List of Speakers here 
+ You can access the List of Participants here. 
+ It is worth noting this event had more than 800 registered attendees.
+ All presentations can be reached through the links provided within the programme.
+ Beginning with the increased spread of the COVID-19 pandemic in the U.S. and the world, in the month of March 2020 and continuing through April and likely to stretch into the following months, the Emergency Management Technical Committee (EMTC) has increased its efforts to ensure awareness of the benefits of our Emergency Data Exchange Language (EDXL) standards and specifications for stakeholders from various agencies such as
+ The Department of Homeland Security (DHS) including several branches/divisions of the Federal Emergency Management Agency (FEMA) 
+ The Department of Health and Human Services (HHS) Office of the Assistant Secretary for Preparedness and Response (ASPR), Centers for Disease Control and Prevention (CDC), Office of the Assistant Secretary for Preparedness and Response (ASPR), Division of Emergency Operations 
+ Health Level 7 International (HL7) specifically for the Fast Healthcare Interoperability Resource (FHIR) initiative furthering awareness of the value of data interoperability through the use of our EDXL standards and specifications 
+ National Alliance for Public Safety GIS (NAPSG) Foundation 
+ From NAPSG: Implementation Guidance: Information Sharing Standards for Crisis Management and Mutual Aid Technology 
+Specifically, we are encouraging awareness and adoption of
+ OASIS EDXL Tracking of Emergency Patients: https://www.oasis-open.org/standards#edxl-tep-02 
+ Bi-directional transformation specification: http://www.hl7.org/implement/standards/product_brief.cfm?product_id=439 
+ OASIS EDXL Hospital Availability Exchange: https://www.oasis-open.org/standards#edxl-have-20 
+ Cross paradigm implementation guide: http://www.hl7.org/implement/standards/product_brief.cfm?product_id=489 
+ From November 15-20, 2019, the International Association of Emergency Managers (IAEM) Annual Conference was conducted in Savannah, Georgia. The OASIS Emergency Management Technical Committee (EMTC) provided a full day pre-conference training session on the EDXL suite of standards. While the EMTC has presented EDXL at sessions during the IAEM annual conference, this is the first time there has been pre-conference training event dedicated to the topic of data interoperability. This provided emergency managers an opportunity to learn about the standards that are available to exchange data for alert and warning, patient tracking, hospital availability, situational awareness, resource management and message distribution. The OASIS Emergency Member Section Steering Committee sponsored the event. Jacob Westfall and I presented at the full day session on Saturday Nov 16. It was attended by 10 persons from three countries (USA, Barbados, Saudi Arabia). Some were longtime emergency managers, one emergency management student and some first time IAEM attendees. All attendees stayed for the full day and stated they got out of the session what they had hoped for. We provided a full overview of the EDXL suite of standards, guiding principles, toolkit with details on the Common Alerting Protocol (CAP), Hospital Availability Exchange (HAVE) and Tracking Emergency Patients) TEP specifications and their joint release with other international standards bodies (ITU and HL7). Lunch was provided as well as a morning and afternoon break.
+ In addition to the preconference workshop on EDXL, OASIS provided exhibit space during the conference. This was a good opportunity to meet with emergency managers, product and service providers as well as government entities interested in interoperable data standards.
+ From 28 September – 30 September 2020, the international 2020 CAP Implementation Workshop Programme here . You can access the List of Speakers here You can access the < List of Participants here. It is worth noting that the virtual event allowed as many as 400 visitors to access the presentations.>
+ We will post links to the presentations and any further information here. 
+ From 16 October - 18 October 2019, the international CAP Workshop 2019 was held in Mexico City, Mexico. You can access the agenda and presentations here . You can access the Final Report here. The Report provides brief notes concerning each of the 22 presentations given at the Workshop, and the List of Speakers also links to each of their presentations. The List of Participants provides names and affiliation of the 81 participants from 16 countries. 
+ On 28 January 2019 the OASIS Committee Specification Emergency Data Exchange Language (EDXL) Hospital AVailability Exchange (HAVE) Version 2.0 Committee Specification 01 Proposed HL7® Informative Document 13 December 2018 was published. In addition, TC Administrator Chet Ensign posted the document on Linked-In for discussion. This is noteworthy because it is the first Joint Release of OASIS Open and Health Level Seven International.
+ From 31 October - 1 November 2018, the international CAP Workshop 2018 was held in Hong Kong, China. You can access the agenda and presentations here . You can access the Final Report here. 
+ On 3 April 2018 the HL7 paper Healthcare IT Computable-Interoperability Strategy “Methodology to manage data-quality risk by standardizing data” In accordance with 21st Century Cures Act, TEFCA and USCDI was posted to the Documents repository of the EM Adoption TC.
+ On 22 March 2018 Best Practices for the Dissemination of Weather Warnings to the Public A Best Practice Statement of the American Meteorological Society(Adopted by the AMS Council 7 January 2018) was posted to the Documents repository of the EM Adoption TC.
+ From Dec 2017-April 2018 implementers of the Common Alerting Protocol (CAP) are invited to answer questions regarding the creation of an Event Terms List. For details, see Call for Comments which was extended through April.
+ Late February 2018 marked the signing of the 2017 Statement of Understanding (SOU) between OASIS and Health Level Seven (HL7).
+ On Jan 30 2018, HL7 Patient Administration Working Group approved joint release of the Hospital Availability Exchange (HAVE) standard which includes an appendix mapping to the HL7 data items. A full announcement from HL7 and OASIS for the joint release is anticipated 1Q2018. 
+ On September 22, 2017 the first international EDXL Workshop was held in Rome. You can access the agenda and presentations here . You can access the Final Report here. 
+ On September 20-21, 2017 the international CAP Workshop 2017 was held in Rome. You can access the programme and presentations here . You can access the Final Report here .
+ The video "Overview of EDXL Emergency Standards" is now available in both English and Italian. You can access the English version at https://www.youtube.com/watch?v=7eoV5XwZVO8 and the Italian version at https://vimeo.com/234306686?utm_source=email&utm_medium=vimeo-cliptranscode-201504&utm_campaign=29220 . 
+ Mert Gencturk from SRDC Corp, a spin-off from the Middle East Technical University, Software Research and Development Center (METU-SRDC) discusses his work on the C2-SENSE Project, a project to a develop a profile-based Emergency Interoperability Framework that exposes the functionalities of C2 Systems, Sensor Systems and other emergency/crisis management systems. The framework uses the OASIS CAP, EDXL SitRep, EDXL RM, EDXL HAVE and EDXL TEP standards. C2-SENSE is a joint project of 8 partners from France (SAFRAN), Austria (AIT), Italy (LUTECH, REGOLA, Innova Puglia, Regione Puglia), Turkey (SRDC) and Poland (PIAP). Watch the full presentation here: https://youtu.be/lDwlAYsshN0 : 17 July 2017 
+ HL7 and OASIS Announce Joint Publication of Implementation Guide to Advance Emergency and Disaster Response ; 20 Sept 2016 This Committee Note (OASIS) and Implementation Guide (HL7) is a bidirectional transformation specification between the OASIS message for Tracking of Emergency Patients and the HL7 message for the admit/discharge/transfer of patients in hospital administration systems. 
+ On August 23-24, 2016 the international CAP Workshop 2016 was held in Bangkok, Thailand. You can access the presenters and presentations here . You can access the Final Report here .
+ On September 23-24, 2015 the international CAP Workshop was held in Rome. You can access the presentations here . You can access the Final Report here .
+ On 11 August 2015, the Emergency Management TC approved Emergency Data Exchange Language Situation Reporting (EDXL-SitRep)v1.0 as a Committee Specification Draft/Public Review Draft and arranged for the 60-Day public review. 
+ On 15 October 2015 National Association of State Emergency Medical Service Officials (NASEMSO) signed a resolution calling for Completion and Implementation of a Data Standard for Tracking of Emergency Patients (TEP) 
+ On 04 August 2015, the Emergency Management TC approved Emergency Data Exchange Language Tracking of Emergency Patients (EDXL-TEP) 1.1 as a Committee Specification Draft/Public Review Draft and arranged for the 30-Day Public Review. 
+ On 13 January 2015, the Emergency Management TC approved Emergency Data Exchange Language Hospital AValability Exchange (EDXL-HAVE) 2.0 as a Committee Specification Draft/Public Review Draft and arranged for the 60-Day Public Review. 
+ Visit the Emergency Management Technical Committee (EM-TC) Activities page for more current topics. 
+ Overview 
+ Insert overview information here -->
+ The EM-TC creates vendor-neutral and platform agnostic standards for organizations and agencies to more easily exchange emergency information. The EM-TC welcomes participation from members of the emergency management and response community, developers and implementers, and members of the public concerned with disaster management and response. 
+ The Emergency Data Exchange Language (EDXL) is a broad initiative to create an integrated framework for a wide range of emergency data exchange standards to support operations, logistics, planning and finance. 
+ Overview links below are provided for completed OASIS standards only. Non-linked items are works in progress. For most recent versions of all technical work see Technical Work Produced by the Committee 
+ EM-TC standard efforts include:
+ EDXL Common Alerting Protocol (EDXL-CAP) 
+ EDXL Distribution Element (EDXL-DE) 
+ EDXL Hospital AVailability Exchange (EDXL-HAVE) 
+ EDXL Resource Messaging (EDXL-RM) 
+ EDXL Reference Information Model (EDXL-RIM) 
+ EDXL Situation Reporting (EDXL-SitRep) 
+ EDXL Tracking Emergency Patients (EDXL-TEP) 
+ For more information, see the TC Charter and FAQ 
+ Subcommittees 
+ Insert subcommittee info here -->
+ EM Adoption SC 
+ Supports the adoption of standards to enable information exchange which advance incident preparedness and response to emergency situations. -->
+ EM CAP Profiles SC 
+ Designs, develops, and releases XML-based standards and specifications as CAP Profiles based on the CAP Standard. 
+ EM CAP SC 
+ Provides ongoing maintenance of the CAP standard and related work. 
+ EM GIS SC 
+ Ensures the proper use and integration of geographic standards in the development of EDXL standards. 
+ EM HAVE SC 
+ Researches, analyzes, recommends, and organizes currently available information on implementation challenges and comments regarding the EDXL-HAVE standard. 
+ EM Infrastructure Framework SC 
+ Produces a horizontal intellectual effort predicated on establishing a common set of EM infrastructure standards, regardless of originating industry and/or agency segment. In particular, it provides ongoing maintenance of the EDXL-DE standard and related work. 
+ EM Messages and Notification SC 
+ Addresses procedures and formats for exchanging new and updated information related to functions including public safety, emergency response and homeland security. In particular, it provides ongoing maintenance of the EDXL-RM and EDXL-SitRep standards and related work. 
+ EM Reference Information Model SC 
+ Creates the EDXL-RIM specification to provide a high-level, abstract, information model for the family of EDXL specifications. Provides guidance on extensions and constraints (profiles) and maintains Common Types, EDXL-CIQ and EDXL-GSF. 
+ EM TEP SC 
+ Develops the OASIS EDXL-Tracking of Emergency Patients (EDXL-TEP) messaging standard, which assists emergency responders, coordinators and management in the exchange of emergency patient and EMS tracking information, thus increasing the effectiveness of emergency medical management, patient tracking and care, and family notification. 
+ EM TEC SC 
+ Develops the OASIS EDXL-Tracking of Emergency Clients (EDXL-TEC) messaging standard to facilitate the tracking of evacuees and other displaced persons during emergencies, disasters, and routine day-to-day incidents, the transport of such emergency clients to shelters, and the repatriation and reunification of emergency clients with their families. 
+ EM Adoption SC 
+ The former EM Adoption SC has migrated to the OASIS Emergency Management Adoption TC 
+ TC Liaisons 
+ On January 1, 2015 Health Level Seven International and OASIS signed a --> Statement of Understanding formalizing a liaison agreement between the two organizations. 
+ TC Tools and Approved Publications 
+ Links for tools/publications have not yet been activated. -->
+ emergency emf Open Repo 
+ Issues Management (JIRA) 
+ OASIS Library for Approved Publications 
+ TC Wiki 
+ Version Control (SVN) 
+ WebConf Meeting Management -->
+ Technical Work Produced by the Committee 
+ Insert work products here -->
+ IE users note : your browser may block active content such as in the following drop down lists. 
+ A search for "How to allow blocked content in IE?" will point you to possible remedies.
+ Developers please note : Internet searches may lead to earlier versions of schemas, which may cause confusion, if used as implementation directive. 
+ To ensure that you get the versions that correspond to the published standards, please retrieve them only from the following selection .
+ Common Alerting Protocol 1.2 ( EDXL-CAP v1.2 , Schema ) 
+ Warning :
+ The current posting for this standard contains the wrong .bmp for the DOM and hence does not reflect one of the submitted changes. The good news is that the normative portion of the document is okay (except bold is missing from MIME type, which would indicate the other change that MIME type is required). The TC is working with the TC Administrator to correct the situation .
+ - EDXL-CAP 1.2 Profiles :
+ USA Integrated Public Alert and Warning System Profile Version 1.0 ( IPAWS Profile v1.0 ) 
+ EDXL-CAP v1.2 Australia (AU) Profile Version 1.0 ( CAP-AU Profile v1.0 ) 
+ Common Alerting Protocol 1.1 ( EDXL-CAP v1.1 ) 
+ incorporating Errata 
+ - EDXL-CAP 1.1 Profile(s) :
+ USA Integrated Public Alert and Warning System Profile 1.0 ( IPAWS Profile v1.0 ) 
+ Common Alerting Protocol (CAP) 1.1 OASIS Standard CAP-V1.1, October 2005. --> Common Alerting Protocol ( CAP ) 1.0 --> Wiki for OASIS Emergency Management TC member collaboration -->
+ Emergency Data Exchange Language Distribution Element 2.0 ( EDXL-DE v2.0 ) 
+ (Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+ - xsd Schemas: 
+ edxl-de 
+ CommonTypes 
+ edxl-ct-v1.0-wd05. 
+ edxl-ext-v1.0 
+ edxl-gsf-base 
+ edxl-gsf.v1.0 
+ edxl_xAL 
+ edxl_xNL 
+ edxl_xPIL 
+ xAL-types 
+ xNL-types 
+ xPIL-types 
+ xlink-2003-12-31 
+ Emergency Data Exchange Language Distribution Element 1.0 ( EDXL-DE v1.0 ) 
+ Emergency Data Exchange Language Hospital AVailability Exchange 2.0 ( EDXL-HAVE v2.0 ) 
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+ - xsd Schemas: 
+ CommonTypes 
+ edxl-have 
+ edxl-gsf.v1.0. 
+ edxl-gsf-base 
+ xAL-types 
+ edxl-xAL 
+ xNL-types 
+ edxl-xNL 
+ xPIL-types 
+ edxl-xPIL 
+ edxl-ct-v1.0 
+ edxl-ext-v1.0 
+ Emergency Data Exchange Language Hospital AVailability Exchange 1.0 ( EDXL-HAVE v1.0 )
+ incorporating Draft Errata 
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the main schema you may need to make another selection first, so that selecting the main schema of the named specification occurs as a change.)
+ - xsd Schemas: 
+ CommonTypes 
+ edxl-have 
+ geo-oasis 
+ gml-oasis 
+ xAL-types 
+ xAL 
+ xNL-types 
+ xNL 
+ xPIL-types 
+ xPIL 
+ xlink-2003-12-31 
+ xlinks 
+ Emergency Data Exchange Language Resource Messaging 1.0 ( EDXL-RM v1.0 )
+ incorporating Draft Errata 
+(Schemas below only load when the selection in the dropdown list is changed, so, if you want the schema displayed, you may need to make another selection first, so that selecting the displayed schema occurs as a change.)
+ - xsd Schemas: 
+ EDXL-RMCommitResource 
+ EDXL-RMCommonTypes 
+ EDXL-RMOfferUnsolicitedResource 
+ EDXL-RMReference 
+ EDXL-RMReleaseResource 
+ EDXL-RMReportResourceDeploymentStatus 
+ EDXL-RMRequestExtendedDeploymentDuration 
+ EDXL-RMRequestInformation 
+ EDXL-RMRequestQuote 
+ EDXL-RMRequestResource 
+ EDXL-RMRequestResourceDeploymentStatus 
+ EDXL-RMRequestReturn 
+ EDXL-RMRequisitionResource 
+ EDXL-RMResponseToRequestExtendedDeploymentDurationStatus 
+ EDXL-RMResponseToRequestInformation 
+ EDXL-RMResponseToRequestQuote 
+ EDXL-RMResponseToRequestResource 
+ EDXL-RMResponseToRequestReturn 
+ CommonTypes 
+ geo-oasis 
+ gml-oasis 
+ xAL-types 
+ xAL 
+ xLink 
+ xNAL-types 
+ xNAL 
+ xNL-types 
+ xNL 
+ xPIL-types 
+ xPIL 
+ xlink-2003-12-31 
+ xlinks 
+ Emergency Data Exchange Language Situa 
+ Providing Feedback: OASIS welcomes feedback on its technical activities from potential users, developers, and others to better assure the interoperability and quality of OASIS work.
+ -->
+ --> 
+ Related links 
+ Charter 
+ IPR Statement 
+ FAQ 
+ Membership 
+ Obligated Members 
+ Email Archives 
+ Comments Archive 
+ Ballots 
+ Documents 
+ Schedule 
+ Press 

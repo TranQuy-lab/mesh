@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api//WFgz5PaK/r99/fhP6dKLmXnvmg</id>
+  <title>arXiv Query: search_query=all:Meshtastic&amp;id_list=&amp;start=0&amp;max_results=8</title>
+  <updated>2026-09-30T16:40:54Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:Meshtastic&amp;start=0&amp;max_results=8&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>8</opensearch:itemsPerPage>
+  <opensearch:totalResults>4</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.17063v1</id>
+    <title>Resilience Analysis in Off-Grid LoRa Mesh Networks: Evaluation of Meshtastic Profiles in Long-Range Propagation Scenarios</title>
+    <updated>2026-05-16T16:09:40Z</updated>
+    <link href="https://arxiv.org/abs/2605.17063v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.17063v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The integration of LoRa technologies with mesh topologies represents a robust alternative for off-grid communications in emergency scenarios within smart cities. Meshtastic firmware implements a decentralised mesh network over LoRa where each node acts simultaneously as end device and router, enabling communication via Bluetooth-connected mobile devices without reliance on conventional infrastructure. Within the Colombian context (915 MHz ISM band), this work establishes design and planning criteria through a controlled guided-link methodology that isolates the LoRa physical layer from propagation effects, enabling deterministic characterisation of all eight Meshtastic modem presets at three transmission power levels (42 datasets). The results reveal a performance partitioning governed primarily by Spreading Factor (SF): "Short" presets (SF7-SF8) fail at 110-120 dB of path attenuation, "Medium" presets (SF9-SF10) sustain links up to 135-150 dB, and "Long" presets (SF11-SF12) maximise coverage, with "Long Slow" reaching 180 dB before failure - a 60-70 dB advantage over the fastest profiles. The SNR analysis confirms sub-noise-floor demodulation down to -18 dB for SF12, with abrupt link failure occurring within 2-4 dB of the theoretical limit. Based on these thresholds, three operational regimes are defined (high-density IoT, balanced urban mesh, and maximum-range emergency), providing network designers with quantitative criteria to select the appropriate configuration and node density for smart city deployments.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-16T16:09:40Z</published>
+    <arxiv:comment>18 pages, 5 tables, 4 figures. To appear in the proceedings of CATAI 2026. Workshop website: https://www.catai.fr/catai2026.html</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Guillermo Antonio Hernandez Ortiz</name>
+    </author>
+    <author>
+      <name>Edgar Santiago Quiroz Puentes</name>
+    </author>
+    <author>
+      <name>José de Jesús Rugeles</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.20379v1</id>
+    <title>A Meshtastic-based LoRa Mesh System for Smart Campus Applications: From Solar-Powered Sensing to Containerized Data Management</title>
+    <updated>2026-05-19T18:30:48Z</updated>
+    <link href="https://arxiv.org/abs/2605.20379v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.20379v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents the design, implementation, and evaluation of a LoRa-based mesh network using the Meshtastic protocol for Smart Campus applications at Universidad Militar Nueva Granada (UMNG). The system integrates heterogeneous hardware nodes including a solar-powered ecological sensing node built around a Raspberry Pi Pico and a Semtech SX1262 transceiver, and mobile trackers based on the Seeed SenseCAP T1000-E managed through a containerized edge gateway running on a Raspberry Pi 4. A Docker Compose microservices stack handles data ingestion via Node-RED, time-series storage in InfluxDB, and real-time visualization through Grafana dashboards. The architecture's performance was evaluated under realistic propagation scenarios at the UMNG Cajicá campus, characterizing link quality using Received Signal Strength Indicator (RSSI) and Signal-to-Noise Ratio (SNR) metrics. Experimental results demonstrate robust mesh connectivity across key university facilities, including an extended-range link of approximately 2.47 km linking the campus gateway to a remote station at Mirador La Cumbre (n = 62 packets received, mean RSSI = -110 dBm, mean SNR = +2.75 dB). This architecture demonstrates that open-source mesh protocols combined with containerized microservices offer an autonomous, highly reproducible infrastructure for environmental monitoring and asset tracking, supporting the transition toward data-driven "Smart Campus" ecosystems without reliance on centralized commercial LoRaWAN operators.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-19T18:30:48Z</published>
+    <arxiv:comment>14 pages, 4 figures, 5 tables.To appear in the proceedings of the 6th CATAÏ Workshop (Bogotá, Colombia, May 7-8, 2026). Workshop website: https://www.catai.fr/catai2026.html</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Rafael Garzon Andosilla</name>
+    </author>
+    <author>
+      <name>José de Jesús Rugeles Uribe</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.13815v1</id>
+    <title>TLF: Rapid Characterization of RF Transceiver Parameters in Embedded Systems via Bus-Level Interception</title>
+    <updated>2026-08-13T23:02:34Z</updated>
+    <link href="https://arxiv.org/abs/2608.13815v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.13815v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present TLF (Transceiver Lifter Framework), a tool for recovering RF transceiver configuration and runtime behavior from bus-level traces captured between a microcontroller and its transceiver IC. A stateful protocol decoder, built against the transceiver's register and data interface, reconstructs operating RF parameters and behavior from intercepted register writes and FIFO transfers. For bus-attached transceivers whose hardware-cryptography keys are loaded through the intercepted host interface, key material is also recoverable. Where the firmware drives frequency hopping -- either through a hardware-assisted engine or a custom schedule -- the decoder extracts the channel table, hop sequence, and timing. We evaluate the approach on two targets from different Semtech families: an SX1233-based UAV C2 modem employing firmware-level FHSS with per-packet sync word rotation, and an SX1276-based Meshtastic node exercising the LoRa register overlay. From a single bus capture, processed in seconds, TLF recovers the complete register-exposed RF configuration (modulation, band plan, phase behavior) without prior knowledge of the target firmware -- sufficient to configure a matched receiver or develop targeted countermeasures. Above the chip layer, a pluggable protocol decoder interprets recovered FIFO payloads as application PDUs, demonstrated end-to-end on Meshtastic. Firmware-level cryptographic state remains, as expected, opaque. The approach requires physical access or emulation of the target hardware, and its recovery depth is bounded by the transceiver's register interface: parameters implemented entirely in firmware (custom FEC, whitening, encryption) are observable only as opaque FIFO payloads.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-13T23:02:34Z</published>
+    <arxiv:comment>Accepted for publication in the Proceedings of the 2026 IEEE Military Communications Conference (MILCOM 2026). This is the authors' accepted version; the final published version will appear in IEEE Xplore. 9 pages, 4 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Larry Hernandez</name>
+    </author>
+    <author>
+      <name>Sergey Bratus</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.08989v1</id>
+    <title>Zero Trust for Multi-RAT IoT: Trust Boundary Management in Heterogeneous Wireless Network Environments</title>
+    <updated>2026-02-09T18:36:05Z</updated>
+    <link href="https://arxiv.org/abs/2602.08989v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.08989v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The proliferation of Multi-Radio Access Technology, Internet of Things devices, particularly Unmanned Aerial Vehicles operating across LoRaWAN, 5G/4G cellular, Meshtastic mesh, proprietary protocols such as DJI OcuSync, MAVLink telemetry links, Wi-Fi, and satellite, creates a fundamental and hitherto unexamined challenge for Zero Trust Architecture adoption. Each transition between radio access technologies constitutes a trust boundary crossing: the device exits one network trust domain and enters another, potentially invalidating authentication state, device attestation, and contextual trust signals. Current ZTA frameworks assume relatively stable network environments and do not address the trust implications of frequent, dynamic RAT switching in mobile IoT deployments.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-09T18:36:05Z</published>
+    <arxiv:comment>17 pages, 2 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Jonathan Shelby</name>
+    </author>
+  </entry>
+</feed>

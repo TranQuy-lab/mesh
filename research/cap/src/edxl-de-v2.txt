@@ -1,0 +1,2273 @@
+ 
+ Emergency Data Exchange Language (EDXL) Distribution Element Version 2.0 
+ Emergency Data Exchange Language (EDXL) Distribution Element
+Version 2.0 
+ Committee Specification 02 
+ 19 September 2013 
+ Specification URIs 
+ This version: 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/edxl-de-v2.0-cs02.odt (Authoritative) 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/edxl-de-v2.0-cs02.html 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/edxl-de-v2.0-cs02.pdf 
+ Previous version: 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs01/edxl-de-v2.0-cs01.odt (Authoritative) 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs01/edxl-de-v2.0-cs01.html 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs01/edxl-de-v2.0-cs01.pdf 
+ Latest version: 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/edxl-de-v2.0.odt (Authoritative) 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/edxl-de-v2.0.html 
+ http://docs.oasis-open.org/emergency/edxl-de/v2.0/edxl-de-v2.0.pdf 
+ Technical Committee: 
+ OASIS Emergency
+Management TC 
+ Chair: 
+ Elysa Jones ( [email protected] ), Individual 
+ Editor: 
+ Jeff Waters ( [email protected] ), US Department of Defense (DoD) 
+ Additional artifacts: 
+ This prose specification is one component of
+a Work Product that also includes: 
+ XML schemas: http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/schema/ 
+ XML examples: http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/examples/ 
+ Related work: 
+ This specification replaces or supersedes: 
+ Emergency Data Exchange Language (EDXL) Distribution Element,
+v. 1.0 . 01 May, 2006. OASIS Standard. http://docs.oasis-open.org/emergency/edxl-de/v1.0/EDXL-DE_Spec_v1.0.pdf 
+ This specification is related to: 
+ Emergency Data Exchange Language (EDXL) Hospital AVailablity
+Exchange (HAVE) Version 1.0 . Latest version. http://docs.oasis-open.org/emergency/edxl-have/v1.0/emergency_edxl_have-1.0.html 
+ Emergency Data Exchange Language Resource Messaging
+(EDXL-RM)1.0 . Latest version. http://docs.oasis-open.org/emergency/edxl-rm/v1.0/EDXL-RM-SPEC-V1.0.html 
+ Emergency Data Exchange Language (EDXL) Common Types (CT)
+Version 1.0 . Latest version. http://docs.oasis-open.org/emergency/edxl-ct/v1.0/edxl-ct-v1.0.html 
+ Emergency Data Exchange Language (EDXL) Customer Information
+Quality (CIQ) Profile Version 1.0 . Latest version. http://docs.oasis-open.org/emergency/edxl-ciq/v1.0/edxl-ciq-v1.0.html 
+ Declared XML namespace: 
+ urn:oasis:names:tc:emergency:EDXL:DE:2.0 
+ Abstract: 
+ This Distribution Element 2.0 (DE 2.0) specification
+describes a standard message distribution format for data sharing among
+emergency information systems. The DE 2.0 serves two important purposes: 
+ (1) The DE 2.0 allows an organization to wrap separate but
+related pieces of emergency information, including any of the EDXL message
+types, into a single package for easier and more useful distribution; 
+ (2) The DE 2.0 allows an organization to address the
+package to organizations or individuals with specified roles, located in
+specified locations or those interested in specified keywords. 
+ This version of the DE expands the ability to use local
+community-defined terms, uses a profile of the Geographic Markup Language (GML)
+, follows best practices for naming conventions, provides the capability to
+link content objects, supports extensions, and is reorganized for increased
+flexibility and reuse of common types. The DE 2.0 packages and addresses
+emergency information for effective distribution with improved standardization
+and ability to be tailored for user needs. 
+ Status: 
+ This document was last revised or approved by the OASIS
+Emergency Management TC on the above date. The level of approval is also listed
+above. Check the Latest version location noted above for possible later
+revisions of this document. 
+ Technical Committee members should send comments on this Work
+Product to the Technical Committees email list. Others should send comments to
+the Technical Committee by using the " Send
+A Comment " button on the Technical Committees web page
+at http://www.oasis-open.org/committees/emergency/ . 
+ For information on whether any patents have been disclosed
+that may be essential to implementing this Work Product, and any offers of
+patent licensing terms, please refer to the Intellectual Property Rights
+section of the Technical Committee web page ( http://www.oasis-open.org/committees/emergency/ipr.php ). 
+ Citation format: 
+ When referencing this Work Product the
+following citation format should be used: 
+ [EDXL-DE-v2.0] 
+ Emergency
+Data Exchange Language (EDXL) Distribution Element Version 2.0 . 19 September 2013. OASIS Committee
+Specification 02. http://docs.oasis-open.org/emergency/edxl-de/v2.0/cs02/edxl-de-v2.0-cs02.html . 
+ Notices 
+ Copyright OASIS Open 2013. All Rights Reserved. 
+ All capitalized terms in the following text have the
+meanings assigned to them in the OASIS Intellectual Property Rights Policy (the
+"OASIS IPR Policy"). The full Policy may be
+found at the OASIS website. 
+ This document and translations of it may be copied and
+furnished to others, and derivative works that comment on or otherwise explain
+it or assist in its implementation may be prepared, copied, published, and
+distributed, in whole or in part, without restriction of any kind, provided
+that the above copyright notice and this section are included on all such
+copies and derivative works. However, this document itself may not be modified
+in any way, including by removing the copyright notice or references to OASIS,
+except as needed for the purpose of developing any document or deliverable
+produced by an OASIS Technical Committee (in which case the rules applicable to
+copyrights, as set forth in the OASIS IPR Policy, must be followed) or as
+required to translate it into languages other than English. 
+ The limited permissions granted above are perpetual and will
+not be revoked by OASIS or its successors or assigns. 
+ This document and the information contained herein is
+provided on an "AS IS" basis and OASIS DISCLAIMS ALL WARRANTIES,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+THE INFORMATION HEREIN WILL NOT INFRINGE ANY OWNERSHIP RIGHTS OR ANY IMPLIED
+WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. 
+ OASIS requests that any OASIS Party or any other party that
+believes it has patent claims that would necessarily be infringed by
+implementations of this OASIS Committee Specification or OASIS Standard, to
+notify OASIS TC Administrator and provide an indication of its willingness to
+grant patent licenses to such patent claims in a manner consistent with the IPR
+Mode of the OASIS Technical Committee that produced this specification. 
+ OASIS invites any party to contact the OASIS TC
+Administrator if it is aware of a claim of ownership of any patent claims that
+would necessarily be infringed by implementations of this specification by a
+patent holder that is not willing to provide a license to such patent claims in
+a manner consistent with the IPR Mode of the OASIS Technical Committee that
+produced this specification. OASIS may include such claims on its website, but
+disclaims any obligation to do so. 
+ OASIS takes no position regarding the validity or scope of
+any intellectual property or other rights that might be claimed to pertain to
+the implementation or use of the technology described in this document or the
+extent to which any license under such rights might or might not be available;
+neither does it represent that it has made any effort to identify any such
+rights. Information on OASIS' procedures with respect to rights in any document
+or deliverable produced by an OASIS Technical Committee can be found on the
+OASIS website. Copies of claims of rights made available for publication and
+any assurances of licenses to be made available, or the result of an attempt
+made to obtain a general license or permission for the use of such proprietary
+rights by implementers or users of this OASIS Committee Specification or OASIS
+Standard, can be obtained from the OASIS TC Administrator. OASIS makes no
+representation that any information or list of intellectual property rights
+will at any time be complete, or that any claims in such list are, in fact,
+Essential Claims. 
+ The name "OASIS" is a trademark of OASIS , the owner and developer of this
+specification, and should be used only to refer to the organization and its
+official outputs. OASIS welcomes reference to, and implementation and use of,
+specifications, while reserving the right to enforce its marks against
+misleading uses. Please see http://www.oasis-open.org/policies-guidelines/trademark 
+for above guidance. 
+ Table of Contents 
+ 1 Introduction . 6 
+ 1.1 Purpose . 6 
+ 1.2 History . 6 
+ 1.3 Structure of the EDXL Distribution Element 7 
+ 1.3.1 <edxlDistribution> . 7 
+ 1.3.2 <descriptor> . 7 
+ 1.3.3 <targetArea> . 8 
+ 1.3.4 <contentObject> . 8 
+ 1.3.5 ValueLists . 8 
+ 1.3.6 Linking
+Content Objects and Other DE 2.0 Components . 8 
+ 1.3.7 Common
+Types . 9 
+ 1.3.8 Community
+Extensions . 10 
+ 1.4 Applications of the EDXL
+Distribution Element 10 
+ 1.5 Terminology . 10 
+ 1.6 Normative
+References . 10 
+ 1.7 Non-normative References . 12 
+ 2 Design
+Principles & Concepts (non-normative) 13 
+ 2.1 Design Philosophy . 13 
+ 2.2 Requirements for Design . 13 
+ 2.3 Example Usage Scenarios . 15 
+ 2.3.1 Distribution
+of Emergency Messages or Alerts Based on Geographic Delivery Area and Incident
+Type 15 
+ 2.3.2 Encapsulation
+and Distribution of One or More Emergency Messages or Alerts or Notifications 15 
+ 2.3.3 Distribution
+of Resource Messages or Reports . 15 
+ 2.3.4 Distribution
+of Well-Formed XML Messages . 15 
+ 3 EDXLDistribution
+Element Structure (normative) 16 
+ 3.1 Document
+Object Model 16 
+ 3.2 Data Dictionary . 16 
+ 3.2.1 EDXLDistribution
+Element and Sub-elements . 16 
+ 3.2.2 targetAreas Element and Sub-elements . 27 
+ 3.2.3 contentObject
+Element and Sub-elements . 29 
+ 3.2.4 otherContent
+Element and Sub-elements . 33 
+ 3.2.5 contentXML Element and Sub-elements . 35 
+ 3.2.6 explicit
+Addressing . 36 
+ 4 Conformance . 38 
+ Appendix A Acknowledgments . 39 
+ Appendix B EDXL-DistributionElement
+XML Schema . 40 
+ Appendix C EDXL-DistributionElement
+2.0 Community Extension XML Schema . 45 
+ Appendix D Revision
+History . 47 
+ 1    Introduction 
+ 1.1 Purpose 
+ The primary purpose of the Distribution Element
+2.0 is to facilitate the routing of any properly formatted emergency message
+to recipients. The Distribution Element may be thought of as a
+"container". It provides the information to route "payload"
+message sets (such as Alerts or Resource Messages), by including key routing
+information such as distribution type, geography, incident, and
+sender/recipient Ids. 
+ The DE 2.0 specification joins the published
+suite of Emergency Data Exchange Language (EDXL) standards.The EDXL continuing
+goal is to facilitate emergency information sharing and data exchange across
+the local, state, tribal, national and non-governmental organizations of
+different professions that provide emergency response and management services.
+EDXL accomplishes this goal by focusing on the standardization of specific
+messages (messaging interfaces) to facilitate emergency communication and
+coordination particularly when more than one profession or governmental jurisdiction
+is involved. 
+ The published
+suite of EDXL Standards includes: 
+ The Common Alerting
+Protocol v1.2 specification (EDXL-CAP) 
+ The Distribution Elements specification v1.0 (EDXL-DE) 
+ The Hospital
+AVailability Exchange specification v1.0 (EDXL-HAVE) 
+ The Resource
+Messaging specification v1.0 (EDXL-RM) 
+ The Situation Reporting v1.0 (EDXL-SitRep) 
+ 1.2 History 
+ The Disaster Management (DM) eGov Initiative of
+the Department of Homeland Security (DHS) determined in 2004 to launch a
+project to develop interagency emergency data communications standards. It
+called together a group of national emergency response practitioner leaders and
+sought their guidance on requirements for such standards. In June, 2004 the
+first such meeting identified the need for a common distribution element for
+all emergency messages. Subsequent meetings of a Standards Working Group
+developed detailed requirements and a draft specification for such a
+distribution element (DE). 
+ During the same period the DM Initiative was
+forming a partnership with industry members of the Emergency Interoperability
+Consortium (EIC) to cooperate in the development of emergency standards. EIC
+had been a leading sponsor of the Common Alerting Protocol (CAP). Both
+organizations desired to develop an expanded family of data formats for
+exchanging operational information beyond warning. 
+ EIC members participated in the development of
+the DE, and in the broader design of the design of a process for the
+development of additional standards. This was named Emergency Data Exchange
+Language (EDXL). 
+ The goal of the EDXL project is to facilitate
+emergency information sharing and data exchange across the local, state,
+tribal, national and non-governmental organizations of different professions
+that provide emergency response and management services. EDXL will accomplish
+this goal by focusing on the standardization of specific messages (messaging
+interfaces) to facilitate emergency communication and coordination particularly
+when more than one profession is involved. It is not just an "emergency
+management" domain exercise. 
+ It is a national effort including a diverse and
+representative group of local, state and federal emergency response
+organizations and professionals, following a multi-step process. Just as a
+data-focused effort targets shared data elements, the EDXL process looks for
+shared message needs, which are common across a broad number of organizations.
+The objective is to rapidly deliver implementable standard messages, in an
+incremental fashion, directly to emergency response agencies in the trenches,
+providing seamless communication and coordination supporting each particular
+process. The effort first addresses the most urgent needs and proceeds to
+subsequent message sets in a prioritized fashion. The goal is to incrementally
+develop and deliver standards. 
+ EDXL is intended as a suite of emergency data
+message types including resource queries and requests, situation status,
+message routing instructions and the like, needed in the context of
+cross-disciplinary, cross-jurisdictional communications related to emergency
+response. 
+ The priorities and requirements are created by
+the DM EDXL Standards Working Group (SWG) which is a formalized group of
+emergency response practitioners, technical experts, and industry. 
+ The original draft DE specification was trialed
+by a number of EIC members starting in October, 2004. In November, 2004, EIC
+formally submitted the draft to the OASIS Emergency Management Technical
+Committee for standardization. 
+ Since its official release, the DE has been
+adopted and used by a number of communities and applications and as a result, a
+few significant enhancements were recommended. The OASIS Infrastructure
+Framework Subcommittee took on the task of assembling the list of suggestions,
+considering potential solutions, and recommending an evolved version DE 2.0.
+This document describes the DE 2.0 and contains references to the schema and
+examples for download. 
+ 1.3 Structure
+of the EDXL Distribution Element 
+ The EDXL Distribution Element (DE) comprises an
+<edxlDistribution> element as described hereafter, optional
+<targetArea> elements describing geospatial or political target area for
+message delivery, and a set of <contentObject> elements each containing
+specific information regarding a particular item of content. The included
+content may be any XML or other content type or a URI to access the content. 
+ The <edxlDistribution> block may be used
+without content to form the body of a routing query to, or response from, a
+directory service. 
+ 1.3.1             
+ <edxlDistribution> 
+ The <edxlDistribution> element asserts the
+originators intent as to the dissemination of that particular message or set
+of messages. 
+ Note that use of the <edxlDistribution>
+element does not guarantee that all network links and nodes will implement the
+asserted dissemination policy or that unintended disclosure will not occur. Where
+sensitive information is transmitted over distrusted networks, it should be
+encrypted in accordance with the Web Services Security (WSS) standard http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0.pdf with any updates and errata published by the OASIS Web Services
+Security Technical Committee http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss , or some other suitable encryption scheme. 
+ 1.3.2             
+ <descriptor> 
+ The <descriptor> element enables the user
+to describe the message with information useful for routing the message,
+including elements such as senderRole, recipientRole and keyword. 
+ 1.3.3             
+ <targetArea> 
+ The <targetArea> is a container element for
+a geospatial or political area representing the source, target, or other area
+relevant for distributing the message content. It contains data necessary to the
+originator's intent, based on location targeting, as to the dissemination of
+that particular message or set of messages. Multiple <targetArea>
+elements are allowed and can be grouped under a <targetAreas> element,
+specifying the <areaKind> and the type of <areaGrouping>, such as
+union or intersection . If multiple <targetArea> elements are used, then
+the order top-to-bottom represents precedence, with the top <targetArea>
+preferred. 
+ 1.3.4             
+ <contentObject> 
+ The <contentObject> is a container element
+for specific messages. The <contentObject> element MUST either contain a
+<contentXML> content container or a <otherContent> container.
+Additional elements (metadata) used for specific distribution of the
+<contentObject> payload or hints for processing the payload are also
+present in the <contentObject> container element. 
+ 1.3.5             
+ ValueLists 
+ The EDXL-DE 2.0 uses a ValueList structure to
+enable communities to have user-defined lists of values for elements such as
+senderRole, recipientRole, keywords, and many others. The first example is a
+user-defined Valuelist specifying recipient roles: 
+ <recipientRole> 
+ <ct:ValueListURI> urn:myagency:gov:sensors:recipientRole </ct:ValueListURI> 
+ <ct:Value> Situational Awareness Apps </ct:Value> 
+ <ct:Value> Warning Devices </ct:Value> 
+ </recipientRole> 
+ This first example contains
+two recipient roles, one role whose value is Situational Awareness Apps and
+one role whose value is Warning Devices. These are notional roles created for
+this example. The roles are identified as values from a list whose unique
+Uniform Reference Identifier (URI) is
+urn:myagency:gov:sensors:recipientRole. When using a ValueList the user can
+can specify a user-defined list by URI (either using the urn:... format or
+the more familiar http://... format) and then include user-defined values
+from that list. This ValueList structure has several advantages, the ValueList:
+(a) provides flexibility for local communities to use community-defined terms
+and vocabulary; (b) allows for the external maintenance of local or
+standardized lists; and (c) avoids the problems inherent in attempting to
+constantly update hardcoded enumerations in a specification. 
+ 1.3.6             
+ Linking Content Objects and Other DE 2.0 Components 
+ A new feature of the EDXL-DE
+2.0 is the ability to specify links between content objects. This linking
+ability is a useful new feature of the DE 2.0, allowing users to specify
+meaningful connections among content objects. 
+ For example, if a DE 2.0
+message contains two alerts and three images, it's now possible to specify by
+links that two of the images go with the first alert and the third image is
+tied to the other alert. 
+ The linking feature can also
+be used to link separable parts of a DE 2.0 message. These separable parts are
+the global elements, EDXLDistribution, Descriptor, Content, ContentDescriptor,
+and ContentObject. 
+ For example, the new EDXL-DE
+2.0 allows the Descriptor portion of the DE 2.0 to be used independently of the
+Content portion of the DE 2.0, as would be commonly done when using a wrapper
+other then the DE-provided EDXLDistribution element. In a SOAP message, the DE
+2.0 Descriptor might appear in the SOAP header while the DE 2.0 Content appears
+in the SOAP body. If needed or desired, a link can be used to tie the
+Descriptor to the Content to make the connection between the two explicit. The
+new DE 2.0 linking feature supports two use cases: one where the user wants to
+show a connection between or among content objects and the other where the user
+wants to explicitly link other separable DE 2.0 components. 
+ The new linking feature is
+enabled using the W3C standard Xlink. For example, here is a link tying a DE
+2.0 Descriptor element to a DE 2.0 Content element: 
+ <de:Link
+xlink:from="de_descriptor" xlink:to="de_content"
+xlink:arcrole="http://www.oasis.org/de/arcroles/isDescriptorOf"
+xlink:title="is Descriptor of"/> 
+ Here are a few examples
+linking content objects: 
+ <de:Link
+xlink:from="contentObject_1" xlink:to="contentObject_2"
+xlink:arcrole="http://www.oasis.org/de/arcroles/isImageOf" xlink:title="is
+Image of"/> 
+ <de:Link
+xlink:from="contentObject_3" xlink:to="contentObject_4"
+xlink:arcrole="http://www.oasis.org/de/arcroles/isVideoOf"
+xlink:title="is Video of"/> 
+ <de:Link
+xlink:from="contentObject_5" xlink:to="contentObject_6"
+xlink:arcrole="http://www.oasis.org/de/arcroles/isAudioOf"
+xlink:title="is Audio of"/> 
+ Xlink is a standard
+specification providing several attributes which can be added to elements to
+support linking. In the examples above, the from and to attributes
+reference the values of xlink label attributes that have been added to the DE
+2.0 components or content objects respectively. In the second example, the
+link is referring to a content object whose xlink:label attribute has been set
+to contentObject_2 and is also referring to another content object whose
+xlink:label attribute has been set to contentObject_1. By using these labels
+as element identifiers, the link connects one to another. Users can specify
+user-defined labels and roles, and thereby create meaningful connections among
+content objects or among DE 2.0 components. 
+ This section is merely an
+introduction to the linking concept. For more details, see the examples and
+also see the Xlink specification itself and referenced tutorials. 
+ 1.3.7             
+ Common Types 
+ Several Element
+Types, such as TargetArea, borrow re-usable elements from the EDXL Common Types
+that apply to and support multiple areas of the DE 2.0 messages. For instance
+TargetArea relies on the EDXL-CIQ profile for geopolitical info and on the
+EDXL-GSF profile for geographical information. 
+ The Supporting Elements Model distinguishes three groups of
+elements: CommonTypes (EDXL-CT), Contact Information (EDXL-CIQ) and Location
+Information (EDXL-GSF). 
+ The following elements are used in this specification and can
+be found at the locations cited in the normative references in Section 1.6
+below. 
+ Supporting
+ Element 
+ Defined In 
+ EDXLLocationType 
+ EDXL-CT 
+ EDXLGeoLocationType 
+ EDXL-GSF 
+ EDXLGeoPoliticalLocationType 
+ EDXL-CT 
+ ValueListURI 
+ EDXL-CT 
+ Value 
+ EDXL-CT 
+ 1.3.8             
+ Community Extensions 
+ The DE 2.0 now supports supplemental inclusion of
+community-defined sets of name/value pairs, referred to here as Community
+Extensions or simply Extensions for short. For example, if you send a DE
+message with an alert or image about an earthquake, you might want to include
+some specific earthquake data, like the magnitude and depth of the earthquake.
+There are no earthquake-specific fields in the DE; however, your community can
+extend the DE to include that information which you represent as a set of parameter
+elements specifically designed to represent earthquake data. The Community
+Extensions concept solves several major problems for improving information
+sharing and developing standards for the emergency management community. First,
+the nature of emergencies is that the unexpected will happen and emergency
+managers need flexibility to send whatever information is needed. Second, an
+emergency begins and often stays local, so local authorities and users need
+control to send the information they decide is important to address the current
+emergency. Third, communities need the opportunity to explore potential new
+standards. The parameter name/value extension mechanism, along with the
+registration and best practice guidance, provides an on-ramp for communities to
+determine what works well for them. Those Community Extensions which are most
+successful can be incorporated formally into future standards. 
+ 1.4 Applications of the EDXL Distribution Element 
+ The primary use of the EDXL Distribution Element
+is to identify and provide information to enable the routing of encapsulated
+payloads, called Content Objects. It is used to provide a common mechanism to
+encapsulate content information. 
+ 1.5           
+ Terminology 
+ The keywords "MUST", "MUST NOT",
+"REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED",
+"MAY", and "OPTIONAL" in this specification are to be
+interpreted as described in IETF
+RFC 2119 . 
+ In addition, within this Specification, the
+keyword CONDITIONAL should be interpreted as potentially REQUIRED or
+OPTIONAL depending on the surrounding context. The term payload refers to
+some body of information contained in the distribution element. The term
+REQUIRED means that empty elements or NULL values are NOT allowed. 
+ 1.6 Normative
+References 
+ [RFC 2119] 
+ S. Bradner. Key words for use in RFCs
+to Indicate Requirement Levels . 
+ http://www.ietf.org/rfc/rfc2119.txt , IETF RFC2119, March 1997. 
+ [RFC2046] 
+ N. Freed, Multipurpose Internet Mail Extensions
+(MIME) Part Two: Media Types , http://www.ietf.org/rfc/rfc2046.txt , IETF RFC 2046, November 1996. 
+ [RFC2119] 
+ S. Bradner, Key
+words for use in RFCs to Indicate Requirement Levels , http://www.ietf.org/rfc/rfc2119.txt , IETF RFC 2119, March 1997. 
+ [RFC3066] 
+ H. Alvestrand, Tags for the Identification of
+Languages, http://www.ietf.org/rfc/rfc3066.txt , IETF RFC 3066, January 2001. 
+ [WGS 84] 
+ National Geospatial Intelligence Agency, Department
+of Defense World Geodetic System 1984, http://earth-info.nga.mil/GandG/publications/tr8350.2/tr8350_2.html , NGA Technical Report TR8350.2, January 2000. 
+ [XML 1.0] 
+ T. Bray, Extensible
+Markup Language (XML) 1.0 (Third Edition) , http://www.w3.org/TR/REC-xml/ , W3C REC-XML-20040204, February 2004. 
+ [namespaces] 
+ T. Bray, Namespaces
+in XML , http://www.w3.org/TR/REC-xml-names/ , W3C REC-xml-names-19990114, January 1999. 
+ [dateTime] 
+ N. Freed, XML Schema Part 2: Datatypes Second
+Edition, http://www.w3.org/TR/xmlschema-2/#dateTime , W3C REC-xmlschema-2, October 2004. 
+ [xlink] 
+ S. DeRose et al, XML Linking Language (Xlink)
+Version 1.1, http://www.w3.org/TR/xlink11/ , W3C REC-xlink11, May 2010. 
+ [EDXL-CIQ] 
+ W. Joerg, OASIS Committee Specification Draft
+Emergency Data Exchange Language Customer Information Quality http://docs.oasis-open.org/emergency/edxl-ciq/v1.0/csd02/ , September, 2011 
+ [EDXL-CT] 
+ W. Joerg, OASIS Committee Specification Draft
+Emergency Data Exchange Language Common Types http://docs.oasis-open.org/emergency/edxl-ct/v1.0/csd02/ , November, 2011 
+ [EDXL-GSF] 
+ W. Joerg, OASIS Committee Specification Draft
+Emergency Data Exchange Language GML Simple Features http://docs.oasis-open.org/emergency/edxl-gsf/v1.0/csd01/ , September, 2011[ 
+ [EDXL-HAVE] 
+ Emergency Data Exchange Language (EDXL) Hospital
+AVailablity Exchange.. OASIS Standard 01
+http://docs.oasis-open.org/emergency/edxlhave/v1.0/emergency_edxl_have-1.0.html,
+1 November 2008 
+ [EDXL-RM] 
+ Emergency Data Exchange Language (EDXL) Resource
+Messaging. OASIS Standard. V1.0.
+http://docs.oasis-open.org/emergency/edxl-rm/v1.0/errata/EDXL-RM-v1.0-OS-errata-os.html,
+1 November 2008 
+ [EDXL-SitRep] 
+ Emergency Data Exchange Language Situation
+Reporting (EDXL-SitRep) Version 1.0. 4 May 2012. OASIS Committee Specification
+Draft 01 / Working Draft 18. 
+ 1.7 Non-normative
+References 
+ [EDXL General Functional
+Requirements] 
+ EDXL
+General Functional Requirements , http://www.oasis-open.org/committees/document.php?document_id=10031&wg_abbrev=emergency , November 2004. 
+ [EDXL Distribution Element
+Implementer's Guide] 
+ EDXL
+Distribution Element Implementer's Guide , http://www.oasis-open.org/committees/document.php?document_id=14120&wg_abbrev=emergency , August 2005. 
+ 2   
+ Design Principles & Concepts (non-normative) 
+ 2.1 Design Philosophy 
+ Below are some of the guiding principles of the
+Distribution Element: 
+ 1.      Provide an Open Container Model to enable dissemination of one or more
+emergency messages 
+ 2.      Provide flexible mechanisms to inform message routing and/or processing
+decisions 
+ 3.      Enable dissemination of messages based on geographic delivery area 
+ 4.      Use and re-use of data content and models developed by other
+initiatives 
+ 5.      Support business process-driven specific messaging needs across
+emergency professions 
+ 6.      Support everyday events and incident preparedness, as well as disasters 
+ 7.      Facilitate emergency information sharing and data exchange across the
+local, state, tribal, national and non-governmental organizations of different
+professions that provide emergency response and management services 
+ 8.      Multi-use format - One message schema supports multiple message types
+(e.g., alert / update / cancellations / acknowledgments / error messages) in
+various applications (actual / exercise / test / system message.) 
+ 2.2 Requirements for Design 
+ The Distribution Element specification should: 
+ 1.    Define
+a compound XML structure (or an equivalent single structure if transcoded into
+another format) including the required and optional elements defined below. 
+ 2.    Specify
+a desired delivery area, expressed in geospatial coordinates or using
+political/administrative codes. 
+ 3.    Allow
+the ability to encapsulate a payload or set of payloads 
+ 4.    Take
+a modular approach to the enumerations of element values which may evolve over
+time, e.g. by referring to a separate schema for those enumerations. 
+ 5.    Specify
+unique distribution and sender identifiers 
+ 6.    Specify
+the date and time the distribution was sent 
+ 7.    Specify
+the actionability of the distribution message (e.g., real-world, test,
+exercise) 
+ 8.    Specify
+the functional type of the distribution message (e.g., report, request, update,
+cancellation, etc.) 
+ 9.    Specify
+that the following elements may be present in a valid payload: 
+ (a)    A
+specification of the format of the distribution message (e.g., the URI of an
+XML Schema for the message) 
+ (b)    The
+functional role and/or type of the sender of the distribution message 
+ (c)    One
+or more functional role and/or type of desired recipients of the distribution
+message 
+ (d)    One
+or more types of response activity involved 
+ (e)    A
+reference to the type of incident 
+ (f)     One or more characterizations of the etiology of the subject event or
+incident (e.g., terrorism, natural, under investigation, etc.) 
+ (g)    The
+incident name or other identifier of one or more event or incident 
+ (h)    A
+reference to one or more response types. 
+ (i)      One or more specific recipient addresses (as a URI). 
+ (j)      Specify an assertion of the confidentiality level of the combined
+payloads. 
+ 10. In addition,
+the Content Object element contained within the Distribution Element SHOULD: 
+ (a)    Allow
+the encapsulation of one or more payloads in each of the Content Object
+elements. 
+ (b)    Specify
+the functional role and/or type of the sender of each payload 
+ (c)    Specify
+one or more functional roles and/or types of desired recipients of each payload 
+ (d)    Specify
+an assertion of the confidentiality level of each payload. 
+ 11. Provide or
+refer to specific lists (enumerations) of values and definitions for: 
+ (a)    Types
+of incidents 
+ (b)    Types
+of hazards and/or events 
+ (c)    Types
+of agencies 
+ (d)    Types
+of response activity 
+ (e)    The
+functional role and/or type of the sender 
+ (f)     The functional roles and/or types of desired recipients 
+ (g)    The
+incident name or other identifier of one or more event or incident. 
+ 2.3 Example
+Usage Scenarios 
+ Note: The following examples of use scenarios
+were used as a basis for design and review of the EDXL Distribution Element
+Message format. These scenarios are non-normative and not intended to be
+exhaustive or to reflect actual practices. 
+ 2.3.1             
+ Distribution of Emergency Messages or Alerts Based on Geographic
+Delivery Area and Incident Type 
+ The terror alert level has been raised to RED.
+Credible intelligence indicates that terrorist groups in the Mid-Atlantic
+region are seeking to conduct an attack in the next 48 hours. The Department of
+Homeland Security sends an emergency alert message, and using the Distribution
+Element, distributes it to all emergency agencies in the specified area. 
+ 2.3.2             
+ Encapsulation and Distribution of One or More Emergency Messages or
+Alerts or Notifications 
+ A Radiological sensor triggered at a prominent
+Tunnel toll booth. Radiation alarm levels indicates possible dirty bomb.
+Authorities decide to send multiple messages to a number of jurisdictions. The
+user sends an EDXL Distribution Element with two encapsulated CAP messages. The
+first one notifies the area where the sensor has been triggered. The second one
+is an alert to emergency response agencies that the state Emergency Operation
+Center (EOC) has been activated, and requests the agencies to be on alert. 
+ 2.3.3             
+ Distribution of Resource Messages or Reports 
+ The Local EOC has a need for additional
+resource/support, but is unsure what specifically to request. A free-form
+request for information and resource availability is prepared, and is sent to
+the state EOC and other organizations (person to person) using the Distribution
+Element. The Local EOC receives an acknowledgment message from the State EOC,
+as well as a request for Information on additional details of the requested
+resource. Both of these messages are contained within a single Distribution
+Element. 
+ 2.3.4             
+ Distribution of Well-Formed XML Messages 
+ A huge crash, involving a car and a HAZMAT truck,
+occurs at a busy junction on an inter-state freeway. Separate automatic
+notifications of both the car crash and the HAZMAT carrier are sent using the
+Vehicular Emergency Data Set (VEDS), contained in the Distribution Element. The
+Transportation Management Center (TMC) shares information (related to the above
+incident) with the adjacent TMC, using the IEEE 1512 Incident Management
+Message Set. These sets of messages are exchanged using the EDXL Distribution
+Element. 
+ 3   
+ EDXLDistribution Element Structure (normative) 
+ 3.1 Document
+Object Model 
+ 3.2 Data Dictionary 
+ 3.2.1             
+ EDXLDistribution Element and Sub-elements 
+ The Distribution Element, <edxlDistribution>
+is the container element for all data necessary to the originators intent as
+to the dissemination of the contained message or set of messages. 
+ Element 
+ edxlDistribution 
+ Type 
+ XML Structure 
+ Usage 
+ CONDITIONAL , MUST be
+ used once and only once when an EDXL envelope is desired, top level container
+ Definition 
+ A container of all of the
+ elements related to the distribution of the content messages. 
+ Comments 
+ 1. The <edxlDistribution>
+ element includes administrative envelope information as well as optionally
+ one <descriptor> block and one <content> block. 
+ 2. Use of the <edxlDistribution>
+ element does not guarantee that all network links and nodes will implement
+ the asserted dissemination policy or that unintended disclosure will not
+ occur. Where sensitive information is transmitted over untrusted networks, it
+ should be encrypted in accordance with the Web Services Security (WSS)
+ standard ( <http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0.pdf> )
+ with any updates and errata published by the OASIS Web Services Security
+ Technical Committee ( <http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss> ),
+ or some other suitable encryption scheme. 
+ 3. This
+ element can be the source or destination for a link. See Section 1.3.5. 
+ Sub-elements 
+ d istributionID [1..1] 
+ s enderID [1..1] 
+ d ateTimeSent 
+ [1..1] 
+ d ateTimeExpires [1..1] 
+ d istributionStatus [1..1] 
+ d istribution Kind [1..1] 
+ d escriptor [0..1] 
+ c ontent [0..1] 
+ other [0..*] 
+ Used In 
+ top level element 
+ Element 
+ descriptor 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY be used
+ once and only once; can be used as a top level element when used outside of
+ the edxlDistribution envelope. 
+ Definition 
+ A container of all of the
+ substantive elements related to describing the distribution of the content
+ messages as a whole. 
+ Comments 
+ 1. This element can be the
+ source or destination for a link. See Section 1.3.5. 
+ Sub-elements 
+ c ombinedConfidentiality [0..1] 
+ l anguage [0..1] 
+ senderRole [0..*] 
+ recipientRole [0..*] 
+ keyword [0..*] 
+ e xplicitAddress [0..*] 
+ t argetArea s [0..*] 
+ u rgency [0..1] 
+ s everity [0..1] 
+ c ertainty [0..1] 
+ incidentID
+ [0..*] 
+ incidentDescription
+ [0..*] 
+ link
+ [0..*] 
+ ext:extension
+ [0..*] 
+ Used In 
+ edxlDistribution 
+ or independently if an alternative envelope is used. 
+ Element 
+ ext:extension 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY be used
+ multiple times. 
+ Definition 
+ This element supports a
+ Community Extension, a set of parameter name/value pairs representing
+ information supplemental to the main body of the standard. 
+ Comments 
+ 1.The
+ <extension> block is in the form of the example shown below: 
+ <ext:extension> 
+ <ext:community> http://mycommunity.org </ext:community> 
+ <ext:id> layer1 </ext:id> 
+ <ext:parameter> 
+ <ext:nameURI> http://mycommunity.org/layer1/urgency </ext:nameURI> 
+ <ext:value> Low </ext:value> 
+ </ext:parameter> 
+ </ext:extension> 
+ 2. Use of the
+ <extension> block should be used for optional supplemental information.
+ The elements with enumerated values provided in the main body of the standard
+ provide the greatest interoperability; however, the <extension> block
+ provides flexibility for local communities to utilize their own supplemental
+ terminology and information when needed. See Section 1.3.8. 
+ Sub-elements 
+ community
+ [1..1] 
+ id
+ [1..1] 
+ parameter
+ [1..*] 
+ nameURI [1..1] 
+ value [1..1] 
+ See
+ Appendix C for the referenced extension schema 
+ Used In 
+ descriptor 
+ contentDescriptor 
+ Element 
+ content 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY be used
+ once and only once; may be used outside of EDXLDistribution if an alternative
+ envelope to <edxlDistribution> is used. 
+ Definition 
+ A container for the
+ contentObject and any links among content objects 
+ Comments 
+ 1.The
+ <content> block must contain one or more <contentObject> blocks
+ and optionally one ore more <link> elements. 
+ 2. This element can be the
+ source or destination for a link. See Section 1.3.5. 
+ Sub-elements 
+ c ontentObject [1..*] 
+ l ink [0..*] 
+ Used In 
+ EDXLDistribution or
+ independently if an alternative envelope is used. 
+ Element 
+ link 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY be used
+ multiple times 
+ Definition 
+ A method for linking
+ <contentObject> elements or other elements 
+ Comments 
+ 1.The
+ link element includes attributes from the xlink:arcLink attributeGroup,
+ consisting of type=arc, xlink:arcrole, xlink:title , xlink:show,
+ xlink:actuate, xlink:from, and xlink:to. The role attribute indicates a
+ property of the resource, the title indicates a human-readable
+ description of the resource, and the label attribute provides a way for an
+ arc-type element to refer to it. The xlink:from attribute defines
+ the start of a link by referencing a resource's label attribute
+ while the xlink:to attribute defines the endpoint of
+ a link by referencing the ending resource label. Since label attributes are
+ available in the DE content, contentObject, and descriptor elements, the
+ link element can be used to link any of these elements. For example, content
+ objects can be linked to each other and to descriptor elements. The linkage
+ is useful to associate content objects when multiple pieces of content are
+ included in one DE or to link a descriptor to content when the two elements
+ are separated, as when using an alternative envelope to the edxlDistribution
+ element, for example when using a SOAP envelope. For more information on
+ xlink, see the XLINK specification referenced in Section 1. 
+ 2. See
+ Section 1.3.5 for a summary overview of the new DE linking capability. 
+ 3.
+ <descriptor> elements can utilize the resourceLink attributes defined
+ in Xlink 1.1. 
+ Used In 
+ content 
+ descriptor 
+ Element 
+ distributionID 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ REQUIRED, MUST be
+ used once and only once 
+ Definition 
+ The unique identifier of
+ this distribution message. 
+ Comments 
+ 1.Uniqueness
+ is assigned by the sender to be unique for that sender. 
+ 2.The
+ identifier MUST be a properly formed -escaped if necessary- XML string. 
+ 3.The
+ string length of the identifier MUST be less than 1024. 
+ Used In 
+ edxl Distribution 
+ Element 
+ senderID 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once 
+ Definition 
+ The unique identifier of the
+ sender. 
+ Comments 
+ 1.Uniquely
+ identifies human parties, systems, services, or devices that are all
+ potential senders of the distribution message. 
+ 2. In
+ the form actor@domain-name. 
+ 3.Uniqueness of
+ the domain-name is guaranteed through use of the Internet Domain Name System,
+ and uniqueness of the actor name enforced by the domain owner. 
+ 4.The identifier
+ MUST be a properly formed -escaped if necessary- XML string. 
+ Used In 
+ edxl Distribution 
+ Element 
+ dateTimeSent 
+ Type 
+ ct:EDXLDateTimeType 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once 
+ Definition 
+ The date and time the
+ distribution message was sent. 
+ Comments 
+ 1. The Date Time combination must include the offset time for time
+ zone. 
+ Must be in the restricted W3C format for the
+ XML [dateTime] data type,
+ see ct:EDXLDateTimeType. 
+ Used In 
+ edxl Distribution 
+ Element 
+ dateTimeExpires 
+ Type 
+ ct:EDXLDateTimeType 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once 
+ Definition 
+ The date and time the
+ distribution message should expire. 
+ Comments 
+ 1. The Date Time combination must include the offset time for the time
+ zone. 
+ Must be in the restricted W3C format for the
+ XML [dateTime] data type,
+ see ct:EDXLDateTimeType. 
+ Used In 
+ edxl Distribution 
+ Element 
+ distributionStatus 
+ Type 
+ One of a selection of
+ enumerated values 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once 
+ Definition 
+ The action-ability of the
+ message. 
+ Comments 
+ 1. The Value must be one of:
+ a. Actual -
+ "Real-world" information for action 
+ b. Exercise - Simulated
+ information for exercise participants 
+ c. System - Messages regarding
+ or supporting network functions 
+ d. Test - Discardable messages
+ for technical testing only. 
+ e. Unknown The
+ distributionStatus is not known 
+ f. NoAppropriateDefault The
+ distributionStatus is known but the provided default values are so
+ inappropriate that to choose one would be entirely misleading. 
+ Used In 
+ edxl Distribution 
+ Element 
+ distributionKind 
+ Type 
+ One of a selection of
+ enumerated values 
+ Usage 
+ REQUIRED, MUST be
+ used once and only once 
+ Definition 
+ The function of the message.
+ Comments 
+ 1. The
+ value must be one of: 
+ a. Report -
+ New information regarding an incident or activity 
+ b.
+ Update - Updated information superseding a previous message 
+ c.
+ Cancel - A cancellation or revocation of a previous message 
+ d.
+ Request - A request for resources, information or action 
+ e.
+ Response - A response to a previous request 
+ f.
+ Dispatch - A commitment of resources or assistance 
+ g.
+ Ack - Acknowledgment of receipt of an earlier message 
+ h.
+ Error - Rejection of an earlier message (for technical reasons) 
+ i.
+ SensorConfiguration - These messages are for reporting configuration 
+ during
+ power up or after Installation or Maintenance. 
+ j.
+ SensorControl - These are messages used to control sensors/sensor 
+ concentrator
+ components behavior. 
+ k.
+ SensorStatus - These are concise messages which report sensors/sensor 
+ concentrator
+ component status or state of health. 
+ l.
+ SensorDetection - These are high priority messages which report sensor 
+ detections. 
+ m.
+ Unknown The distributionStatus is not known 
+ n.
+ NoAppropriateDefault The distributionStatus is known but the provided
+ default values are so inappropriate that to choose one would be entirely
+ misleading. 
+ Used In 
+ edxl Distribution 
+ Element 
+ combinedConfidentiality 
+ Type 
+ One of a selection of
+ enumerated values. 
+ Usage 
+ CONDITIONAL, Must be
+ present when confidentiality is used in a content object 
+ Definition 
+ Confidentiality of the
+ combined distribution messages content. 
+ Comments 
+ 1. The <combinedConfidentiality>
+ indicates the confidentiality of the combined 
+ <contentObject>
+ sub-elements. Generally the combined confidentiality is the
+ most restrictive of the <confidentiality> elements in the
+ container <contentObject> element,
+ but it can be more restrictive than any of the individual
+ <confidentiality> elements. 
+ 1.             
+ 2. The <combinedConfidentiality>
+ element MUST be present if a
+ <confidentiality> element is present in any of the
+ <contentObject> elements. 
+ 3. The value
+ must be one of: 
+ a. Unclassified 
+ b. Classified 
+ Used In 
+ d escriptor 
+ Element 
+ language 
+ Type 
+ xsd:language 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The primary language (but
+ not necessarily exclusive) used in the payloads. 
+ Comments 
+ 1. Valid language values are supplied in the ISO standard [ RFC3066 ] . 
+ 2. The language MUST be a properly formed -escaped if necessary- XML
+ string. 
+ Used In 
+ descriptor 
+ Element 
+ senderRole 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The functional role of the
+ sender, as it may determine message routing decisions. 
+ Comments 
+ 1. The list and associated value(s) is in the form: 
+ <senderRole> 
+ <ct:ValueListURI>valueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </senderRole> 
+ 2.The <ct:ValueListURI> is the Uniform Resource Name of a published
+ list of values and definitions, and <ct:Value> is a string
+ (which may represent a number) denoting the value itself. 
+ 3. Multiple instances of the <ct:Value>, May occur with a single
+ <ct:ValueListURI> within the <senderRole> container. 
+ 4. Multiple instances of <senderRole> MAY occur within a single
+ <descriptor> container 
+ 5. Numerous organizations provide role definitions; the external role
+ references provided are examples only. The IF committee does not endorse
+ and/or approve any particular role definition external references. 
+ Example Role External References: 
+ http://www.fema.gov/pdf/emergency/nims/NIMS_core.pdf 
+ http://www.ccc.ca.gov/emer/Pages/RolesCapabilities.aspx 
+ https://www.niem.gov/training/Documents/Mod09_NIEM_PI_How_NIEM_uses_XML.pdf 
+ Sub-elements 
+ ValueListURI [1..1] 
+ Value [1..*] 
+ Used In 
+ d escriptor 
+ Element 
+ recipientRole 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The functional role of the
+ recipient, as it may determine message routing decisions. 
+ Comments 
+ 1        
+ 1. The list and associated value(s) are in the form: 
+ <recipientRole> 
+ <ct:ValueListURI>ValueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </recipientRole> 
+ 2. The <ct:ValueListURI> is the Uniform Resource Name of a published
+ list of values and definitions, and the <ct:Value> is a string (which
+ may represent a number) denoting the value itself. 
+ 3. Multiple instances of the
+ <ct:Value>, MAY occur with a single <ct:ValueListURI> within the <recipientRole>
+ container. 
+ 4. Multiple instances of <recipientRole>
+ MAY occur within a single <descriptor> container. 
+ 5. Numerous organizations
+ provide role definitions; the external role references provided are examples
+ only. The IF committee does not endorse and/or approve any particular role
+ definition -external references. 
+ Example Role External
+ References: 
+ http://www.fema.gov/pdf/emergency/nims/NIMS_core.pdf 
+ http://www.ccc.ca.gov/emer/Pages/RolesCapabilities.aspx 
+ https://www.niem.gov/training/Documents/Mod09_NIEM_PI_How_NIEM_uses_XML.pdf 
+ Sub-elements 
+ ct:ValueListURI [1..1] 
+ ct:Value [1..*] 
+ Used In 
+ Descriptor 
+ Element 
+ keyword 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The topic related to the
+ distribution message, as it may determine message routing
+ decisions. 
+ Comments 
+ 1. The
+ list and associated value(s) is in the form: 
+ <keyword> 
+ <ct:ValueListURI>ValueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </keyword> 
+ 2. The <ct:ValueListURI> is the Uniform Resource Name of a published
+ list of values and definitions, and the <ct:Value> is a string (which
+ may represent a number) denoting the value itself. 
+ 3. Multiple instances of the
+ <ct:Value>, MAY occur with a single <ct:ValueListURI> within the <keyword>
+ container. 
+ 4. Multiple instances of <keyword> MAY occur within
+ a single <edxlDistribution> container. 
+ 5 Examples of things <keyword> might be used to
+ describe include event type, event etiology, incident ID and response
+ type. 
+ Sub-elements 
+ ct:ValueListURI [1..1] 
+ ct: V alue [1..*] 
+ Used In 
+ d escriptor 
+ Element 
+ explicitAddress 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The identifier of an
+ explicit recipient. 
+ Comments 
+ 1. Identifies human parties,
+ systems, services, or devices that are all potential recipients of the
+ distribution message. 
+ 2. The explicit address of a recipient in the form: 
+ 1.             
+ <explicitAddress> 
+ <explicitAddressScheme> explicitAddressScheme </explicitAddressScheme> 
+ <explicitAddressValue> explicitAddressValue
+ </explicitAddressValue> 
+ </explicitAddress > 
+ The content of <explicitAddressScheme> is the distribution addressing
+ scheme used, and the content of <explicitAddressValue> is a string
+ denoting the addressees value. 
+ 3. Multiple instances of the <explicitAddressValue >
+ MAY occur with a single 
+ 2.             
+ < explicitAddressScheme> within the <explicitAddress >
+ container. 
+ 4. Multiple instances of <explicitAddress > MAY
+ occur within a single <descriptor> container. 
+ Sub-elements 
+ explicitAddressScheme[1..1] 
+ explicitAddressValue[1..*] 
+ Used In 
+ d escriptor 
+ Element 
+ urgency 
+ Type 
+ One of a selection of
+ enumerated values. 
+ Usage 
+ OPTIONAL, MAY be used
+ once and only once 
+ Definition 
+ The urgency of the content
+ of the message. 
+ Comments 
+ 1. The value must be one of: 
+ a.Immediate - Responsive
+ action SHOULD be taken immediately 
+ b.Expected - Responsive action SHOULD be
+ taken soon (within next hour) 
+ c.Future - Responsive action SHOULD be
+ taken in the near future 
+ d.Past - Responsive action is
+ no longer required 
+ e.Unknown - Urgency not known 
+ f. NoAppropriateDefault The urgency is known but the
+ provided default values are so inappropriate that to choose one would be
+ entirely misleading. 
+ Used In 
+ d escriptor 
+ Element 
+ severity 
+ Type 
+ One of a selection of
+ enumerated values. 
+ Usage 
+ OPTIONAL, MAY be used
+ once and only once 
+ Definition 
+ The severity of the content
+ of the message. 
+ Comments 
+ 1. The value must be one of: 
+ a.Extreme - Extraordinary
+ threat to life or property 
+ b.Severe - Significant threat to life or
+ property 
+ c. Moderate - Possible threat to life or property
+ d.Minor Minimal to no known threat to
+ life or property 
+ e. Unknown - Severity unknown 
+ f. NoAppropriateDefault The severity is known but the
+ provided default values are so inappropriate that to choose one would be
+ entirely misleading. 
+ Used In 
+ d escriptor 
+ Element 
+ certainty 
+ Type 
+ One of a selection of
+ enumerated values. 
+ Usage 
+ OPTIONAL, MAY be used
+ once and only once 
+ Definition 
+ The certainty of the content
+ of the message. 
+ Comments 
+ 1. The value must be one of: 
+ a. Observed Determined to
+ have occurred or to be ongoing 
+ b.Likely - Likely (p > ~50%) 
+ c.Possible - Possible but not likely (p
+ <= ~50%) 
+ d. Unlikely -
+ Not expected to occur (p ~ 0) 
+ e. Unknown - Certainty unknown 
+ f. NoAppropriateDefault The severity is known but the
+ provided default values are so inappropriate that to choose one would be
+ entirely misleading. 
+ Used In 
+ d escriptor 
+ Element 
+ incidentID 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ OPTIONAL, MAY use
+ multiple times 
+ Definition 
+ The human-readable text
+ uniquely identifying the incident/event/situation associated with the
+ Content. 
+ Comments 
+ 1. MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ d escriptor 
+ Element 
+ incidentDescription 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The human-readable text
+ describing the incident/event/situation associated with the
+ ContentObject. 
+ Comments 
+ 1. MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ d escriptor 
+ 3.2.2
+ t argetAreas Element and Sub-elements 
+ The <targetAreas> is a container element
+for the geospatial or political areas targeting or describing the message
+content. It indicates the originators intent based on location targeting as to
+the dissemination of that particular message or set of messages. The
+<targetArea> utilizes the EDXL GML SimpleFeatures Profile, which should
+be consulted for detailed description of <targetArea> sub-elements. 
+ Element 
+ targetAreas 
+ Type 
+ X ML Structure 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ A container for TargetArea
+ information. 
+ Comments 
+ 1. The <targetAreas> block must contain one <areaKind>
+ block, one <areaGrouping> block, and one or more <targetArea>
+ elements. 
+ Sub-elements 
+ areaKind
+ [1..1] 
+ areaGrouping
+ [1..1] 
+ targetArea
+ [1..*] 
+ Used In 
+ d escriptor 
+ Element 
+ areaGrouping 
+ Type 
+ One of a selection of enumerated values. 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once. 
+ Definition 
+ The container element for location
+ information. 
+ Comments 
+ 1. The value must be one of: Intersection, Union, ExclusiveOr,
+ Complement, OtherGroupingType, Unknown, NoAppropriateDefault. 
+ Used In 
+ targetAreas 
+ Element 
+ targetArea 
+ Type 
+ X ML Structure 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The container element for
+ location information. 
+ Comments 
+ 1. If multiple Sub-elements appear in a single <targetArea>
+ element then it should be in the document order with most accurate
+ representation first. 
+ 2. Multiple <targetArea> blocks may appear in a single
+ <targetAreas>element. 
+ Sub-elements 
+ edxl-gsf:EDXLGeoLocation
+ [0..*] 
+ ct:EDXLGeoPoliticalLocation
+ [0..*] 
+ Used In 
+ targetAreas 
+ Element 
+ areaKind 
+ Type 
+ One of a selection of
+ enumerated values. 
+ Usage 
+ REQUIRED , MUST use
+ once and only once. 
+ Definition 
+ Specifies the kind of area,
+ for example SourceTargetArea or DistributionTargetArea. 
+ Comments 
+ 1. The value must be one of SourceTargetArea,
+ DistributionTargetArea, OtherTargetArea, Unknown, or
+ NoAppropriateDefault 
+ Used In 
+ targetAreas 
+ 3.2.3             
+ contentObject Element and Sub-elements 
+ The <contentObject> element is the
+container element for specific messages. The <contentObject> element MUST
+either contain a <contentXML> content container or a <otherContent>
+content container. Additional elements (metadata) used for specific
+distribution of the <contentObject> payload or hints for processing the
+payload are also present in the <contentObject> container element. 
+ Element 
+ contentObject 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The container element for
+ message data and content. 
+ Comments 
+ 1. The <contentObject> is the container element for specific
+ messages. 
+ 2. The
+ <contentObject> may have an optional attribute that defines a namespace
+ prefix which resolves ambiguous element names. 
+ 3. The
+ <contentObject> contains an optional <contentDescriptor> to
+ describe the content. 
+ 4. The <contentObject> element
+ MUST contain exactly one of the two content formats: 
+ <contentXML>, for valid namespaced XML content 
+ or 
+ <otherContent>,
+ containing either a 
+ <uri>
+ element, for reference to the contents location, 
+ or a
+ <contentData> element, for data encapsulated in the message. 
+ 5. This element can be the source or
+ destination for a link. See Section 1.3.5. 
+ Sub-elements 
+ contentDescriptor
+ [0..1] 
+ Either contentXML [1..1] or o therContent [1..1]) 
+ Other [0..*] 
+ Used In 
+ edxl Distribution or Stand-alone 
+ Element 
+ contentDescriptor 
+ Type 
+ XML Structure 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The description of the
+ message content object 
+ Comments 
+ 1. This element can be the
+ source or destination for a link. See Section 1.3.5. 
+ Sub-elements 
+ contentDescription 
+ [0..1] 
+ contentKeyword
+ [0..*] 
+ originatorRole
+ [0..*] 
+ consumerRole
+ [0..*] 
+ contentID [0..*] 
+ confidentiality [0..1] 
+ contentLanguage [0..1] 
+ ext:extension [0..*] 
+ Used In 
+ edxl Distribution or Stand-alone 
+ Element 
+ contentDescription 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The human-readable text
+ describing the content object. 
+ Comments 
+ MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ c ontent Descriptor 
+ Element 
+ contentKeyword 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The topic related to the
+ message data and content, as it may determine message distribution
+ and presentation decisions. 
+ Comments 
+ 1. The list and associated value(s) are in the form: 
+ <contentKeyword> 
+ <ct:ValueListURI>ValueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </contentKeyword> 
+ The <ct:ValueListURI> is the Uniform Resource Identifier of a published
+ list of values and definitions, and <ct:Value> is a string (which may
+ represent a number) denoting the value itself. 
+ 2. Multiple
+ instances of the <ct:Value>, MAY occur with a single
+ <ct:ValueListURI> within the <contentKeyword> container. 
+ 3. Multiple instances of <contentKeyword>
+ MAY occur within a single <contentObject> container. 
+ Sub-elements 
+ ValueListURI [1..1] 
+ Value [1..*] 
+ Used In 
+ C ontent Descriptor 
+ Element 
+ originatorRole 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The functional role of the
+ message originator, as it may determine message distribution and presentation
+ decisions. 
+ Comments 
+ 1. The list and associated value(s) are in the form: 
+ <originatorRole> 
+ <ct:ValueListURI>ValueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </originatorRole> 
+ The <ct:ValueListURI> is the Uniform Resource Identifier of a published
+ list of values and definitions, and <ct:Value> is a string (which may
+ represent a number) denoting the value itself. 
+ 2. Multiple instances of the
+ <Value>, MAY occur with a single <ValueListURI> within the <OriginatorRole>
+ container. 
+ 3. Multiple instances of <originatorRole>
+ MAY occur within a single <contentObject> container. 
+ Sub-elements 
+ ct:ValueListURI [1..1] 
+ ct:Value [1..*] 
+ Used In 
+ c ontent Descriptor 
+ Element 
+ consumerRole 
+ Type 
+ ct:ValueListType 
+ Usage 
+ OPTIONAL , MAY use
+ multiple 
+ Definition 
+ The functional role of the
+ message consumer, as it may determine message distribution and presentation
+ decisions. 
+ Comments 
+ 1. The list and associated value(s) are in the form: 
+ <consumerRole> 
+ <ct:ValueListURI>ValueListURI</ct:ValueListURI> 
+ <ct:Value>value</ct:Value> 
+ </consumerRole> 
+ The <ct:ValueListURI> is the Uniform Resource Name of a published list
+ of values and definitions, and <ct:Value> is a string (which may
+ represent a number) denoting the value itself. 
+ 2. Multiple
+ instances of the <ct:Value>, MAY occur with a single <ct:ValueListURI>
+ within the <consumerRole> container. 
+ 3. Multiple instances of <consumerRole>
+ MAY occur within a single <contentObject> container. 
+ Sub-elements 
+ ct:ValueListURI [1..1] 
+ ct:Value [1..*] 
+ Used In 
+ c ontent Descriptor 
+ Element 
+ contentID 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ OPTIONAL , MAY be used
+ multiple times. 
+ Definition 
+ An identifier for a
+ contentObject. 
+ Comments 
+ 1.
+ Multiple instances of contentID MAY occur within a contentDescriptor. 
+ 2.The
+ identifier MUST be a properly formed -escaped if necessary- XML string. 
+ 3.The
+ string length of the identifier MUST be less than 1024. 
+ Used In 
+ contentDescriptor 
+ Element 
+ confidentiality 
+ Type 
+ One of a selection of enumerated values. 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ Special requirements
+ regarding confidentiality of the content of this <contentObject>. 
+ Comments 
+ 1. The value must be one of: 
+ a. Unclassified 
+ b.
+ Classified 
+ 2.
+ The extension mechanism defined in Section 1.3.8 can be used to provide a
+ more specific classification value from an externally-managed,
+ community-appropriate classification list. 
+ Used In 
+ c ontent Descriptor 
+ Element 
+ contentLanguage 
+ Type 
+ xsd:language 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ Specifies the language of
+ this particular content object 
+ Comments 
+ 1. Valid language values are supplied in the ISO standard [ RFC3066 ] . 
+ 2. The language
+ MUST be a properly formed -escaped if necessary- XML string. 
+ Used In 
+ c ontent Descriptor 
+ Element 
+ other 
+ Type 
+ XML content from any
+ namespace other than the DE 2.0 namespace 
+ Usage 
+ OPTIONAL , MAY be use
+ to add an unlimited number of XML elements for enveloped signing process. 
+ Definition 
+ Special requirements
+ allowing for signature of the content of a <ContentObject>. 
+ Comments 
+ 1. There is no mandatory validation of the elements if the namespace
+ reference can not be located. 
+ 2. MUST be a
+ properly formed XML string escaped, if necessary. 
+ 3. Element
+ names cannot duplicate other element names in the contentObject. Such
+ duplication would prevent validation due to the ambiguity introduced. 
+ 4. This
+ element may be used for signatures. Use the extension element for other
+ types of supplemental information. 
+ Used In 
+ c ontentObject 
+ 3.2.4             
+ otherContent Element and Sub-elements 
+ Element 
+ otherContent 
+ Type 
+ XML Structure 
+ Usage 
+ CONDITIONAL , MUST use
+ once if ContentXML is not used 
+ Definition 
+ Container for content
+ provided in a non-XML MIME type. 
+ Comments 
+ 1. The <otherContent>
+ container MUST contain either <contentData> or <uri> or both. 
+ 2. If
+ the <uri> element is used in conjunction with the <contentData>
+ element, it must reference a data location that contains the same data as is
+ contained in the <contentData> element. 
+ Sub-elements 
+ mimeType [1..1] 
+ size [0..1] 
+ digest [0..1] 
+ uri [0..1] 
+ contentData [0..1] 
+ Used In 
+ c ontentObject 
+ Element 
+ mimeType 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ REQUIRED , MUST be
+ used once and only once 
+ Definition 
+ The format of the payload. 
+ Comments 
+ 1. MIME content type and
+ sub-type as described in [ RFC 2046 ]. 
+ 2. The string length of the
+ identifier MUST be less than 1024. 
+ 3. MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ o therContent 
+ Element 
+ size 
+ Type 
+ xsd:integer 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The file size of the
+ payload. 
+ Comments 
+ 1. Value must be in bytes
+ and represent the raw file size (not encoded or encrypted). 
+ Used In 
+ o therContent 
+ Element 
+ digest 
+ Type 
+ xsd:base64Binary 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ The digest value for the
+ payload. 
+ Comments 
+ 1. Used to ensure the integrity of the payload. 
+ 2. Calculated using the Secure Hash
+ Algorithm (SHA-1) 
+ 3. MUST be a hexadecimal representation
+ of a SHA-1 Hash followed by a BASE 64-encoding to be
+ carried in a non-CDATA element. 
+ Used In 
+ otherContent 
+ Element 
+ uri 
+ Type 
+ xsd:anyURI 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once; but REQUIRED if contentData not used 
+ Definition 
+ A Uniform Resource
+ Identifier that can be used to retrieve the identified resource. 
+ Comments 
+ 1. May be a full
+ absolute URI, typically a Uniform Resource Locator, that can be used
+ to retrieve the resource over the Internet. 
+ 2. May be a
+ relative URI naming a file. This may be just a pointer to a file or
+ specifically to the file represented in the <ContentData>. 
+ Used In 
+ o therContent 
+ Element 
+ contentData 
+ Type 
+ xsd:base64Binary 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once; but REQUIRED if uri not used 
+ Definition 
+ The base-64 encoded data
+ content. 
+ Comments 
+ 1. MAY be used
+ either with or instead of the <Uri> element in contexts where retrieval
+ of a resource via a URI is not feasible. 
+ 2. MUST be a
+ properly formed -escaped if necessary- XML string. 
+ Used In 
+ o therContent 
+ 3.2.5
+ c ontentXML Element and Sub-elements 
+ Element 
+ contentXML 
+ Type 
+ XML Structure 
+ Usage 
+ CONDITIONAL , MUST use
+ once and only once if otherContent is not used 
+ Definition 
+ Container for
+ valid-namespaced XML data. 
+ Comments 
+ An optional namespace
+ attribute may be included. 
+ Sub-elements 
+ keyXMLContent [0..1] 
+ embeddedXMLContent [1..1] 
+ Used In 
+ c ontent O b j e c t 
+ Element 
+ keyXMLContent 
+ Type 
+ XML content from any namespace
+ other than the DE 2.0 namespace 
+ Usage 
+ OPTIONAL , MAY use
+ once and only once 
+ Definition 
+ A container element for
+ collected fragments of valid XML. 
+ Comments 
+ 1. Extracts must come from the XML document contained within the 
+ <embeddedXMLContent> element within the current
+ <contentObject> block. 
+ 2. All content within this element MUST
+ be explicitly namespaced as defined in the enclosing
+ <contentObject> tag. 
+ 3. MUST be a
+ properly formed -escaped if necessary- XML string. 
+ Used In 
+ c ontentXML 
+ Element 
+ embeddedXMLContent 
+ Type 
+ XML content from any
+ namespace other than the DE 2.0 namespace 
+ Usage 
+ CONDITIONAL , REQUIRED
+ if parent element contentXml is present, MAY use only one per content object 
+ Definition 
+ The <embeddedXMLContent>
+ element is an open container for valid XML from an explicit namespaced XML
+ Schema. 
+ Comments 
+ 1. The content MUST be a separately-namespaced well-formed XML
+ document. 
+ 2. The enclosed XML content MUST be
+ explicitly namespaced as defined in the enclosing <embeddedXMLContent>
+ tag. 
+ 3. Enclosed XML content may be
+ encrypted and/or signed within this element. 
+ 4. This element MUST be present if
+ parent element, contentXML, is present. 
+ Used In 
+ c ontentXML 
+ 3.2.6             
+ explicit Addressing 
+ Element 
+ explicitAddressScheme 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ REQUIRED , MUST use
+ once and only once 
+ Definition 
+ Identifies the distribution
+ addressing scheme used. 
+ Comments 
+ 1. MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ e xplicitAddress 
+ Element 
+ explicitAddressValue 
+ Type 
+ ct:EDXLStringType 
+ Usage 
+ REQUIRED , MAY use
+ multiple 
+ Definition 
+ A properly formed -escaped
+ if necessary- XML string denoting the addressees value. 
+ Comments 
+ 1. MUST be a properly formed
+ -escaped if necessary- XML string. 
+ Used In 
+ e xplicitAddress 
+ 4   
+ Conformance 
+ An XML 1.0 element is a conforming EDXL-DE-v2.0 Message if and
+only if: 
+ a) it meets the general requirements specified in Section 3; 
+ b) if its namespace name is
+"urn:oasis:names:tc:emergency:EDXL:DE:2.0", and the element is
+valid according to the schema located at
+http://docs.oasis-open.org/emergency/EDXL-DE-v2.0/EDXL-DE-v2.0.xsd 
+ c) if its namespace name is
+"urn:oasis:names:tc:emergency:EDXL:DE:2.0", then its content(which
+includes the content of each of its descendants) meets all the additional
+mandatory requirements provided in the specific subsection of Section 3 corresponding
+to the elements name. 
+ Appendix A               
+ Acknow ledgments 
+ The following individuals have participated in the creation
+of this specification and are 
+ gratefully acknowledged 
+ Participants: 
+ Rex Brooks, Network Centric
+Operations Industry Consortium (NCOIC) 
+ Martena Gooch, SAIC,Contractor for
+the FEMA NPD P-TAC Center 
+ Gary Ham, Individual 
+ Werner Joerg, IEM 
+ Hans Jespersen, Solace Systems 
+ Elysa Jones, Individual 
+ Lew Leinenweber, Evolution
+Technologies, Inc. 
+ Don McGarry, The MITRE Corporation 
+ Norm Paulsen, Environment Canada 
+ Brian Wilkins, MITRE 
+ Jeff Waters, DOD 
+ Appendix B               
+ EDXL-DistributionElement XML Schema 
+ The EDXL-DistributionElement XML Schema is provided here
+for convenience,the schema can be downloaded at the OASIS website:
+http://docs.oasis-open.org/emergency/ 
+ <?xml version="1.0" encoding="UTF-8"?> 
+ <!-- 
+Emergency Data Exchange Language (EDXL) Distribution Element Version 2.0 
+Committee Specification Draft 02 / Public Review Draft 02 
+10 April 2013 
+Copyright (c) OASIS Open 2012. All Rights Reserved. 
+ Source:
+http://docs.oasis-open.org/emergency/edxl-de/v2.0/csprd03/schema/ 
+ --> 
+ <xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema" xmlns:xlink = "http://www.w3.org/1999/xlink" 
+ xmlns:edxl-gsf = "urn:oasis:names:tc:emergency:edxl:gsf:1.0" 
+ xmlns:ct = "urn:oasis:names:tc:emergency:edxl:ct:1.0" 
+ xmlns = "urn:oasis:names:tc:emergency:EDXL:DE:2.0" 
+ xmlns:gml = "http://www.opengis.net/gml/3.2" 
+ xmlns:ext = "urn:oasis:names:tc:emergency:edxl:extension:1.0" 
+ targetNamespace = "urn:oasis:names:tc:emergency:EDXL:DE:2.0" 
+ elementFormDefault = "qualified" 
+attributeFormDefault = "unqualified" version = "1.0CD" > 
+ <xs:import namespace = "http://www.w3.org/1999/xlink" schemaLocation = "./other-supporting-schema/xlink.xsd" /> 
+ <xs:import namespace = "urn:oasis:names:tc:emergency:edxl:gsf:1.0" 
+schemaLocation = "./other-supporting-schema/EDXLCT_wd06/edxl-gsf.v1.0.xsd" /> 
+ <xs:import namespace = "urn:oasis:names:tc:emergency:edxl:ct:1.0" 
+schemaLocation = "./other-supporting-schema/EDXLCT_wd06/edxl-ct-v1.0-wd05.xsd" /> 
+ <xs:import namespace = "urn:oasis:names:tc:emergency:edxl:extension:1.0" 
+schemaLocation = "./other-supporting-schema/EDXLCT_wd06/edxl-ext-v1.0.xsd" /> 
+ <xs:element name = "edxlDistribution" type = "DEDistributionType" /> 
+ <xs:complexType name = "DEDistributionType" > 
+ <xs:complexContent> 
+ <xs:extension base = "DEEnvelopeType" > 
+ <xs:sequence> 
+ <xs:element ref = "descriptor" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element ref = "content" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element name = "other" type = "AnyXMLType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ <xs:attributeGroup ref = "xlink:extendedAttrs" /> 
+ </xs:extension> 
+ </xs:complexContent> 
+ </xs:complexType> 
+ <xs:complexType name = "DEEnvelopeType" > 
+ <xs:sequence> 
+ <xs:element name = "distributionID" type = "ct:EDXLStringType" minOccurs = "1" /> 
+ <xs:element name = "senderID" type = "ct:EDXLStringType" minOccurs = "1" /> 
+ <xs:element name = "dateTimeSent" type = "ct:EDXLDateTimeType" minOccurs = "1" /> 
+ <xs:element name = "dateTimeExpires" type = "ct:EDXLDateTimeType" minOccurs = "1" /> 
+ <xs:element name = "distributionStatus" type = "DistributionStatusType" minOccurs = "1" /> 
+ <xs:element name = "distributionKind" type = "DistributionKindType" minOccurs = "1" /> 
+ <xs:element ref = "ext:extension" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:element name = "descriptor" type = "DEDescriptorType" /> 
+ <xs:complexType name = "DEDescriptorType" > 
+ <xs:sequence> 
+ <xs:element name = "combinedConfidentiality" type = "ConfidentialityType" minOccurs = "0" /> 
+ <xs:element name = "language" type = "xs:language" minOccurs = "0" /> 
+ <xs:element name = "senderRole" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "recipientRole" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "keyword" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "explicitAddress" type = "ValueSchemeType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "targetAreas" type = "TargetAreasType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "urgency" type = "UrgencyType" minOccurs = "0" /> 
+ <xs:element name = "severity" type = "SeverityType" minOccurs = "0" /> 
+ <xs:element name = "certainty" type = "CertaintyType" minOccurs = "0" /> 
+ <xs:element name = "incidentID" type = "ct:EDXLStringType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "incidentDescription" type = "ct:EDXLStringType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element ref = "link" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element ref = "ext:extension" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ <xs:attributeGroup ref = "xlink:resourceAttrs" /> 
+ </xs:complexType> 
+ <xs:element name = "content" type = "DEContentType" /> 
+ <xs:complexType name = "DEContentType" > 
+ <xs:sequence> 
+ <xs:element ref = "contentObject" minOccurs = "1" maxOccurs = "unbounded" /> 
+ <xs:element ref = "link" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ <xs:attributeGroup ref = "xlink:resourceAttrs" /> 
+ </xs:complexType> 
+ <xs:element name = "link" type = "DELinkType" /> 
+ <xs:complexType name = "DELinkType" > 
+ <xs:attributeGroup ref = "xlink:arcAttrs" /> 
+ </xs:complexType> 
+ <xs:element name = "contentDescriptor" type = "DEContentDescriptorType" /> 
+ <xs:complexType name = "DEContentDescriptorType" > 
+ <xs:sequence> 
+ <xs:element name = "contentDescription" type = "ct:EDXLStringType" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element name = "contentKeyword" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "originatorRole" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "consumerRole" type = "ct:ValueListType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "contentID" type = "ct:EDXLStringType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ <xs:element name = "confidentiality" type = "ConfidentialityType" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element name = "contentLanguage" type = "xs:language" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element ref = "ext:extension" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:element name = "contentObject" type = "DEContentObjectType" /> 
+ <xs:complexType name = "DEContentObjectType" > 
+ <xs:sequence> 
+ <xs:element ref = "contentDescriptor" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:choice minOccurs = "1" maxOccurs = "1" > 
+ <xs:element name = "contentXML" type = "ContentXmlType" /> 
+ <xs:element name = "otherContent" type = "OtherContentType" /> 
+ </xs:choice> 
+ <xs:element name = "other" type = "AnyXMLType" minOccurs = "0" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ <xs:attributeGroup ref = "xlink:resourceAttrs" /> 
+ </xs:complexType> 
+ <xs:complexType name = "OtherContentType" mixed = "false" > 
+ <xs:sequence> 
+ <xs:element name = "mimeType" type = "ct:EDXLStringType" minOccurs = "1" /> 
+ <xs:element name = "size" type = "xs:integer" minOccurs = "0" /> 
+ <xs:element name = "digest" type = "xs:base64Binary" minOccurs = "0" /> 
+ <xs:choice> 
+ <xs:sequence> 
+ <xs:element name = "uri" type = "xs:anyURI" /> 
+ <xs:element name = "contentData" type = "xs:base64Binary" minOccurs = "0" /> 
+ </xs:sequence> 
+ <xs:element name = "contentData" type = "xs:base64Binary" /> 
+ </xs:choice> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:complexType name = "ContentXmlType" mixed = "false" > 
+ <xs:sequence> 
+ <xs:element name = "keyXMLContent" type = "AnyXMLType" minOccurs = "0" maxOccurs = "1" /> 
+ <xs:element name = "embeddedXMLContent" type = "AnyXMLType" minOccurs = "1" maxOccurs = "1" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:complexType name = "AnyXMLType" > 
+ <xs:sequence> 
+ <xs:any namespace = "##other" 
+processContents = "strict" maxOccurs = "1" /> 
+ </xs:sequence> 
+ <xs:anyAttribute namespace = "##other" 
+processContents = "lax" /> 
+ </xs:complexType> 
+ <xs:complexType name = "TargetAreasType" > 
+ <xs:sequence> 
+ <xs:element name = "areaKind" type = "AreaKindType" minOccurs = "1" maxOccurs = "1" /> 
+ <xs:element name = "areaGrouping" type = "AreaGroupingType" minOccurs = "1" maxOccurs = "1" /> 
+ <xs:element name = "targetArea" type = "TargetAreaType" minOccurs = "1" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:complexType name = "TargetAreaType" > 
+ <xs:choice> 
+ <xs:element ref = "edxl-gsf:EDXLGeoLocation" minOccurs = "1" maxOccurs = "1" /> 
+ <xs:element name = "geoPoliticalLocation" type = "ct:EDXLGeoPoliticalLocationType" minOccurs = "1" maxOccurs = "1" /> 
+ </xs:choice> 
+ </xs:complexType> 
+ <xs:complexType name = "ValueSchemeType" > 
+ <xs:sequence> 
+ <xs:element name = "explicitAddressScheme" type = "ct:EDXLStringType" /> 
+ <xs:element name = "explicitAddressValue" type = "ct:EDXLStringType" minOccurs = "1" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:simpleType name = "AreaKindType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "SourceTargetArea" /> 
+ <xs:enumeration value = "DistributionTargetArea" /> 
+ <xs:enumeration value = "OtherTargetArea" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "AreaGroupingType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Intersection" /> 
+ <xs:enumeration value = "Union" /> 
+ <xs:enumeration value = "ExclusiveOr" /> 
+ <xs:enumeration value = "Complement" /> 
+ <xs:enumeration value = "OtherGroupingType" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "ConfidentialityType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Unclassified" /> 
+ <xs:enumeration value = "Classified" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "CertaintyType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Observed" /> 
+ <xs:enumeration value = "Likely" /> 
+ <xs:enumeration value = "Possible" /> 
+ <xs:enumeration value = "Unlikely" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "DistributionKindType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Report" /> 
+ <xs:enumeration value = "Update" /> 
+ <xs:enumeration value = "Cancel" /> 
+ <xs:enumeration value = "Request" /> 
+ <xs:enumeration value = "Response" /> 
+ <xs:enumeration value = "Dispatch" /> 
+ <xs:enumeration value = "Ack" /> 
+ <xs:enumeration value = "Error" /> 
+ <xs:enumeration value = "SensorConfiguration" /> 
+ <xs:enumeration value = "SensorControl" /> 
+ <xs:enumeration value = "SensorStatus" /> 
+ <xs:enumeration value = "SensorDetection" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "DistributionStatusType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Actual" /> 
+ <xs:enumeration value = "Exercise" /> 
+ <xs:enumeration value = "System" /> 
+ <xs:enumeration value = "Test" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "SeverityType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Extreme" /> 
+ <xs:enumeration value = "Severe" /> 
+ <xs:enumeration value = "Moderate" /> 
+ <xs:enumeration value = "Minor" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ <xs:simpleType name = "UrgencyType" > 
+ <xs:restriction base = "ct:EDXLStringType" > 
+ <xs:enumeration value = "Immediate" /> 
+ <xs:enumeration value = "Expected" /> 
+ <xs:enumeration value = "Future" /> 
+ <xs:enumeration value = "Past" /> 
+ <xs:enumeration value = "Unknown" /> 
+ <xs:enumeration value = "NoAppropriateDefault" /> 
+ </xs:restriction> 
+ </xs:simpleType> 
+ </xs:schema> 
+ Appendix C               
+ EDXL-DistributionElement 2.0 Community Extension XML Schema 
+ The EDXL-DistributionElement 2.0 XML Schema imports a
+separate schema for providing Community Extensions. This defaults schema is
+provided below for convenience, but it is also available at:
+http://docs.oasis-open.org/emergency/ 
+ <?xml version="1.0" encoding="UTF-8"?> 
+ <xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema" 
+ xmlns:ext = "urn:oasis:names:tc:emergency:edxl:extension:1.0" 
+ xmlns:ct = "urn:oasis:names:tc:emergency:edxl:ct:1.0" 
+targetNamespace = "urn:oasis:names:tc:emergency:edxl:extension:1.0" 
+elementFormDefault = "qualified" attributeFormDefault = "unqualified" > 
+ <xs:import namespace = "urn:oasis:names:tc:emergency:edxl:ct:1.0" 
+schemaLocation = "./edxl-ct-v1.0-wd05.xsd" /> 
+ <xs:element name = "extension" > 
+ <xs:annotation> 
+ <xs:documentation> Base element to allow communities to
+extend/augment an EDXL data standard </xs:documentation> 
+ </xs:annotation> 
+ <xs:complexType> 
+ <xs:sequence> 
+ <xs:element name = "community" type = "xs:anyURI" > 
+ <xs:annotation> 
+ <xs:documentation> Unique identifier of the community </xs:documentation> 
+ </xs:annotation> 
+ </xs:element> 
+ <xs:element name = "id" type = "xs:anyURI" > 
+ <xs:annotation> 
+ <xs:documentation> Unique identifier for this extension </xs:documentation> 
+ </xs:annotation> 
+ </xs:element> 
+ <xs:element name = "parameter" type = "ext:ParameterType" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ </xs:element> 
+ <xs:complexType name = "ParameterType" > 
+ <xs:annotation> 
+ <xs:documentation> Group of elements used to extend/augment
+an EDXL data standard </xs:documentation> 
+ </xs:annotation> 
+ <xs:sequence> 
+ <xs:element name = "nameURI" type = "ext:ParameterNameType" > 
+ <xs:annotation> 
+ <xs:documentation> Unique identifier of a parameter </xs:documentation> 
+ </xs:annotation> 
+ </xs:element> 
+ <xs:element name = "value" type = "ext:ParameterValueType" maxOccurs = "unbounded" /> 
+ </xs:sequence> 
+ </xs:complexType> 
+ <xs:complexType name = "ParameterNameType" > 
+ <xs:simpleContent> 
+ <xs:extension base = "xs:anyURI" > 
+ <xs:attribute name = "xPath" type = "xs:string" use = "optional" /> 
+ </xs:extension> 
+ </xs:simpleContent> 
+ </xs:complexType> 
+ <xs:complexType name = "ParameterValueType" > 
+ <xs:simpleContent> 
+ <xs:extension base = "ct:EDXLStringType" > 
+ <xs:attribute name = "uom" type = "xs:string" use = "optional" /> 
+ </xs:extension> 
+ </xs:simpleContent> 
+ </xs:complexType> 
+ </xs:schema> 
+ Appendix D               
+ Revision History 
+ Revision 
+ Date 
+ Editor 
+ Changes Made 
+ Edxl-de-v2.0-wd02 
+ 26 Sept 2011 
+ Jeff Waters 
+ First Full Working Draft 
+ Edxl-de-v2.0-wd03 
+ 11 Oct 2011 
+ Jeff Waters 
+ Added recommended changes by
+ Martena Gooch, as recorded in the document at
+ http://www.oasis-open.org/apps/org/workgroup/emergency-if/download.php/43842/de-notes-fixed-in-wd02.doc 
+ Edxl-de-v2.0-wd04 
+ 18 Oct 2011 
+ Jeff Waters 
+ Added recommended changes by
+ Martena Gooch. 
+ Edxl-de-v2.0-wd05 
+ 25 Oct 2011 
+ Jeff Waters 
+ Added recommended changes by
+ Werner Joerg, including multiplicities for sub elements 
+ Edxl-de-v2.0-wd08 
+ 31 Jul 2012 
+ Jeff Waters 
+ Removed
+ DistributionReference, added AreaGrouping, and addressed other recommended
+ changes to add flexibility and streamline schema 
+ Edxl-de-v2.0-wd09 
+ 21 Aug 2012 
+ Jeff Waters 
+ Restored RecipientRole,
+ SenderRole, Keyword, updated diagram, and performed other cleanup 
+ Edxl-de-v2.0-wd11 
+ 21 May 2013 
+ Jeff Waters 
+ Added extension element and
+ schema, lower-cased element names, changed ValueList / Default choices with
+ straight enumerations (since the extension mechanism allows for
+ community-defined values) 

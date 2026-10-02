@@ -1,0 +1,289 @@
+                                             If you cite this paper, please use the WoWMoM reference: J. Alamos, P. Kietzmann, T. C. Schmidt, M. Wählisch.
+                                             WIP: Exploring DSME MAC for LoRa – A System Integration and First Evaluation.
+                                             Proc. of the 23rd IEEE International Symposium on a World of Wireless, Mobile and Multimedia Networks, IEEE, 2022.
+
+
+
+                                                      WIP: Exploring DSME MAC for LoRa –
+                                                      A System Integration and First Evaluation
+                                                     José Álamos                        Peter Kietzmann                   Thomas C. Schmidt                Matthias Wählisch
+                                            HAW Hamburg & FU Berlin                        HAW Hamburg                         HAW Hamburg                 Freie Universität Berlin
+                                             jose.alamos@haw-hamburg.de           peter.kietzmann@haw-hamburg.de          t.schmidt@haw-hamburg.de          m.waehlisch@fu-berlin.de
+
+
+
+
+                                            Abstract—LoRa is a popular wireless technology that enables            infrastructure backhaul. Intermittent GW connectivity prevents
+                                         low-throughput (bytes) long-range communication (km) at low               data forwarding between the LoRaWAN network and ENs.
+                                         energy consumption (mW). Its transmission, though, is on one              Since peer to peer communication is impossible between ENs,
+                                         side prone to interference during long on-air times, and on
+                                         the other side subject to duty cycle restrictions. LoRaWAN                unreachable GWs prevent communication.
+                                         defines a MAC and a vertical stack on top of LoRa. LoRaWAN                   We argue for replacing the LoRa MAC to overcome Lo-
+                                         circumvents the above limitations by imposing a centralized               RaWAN limitations. Zorbas et al. [1] summarize the potentials
+                                         network architecture, which heavily reduces downlink capacity
+arXiv:2112.09403v2 [cs.NI] 22 Apr 2022
+
+
+
+
+                                                                                                                   of time-slotted MAC layers for LoRa and provide a literature
+                                         and prevents peer-to-peer communication. This makes it unusable           survey. They propose TS-LoRa [2] as a LoRaWAN alternative.
+                                         for many deployments. The Deterministic and Synchronous
+                                         Multichannel Extension (DSME) of IEEE 802.15.4e benefits of               It adds a time-slot extension to LoRaWAN and introduces
+                                         time-slotted communication and peer-to-peer communication and             group ACKs to save downlink, but the solution still requires
+                                         has the potential to overcome LoRaWAN limitations. In this                a permanent infrastructure backhaul. Haubro et al. [3] present
+                                         work, we implement DSME on top of LoRa in the open source                 an approach for IEEE 802.15.4e TSCH mode (Time Slotted
+                                         IoT OS RIOT and open the field for first evaluation experiments           Channel Hopping) over LoRa which suggests performance
+                                         on real hardware. Initial results indicate that DSME-LoRa not
+                                         only enables reliable peer-to-peer communication for constrained          potentials. We argue that IEEE 802.15.4e DSME (Deter-
+                                         IoT devices, but also scales with an increasing number of nodes.          ministic and Synchronous Multichannel Extension) is better
+                                                                                                                   suitable for LoRa radios. In contrast to TSCH, DSME provides
+                                           Index Terms—Wireless, 802.15.4e, IoT networking                         both contention-access transmission (using CSMA-CA) and
+                                                                                                                   contention-free transmission (time- and frequency multiplex).
+                                                                 I. I NTRODUCTION                                  Three built-in features of DSME make it an appealing candi-
+                                            LoRa is a popular wireless technology for the Internet of              date for LoRa. First, DSME creates slot schedules natively in
+                                         Things (IoT) that achieves long range transmissions (km) at               a decentralized manner, which reduces management overhead
+                                         minimal power consumption (mW). The narrowband chirp                      and enables mesh and multi-hop topologies out of the box.
+                                         spread spectrum modulation is robust against interference                 Second, the multisuperframe structure of DSME outperforms
+                                         and doppler effect. LoRa operates in unlicensed subGHz                    TSCH in throughput and delay for high transmission duty
+                                         spectrums, which are subject to regional band regulations.                cycles and large networks [4]. Third, DSME supports native
+                                         LoRaWAN is a cloud-based network architecture for LoRa that               group ACKs, which reduces downlink load. In our previous
+                                         organizes all communication between constrained Endnodes                  work [5], we proposed a DSME-LoRa mapping scheme as
+                                         (ENs) and user applications. LoRaWAN consists of three                    well as an information centric networking adaption [6] that
+                                         components: Application Servers (ASs) provide an interface                base on simulation results for time-slotted transmissions. In
+                                         for business logic implementation; A centralized Network                  this paper, we go a step further with the implementation of
+                                         Server (NS) coordinates communication including the PHY                   DSME-LoRa on real hardware.
+                                         configuration, media access, and routes between ASs and                      The contributions of this paper are the following. We intro-
+                                         ENs; Gateways (GWs) act as a LoRaWAN backbone and                         duce the necessary background. (§ II). We present our DSME-
+                                         mediate packets between ENs and the NS. Three constrains are              LoRa integration into the RIOT [7] network stack (§ III)
+                                         worth stressing: First, downlink packets are heavily regulated.           and perform first real-world measurements on constrained
+                                         Regional band restrictions limit the number of downlink                   IoT nodes in the open access FIT IoT-LAB testbed. Next,
+                                         packets per GW. Hence, high downlink loads lead to un-                    we compare our practical measurements to simulation results
+                                         predictable and long latencies as well as packet loss. This               (§ IV) that we conduct on our previous work [5] and draw a
+                                         makes LoRaWAN impractical for many applications. Second,                  first conclusion about the practicability of DSME-LoRa (§ V).
+                                         the centralized architecture of LoRaWAN challenges data
+                                         sharing between users, between ENs, and complicates the                            II. P ROBLEM S TATEMENT AND C HALLENGES
+                                         development of distributed applications across the Internet.                 DSME defines a deterministic and synchronous multichan-
+                                         Higher-layer protocols (IP, CoAP) run inefficiently on top of             nel that allows for coordinated communication. Coordination
+                                         LoRaWAN networks. Third, LoRaWAN requires a permanent                     is based on superframes, which consist of three parts: Beacon
+                                                                                                                                    GNRC
+                                                                                          Application / Lower Network Stack         Pktbuf
+
+
+
+
+                                                                                                                                                 GNRC Packet Buffer
+                                                                                                                                     API
+                                        Contention Access Period (CAP)
+   Superframe              GTS          Contention Free Period (CFP)                              GNRC NetAPI/Netreg
+         Multisuperframe                Beacon Slot (BS)
+                                                                                                                                    GNRC
+                           Beacon Interval                                                        GNRC Netif DSME                   Pktbuf
+                                                                                                                                     API
+Fig. 1: Example of a DSME multisuperframe structure con-                                DSME Adaption Layer API
+sisting of two superframes per multisuperframe and a beacon                                                           DSME          GNRC
+
+
+
+
+                                                                             OpenDSME
+interval of two multisuperframes.                                                       DSME Adaption Layer                         Pktbuf
+                                                                                                                     Message         API
+                                                                                         MLME-SAP/MCPS-SAP        IDSMEMessage
+
+slot (BS), contention access period (CAP), and contention free
+                                                                                                     DSME Layer
+period (CFP). A series of superframes compose a multisu-
+perframe, see Figure 1. Data transmission occurs during the                                          IDSMEPlatform
+CAP using CSMA-CA on a single common channel, or during
+                                                                                                                                        Our
+the CFP using a guaranteed time slot (GTS). DSME devices                                           DSME Platform                        contribution
+
+synchronize to their neighbours through (enhanced) beacons                              802.15.4 Radio HAL   High-level Timer API       OpenDSME
+                                                                                                                                        module
+received during the beacon slots.
+   The integration of DSME on top of LoRa on real hardware                                LoRa Driver         Platform Timer            RIOT
+                                                                                                                                        module
+imposes a series of challenges that are not present on a sim-
+ulation environment. (i) Longer on-air times of LoRa require             Fig. 2: DSME-LoRa integration into the networking subsystem
+a longer superframe duration, which increments the beacon                of RIOT.
+interval time. Thereby, devices are prone to de-synchronization
+due to clock drift between neighbours. (ii) LoRa transceivers
+do not add RX timestamps to received frames, which DSME                  Pktbuf, which facilitates a transparent integration of DSME-
+requires to calculate the time difference to a neighbour and             LoRa with the networking subsystem. GNRC Pktbuf provides
+perform synchronization. (iii) In case of time critical opera-           three promising features: (i) centralized storage that prevents
+tions, DSME accesses a transceiver based on Interrupt Service            data duplication. (ii) A scattered packet representation which
+Routine (ISR). On the one hand, this limits the responsiveness           allows to append chunks of bytes in a packet, without memory
+of real time operating systems, and, on the other hand, faces            reallocation. (iii) It supports allocation with malloc instead
+concurrent access to the hardware bus (SPI). (iv) Common IoT             of static memory allocation, to operate on the same memory
+LoRa hardware is constrained in terms of memory, typically               pool as openDSME which bases on heap.
+around 100 kB of ROM and 10 kB of RAM, which is enough                      DSME Platform implements the DSME platform interface
+for a LoRaWAN stack. In contrast to LoRaWAN, DSME                        (IDSMEPlatform) which acts as a hardware abstraction layer.
+requires more memory due to the complexity of the MAC.                   It includes two parts. (i) The implementation of transceiver
+                                                                         access routines on top of the 802.15.4 Radio HAL in RIOT.
+                    III. I MPLEMENTATION                                 We reconfigure openDSME to adjust to LoRa symbol times,
+  We integrate the openDSME [8] MAC implementation to                    based on our proposed PHY configuration [5]. We use the
+the networking subsystem of RIOT (namely GNRC). GNRC                     ValidHeader IRQ of the transceiver to tag the LoRa PHY
+provides a generic inter-module messaging interface (GNRC                header and calculate the RX timestamp of the LoRa frame.
+NetAPI), a packet dispatch registry (GNRC Netreg) and a                  (ii) The access to timer functionalities of the operating system.
+centralized packet buffer (GNRC Pktbuf). RIOT provides a                 Thereby, we configure the high-level timer to use a precision
+hardware abstraction layer for standard 802.15.4 radios, as              real-time timer peripheral, to reduce de-synchronization due
+well as a timer abstraction layer.                                       to clock drifts. We leverage the processing of radio and timer
+                                                                         events to the RIOT scheduler, to ensure DSME does not access
+A. DSME-LoRa Integration                                                 the transceiver during ISR.
+   Figure 2 presents an overview of the software modules and                LoRa Driver implements a 802.15.4-type device driver for
+exposes existing RIOT modules and APIs (white), openDSME                 the LoRa transceiver. We map the LoRa PHY configuration
+modules and APIs (purple), and our contributions (orange).               proposed in [5] to 16 LoRa channels, and CCA to the channel
+   GNRC Netif DSME implements the DSME network inter-                    activity detection feature (CAD) of the radio.
+face. This enables applications or an IP stack to communicate
+via the GNRC messaging interface NetAPI and the packet                   B. Experiment Deployment
+dispatcher registry GNRC Netreg. Our network interface im-                  We run DSME-LoRa on the Saclay site of the FIT IoT-
+plementation utilizes the DSME Adaption Layer internally,                LAB testbed which provides 20 x B-L072Z-LRWAN1 nodes
+which is a convenience API provided by openDSME, to access               that base on an ARM Cortex-M0+ CPU and contain a SX1276
+the DSME Layer that implements the MAC logic.                            LoRa transceiver. The platform provides 192 kB of ROM and
+   DSME Message implements the openDSME packet inter-                    20 kB of RAM. To meet these constrains with our implemen-
+face (IDSMEMessage) that allocates memory in the GNRC                    tation, we (i) limit the number of superframes per multisu-
+                                ROM                    RAM              The firmware requires a total of 108.06 kB in ROM and
+     Component           [kB]    Prop. [%]     [kB]     Prop. [%]    11.78 kB in RAM which fits our target platform. The ‘unused’
+     Application         1.07           0.99    2.17         18.39   RAM of 8.22 kB is utilized for dynamic runtime memory
+     openDSME           64,59          59.77    7.67         65.13   allocation (heap). Three operations of openDSME make use
+     OS (incl. GNRC)    39.17          36.24    1.94         16.48   of the heap. (i) allocation of a packet (92 Bytes plus size of
+     LoRa Driver         3.25           3.00    0.00          0.00
+                                                                     the MAC data frame without frame checksum), (ii) allocation
+     Total             108.06         100.00   11.78      100.00
+                                                                     of a GTS slot (44 Bytes), and (iii) allocation of a neighbour
+TABLE I: ROM and RAM requirements for DSME-LoRa inte-                queue entry (124 Bytes). A neighbour entry is instantiated
+gration in RIOT, measured on a B-L072z-LRWAN1 platform.              on every GTS association with a new neighbor node. As
+Prop. [%] depicts the proportion of the total image size.            an example, a device that allocates 6 GTS with 3 different
+                                                                     neighbours schedule 5 frames (each with a size 25 Bytes). This
+                                                                     requires 6 · 44 + 3 · 124 = 636 Bytes of for slot allocation, and
+                                                                     5 · (92 + 25) = 585 Bytes for packet allocation, which are
+perframe to one. This reduces the number of available GTS,           allocated on the heap using malloc.
+hence, decreases RAM requirements; (ii) configure GNRC
+Netreg to use callbacks instead of IPC, which saves one              B. Data Transmission Performance
+additional receive thread.                                              Fig. 3 shows the distribution of completion times and the
+   We deploy a sensor-actuator network that consists of one co-      packet reception ratio (PRR) for relaxed (Fig. 3a&3b) and
+ordinator node, 5/10/15 sensors that transmit 16 Byte payloads       stressed (Fig. 3c&3d) data transmissions. We separate CAP
+to three actuator nodes, at an exponential packet rate. Hence,       and CFP transmissions and show real-world measurements
+our network incorporates 19 LoRa devices at max. Thereby,            next so comparable simulation results for three network sizes
+we analyze data transmission in CAP and CFP, and we vary             (5/10/15 nodes).
+the number of sensors as well as the average transmission rate.      Transmission during CAP. Our results show that the time to
+For the CFP case, a static resource allocation scheme allocates      completion increases with an increase of network size (Fig. 3a)
+transmission cells during bootstrap, to prevent slot negotiation     and a decrease of the transmission interval (Fig. 3c). Both
+during experiment run. The cell assignment adds one unique           cases increase the amount of on-air traffic. As a result, the
+cell to each sensor-actuator pair, in a multisuperframe.             number of failed CCA attempts increases and a higher number
+   We compare our real-world measurements to simulation              of frames delay until CCA reports a clear channel. Packets stay
+results that we conduct in OMNeT++ /INET, based on the               in the MAC queue until a re-attempt succeeds and the MAC
+environment that was presented in [5].                               receives a valid ACK. Hence, the average time to completion
+                                                                     increases. Frames that face a channel busy have a higher
+                       IV. E VALUATION
+                                                                     chance of collision. Note that CCA is prone to inaccuracies,
+A. Memory Requirements                                               hence, the MAC transmits a fraction of packets when the
+   Table I shows the firmware size, separated into ROM               channel is actually busy which leads to wireless interference.
+(text + data segment) and RAM (bss + data segment), for                 In the relaxed scenario (Fig. 3a), CSMA-CA leads to a
+a DSME-LoRa firmware image that we compile for our test              PRR of 100 %, regardless of the network size. In contrast,
+platform. Thereby, we group the memory consumption into              in the stressed scenario (Fig. 3c) the PR decreases drastically
+four components: The application utilizes ≈ 2 kB of RAM              with the number of nodes (<50 % with 15 nodes). This is due
+for thread stack allocation. We utilize default values here,         to exceeded CCA attempts which leads to discarded packets
+which gives enough space to operate standard IoT applications        already on the sender, and remaining packet collisions on-air.
+using sensors and actuators. openDSME contains the core                 Our experimental measurements converge to simulation re-
+MAC implementation, as well as the DSME Adaption Layer,              sults. Differing channel models in the simulation environment
+DSME Platform, and DSME Message (compare Figure 2).                  and the physical channel upfront explain the small variations.
+This contributes the biggest proportion of 60–65% to the total       Transmission during CFP. In the relaxed scenario (Fig. 3b),
+firmware size. It is noteworthy, however, that the implemen-         the time to completion does not vary with the network size, be-
+tation maintains a variety of data structures that enable a          cause transmissions occur during a dedicated GTS. Hence, all
+direct use in the INET simulation framework. The embedded            transmissions are collision free and have the same throughput
+integration would benefit from further optimization. Operating       (one packet per multisuperframe). When the queue is empty,
+system (OS) includes the kernel, scheduler, drivers, and OS          the MAC queue schedules packets in the next available slot.
+utilities (e.g., a shell), as well as the dependencies of the        As a result, the time to completion is upper bounded by the
+networking subsystem GNRC. Hence, we account our GNRC                duration of a multisuperframe.
+Netif DSME network interface to that group. In total, this              Reducing the transmission interval reduces the chances of
+requires ≈ 40 kB of ROM, and ≈ 2 kB of RAM, which is                 transmission when the MAC queue is empty, due to stress
+in line with former analyses [7]. Finally, the integration of        and queue saturation. The time to completion in the stressed
+our LoRa transceiver driver below the 802.15.4 Radio HAL             scenario (Fig. 3d) increases >10x, because the transmission
+operates frugal and only requires ≈ 3 kB of ROM.                     interval is shorter than the duration of a multisuperframe.
+       1.0                                             1.0 Queue                                     1.0                                        1.0
+                                                             empty                                                                                        Transient queue fill      Tqo
+       0.8                                             0.8                                           0.8                                        0.8
+                               N=5 (sim)
+       0.6                                             0.6                                           0.6                                        0.6
+ CDF
+
+
+
+
+                                                 CDF
+
+
+
+
+                                                                                               CDF
+
+
+
+
+                                                                                                                                          CDF
+                               N=5
+                               N=10 (sim)
+       0.4                                             0.4                                           0.4                                        0.4
+                               N=10
+       0.2                     N=15 (sim)              0.2                                           0.2                                        0.2
+                               N=15
+       0.0                                             0.0                                           0.0                                        0.0
+             0    10      20      30        40               0    10      20      30      40               0     50       100       150               0        50       100       150
+                 Time to completion [s]                          Time to completion [s]                        Time to completion [s]                        Time to completion [s]
+             (a) CAP, TX interval=20s                        (b) CFP, TX interval=20s                      (c) CAP, TX interval=5s                    (d) CFP, TX interval=5s
+
+                                Fig. 3: Distribution of time to completion and PRR for varying number of nodes.
+
+
+This puts the MAC queue is an unstable condition in which                                         Our experiments show that DSME-LoRa enables node-to-
+the MAC schedules packets when the queue is (nearly)                                           node communication in long-range network scenarios. Data
+overflowed. In these cases, the MAC layer queueing delays                                      transmission during the contention access period is subject
+transmissions by multiples of a multisuperframe duration.                                      to packet collisions, which leads to degradation of time to
+Naturally, the fraction of packets with a time to completion                                   completion and packet reception ratio, when traffic increases.
+upper bounded by one multisuperframe duration decreases.                                       Nevertheless, the CAP is typically only used to negotiate CFP
+   The first transmissions in Fig. 3d (0–60 s) reflect an initial                              resources. Data transmission during CFP, however, enables
+transient phase that fills the MAC queue sequentially. These                                   reliable packet delivery with deterministic latencies due to
+packets have a short time to completion. Tqo represents the                                    exclusive time-frequency slots. The delivery ratio degrades
+completion time of the last packet in a saturated queue,                                       with stress in the MAC queue, however, the network size does
+assuming the MAC transmits all queued packets without                                          not affect the time to completion using CFP.
+retransmissions. Nonetheless, a small fraction of packets are                                     Our research agenda is twofold. First, we will explore low
+still retransmitted and the time to completion exceeds Tqo .                                   power capabilities of DSME-LoRa on hardware. Second, we
+   The PRR does not vary with the network size, as a result of                                 will adopt concepts proposed by the IETF 6TiSCH group,
+collision free transmissions. Hence, the cause of packet loss                                  taking advantage of built-in scheduling features of DSME
+is either (i) channel interference or (ii) MAC queue overflow.                                 to enable multi-hop communication. Thereby, we will enable
+In the relaxed scenario (Fig. 3b), (i) holds and reveals a high                                IPv6 connectivity through the network subsystem of RIOT.
+reception ratio of 99.8 %, due to the robust LoRa modulation.
+                                                                                                                                  R EFERENCES
+The stressed scenario (Fig. 3d), in contrast, shows the effect of
+(ii) and reveals a low reception rate of ≈ 65 % due to discarded                               [1] D. Zorbas and X. Fafoutis, “Time-Slotted LoRa Networks: Design Con-
+                                                                                                   siderations, Implementations, and Perspectives,” IEEE Internet of Things
+packets by sender when the MAC queue is full. Note that the                                        Magazine, vol. 4, no. 1, pp. 84 – 89, 3 2021.
+PRR does not vary with the network size, even under stress.                                    [2] D. Zorbas et al. “TS-LoRa: Time-slotted LoRaWAN for the Industrial
+                                                                                                   Internet of Things,” Comp. Comm., vol. 153, pp. 1–10, 2020.
+   Similarly to Fig. IV-B, differences between simulation re-                                  [3] M. Haubro, C. Orfanidis, G. Oikonomou, and X. Fafoutis, “TSCH-over-
+sults and real world experiments are small and explained by                                        LoRA: long range and reliable IPv6 multi-hop networks for the internet
+a varying number of retransmissions. While our simulations                                         of things,” Internet Technology Letters, vol. 3, no. 4, p. e165, 2020.
+                                                                                               [4] C. Vallati, S. Brienza, M. Palmieri, and G. Anastasi, “Improving Network
+get along without retransmissions, the real world experiments                                      Formation in IEEE 802.15.4e DSME,” Computer Communications, vol.
+incorporate sporadic retransmissions that increase the comple-                                     114, no. C, December 2017.
+tion time marginally.                                                                          [5] J. Alamos, P. Kietzmann, T. C. Schmidt, and M. Wählisch, “DSME-LoRa
+                                                                                                   – A Flexible MAC for LoRa,” in Proc. of 29th IEEE International
+                                                                                                   Conference on Network Protocols (ICNP 2021), Poster Session. IEEE,
+                     V. C ONCLUSION AND O UTLOOK                                                   November 2021.
+                                                                                               [6] P. Kietzmann, J. Alamos, D. Kutscher, T. C. Schmidt, and M. Wählisch,
+   In this paper, we started from the observation that sound                                       “Long-Range ICN for the IoT: Exploring a LoRa System Design,” in
+protocol analysis needs complementary methods. To close the                                        Proc. of 21th IFIP Networking Conference. IEEE Press, June 2022.
+                                                                                               [7] E. Baccelli, C. Gündogan, O. Hahm, P. Kietzmann, M. Lenders,
+gap for DSME over LoRa, a cutting-edge MAC proposal for                                            H. Petersen, K. Schleiser, T. C. Schmidt, and M. Wählisch, “RIOT: an
+decentralized, long-range IoT communication, we contributed                                        Open Source Operating System for Low-end Embedded Devices in the
+the first implementation of DSME-LoRa running on real                                              IoT,” IEEE Internet of Things Journal, vol. 5, no. 6, pp. 4428–4440,
+                                                                                                   December 2018.
+hardware. In contrast to existing simulations, we implemented                                  [8] F. Kauer, M. Köstler, and V. Turau, “Reliable Wireless Multi-
+DSME-LoRa based on RIOT, an open-source IoT operating                                              Hop Networks with Decentralized Slot Management: An Analysis of
+system. We evaluated the performance on resource constrained                                       IEEE 802.15.4 DSME,” Open Archive: arXiv.org, Technical Report
+                                                                                                   arXiv:1806.10521, June 2018.
+hardware in an open-access testbed. Our measurement results
+are on par with prior simulations.
+

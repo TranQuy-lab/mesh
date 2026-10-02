@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/d2tEv+86nPecD3uh8CM+bYaPqlM</id>
+  <title>arXiv Query: search_query=all:"LoRa" AND all:"capture effect"&amp;id_list=&amp;start=0&amp;max_results=8</title>
+  <updated>2026-09-30T16:31:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22LoRa%22+AND+all:%22capture+effect%22&amp;start=0&amp;max_results=8&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>8</opensearch:itemsPerPage>
+  <opensearch:totalResults>10</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.21136v2</id>
+    <title>LoRa and LoRaWAN simulator-cum-emulator with CAD and capture effect in Python</title>
+    <updated>2026-06-11T19:07:33Z</updated>
+    <link href="https://arxiv.org/abs/2605.21136v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.21136v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing LoRaWAN/LoRa simulators consist of large, complicated C++ codebases and often do not support all device classes. This paper presents the design of a simple to use, Python-based discrete-event simulator that addresses these gaps while also introducing a novel method for evaluating real device firmware in the simulator. The simulator is built on a custom asyncio-based simulation kernel, a three-phase packet delivery model that reproduces the capture effect, a full LoRaWAN 1.0.4 stack, and a containerized firmware system that cross-compiles real STM32 C firmware and redirects HAL calls into the simulator via CFFI. The simulator is distributed as a Python package via Github (https://github.com/MatthijsReyers/lora-simulator) and requires no external simulation framework or dependencies.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-20T13:12:30Z</published>
+    <arxiv:comment>Totally 11 Pages; Github link ncluded</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Matthijs Reyers</name>
+    </author>
+    <author>
+      <name>Niels Hokke</name>
+    </author>
+    <author>
+      <name>R. R. Venkatesha Prasad</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.02866v1</id>
+    <title>Analysis of LoRaWAN Uplink with Multiple Demodulating Paths and Capture Effect</title>
+    <updated>2019-02-07T22:06:45Z</updated>
+    <link href="https://arxiv.org/abs/1902.02866v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.02866v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Low power wide area networks (LPWANs), such as the ones based on the LoRaWAN protocol, are seen as enablers of large number of IoT applications and services. In this work, we assess the scalability of LoRaWAN by analyzing the frame success probability (FSP) of a LoRa frame while taking into account the capture effect and the number of parallel demodulation paths of the receiving gateway. We have based our model on the commonly used {SX1301 gateway chipset}, which is capable of demodulating {up to} eight frames simultaneously; however, the results of the model can be generalized to architectures with arbitrary number of demodulation paths. We have also introduced and investigated {three} policies for Spreading Factor (SF) allocation. Each policy is evaluated in terms of coverage {probability}, {FSP}, and {throughput}. The overall conclusion is that the presence of multiple demodulation paths introduces a significant change in the analysis and performance of the LoRa random access schemes.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-07T22:06:45Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <arxiv:journal_ref>2019 IEEE International Conference on Communications (ICC), Shanghai, China, 2019</arxiv:journal_ref>
+    <author>
+      <name>René Brandborg Sørensen</name>
+    </author>
+    <author>
+      <name>Nasrin Razmi</name>
+    </author>
+    <author>
+      <name>Jimmy Jessen Nielsen</name>
+    </author>
+    <author>
+      <name>Petar Popovski</name>
+    </author>
+    <arxiv:doi>10.1109/ICC.2019.8761142</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICC.2019.8761142" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.10732v1</id>
+    <title>LoRa beyond ALOHA: An Investigation of Alternative Random Access Protocols</title>
+    <updated>2020-02-25T08:36:05Z</updated>
+    <link href="https://arxiv.org/abs/2002.10732v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.10732v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a stochastic geometry-based model to investigate alternative medium access choices for LoRaWAN---a widely adopted low-power wide-area networking (LPWAN) technology for the Internet-of-things (IoT). LoRaWAN adoption is driven by its simplified network architecture, air interface, and medium access. The physical layer, known as LoRa, provides quasi-orthogonal virtual channels through spreading factors (SFs) and time-power capture gains. However, the adopted pure ALOHA access mechanism suffers, in terms of scalability, under the same-channel same-SF transmissions from a large number of devices. In this paper, our objective is to explore access mechanisms beyond-ALOHA for LoRaWAN. Using recent results on time- and power-capture effects of LoRa, we develop a unified model for the comparative study of other choices, i.e., slotted ALOHA and carrier-sense multiple access (CSMA). The model includes the necessary design parameters of these access mechanisms, such as guard time and synchronization accuracy for slotted ALOHA, carrier sensing threshold for CSMA. It also accounts for the spatial interaction of devices in annular-shaped regions, characteristic of LoRa, for CSMA. The performance derived from the model in terms of coverage probability, channel throughput, and energy efficiency are validated using Monte-Carlo simulations. Our analysis shows that slotted ALOHA indeed has higher reliability than pure ALOHA but at the cost of lower energy efficiency for low device densities. Whereas, CSMA outperforms slotted ALOHA at smaller SFs in terms of reliability and energy efficiency, with its performance degrading to pure ALOHA at higher SFs.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-25T08:36:05Z</published>
+    <arxiv:comment>10 pages, 9 figures, final version to appear in IEEE Transactions on Industrial Informatics</arxiv:comment>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Luca Beltramelli</name>
+    </author>
+    <author>
+      <name>Aamir Mahmood</name>
+    </author>
+    <author>
+      <name>Patrik Österberg</name>
+    </author>
+    <author>
+      <name>Mikael Gidlund</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.15122v3</id>
+    <title>Experimental Comparison of SNR and RSSI for LoRa-ESL Based on Machine Clustering and Arithmetic Distribution</title>
+    <updated>2022-12-13T11:34:57Z</updated>
+    <link href="https://arxiv.org/abs/2210.15122v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.15122v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LoRa lacks the sensing capabilities of channel status. Received signal strength indicator (RSSI) decreases due to collision, interference, and near-far effect while for signal-to-noise ratio (SNR), the packets are rejected by decreasing the transmission power (TP) at a higher spreading factor (SF). To overcome these challenges in the case of electric shelf label (ESL) to minimize the dependency on retransmission and acknowledgment, the end devices (EDs) are allocated around gateways (GWs) based on machine clustering with dynamic SF for SNR while dynamic TP for RSSI. The experimental results determined that the RSSI approach is more dominant than SNR because of determining the exact locality of the ED that diminished the capture effect. Arithmetic distribution of EDs for various GWs in different clusters helps to minify the near-far effect. The resultant received power (RP) at each cluster is higher for most of the connected EDs than the threshold RP.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-27T02:15:02Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Malak Abid Ali Khan</name>
+    </author>
+    <author>
+      <name>Hongbin Ma</name>
+    </author>
+    <author>
+      <name>Syed Muhammad Aamir</name>
+    </author>
+    <author>
+      <name>Cekderi Anil Baris</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.13076v1</id>
+    <title>Matching-Driven Deep Reinforcement Learning for Energy-Efficient Transmission Parameter Allocation in Multi-Gateway LoRa Networks</title>
+    <updated>2024-07-18T00:54:26Z</updated>
+    <link href="https://arxiv.org/abs/2407.13076v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.13076v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Long-range (LoRa) communication technology, distinguished by its low power consumption and long communication range, is widely used in the Internet of Things. Nevertheless, the LoRa MAC layer adopts pure ALOHA for medium access control, which may suffer from severe packet collisions as the network scale expands, consequently reducing the system energy efficiency (EE). To address this issue, it is critical to carefully allocate transmission parameters such as the channel (CH), transmission power (TP) and spreading factor (SF) to each end device (ED). Owing to the low duty cycle and sporadic traffic of LoRa networks, evaluating the system EE under various parameter settings proves to be time-consuming. Consequently, we propose an analytical model aimed at calculating the system EE while fully considering the impact of multiple gateways, duty cycling, quasi-orthogonal SFs and capture effects. On this basis, we investigate a joint CH, SF and TP allocation problem, with the objective of optimizing the system EE for uplink transmissions. Due to the NP-hard complexity of the problem, the optimization problem is decomposed into two subproblems: CH assignment and SF/TP assignment. First, a matching-based algorithm is introduced to address the CH assignment subproblem. Then, an attention-based multiagent reinforcement learning technique is employed to address the SF/TP assignment subproblem for EDs allocated to the same CH, which reduces the number of learning agents to achieve fast convergence. The simulation outcomes indicate that the proposed approach converges quickly under various parameter settings and obtains significantly better system EE than baseline algorithms.</summary>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-18T00:54:26Z</published>
+    <arxiv:primary_category term="cs.MA"/>
+    <author>
+      <name>Ziqi Lin</name>
+    </author>
+    <author>
+      <name>Xu Zhang</name>
+    </author>
+    <author>
+      <name>Shimin Gong</name>
+    </author>
+    <author>
+      <name>Lanhua Li</name>
+    </author>
+    <author>
+      <name>Zhou Su</name>
+    </author>
+    <author>
+      <name>Bo Gu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.05014v1</id>
+    <title>Coverage Probability and Spectral Efficiency Analysis of Multi-Gateway Downlink LoRa Networks</title>
+    <updated>2022-02-10T13:18:08Z</updated>
+    <link href="https://arxiv.org/abs/2202.05014v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.05014v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The system-level performance of multi-gateway downlink long-range (LoRa) networks is investigated in the present paper.
+  Specifically, we first compute the active probability of a channel and the selection probability of an active end-device (ED) in the closed-form expressions. We then derive the coverage probability (Pcov) and the area spectral efficiency (ASE) under the impact of the capture effects and different spreading factor (SF) allocation schemes.
+  Our findings show that both the Pcov and the ASE of the considered networks can be enhanced significantly by increasing both the duty cycle and the transmit power.
+  Finally, Monte-Carlo simulations are provided to verify the accuracy of the proposed mathematical frameworks.</summary>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-10T13:18:08Z</published>
+    <arxiv:primary_category term="cs.IT"/>
+    <author>
+      <name>Lam-Thanh Tu</name>
+    </author>
+    <author>
+      <name>Abbas Bradai</name>
+    </author>
+    <author>
+      <name>Yannis Pousset</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1801.00522v1</id>
+    <title>A Fair Adaptive Data Rate Algorithm for LoRaWAN</title>
+    <updated>2018-01-01T22:24:03Z</updated>
+    <link href="https://arxiv.org/abs/1801.00522v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.00522v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LoRaWAN exhibits several characteristics that can lead to an unfair distribution of the Data Extracted Rate (DER) among nodes. Firstly, the capture effect leads to a strong signal suppressing a weaker signal at the gateway and secondly, the spreading codes used are not perfectly orthogonal, causing packet loss if an interfering signal is strong enough. In these conditions, nodes experiencing higher attenuation are less likely to see their packets received correctly. We develop FADR, a Fair Adaptive Data Rate algorithm for LoRaWAN that exploits the different Spreading Factors (SFs) and Transmission Powers (TPs) settings available in LoRa to achieve a fair Data Extraction Rate among all nodes while at the same time avoiding excessively high TPs. Simulations show that FADR, in highly congested cells, achieves 300% higher fairness than the minimum airtime allocation approach and 22% higher fairness than Brechts approach, while consuming almost 22% lower energy.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-01T22:24:03Z</published>
+    <arxiv:comment>2 pages, 6 figures and 1 algorithm</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Khaled Q. Abdelfadeel</name>
+    </author>
+    <author>
+      <name>Victor Cionca</name>
+    </author>
+    <author>
+      <name>Dirk Pesch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1705.05899v1</id>
+    <title>Scalability analysis of large-scale LoRaWAN networks in ns-3</title>
+    <updated>2017-05-16T20:11:09Z</updated>
+    <link href="https://arxiv.org/abs/1705.05899v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1705.05899v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As LoRaWAN networks are actively being deployed in the field, it is important to comprehend the limitations of this Low Power Wide Area Network technology. Previous work has raised questions in terms of the scalability and capacity of LoRaWAN networks as the number of end devices grows to hundreds or thousands per gateway. Some works have modeled LoRaWAN networks as pure ALOHA networks, which fails to capture important characteristics such as the capture effect and the effects of interference. Other works provide a more comprehensive model by relying on empirical and stochastic techniques. This work uses a different approach where a LoRa error model is constructed from extensive complex baseband bit error rate simulations and used as an interference model. The error model is combined with the LoRaWAN MAC protocol in an ns-3 module that enables to study multi channel, multi spreading factor, multi gateway, bi-directional LoRaWAN networks with thousands of end devices. Using the lorawan ns-3 module, a scalability analysis of LoRaWAN shows the detrimental impact of downstream traffic on the delivery ratio of confirmed upstream traffic. The analysis shows that increasing gateway density can ameliorate but not eliminate this effect, as stringent duty cycle requirements for gateways continue to limit downstream opportunities.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-05-16T20:11:09Z</published>
+    <arxiv:comment>12 pages, submitted to the IEEE Internet of Things Journal</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Floris Van den Abeele</name>
+    </author>
+    <author>
+      <name>Jetmir Haxhibeqiri</name>
+    </author>
+    <author>
+      <name>Ingrid Moerman</name>
+    </author>
+    <author>
+      <name>Jeroen Hoebeke</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,737 @@
+                                               Resilience Analysis in Off-Grid LoRa Mesh
+                                              Networks: Evaluation of Meshtastic Profiles in
+                                                   Long-Range Propagation Scenarios
+
+                                             Guillermo Antonio Hernandez Ortiz1 , Edgar Santiago Quiroz Puentes1 , and
+                                                                     Jose de Jesús Rugeles1
+
+                                             Telecommunications Engineering Program, Universidad Militar Nueva Granada,
+arXiv:2605.17063v1 [cs.NI] 16 May 2026
+
+
+
+
+                                                                       Bogotá D.C., Colombia
+                                                             est.guillermo.hern@unimilitar.edu.co,
+                                              est.edgar.squiroz@unimilitar.edu.co, jose.rugeles@unimilitar.edu.co
+
+
+
+                                                 Abstract. The integration of LoRa technologies with mesh topologies
+                                                 represents a robust alternative for off-grid communications in emergency
+                                                 scenarios within smart cities. Meshtastic firmware implements a decen-
+                                                 tralised mesh network over LoRa where each node acts simultaneously as
+                                                 end device and router, enabling communication via Bluetooth-connected
+                                                 mobile devices without reliance on conventional infrastructure. Within
+                                                 the Colombian context (915 MHz ISM band), this work establishes de-
+                                                 sign and planning criteria through a controlled guided-link methodology
+                                                 that isolates the LoRa physical layer from propagation effects, enabling
+                                                 deterministic characterisation of all eight Meshtastic modem presets at
+                                                 three transmission power levels (42 datasets). The results reveal a perfor-
+                                                 mance partitioning governed primarily by Spreading Factor (SF): Short
+                                                 presets (SF7–SF8) fail at 110 dB to 120 dB of path attenuation, Medium
+                                                 presets (SF9–SF10) sustain links up to 135 dB to 150 dB, and Long pre-
+                                                 sets (SF11–SF12) maximise coverage, with Long Slow reaching 180 dB
+                                                 before failure—a 60 dB to 70 dB advantage over the fastest profiles. The
+                                                 SNR analysis confirms sub-noise-floor demodulation down to −18 dB for
+                                                 SF12, with abrupt link failure occurring within 2 dB to 4 dB of the the-
+                                                 oretical limit. Based on these thresholds, three operational regimes are
+                                                 defined—high-density IoT, balanced urban mesh, and maximum-range
+                                                 emergency—providing network designers with quantitative criteria to
+                                                 select the appropriate configuration and node density for smart city de-
+                                                 ployments.
+
+                                                 Keywords: Meshtastic · LoRa · Mesh networks · Emergency communi-
+                                                 cations · Smart city · Off-grid · Routing · SX1262
+
+
+                                         1     Introduction
+                                         The transformation of urban environments into smart cities fundamentally de-
+                                         pends on the ability to deploy communication networks that connect thousands
+                                         of devices with limited energy, memory, and processing resources. In this ecosys-
+                                         tem, Low Power Wide Area Networks (LPWAN) based on LoRa (Long Range)
+2      G. A. Hernandez Ortiz et al.
+
+modulation have emerged as a technically compelling solution, filling the gap be-
+tween short-range networks such as WiFi and traditional cellular infrastructure.
+Through its Chirp Spread Spectrum (CSS) modulation, LoRa provides supe-
+rior resistance to interference and multipath fading, which is critical for data
+transmission in dense metropolitan environments [1].
+    Traditionally, these solutions have been deployed under the LoRaWAN proto-
+col using a star topology, where end devices communicate with centralised gate-
+ways connected to Internet backhaul. However, disaster events—earthquakes,
+floods, massive power outages, or cyberattacks on critical infrastructure—can
+disable the 4G/5G cellular and fibre optic networks that support urban services
+such as transportation, energy distribution, and public safety [8]. This reality
+has driven the development of decentralised mesh network architectures capa-
+ble of maintaining communication continuity without any fixed infrastructure,
+a factor identified as a fundamental pillar of urban resilience in the context of
+disaster-resilient smart city frameworks [5, 12].
+    The Meshtastic firmware implements precisely this approach over LoRa, en-
+abling every node to function simultaneously as an end device and a router
+through a managed flooding protocol combined with CSMA/CA. By enabling
+Bluetooth Low Energy (BLE) connectivity, users can communicate through
+Meshtastic nodes using their mobile devices without depending on conventional
+cellular or Internet infrastructure. Beyond emergency messaging, the protocol
+natively supports telemetry data transmission from IoT sensors, while compati-
+bility with MQTT allows Internet-connected nodes to act as gateways to urban
+management platforms such as ThingsBoard or Grafana [13]. This hybrid ar-
+chitecture enables autonomous operation during infrastructure failures, bridging
+the gap between emergency communications and smart city services such as
+waste management, smart metering, and real-time structural health monitoring
+of bridges and critical infrastructure.
+    In the context of Latin American smart cities, where telecommunications in-
+frastructure can be heterogeneous and vulnerable, the ability to operate in the
+915 MHz ISM band without requiring a licence, combined with low-cost hardware
+and solar-powered autonomous operation, makes Meshtastic a particularly com-
+pelling solution for community early warning systems. The present work seeks to
+establish a design and action plan for the use of Meshtastic mesh networks in the
+915 MHz frequency band, with the goal of contributing to the development of
+resilient, low-cost communication infrastructure for smart urban environments.
+    The objective of this work is to establish design and planning criteria for
+Meshtastic networks operating in the 915 MHz ISM band. To this end, this paper
+makes the following contributions:
+
+1. A controlled guided-link experimental methodology that isolates LoRa phys-
+   ical layer behaviour from propagation effects, enabling deterministic sensi-
+   tivity and PER characterisation.
+2. A comprehensive evaluation of all eight Meshtastic modem presets (Short
+   Turbo through Long Slow ) at three transmission power levels, yielding 42
+   datasets that map the operational envelope of the SX1262 transceiver.
+                                 Title Suppressed Due to Excessive Length       3
+
+3. Spectral verification of LoRa emissions using both SDR-based and calibrated
+   spectrum analyser measurements, confirming CSS modulation compliance in
+   the 915 MHz band.
+4. Practical design guidelines for coverage planning in urban emergency and
+   IoT deployment scenarios, derived from empirical sensitivity thresholds.
+    The remainder of this paper is organised as follows. Section 3 details the ex-
+perimental setup, hardware characterisation, and test matrix. Section 4 presents
+the measurement results and sensitivity analysis. Section 5 discusses the impli-
+cations for configuration selection and node density planning. Finally, Section 6
+summarises the findings and outlines future work.
+
+
+2   State of the art
+The development of smart cities requires communication technologies that achieve
+a balance between long range and low energy consumption, especially when con-
+necting devices with limited resources. In this context, LoRa (Long Range) has
+established itself as one of the most relevant solutions at the physical layer,
+thanks to its Chirp Spread Spectrum (CSS) modulation, which allows it to op-
+erate robustly against interference and fading effects typical of dense urban en-
+vironments. This characteristic translates into high receiver sensitivity, making
+it possible to establish links where other wireless technologies are not viable.
+A key aspect of these networks is energy efficiency. Mechanisms such as Chan-
+nel Activity Detection (CAD) allow devices to identify channel activity without
+keeping the receiver continuously active, thereby reducing battery consumption.
+However, parameters such as the Spreading Factor (SF) and bandwidth (BW)
+not only determine communication range, but also the time on air (airtime),
+which directly impacts node battery life.
+    In relation to this, studies such as that of [1] analyze in detail the behav-
+ior of the LoRa physical layer, establishing the mathematical foundations for
+understanding how SF and BW influence metrics such as bit rate and symbol
+duration. Their results show that SF is the most determining factor in coverage,
+which is consistent with experimental observations in practical configurations
+such as those used in Meshtastic.
+    On the other hand, [4] evaluate LoRa performance in environments with
+adverse propagation conditions, such as university campuses with multiple ob-
+stacles. Their results show how SF and Code Rate (CR) affect packet loss rate,
+providing a relevant experimental basis for analysis in dense urban scenarios.
+Along the same lines, [13] present real-world implementations of private LoRa
+networks, reporting ranges of up to 7.5 km in urban environments using high SF
+configurations, which serves as a reference for long-range propagation studies.
+    At the architecture level, most current deployments are based on LoRaWAN,
+which uses a star topology dependent on gateways and central servers. Neverthe-
+less, alternatives such as mesh networks have emerged, enabling direct commu-
+nication between nodes without the need for fixed infrastructure. This approach,
+adopted by solutions such as Meshtastic, is particularly attractive in scenarios
+4      G. A. Hernandez Ortiz et al.
+
+where traditional connectivity is unavailable or may fail, such as in emergency
+situations.
+    The behavior of these networks under real conditions has been widely stud-
+ied. [2] analyzed the operation of The Things Network over several months,
+identifying issues associated with packet collisions and SF usage distribution in
+congested networks. Likewise, [11] demonstrate the applicability of LoRa in crit-
+ical infrastructure monitoring, evaluating quality of service parameters such as
+latency and throughput, which reinforces its usefulness in urban environments.
+    From a broader perspective, systematic reviews such as that of [8] show
+the growing adoption of LoRa in sectors such as agriculture, mining, and early
+warning systems. At the same time, [6] highlight important challenges related
+to security and interconnectivity in LoRaWAN architectures, which opens the
+door to decentralized solutions such as mesh networks. Regarding the regulatory
+framework, [5] emphasize the importance of international standards such as
+ISO 37120 and IEEE P2784, which promote interoperability and scalability in
+smart city development.
+    Finally, the deployment of these technologies is often supported by controlled
+testing environments. [7] introduce the concept of Living Labs, which allows
+solutions to be validated before large-scale implementation. In a complementary
+manner, studies such as those of [12] and [3] emphasize the importance of
+integrating sensors and resilient networks to improve key aspects such as urban
+mobility and public safety.
+    Taken together, the reviewed literature shows that the combination of LoRa
+with mesh architectures represents a solid alternative for the development of
+resilient networks, especially in scenarios where centralized infrastructure is not
+viable. This approach is particularly relevant in emergency communication ap-
+plications and off-grid environments, where service continuity is a critical re-
+quirement.
+
+
+3     Methodology
+
+The design of wireless networks using Meshtastic nodes requires a rigorous un-
+derstanding of radio frequency (RF) parameters and hardware capabilities. This
+section details the experimental framework, the characterisation of the devices
+under test (DUT), and the physical layer principles governing system perfor-
+mance.
+
+
+3.1   Experimental Setup and System Architecture
+
+To evaluate link resilience and packet error rate (PER) deterministically, the
+RF link was replaced by a guided medium. This approach eliminates stochas-
+tic variables such as multipath fading, environmental interference, and temporal
+variability of the wireless channel, providing a controlled and repeatable envi-
+ronment for sensitivity analysis.
+                                   Title Suppressed Due to Excessive Length            5
+
+    Figure 1 illustrates the experimental link model. The antennas were substi-
+tuted by a wired connection where the RF channel is emulated through a cascade
+of fixed attenuators (At1–4 ) and a final manual rotary step attenuator (Atvar )
+used to sweep the receiver toward its sensitivity threshold. All components are
+matched to a 50 Ω characteristic impedance.
+    The precision attenuators used were Mini-Circuits model VAT-30+, which
+provide a flat response within the 915 MHz band with a V SW R ≈ 1.2. Intercon-
+nections were made using 50 Ω SMA-to-SMA coaxial jumpers with measured
+insertion loss Lins < 0.5 dB per segment. The combined uncertainty of the
+attenuator chain, including connector mismatch and component tolerances, is
+estimated at ±0.8 dB across the measurement bandwidth.
+
+
+          PT x                                                               Pr
+
+                                                             ···
+
+                     At1     At2       At3       At4               Atvar
+       Transmitter                                                         Receiver
+          Node                                                              Node
+
+
+Fig. 1: Experimental guided-link system model using fixed attenuators (At1–4 :
+Mini-Circuits VAT-30+, 50 Ω) and a manual rotary step attenuator (Atvar : 0–
+110 dB).
+
+
+      The received power Pr is calculated as:
+                                                 n
+                                                 X
+                            Pr = PT x − Lins −         Atx                            (1)
+                                                 x=1
+
+where PT x is the transmission power, Lins represents the aggregate insertion
+losses of connectors and jumpers, and Atx denotes the attenuation of each stage.
+    The study utilised the Heltec WiFi LoRa 32 V3.2 and the RAK4631 Wis-
+Block as primary nodes. Both utilise the Semtech SX1262 LoRa chipset. It is
+important to note a discrepancy between software reporting and hardware limits:
+while the Meshtastic interface for the RAK4631 node used as a transmitter may
+allow settings up to +30 dBm, the SX1262 transceiver is physically limited to a
+maximum output of +21 ± 1 dBm [10]. Consequently, this study adopts quali-
+tative labels (Low, Medium, Max) to describe transmission power levels, where
+“Max” represents the hardware’s maximum effective saturation point. Table 1
+compares the key technical specifications of both nodes.
+
+3.2     LoRa Physical Layer and Meshtastic Presets
+Modem Presets (SF, BW, CR). Meshtastic abstracts the complexity of
+LoRa modulation through “Modem Presets,” which are standardised combina-
+tions of three core variables:
+6         G. A. Hernandez Ortiz et al.
+
+
+       Table 1: Technical Comparison of Meshtastic Nodes under Evaluation
+      Feature               Heltec WiFi LoRa 32 RAK4631 WisBlock
+                            V3.2
+      Master MCU            ESP32-S3FN8 (Dual-core Nordic nRF52840 (Cortex-
+                            LX7, 240 MHz)            M4F, 64 MHz)
+      LoRa Chipset          Semtech SX1262           Semtech SX1262
+      LoRa Sensitivity      −137 dBm       (SF12   / −137 dBm       (SF12     /
+                            125 kHz)                 125 kHz)
+      Max. TX Power         21 ± 1 dBm               22 dBm
+      Flash / RAM           8 MB Flash / 512 kB SRAM 1 MB Flash / 256 kB RAM
+      Onboard Display       0.96” OLED (128 × 64)    None (external via I2 C)
+      USB Interface         Type-C (CP2102 bridge) Type-C (Native USB)
+
+
+
+    – Spreading Factor (SF): Defines the duration of the chirps. A higher SF
+      (up to 12) increases the link budget and sensitivity, allowing signals to be
+      decoded even under the noise floor, but significantly increases Time-on-Air
+      (ToA).
+    – Bandwidth (BW): The frequency range of the signal. Reducing BW (e.g.,
+      from 500 kHz to 125 kHz) improves sensitivity at the cost of lower bitrates.
+    – Coding Rate (CR): The ratio of forward error correction bits. Higher CR
+      (e.g., 4/8) increases redundancy and reliability in high-attenuation environ-
+      ments.
+   These presets allow the system to adapt to different mission requirements,
+ranging from high-speed local telemetry (Short Turbo) to maximum-range emer-
+gency messaging (Long Slow ), as detailed in Table 2.
+
+
+
+             Table 2: Meshtastic Modem Presets and LoRa Parameters
+                 Preset Name BW (kHz) SF CR                Target
+                 Short Turbo               500    7 4/5   High Speed
+                 Short Fast                250    7 4/5 Balanced Local
+                 Short Slow                250    8 4/5 Balanced Fast
+                 Medium Fast               250    9 4/5 Balanced Mesh
+                 Medium Slow               250   10 4/5 Robust Mesh
+                 Long Fast*                250   11 4/5 Default Range
+                 Long Moderate             125   11 4/8   High Range
+                 Long Slow                 125   12 4/8 Maximum Range
+                 *Default configuration.
+
+
+
+
+CSS Modulation and Sub-Noise-Floor Operation. The link behaviour
+is governed by Chirp Spread Spectrum (CSS) modulation. In urban canyon or
+                                 Title Suppressed Due to Excessive Length       7
+
+emergency rescue scenarios, signals often operate below the thermal noise floor
+(SN R < 0). LoRa transceivers like the SX1262 can demodulate signals with
+negative SNR, down to approximately −20 dB for high spreading factors [10].
+This characteristic is fundamental for the experimental design, as the guided-
+link attenuator chain must be capable of driving the received signal well below
+the noise floor to map the full sensitivity curve.
+
+
+SNR vs. RSSI: Critical Metric Selection. In high-attenuation environ-
+ments, the Signal-to-Noise Ratio (SNR) becomes a more critical metric than the
+Received Signal Strength Indicator (RSSI). While RSSI measures total power
+at the receiver front-end, it loses granularity at the noise floor [9]. The actual
+received power (Prx ) is corrected as follows:
+                       (
+                         RSSIpacket + SN Rpacket , if SN R < 0
+                Prx =                                                          (2)
+                         RSSIpacket ,                 if SN R ≥ 0
+
+    This correction is particularly relevant for presets with high SF and narrow
+BW (e.g., Long Slow ), where the receiver operates deep into the negative-SNR
+region before link failure occurs.
+
+
+3.3   Spectral Verification of LoRa Emissions
+
+To validate the spectral characteristics of the DUT before the guided-link experi-
+ments, the transmitted signal was captured using two independent measurement
+systems. This dual-instrument approach provides both time-frequency visualisa-
+tion of the CSS modulation and a calibrated power spectral density reference.
+    Figure 2 shows the LoRa signal captured using an RTL-SDR receiver and the
+SDRangel software, centred at 902.125 MHz with a span of 3.2 MHz. The upper
+panel displays the real-time power spectral density, where two transmission peaks
+are visible around 901.9 MHz and 902.2 MHz, reaching approximately −20 dBm
+above a noise floor of −70 dBm to −80 dBm. The lower panel presents the spec-
+trogram (waterfall display), where the characteristic diagonal chirp patterns of
+CSS modulation are clearly identifiable. These frequency sweeps, visible as di-
+agonal bright traces, confirm that the LoRa transmitter is operating correctly
+with the expected modulation scheme.
+    Figure 3 presents the spectral measurement obtained with an Anritsu hand-
+held spectrum analyser, centred at 926.750 MHz with a 5 MHz span. The in-
+strument was configured with a resolution bandwidth (RBW) of 300 kHz, video
+bandwidth (VBW) of 100 kHz, and a sweep time of 108 ms in Max Hold trace
+mode. The captured spectral envelope shows the accumulated LoRa signal occu-
+pying approximately 925 MHz to 928 MHz, with peak power levels near −35 dBm
+(accounting for 2.2 dB of external gain noted in the instrument settings). The
+occupied bandwidth and centre frequency are consistent with the 915 MHz ISM
+band channelisation used by Meshtastic in the Americas region (AU915/US915
+frequency plan).
+8      G. A. Hernandez Ortiz et al.
+
+
+
+
+Fig. 2: LoRa signal captured with RTL-SDR and SDRangel at 902.125 MHz
+(span: 3.2 MHz). Upper: PSD showing transmission peaks. Lower: waterfall dis-
+play with characteristic CSS chirp patterns.
+
+
+
+
+Fig. 3: LoRa spectral envelope captured with Anritsu spectrum analyser at
+926.750 MHz (span: 5 MHz, RBW: 300 kHz, Max Hold). The occupied band-
+width confirms operation within the 915 MHz ISM band.
+                                 Title Suppressed Due to Excessive Length       9
+
+    The combination of both measurements—the SDR waterfall confirming CSS
+chirp structure and the calibrated analyser verifying power levels and occupied
+bandwidth—provides robust evidence that the DUT emits signals conforming to
+the LoRa specification prior to entering the guided-link attenuator chain.
+
+3.4   Experimental Design
+Variable Classification. Table 3 explicitly categorises the experimental vari-
+ables to ensure reproducibility.
+
+
+
+                 Table 3: Experimental Variable Classification
+       Type         Variable                  Values / Range
+                   Modem Preset               8 presets (Table 2)
+       Independent TX Power Level             Low, Medium, Max
+                   Atvar                      0–110 dB (1 dB steps)
+                    RSSI                      dBm
+       Dependent    SNR                       dB
+                    PER                       % (per 50-packet burst)
+                    Fixed attenuation            At1–4 (constant)
+                                              P
+       Controlled   Temperature               Ambient (20 ◦ C to 25 ◦ C)
+                    Packet payload            Fixed tag per step
+
+
+
+     To characterise performance across the Meshtastic operational spectrum, a
+comprehensive matrix of 42 datasets was executed. This consists of all 8 modem
+presets evaluated at three power levels, as summarised in Table 4. Presets with
+shorter ToA (Short Turbo through Long Fast) were measured in duplicate runs
+per power level to assess repeatability, yielding 36 datasets. Presets with longer
+ToA (Long Moderate and Long Slow ) were measured once per power level due
+to extended acquisition times, contributing 6 additional datasets.
+     The variable attenuation (Atvar ) was incremented manually using a rotary
+step attenuator (0–110 dB in 1 dB steps). For each attenuation step, a burst
+of 50 packets was transmitted. After each burst, a stabilisation period of 5 s
+was observed before incrementing the attenuator to the next step. Data was
+captured through the CP2102 serial interface at 115 200 baud and logged to CSV
+files, recording timestamp, RSSI, SNR, and a “payload” tag correlated with each
+attenuation step.
+     The Packet Error Rate (PER) was calculated for each attenuation step as:
+                                        Nlost
+                             P ER =           × 100%                          (3)
+                                        Nsent
+where Nsent = 50 packets per step and Nlost is the number of packets not
+received or received with CRC errors. The sensitivity threshold for each modem
+10      G. A. Hernandez Ortiz et al.
+
+
+            Table 4: Experimental Test Matrix (42 Datasets Total)
+           Meshtastic Preset Power Levels Runs/Level Datasets
+           Short Turbo          Low, Med, Max       2           6
+           Short Fast           Low, Med, Max       2           6
+           Short Slow           Low, Med, Max       2           6
+           Medium Fast          Low, Med, Max       2           6
+           Medium Slow          Low, Med, Max       2           6
+           Long Fast            Low, Med, Max       2           6
+           Long Moderate        Low, Med, Max       1           3
+           Long Slow            Low, Med, Max       1           3
+                                                        Total   42
+
+
+preset–power combination was defined as the minimum received power Pr at
+which P ER ≤ 10%. Beyond this threshold, the link is considered unreliable for
+operational Meshtastic deployment.
+
+4     Results and Analysis
+This section presents the experimental results obtained from the 42-dataset test
+matrix. The analysis focuses on the joint behaviour of RSSI and SNR as a
+function of guided-link attenuation across all eight Meshtastic modem presets at
+maximum transmission power (effective +21 dBm).
+   Figures 4 present the complete measurement results:
+
+4.1   Spreading Factor and Bandwidth Impact on Sensitivity
+The RSSI data in Fig. 4(a) reveals distinct behavioural families, separated pri-
+marily by their Spreading Factor (SF).The Short family (SF 7–SF 8, BW ≥
+250 kHz) exhibits a quasi-linear RSSI decay of approximately −1 dB per 1 dB of
+added attenuation, consistent with the expected response of a calibrated guided
+link. Short Turbo (SF 7, BW = 500 kHz), having the lowest processing gain,
+reaches the receiver noise floor first, saturating near −90 dBm at approximately
+75 dB. Short Fast (SF 7, BW = 250 kHz) and Short Slow (SF 8, BW = 250 kHz)
+collapse progressively between 110 dB to 120 dB.
+    The Medium family (SF 9–SF 10, BW = 250 kHz) extends reliable reception
+into the 135 dB to 150 dB range, with the additional processing gain of SF 9
+and SF 10 providing approximately 20 dB to 30 dB of additional margin over the
+Short presets.The high processing gain Long family (SF 11–SF 12) demonstrates
+markedly extended range. Even at a wider bandwidth, Long Fast (SF 11, BW =
+250 kHz) survives up to 155 dB. Long Slow (SF 12, BW = 125 kHz) maximises
+the link budget, maintaining packet reception up to approximately 180 dB of
+total attenuation. This additional margin is attributable to the 3 dB sensitivity
+improvement from halving the bandwidth combined with the maximum CSS
+processing gain of SF 12.
+                                     0                                                                 16
+                                                       ADC saturation                                  14
+                                    20                                                                 12
+                                    40                                                                 10
+                                                                                                        8
+                                    60
+                                                                                                        6
+
+
+
+
+                                                                                            SNR (dB)
+                                    80                                                                  4
+
+
+
+
+                      RSSI (dBm)
+                                                                                       N0
+                                   100                                                                  2
+                                                                                 (a)                    0                                   (b)
+                                   120                                                                  2
+                                         0   25   50     75 100 125 150 175                                 0   25   50   75 100 125 150 175
+                                                   Attenuation (dB)                                                   Attenuation (dB)
+              Short Turbo (SF7, BW 500 kHz)            Short Slow (SF7, BW 250 kHz)            Medium Slow (SF10, BW 250 kHz)     Long Moderate (SF11, BW 125 kHz)
+              Short Fast (SF7, BW 250 kHz)             Medium Fast (SF9, BW 250 kHz)           Long Fast (SF11, BW 250 kHz)       Long Slow (SF12, BW 125 kHz)
+
+
+
+Fig. 4: Comparison of Meshtastic modem presets: (a) Received Signal Strength Indicator (RSSI) vs. Path Attenuation and (b)
+Signal-to-Noise Ratio (SNR) vs. Path Attenuation. The dashed line N0 indicates the receiver thermal noise floor.
+                                                                                                                                                                     Title Suppressed Due to Excessive Length
+                                                                                                                                                                     11
+12      G. A. Hernandez Ortiz et al.
+
+4.2   SNR Stratification and Sub-Noise-Floor Demodulation
+The SNR data in Fig. 4(b) reveals a clear stratification by spreading factor.
+At low attenuation, the presets cluster into tiers: a high tier (12 dB to 14 dB)
+occupied by the SF 7–SF 8 presets (Short Turbo, Short Fast, and Short Slow ), a
+mid tier (8 dB to 11 dB) corresponding to SF 9–SF 11 at BW = 250 kHz (Medium
+Fast, Medium Slow, Long Fast), and a lower initial tier (5 dB to 7 dB) for the
+narrowband BW = 125 kHz presets (Long Moderate, Long Slow ).
+    A defining characteristic of the LoRa physical layer is explicitly captured in
+this dataset: the ability to demodulate signals deeply embedded in thermal noise.
+As attenuation increases beyond 120 dB, the SNR for high-SF presets crosses the
+zero-threshold and descends linearly into the negative regime. Long Slow reaches
+absolute SNR values of approximately −18 dB before link failure, demonstrating
+that the CSS processing gain effectively preserves demodulation capability near
+the SX1262’s theoretical limit (−20 dB for SF 12).The data also suggests that
+link failure for high-SF presets is abrupt rather than gradual. The transition from
+reliable reception to complete link loss occurs while the system still maintains
+a tight 2 dB to 4 dB margin above the absolute theoretical demodulation limit,
+confirming that fade margins in the order of 5 dB are required for stable network
+planning.
+
+4.3   Measurement Artefacts
+Two systematic artefacts were identified in the dataset, providing important
+bounds for signal interpretation.
+
+Front-End ADC Saturation. Several presets report RSSI ≈ 0 dBm at low
+attenuation levels (0 dB to 40 dB), visible in the upper-left region of Fig. 4(a).
+This indicates ADC saturation: the received signal exceeds the dynamic range of
+the SX1262 receiver, causing the RSSI register to clip. These data points do not
+represent actual propagation loss and must be excluded from path-loss regression
+models.
+
+RSSI Plateau at the Noise Floor. Beyond the sensitivity limit, all surviving
+presets exhibit an RSSI plateau near −100 dBm that persists across extreme
+attenuation levels. In this regime, the RSSI register reflects the receiver’s thermal
+noise power rather than the signal energy. Consequently, the corrected received
+power must be calculated using the SNR-adjusted formula (Eq. 2), validating
+the theoretical prediction that SNR is the sole reliable link quality metric in the
+sub-noise-floor operating regime.
+
+4.4   Anomalous Behaviour of Long Moderate
+The Long Moderate preset (SF 11, BW = 125 kHz, CR = 4/8) exhibits a highly
+anomalous discontinuity. As seen in Figs. 4(a) and 4(b), the link fails abruptly
+                                   Title Suppressed Due to Excessive Length       13
+
+near 80 dB of attenuation. Crucially, at the point of failure, the preset still main-
+tains an extraordinarily robust SNR of approximately +10 dB. Because this
+abrupt drop does not follow the physical layer progression seen in Long Slow
+(SF 12, same BW) nor Long Fast (SF 11, wider BW), it strongly suggests a
+specific interaction between SF 11, CR = 4/8, and the firmware’s Channel Ac-
+tivity Detection (CAD) or packet timeout mechanisms, rather than a true RF
+sensitivity limitation.
+
+
+5     Discussion
+
+The experimental results presented in Section 4 provide the empirical foundation
+for selecting the appropriate Meshtastic configuration according to the deploy-
+ment scenario. This section analyses how the choice of modem preset directly
+determines the achievable inter-node distance and, consequently, the node den-
+sity required to guarantee mesh connectivity over a given coverage area.
+
+
+5.1   Operational Regimes and Configuration Selection
+
+Three operational regimes can be identified from the sensitivity thresholds:
+
+ – High-density, low-latency applications (Short Turbo, Short Fast, Short
+   Slow ): suitable for dense urban IoT sensor networks, building automation,
+   or campus-scale telemetry where nodes are closely spaced (<500 m) and fre-
+   quent data updates are required. The high throughput and low ToA minimise
+   channel occupancy per transmission, enabling a larger number of nodes to
+   coexist within the same mesh without excessive collision probability. The
+   SF 7–SF 8 presets tolerate 110 dB to 120 dB of path loss, which in a typical
+   dense urban environment (path loss exponent n ≈ 3.5–4) corresponds to
+   inter-node distances in the order of 100 m to 500 m.
+ – Balanced urban mesh (Medium Fast, Medium Slow, Long Fast): appropri-
+   ate for neighbourhood-scale smart city deployments—environmental moni-
+   toring, traffic sensing, public safety alerts—where moderate inter-node dis-
+   tances (0.5 km to 2 km) balance coverage and throughput. Long Fast, as the
+   default Meshtastic configuration, represents the most versatile trade-off for
+   general-purpose urban mesh networks, sustaining links up to 155 dB of at-
+   tenuation. Medium Fast is notable for maintaining a uniform SNR margin
+   of approximately 10 dB across its operational range, making it particularly
+   robust against temporal fading variations.
+ – Maximum-range emergency networks (Long Slow ): designed for disas-
+   ter response, rural coverage extension, or search-and-rescue operations where
+   inter-node distances may exceed 2 km to 10 km. The reduced throughput and
+   high ToA are acceptable trade-offs when the primary objective is to estab-
+   lish any communication link over the largest possible area with the minimum
+   number of available nodes. The 180 dB link budget of Long Slow enables the-
+   oretical LOS ranges exceeding 10 km even with conservative fade margins.
+14        G. A. Hernandez Ortiz et al.
+
+    It should be noted that the anomalous behaviour of Long Moderate (Sec-
+tion 4.4) currently limits its practical applicability despite its favourable the-
+oretical parameters. Until the root cause—likely firmware-related—is resolved,
+Long Slow remains the recommended preset for maximum-range deployments.
+
+
+5.2     Node Density and Economic Implications
+
+The 60 dB to 70 dB span between the Short Turbo and Long Slow sensitivity
+thresholds translates directly into node density requirements for a given coverage
+area. Table 5 illustrates the estimated inter-node distances for a representative
+dense urban scenario.
+
+
+
+Table 5: Estimated Inter-Node Distance and Density for Dense Urban Deploy-
+ment (n = 3.5, PT x = +21 dBm)
+     Regime               Max Att. (dB) Est. Range (m) Nodes/km2 (approx.)
+     Short (SF7–8)             110–120             200–400        25–80
+     Medium (SF9–10)           135–150            500–1500        3–12
+     Long (SF11–12)            155–180            1500–5000        1–3
+     Ranges assume f = 915 MHz, free-space + urban excess loss.
+     Actual values depend on building density and terrain.
+
+
+
+
+    A Short Turbo deployment covering 1 km2 may require 25 to 80 nodes, while
+the same area under Long Slow could be served by as few as one to three strate-
+gically placed nodes—at the cost of message latency increasing from seconds to
+minutes. For a municipal risk management agency planning a city-wide early
+warning system, this represents a trade-off between hardware investment (more
+nodes, lower unit cost per message) and operational simplicity (fewer nodes,
+higher per-node criticality).
+    The guided-link sensitivity thresholds established in Section 4 provide the
+baseline link budget from which planners can subtract the expected path loss—
+using models such as ITU-R P.1411 for urban microcells or the Okumura-Hata
+model for wider areas—to estimate the maximum inter-node spacing for each
+preset in a specific urban morphology. For Latin American cities, where building
+construction (reinforced concrete, brick masonry) introduces additional NLoS
+penetration losses at 915 MHz, a conservative margin of 10 dB to 15 dB beyond
+the measured thresholds is recommended.
+
+
+6      Conclusions
+
+This work presented a guided-link experimental methodology for the determinis-
+tic characterisation of Meshtastic nodes operating in the 915 MHz ISM band. By
+replacing the wireless channel with a calibrated attenuator cascade, the study
+                                  Title Suppressed Due to Excessive Length      15
+
+isolated the LoRa physical layer from stochastic propagation effects, enabling re-
+peatable sensitivity and PER measurements across the full operational envelope
+of the SX1262 transceiver.
+    The evaluation of all eight modem presets at three power levels (42 datasets)
+revealed three distinct performance tiers governed primarily by Spreading Fac-
+tor: the Short family (SF 7–SF 8) failed between 110 dB to 120 dB, the Medium
+family (SF 9–SF 10) sustained links up to 135 dB to 150 dB, and the Long family
+(SF 11–SF 12) reached 180 dB—a 60 dB to 70 dB advantage that translates to
+multiple orders of magnitude in propagation distance. The SNR analysis con-
+firmed sub-noise-floor demodulation down to −18 dB for SF 12, with abrupt link
+failure within 2 dB to 4 dB of the theoretical limit, establishing that fade margins
+of 5 dB suffice for stable network planning.
+    These thresholds enabled the identification of three operational regimes—
+high-density IoT, balanced urban mesh, and maximum-range emergency—each
+with distinct node density and latency characteristics (Section 5). The anal-
+ysis provides network designers and municipal risk management agencies with
+quantitative criteria to dimension Meshtastic deployments according to coverage
+requirements, budget constraints, and urban morphology.
+    Two measurement artefacts were documented (ADC saturation and noise
+floor plateau), and an anomalous firmware-level failure of the Long Moderate
+preset was identified, warranting further investigation.
+    Meshtastic represents a vital convergence between the sub-noise-floor capabil-
+ities of SX1262 transceivers and the need for communication resilience in smart
+cities. For Latin American urban contexts—where licence-free 915 MHz opera-
+tion, low hardware cost, and autonomous power supply enable rapid deployment—
+the configuration-dependent design guidelines presented here constitute a prac-
+tical planning framework for off-grid emergency and IoT networks.
+
+6.1   Future Work
+The results open several research directions:
+
+ 1. Outdoor propagation validation: Field measurements in representative
+    urban environments (dense urban, suburban, urban canyon), with particu-
+    lar emphasis on NLoS penetration losses through Latin American building
+    materials at 915 MHz.
+ 2. Flooding protocol scalability: Evaluation of Meshtastic’s managed flood-
+    ing in dense NLoS scenarios, and exploration of hybrid routing strategies
+    (selective forwarding, hierarchical clustering) for formal adoption by risk
+    management entities.
+ 3. Node density optimisation tool: Development of a planning tool map-
+    ping empirical sensitivity thresholds to optimal node placement for a given
+    urban morphology, terrain, and QoS requirements.
+ 4. IoT platform integration: Benchmarking of dual-mode operation (au-
+    tonomous mesh / cloud-connected) with urban management platforms under
+    realistic multi-hop traffic loads.
+16    G. A. Hernandez Ortiz et al.
+
+5. Dynamic channel emulation: Extension of the guided-link methodology
+   to include multipath fading profiles and Doppler spread via hardware channel
+   emulator.
+                              Bibliography
+
+
+ [1] Augustin, A., Yi, J., Clausen, T., Townsley, W.: A study of LoRa: Long
+     range & low power networks for the internet of things 16(9), 1466.
+     https://doi.org/10.3390/s16091466, https://www.mdpi.com/1424-8220/
+     16/9/1466
+ [2] Blenn, N., Kuipers, F.: LoRaWAN in the wild: Measurements from
+     the things network. https://doi.org/10.48550/arXiv.1706.03086, http://
+     arxiv.org/abs/1706.03086
+ [3] Cantuarias-Villessuzanne, C., Weigel, R., Blain, J.: Clustering of european
+     smart cities to understand the cities’ sustainability strategies 13(2), 513.
+     https://doi.org/10.3390/su13020513, https://www.mdpi.com/2071-1050/
+     13/2/513
+ [4] Kurji, A.S., Al-Nakkash, A.H., Hussein, O.A.: LORA in a campus: Relia-
+     bility and stability testing 1105(1), 012034. https://doi.org/10.1088/1757-
+     899X/1105/1/012034, https://iopscience.iop.org/article/10.1088/
+     1757-899X/1105/1/012034
+ [5] Lai, C.S., Jia, Y., Dong, Z., Wang, D., Tao, Y., Lai, Q.H., Wong, R.T.K.,
+     Zobaa, A.F., Wu, R., Lai, L.L.: A review of technical standards for smart
+     cities 2(3), 290–310. https://doi.org/10.3390/cleantechnol2030019, https:
+     //www.mdpi.com/2571-8797/2/3/19
+ [6] Lavric, A., Popa, V.: Internet of things and LoRa™ low-power wide-area
+     networks: A survey
+ [7] Omotayo, T., Awuzie, B., Ajayi, S., Moghayedi, A., Oyeyipo, O.:
+     A systems thinking model for transitioning smart campuses to
+     cities 7, 755424. https://doi.org/10.3389/fbuil.2021.755424, https://www.
+     frontiersin.org/articles/10.3389/fbuil.2021.755424/full
+ [8] Paikaray, B., Samal, A.K., Jayanthu, S., Pramanik, J.: A com-
+     prehensive     systematic     review   of   progressive    applications   of
+     LoRa and LoRaWAN networks in the internet of things 10(4),
+     10063638.        https://doi.org/10.1504/IJIMS.2024.10063638,          http:
+     //www.inderscience.com/link.php?id=10063638
+ [9] Semtech Corporation: AN1200.21 reading channel RSSI during a CAD,
+     https://www.semtech.com
+[10] Semtech Corporation: SX1276/77/78/79 – 137 MHz to 1020 MHz low power
+     long range transceiver, https://www.semtech.com, semtech Corporation,
+     Wireless & Sensing Products Division
+[11] Setiowati, S., Riandini, R., Sari, V.A., Purwanti, I.L., Andriansyah, N.:
+     LoRa communication in the service level monitoring satu duit bogor bridge
+     7(1), 19–28. https://doi.org/10.25077/jitce.7.01.19-28.2023, https://54.
+     251.190.23/index.php/JITCE/article/view/190
+[12] Yuloskov, A., Bahrami, M.R., Mazzara, M., Kotorov, I.: Smart cities in rus-
+     sia: Current situation and insights for future development 13(10), 252.
+18    G. A. Hernandez Ortiz et al.
+
+     https://doi.org/10.3390/fi13100252, https://www.mdpi.com/1999-5903/
+     13/10/252
+[13] Zhou, Q., Zheng, K., Hou, L., Xing, J., Xu, R.: Design
+     and implementation of open LoRa for IoT 7, 100649–100657.
+     https://doi.org/10.1109/ACCESS.2019.2930243,    https://ieeexplore.
+     ieee.org/document/8768288/
+

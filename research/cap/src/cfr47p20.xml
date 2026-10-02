@@ -1,0 +1,1560 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="cfr.xsl"?>
+<CFRGRANULE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CFRMergedXML.xsd">
+    <FDSYS>
+        <CFRTITLE>47</CFRTITLE>
+        <CFRTITLETEXT>Telecommunication</CFRTITLETEXT>
+        <VOL>2</VOL>
+        <DATE>2023-10-01</DATE>
+        <ORIGINALDATE>2023-10-01</ORIGINALDATE>
+        <COVERONLY>false</COVERONLY>
+        <TITLE>COMMERCIAL MOBILE SERVICES</TITLE>
+        <GRANULENUM>20</GRANULENUM>
+        <HEADING>PART 20</HEADING>
+        <ANCESTORS>
+            <PARENT HEADING="Title 47" SEQ="2">Telecommunication</PARENT>
+            <PARENT HEADING="CHAPTER I" SEQ="1">FEDERAL COMMUNICATIONS COMMISSION (CONTINUED)</PARENT>
+            <PARENT HEADING="SUBCHAPTER B" SEQ="0">COMMON CARRIER SERVICES</PARENT>
+        </ANCESTORS>
+    </FDSYS>
+    <PART>
+        <EAR>Pt. 20</EAR>
+        <HD SOURCE="HED">PART 20—COMMERCIAL MOBILE SERVICES</HD>
+        <CONTENTS>
+            <SECHD>Sec.</SECHD>
+            <SECTNO>20.1</SECTNO>
+            <SUBJECT>Purpose.</SUBJECT>
+            <SECTNO>20.2</SECTNO>
+            <SUBJECT>Other applicable rule parts.</SUBJECT>
+            <SECTNO>20.3</SECTNO>
+            <SUBJECT>Definitions.</SUBJECT>
+            <SECTNO>20.5</SECTNO>
+            <SUBJECT>Citizenship.</SUBJECT>
+            <SECTNO>20.6</SECTNO>
+            <SUBJECT>CMRS spectrum aggregation limit.</SUBJECT>
+            <SECTNO>20.7–20.9</SECTNO>
+            <SUBJECT>[Reserved]</SUBJECT>
+            <SECTNO>20.11</SECTNO>
+            <SUBJECT>Interconnection to facilities of local exchange carriers.</SUBJECT>
+            <SECTNO>20.12</SECTNO>
+            <SUBJECT>Resale and roaming.</SUBJECT>
+            <SECTNO>20.13</SECTNO>
+            <SUBJECT>State petitions for authority to regulate rates.</SUBJECT>
+            <SECTNO>20.15</SECTNO>
+            <SUBJECT>Requirements under Title II of the Communications Act.</SUBJECT>
+            <SECTNO>20.18</SECTNO>
+            <SUBJECT>[Reserved]</SUBJECT>
+            <SECTNO>20.19</SECTNO>
+            <SUBJECT>Hearing aid-compatible mobile handsets.</SUBJECT>
+            <SECTNO>20.20</SECTNO>
+            <SUBJECT>Conditions applicable to provision of CMRS service by incumbent Local Exchange Carriers.</SUBJECT>
+            <SECTNO>20.21</SECTNO>
+            <SUBJECT>Signal boosters.</SUBJECT>
+            <SECTNO>20.22</SECTNO>
+            <SUBJECT>Rules governing mobile spectrum holdings.</SUBJECT>
+            <SECTNO>20.23</SECTNO>
+            <SUBJECT>Contraband wireless devices in correctional facilities.</SUBJECT>
+        </CONTENTS>
+        <AUTH>
+            <HD SOURCE="HED">Authority:</HD>
+            <P>47 U.S.C. 151, 152(a), 154(i), 155, 157, 160, 201, 214, 222, 251(e), 301, 302, 303, 303(b), 303(r), 307, 307(a), 309, 309(j)(3), 316, 316(a), 332, 610, 615, 615a, 615b, and 615c, unless otherwise noted.</P>
+        </AUTH>
+        <SOURCE>
+            <HD SOURCE="HED">Source:</HD>
+            <P>59 FR 18495, Apr. 19, 1994, unless otherwise noted.</P>
+        </SOURCE>
+        <SECTION>
+            <SECTNO>§ 20.1</SECTNO>
+            <SUBJECT>Purpose.</SUBJECT>
+            <P>The purpose of these rules is to set forth the requirements and conditions applicable to commercial mobile radio service providers.</P>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.2</SECTNO>
+            <SUBJECT>Other applicable rule parts.</SUBJECT>
+            <P>Other FCC rule parts applicable to licensees in the commercial mobile radio services include the following:</P>
+            <P>
+                (a) 
+                <E T="03">Part 1.</E>
+                 This part includes rules of practice and procedure for license applications, adjudicatory proceedings, procedures for reconsideration and review of the Commission's actions; provisions concerning violation notices and forfeiture proceedings; competitive bidding procedures; and the environmental requirements that, together with the procedures specified in § 17.4(c) of this chapter, if applicable, must be complied with prior to the initiation of construction. Subpart F includes the rules for the Wireless Telecommunications Services and the procedures for filing electronically via the ULS.
+            </P>
+            <P>
+                (b) 
+                <E T="03">Part 2.</E>
+                 This part contains the Table of Frequency Allocations and special requirements in international regulations, recommendations, agreements, and treaties. This part also contains standards and procedures concerning the marketing and importation of radio frequency devices, and for obtaining equipment authorization.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Part 9.</E>
+                 This part contains 911 and E911 requirements applicable to telecommunications carriers and commercial mobile radio service (CMRS) providers.
+            </P>
+            <CITA>[78 FR 21559, Apr. 11, 2013, as amended at 84 FR 66779, Dec. 5, 2019]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.3</SECTNO>
+            <SUBJECT>Definitions.</SUBJECT>
+            <P>
+                <E T="03">Automatic Roaming.</E>
+                 With automatic roaming, under a pre-existing contractual agreement between a subscriber's home carrier and a host carrier, a roaming subscriber is able to originate or terminate a call in the host carrier's service area without taking any special actions.
+            </P>
+            <P>
+                <E T="03">CIS Operator.</E>
+                 An operator of a CIS at a correctional facility, whether a CIS solutions provider, or a DCFO or responsible party that deploys its own CIS at a correctional facility.
+            </P>
+            <P>
+                <E T="03">Commercial mobile data service.</E>
+                 (1) Any mobile data service that is not interconnected with the public switched network and is:
+            </P>
+            <P>(i) Provided for profit; and</P>
+            <P>(ii) Available to the public or to such classes of eligible users as to be effectively available to the public.</P>
+            <P>(2) Commercial mobile data service includes services provided by Mobile Satellite Services and Ancillary Terrestrial Component providers to the extent the services provided meet this definition.</P>
+            <P>
+                <E T="03">Commercial mobile radio service.</E>
+                 A mobile service that is:
+            </P>
+            <P>
+                (a)(1) provided for profit, 
+                <E T="03">i.e.</E>
+                , with the intent of receiving compensation or monetary gain;
+            </P>
+            <P>
+                (2) An interconnected service; and
+                <PRTPAGE P="6"/>
+            </P>
+            <P>(3) Available to the public, or to such classes of eligible users as to be effectively available to a substantial portion of the public; or</P>
+            <P>(b) The functional equivalent of such a mobile service described in paragraph (a) of this definition.</P>
+            <P>(c) A variety of factors may be evaluated to make a determination whether the mobile service in question is the functional equivalent of a commercial mobile radio service, including: Consumer demand for the service to determine whether the service is closely substitutable for a commercial mobile radio service; whether changes in price for the service under examination, or for the comparable commercial mobile radio service, would prompt customers to change from one service to the other; and market research information identifying the targeted market for the service under review.</P>
+            <P>(d) Unlicensed radio frequency devices under part 15 of this chapter are excluded from this definition of Commercial mobile radio service.</P>
+            <P>
+                <E T="03">Consumer Signal Booster.</E>
+                 A bi-directional signal booster that is marketed and sold for use without modification.
+            </P>
+            <P>
+                <E T="03">Contraband Interdiction System.</E>
+                 A Contraband Interdiction System (CIS) is any system comprised of one or more stations that is used only at a permanent correctional facility that is authorized to operate such systems pursuant to this part and that is designed exclusively to prevent transmissions to or from contraband wireless devices within the boundaries of the facility and/or to obtain identifying information from such contraband wireless devices.
+            </P>
+            <P>
+                <E T="03">Designated Correctional Facility Official.</E>
+                 A Designated Correctional Facility Official (DCFO) is an official of the state, local, or Federal government responsible for administration and oversight of the relevant correctional facility where a contraband wireless device is located.
+            </P>
+            <P>
+                (1) In government-run correctional facilities, this definition requires the DCFO to be, at a minimum, the official with responsibility for oversight of the relevant facility (
+                <E T="03">e.g.,</E>
+                 the warden) or higher ranking official.
+            </P>
+            <P>(2) In privately-run correctional facilities, this definition requires the DCFO to be a government official with responsibility for oversight of the facility's performance through contract.</P>
+            <P>
+                <E T="03">Fixed Consumer Signal Booster.</E>
+                 A Consumer Signal Booster designed to be operated in a fixed location in a building.
+            </P>
+            <P>
+                <E T="03">Host Carrier.</E>
+                 For automatic roaming, the host carrier is a facilities-based CMRS carrier on whose system another carrier's subscriber roams. A facilities-based CMRS carrier may, on behalf of its subscribers, request automatic roaming service from a host carrier.
+            </P>
+            <P>
+                <E T="03">Incumbent Wide Area SMR Licensees.</E>
+                 Licensees who have obtained extended implementation authorizations in the 800 MHz or 900 MHz service, either by waiver or under Section 90.629 of these rules, and who offer real-time, two-way voice service that is interconnected with the public switched network.
+            </P>
+            <P>
+                <E T="03">Industrial Signal Booster:</E>
+                 All signal boosters other than Consumer Signal Boosters.
+            </P>
+            <P>
+                <E T="03">Interconnection or Interconnected.</E>
+                 Direct or indirect connection through automatic or manual means (by wire, microwave, or other technologies such as store and forward) to permit the transmission or reception of messages or signals to or from points in the public switched network.
+            </P>
+            <P>
+                <E T="03">Interconnected Service.</E>
+                 A service:
+            </P>
+            <P>(a) That is interconnected with the public switched network, or interconnected with the public switched network through an interconnected service provider, that gives subscribers the capability to communicate to or receive communication from all other users on the public switched network; or</P>
+            <P>
+                (b) For which a request for such interconnection is pending pursuant to section 332(c)(1)(B) of the Communications Act, 47 U.S.C. 332(c)(1)(B). A mobile service offers interconnected service even if the service allows subscribers to access the public switched network only during specified hours of the day, or if the service provides general access to points on the public switched network but also restricts access in certain limited ways. Interconnected service does not include any interface between a licensee's facilities 
+                <PRTPAGE P="7"/>
+                and the public switched network exclusively for a licensee's internal control purposes.
+            </P>
+            <P>
+                <E T="03">Managed Access System.</E>
+                 A Managed Access System (MAS) is a Contraband Interdiction System whose operations require:
+            </P>
+            <P>(1) One or more lease agreements with CMRS operators; and</P>
+            <P>(2) Real-time awareness of wireless provider spectrum use in the vicinity of the correctional facility where it is deployed.</P>
+            <P>
+                <E T="03">Manual Roaming.</E>
+                 With manual roaming, a subscriber must establish a relationship with the host carrier on whose system he or she wants to roam in order to make a call. Typically, the roaming subscriber accomplishes this in the course of attempting to originate a call by giving a valid credit card number to the carrier providing the roaming service.
+            </P>
+            <P>
+                <E T="03">Mobile Consumer Signal Booster.</E>
+                 A Consumer Signal Booster designed to operate in a moving vehicle where both uplink and downlink transmitting antennas are at least 20 cm from the user or any other person.
+            </P>
+            <P>
+                <E T="03">Mobile Service.</E>
+                 A radio communication service carried on between mobile stations or receivers and land stations, and by mobile stations communicating among themselves, and includes:
+            </P>
+            <P>(a) Both one-way and two-way radio communications services;</P>
+            <P>(b) A mobile service which provides a regularly interacting group of base, mobile, portable, and associated control and relay stations (whether licensed on an individual, cooperative, or multiple basis) for private one-way or two-way land mobile radio communications by eligible users over designated areas of operation; and</P>
+            <P>(c) Any service for which a license is required in a personal communications service under part 24 of this chapter.</P>
+            <P>
+                <E T="03">Non-individual.</E>
+                 A non-individual is a partnership and each partner is eighteen years of age or older; a corporation; an association; a state, territorial, or local government unit; or a legal entity.
+            </P>
+            <P>
+                <E T="03">Private mobile radio service.</E>
+                 A mobile service that meets neither the paragraph (a) nor paragraph (b) definitions of commercial mobile radio service set forth in this section. A mobile service that does not meet the paragraph (a) definition of commercial mobile radio service in this section is presumed to be a private mobile radio service. Private mobile radio service includes the following:
+            </P>
+            <P>(a) Not-for-profit land mobile radio and paging services that serve the licensee's internal communications needs as defined in part 90 of this chapter. Shared-use, cost-sharing, or cooperative arrangements, multiple licensed systems that use third party managers or users combining resources to meet compatible needs for specialized internal communications facilities in compliance with the safeguards of § 90.179 of this chapter are presumptively private mobile radio services;</P>
+            <P>(b) Mobile radio service offered to restricted classes of eligible users. This includes entities eligible in the Public Safety Radio Pool and Radiolocation service.</P>
+            <P>(c) 220–222 MHz land mobile service and Automatic Vehicle Monitoring systems (part 90 of this chapter) that do not offer interconnected service or that are not-for-profit; and</P>
+            <P>(d) Personal Radio Services under part 95 of this chapter (General Mobile Services, Radio Control Radio Services, and Citizens Band Radio Services); Maritime Service Stations (excluding Public Coast stations) (part 80 of this chapter); and Aviation Service Stations (part 87 of this chapter).</P>
+            <P>
+                <E T="03">Provider-Specific Consumer Signal Boosters.</E>
+                 Provider-Specific Consumer Signal Boosters may only operate on the frequencies and in the market areas of the specified licensee(s). Provider-Specific Consumer Signal Boosters may only be certificated and operated with the consent of the licensee(s) whose frequencies are being amplified by the device.
+            </P>
+            <P>
+                <E T="03">Public Switched Network.</E>
+                 Any common carrier switched network, whether by wire or radio, including local exchange carriers, interexchange carriers, and mobile service providers, that uses the North American Numbering Plan in connection with the provision of switched services.
+            </P>
+            <P>
+                <E T="03">Signal booster.</E>
+                 A device that automatically receives, amplifies, and retransmits on a bi- or unidirectional basis, the signals received from base, 
+                <PRTPAGE P="8"/>
+                fixed, mobile, or portable stations, with no change in frequency or authorized bandwidth.
+            </P>
+            <P>
+                <E T="03">Signal booster operator.</E>
+                 The signal booster operator is the person or persons with control over the functioning of the signal booster, or the person or persons with the ability to deactivate it in the event of technical malfunctioning or harmful interference to a primary radio service.
+            </P>
+            <P>
+                <E T="03">Wideband Consumer Signal Boosters.</E>
+                 Wideband Consumer Signal Boosters may operate on the frequencies and in the market areas of multiple licensees.
+            </P>
+            <CITA>[59 FR 18495, Apr. 19, 1994]</CITA>
+            <EDNOTE>
+                <HD SOURCE="HED">Editorial Note:</HD>
+                <P>
+                    For 
+                    <E T="04">Federal Register</E>
+                     citations affecting § 20.3, see the List of CFR Sections Affected, which appears in the Finding Aids section of the printed volume and at www.fdsys.gov.
+                </P>
+            </EDNOTE>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.5</SECTNO>
+            <SUBJECT>Citizenship.</SUBJECT>
+            <P>(a) This rule implements section 310 of the Communications Act, 47 U.S.C. 310, regarding the citizenship of licensees in the commercial mobile radio services. Commercial mobile radio service authorizations may not be granted to or held by:</P>
+            <P>(1) Any foreign government or any representative thereof;</P>
+            <P>(2) Any alien or the representative of any alien;</P>
+            <P>(3) Any corporation organized under the laws of any foreign government;</P>
+            <P>(4) Any corporation of which more than one-fifth of the capital stock is owned of record or voted by aliens or their representatives or by a foreign government or representative thereof or by any corporation organized under the laws of a foreign country; or</P>
+            <P>(5) Any corporation directly or indirectly controlled by any other corporation of which more than one-fourth of the capital stock is owned of record or voted by aliens, their representatives, or by a foreign government or representative thereof, or by any corporation organized under the laws of a foreign country, if the Commission finds that the public interest will be served by the refusal or revocation of such license.</P>
+            <P>(b) The limits listed in paragraph (a) of this section may be exceeded by eligible individuals who held ownership interests on May 24, 1993, pursuant to the waiver provisions established in section 332(c)(6) of the Communications Act. Transfers of ownership to any other person in violation of paragraph (a) of this section are prohibited.</P>
+            <CITA>[59 FR 18495, Apr. 19, 1994, as amended at 61 FR 55580, Oct. 28, 1996]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.6</SECTNO>
+            <SUBJECT>CMRS spectrum aggregation limit.</SUBJECT>
+            <P>
+                (a) 
+                <E T="03">Spectrum limitation.</E>
+                 No licensee in the broadband PCS, cellular, or SMR services (including all parties under common control) regulated as CMRS (
+                <E T="03">see</E>
+                 47 CFR 20.9) shall have an attributable interest in a total of more than 55 MHz of licensed broadband PCS, cellular, and SMR spectrum regulated as CMRS with significant overlap in any geographic area.
+            </P>
+            <P>
+                (b) 
+                <E T="03">SMR spectrum.</E>
+                 To calculate the amount of attributable SMR spectrum for purposes of paragraph (a) of this section, an entity must count all 800 MHz and 900 MHz channels located at any SMR base station inside the geographic area (MTA or BTA) where there is significant overlap. All 800 MHz channels located on at least one of those identified base stations count as 50 kHz (25 kHz paired), and all 900 MHz channels located on at least one of those identified base stations count as 25 kHz (12.5 kHz paired); provided that any discrete 800 or 900 MHz channel shall be counted only once per licensee within the geographic area, even if the licensee in question utilizes the same channel at more than one location within the relevant geographic area. No more than 10 MHz of SMR spectrum in the 800 and 900 MHz SMR services will be attributed to an entity when determining compliance with the cap.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Significant overlap.</E>
+                 (1) For purposes of paragraph (a) of this section, significant overlap of a PCS licensed service area and CGSA(s) (as defined in § 22.911 of this chapter) or SMR service area(s) occurs when at least 10 percent of the population of the PCS licensed service area for the counties contained therein, as determined by the latest available decennial census figures as complied by the Bureau of the Census, is within the CGSA(s) and/or SMR service area(s).
+            </P>
+            <P>
+                (2) The Commission shall presume that an SMR service area covers less 
+                <PRTPAGE P="9"/>
+                than 10 percent of the population of a PCS service area if none of the base stations of the SMR licensee are located within the PCS service area. For an SMR licensee's base stations that are located within a PCS service area, the channels licensed at those sites will be presumed to cover 10 percent of the population of the PCS service area, unless the licensee shows that its protected service contour for all of its base stations covers less than 10 percent of the population of the PCS service area.
+            </P>
+            <P>
+                (d) 
+                <E T="03">Ownership attribution.</E>
+                 For purposes of paragraph (a) of this section, ownership and other interests in broadband PCS licensees, cellular licensees, or SMR licensees will be attributed to their holders pursuant to the following criteria:
+            </P>
+            <P>(1) Controlling interest shall be attributable. Controlling interest means majority voting equity ownership, any general partnership interest, or any means of actual working control (including negative control) over the operation of the licensee, in whatever manner exercised.</P>
+            <P>(2) Partnership and other ownership interests and any stock interest amounting to 20 percent or more of the equity, or outstanding stock, or outstanding voting stock of a broadband PCS, cellular or SMR licensee shall be attributed, except that ownership will not be attributed unless the partnership and other ownership interests and any stock interest amount to at least 40 percent of the equity, or outstanding stock, or outstanding voting stock of a broadband PCS, cellular or SMR licensee if the ownership interest is held by a small business or a rural telephone company, as these terms are defined in § 1.2110 of this chapter or other related provisions of the Commission's rules, or if the ownership interest is held by an entity with a non-controlling equity interest in a broadband PCS licensee or applicant that is a small business.</P>
+            <P>(3) Investment companies, as defined in 15 U.S.C. 80a–3, insurance companies and banks holding stock through their trust departments in trust accounts will be considered to have an attributable interest only if they hold 40 percent or more of the outstanding voting stock of a corporate broadband PCS, cellular or SMR licensee, or if any of the officers or directors of the broadband PCS, cellular or SMR licensee are representatives of the investment company, insurance company or bank concerned. Holdings by a bank or insurance company will be aggregated if the bank or insurance company has any right to determine how the stock will be voted. Holdings by investment companies will be aggregated if under common management.</P>
+            <P>(4) Non-voting stock shall be attributed as an interest in the issuing entity if in excess of the amounts set forth in paragraph (d)(2) of this section.</P>
+            <P>(5) Debt and instruments such as warrants, convertible debentures, options, or other interests (except non-voting stock) with rights of conversion to voting interests shall not be attributed unless and until converted, except that this provision does not apply in determining whether an entity is a small business, a rural telephone company, or a business owned by minorities and/or women, as these terms are defined in § 1.2110 of this chapter or other related provisions of the Commission's rules.</P>
+            <P>(6) Limited partnership interests shall be attributed to limited partners and shall be calculated according to both the percentage of equity paid in and the percentage of distribution of profits and losses.</P>
+            <P>(7) Officers and directors of a broadband PCS licensee or applicant, cellular licensee, or SMR licensee shall be considered to have an attributable interest in the entity with which they are so associated. The officers and directors of an entity that controls a broadband PCS licensee or applicant, a cellular licensee, or an SMR licensee shall be considered to have an attributable interest in the broadband PCS licensee or applicant, cellular licensee, or SMR licensee.</P>
+            <P>
+                (8) Ownership interests that are held indirectly by any party through one or more intervening corporations will be determined by successive multiplication of the ownership percentages for each link in the vertical ownership chain and application of the relevant attribution benchmark to the resulting product, except that if the ownership percentage for an interest in any link 
+                <PRTPAGE P="10"/>
+                in the chain exceeds 50 percent or represents actual control, it shall be treated as if it were a 100 percent interest. (For example, if A owns 20% of B, and B owns 40% of licensee C, then A's interest in licensee C would be 8%. If A owns 20% of B, and B owns 51% of licensee C, then A's interest in licensee C would be 20% because B's ownership of C exceeds 50%.)
+            </P>
+            <P>(9) Any person who manages the operations of a broadband PCS, cellular, or SMR licensee pursuant to a management agreement shall be considered to have an attributable interest in such licensee if such person, or its affiliate, has authority to make decisions or otherwise engage in practices or activities that determine, or significantly influence,</P>
+            <P>(i) The nature or types of services offered by such licensee;</P>
+            <P>(ii) The terms upon which such services are offered; or</P>
+            <P>(iii) The prices charged for such services.</P>
+            <P>(10) Any licensee or its affiliate who enters into a joint marketing arrangements with a broadband PCS, cellular, or SMR licensee, or its affiliate shall be considered to have an attributable interest, if such licensee, or its affiliate, has authority to make decisions or otherwise engage in practices or activities that determine, or significantly influence,</P>
+            <P>(i) The nature or types of services offered by such licensee;</P>
+            <P>(ii) The terms upon which such services are offered; or</P>
+            <P>(iii) The prices charged for such services.</P>
+            <P>
+                (e) 
+                <E T="03">Divestiture.</E>
+                 (1) Divestiture of interests as a result of a transfer of control or assignment of authorization must occur prior to consummating the transfer or assignment, except that a licensee that meets the requirements set forth in paragraph (e)(2) of this section shall have 90 days from final grant to come into compliance with the spectrum aggregation limit.
+            </P>
+            <P>(2) An applicant with:</P>
+            <P>(i) Controlling or attributable ownership interests in broadband PCS, cellular, and/or SMR licenses where the geographic license areas cover 20 percent or less of the applicant's service area population;</P>
+            <P>(ii) Attributable interests in broadband PCS, cellular, and/or SMR licenses solely due to management agreements or joint marketing agreements; or</P>
+            <P>(iii) Non-controlling attributable interests in broadband PCS, cellular, and/or SMR licenses, regardless of the degree to which the geographic license areas cover the applicant's service area population, shall be eligible to have its application granted subject to a condition that the licensee shall come into compliance with the spectrum limitation set out in paragraph (a) within ninety (90) days after final grant. For purposes of this paragraph, a “non-controlling attributable interest” is one in which the holder has less than a fifty (50) percent voting interest and there is an unaffiliated single holder of a fifty (50) percent or greater voting interest.</P>
+            <P>(3) The applicant for a license that, if granted, would exceed the spectrum aggregation limitation in paragraph (a) of this section shall certify on its application that it and all parties to the application will come into compliance with this limitation. If such an applicant is a successful bidder in an auction, it must submit with its long-form application a signed statement describing its efforts to date and future plans to come into compliance with the spectrum aggregation limitation. A similar statement must also be included with any application for assignment of licenses or transfer of control that, if granted, would exceed the spectrum aggregation limit.</P>
+            <P>
+                (4)(i) Parties holding controlling interests in broadband PCS, cellular, and/or SMR licensees that conflict with the attribution threshold or geographic overlap limitations set forth in this section will be considered to have come into compliance if they have submitted to the Commission an application for assignment of license or transfer of control of the conflicting licensee (
+                <E T="03">see</E>
+                 § 1.948 of this chapter; 
+                <E T="03">see also</E>
+                 § 24.839 of this chapter (PCS)) by which, if granted, such parties no longer would have an attributable interest in the conflicting license. Divestiture may be to an interim trustee if a buyer has not been secured in the required period of time, as long as the applicant has no interest in or control of the trustee, 
+                <PRTPAGE P="11"/>
+                and the trustee may dispose of the license as it sees fit. Where parties to broadband PCS, cellular, or SMR applications hold less than controlling (but still attributable) interests in broadband PCS, cellular, or SMR licensee(s), they shall submit a certification that the applicant and all parties to the application have come into compliance with the limitations on spectrum aggregation set forth in this section.
+            </P>
+            <P>(ii) Applicants that meet the requirements of paragraph (e)(2) of this section must tender to the Commission within ninety (90) days of final grant of the initial license, such an assignment or transfer application or, in the case of less than controlling (but still attributable) interests, a written certification that the applicant and all parties to the application have come into compliance with the limitations on spectrum aggregation set forth in this section. If no such transfer or assignment application or certification is tendered to the Commission within ninety (90) days of final grant of the initial license, the Commission may consider the certification and the divestiture statement to be material, bad faith misrepresentations and shall invoke the condition on the initial license or the assignment or transfer, cancelling or rescinding it automatically, shall retain all monies paid to the Commission, and, based on the facts presented, shall take any other action it may deem appropriate.</P>
+            <P>
+                (f) 
+                <E T="03">Sunset.</E>
+                 This rule section shall cease to be effective January 1, 2003.
+            </P>
+            <NOTE>
+                <HD SOURCE="HED">Note 1 to § 20.6:</HD>
+                <P>For purposes of the ownership attribution limit, all ownership interests in operations that serve at least 10 percent of the population of the PCS service area should be included in determining the extent of a PCS applicant's cellular or SMR ownership.</P>
+            </NOTE>
+            <NOTE>
+                <HD SOURCE="HED">Note 2 to § 20.6:</HD>
+                <P>When a party owns an attributable interest in more than one cellular or SMR system that overlaps a PCS service area, the total population in the overlap area will apply on a cumulative basis.</P>
+            </NOTE>
+            <NOTE>
+                <HD SOURCE="HED">Note 3 to § 20.6:</HD>
+                <P>Waivers of § 20.6(d) may be granted upon an affirmative showing:</P>
+                <P>(1) That the interest holder has less than a 50 percent voting interest in the licensee and there is an unaffiliated single holder of a 50 percent or greater voting interest;</P>
+                <P>(2) That the interest holder is not likely to affect the local market in an anticompetitive manner;</P>
+                <P>(3) That the interest holder is not involved in the operations of the licensee and does not have the ability to influence the licensee on a regular basis; and</P>
+                <P>(4) That grant of a waiver is in the public interest because the benefits to the public of common ownership outweigh any potential anticompetitive harm to the market.</P>
+            </NOTE>
+            <CITA>[64 FR 54574, Oct. 7, 1999, as amended at 67 FR 1642, Jan. 14, 2002]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§§ 20.7–20.9</SECTNO>
+            <RESERVED>[Reserved]</RESERVED>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.11</SECTNO>
+            <SUBJECT>Interconnection to facilities of local exchange carriers.</SUBJECT>
+            <P>(a) A local exchange carrier must provide the type of interconnection reasonably requested by a mobile service licensee or carrier, within a reasonable time after the request, unless such interconnection is not technically feasible or economically reasonable. Complaints against carriers under section 208 of the Communications Act, 47 U.S.C. 208, alleging a violation of this section shall follow the requirements of §§ 1.711–1.734 of this chapter, 47 CFR 1.711–1.734.</P>
+            <P>(b) Local exchange carriers and commercial mobile radio service providers shall exchange Non-Access Telecommunications Traffic, as defined in § 51.701 of this chapter, under a bill-and-keep arrangement, as defined in § 51.713 of this chapter, unless they mutually agree otherwise.</P>
+            <P>(c) Local exchange carriers and commercial mobile radio service providers shall also comply with applicable provisions of part 51 of this chapter.</P>
+            <P>(d) Local exchange carriers may not impose compensation obligations for traffic not subject to access charges upon commercial mobile radio service providers pursuant to tariffs.</P>
+            <P>
+                (e) An incumbent local exchange carrier may request interconnection from a commercial mobile radio service provider and invoke the negotiation and arbitration procedures contained in section 252 of the Act. A commercial mobile radio service provider receiving 
+                <PRTPAGE P="12"/>
+                a request for interconnection must negotiate in good faith and must, if requested, submit to arbitration by the state commission.
+            </P>
+            <CITA>[59 FR 18495, Apr. 19, 1994, as amended at 61 FR 45619, Aug. 29, 1996; 70 FR 16145, Mar. 30, 2005; 76 FR 73852, Nov. 29, 2011; 77 FR 1640, Jan. 11, 2012]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.12</SECTNO>
+            <SUBJECT>Resale and roaming.</SUBJECT>
+            <P>(a)(1) Scope of manual roaming and resale. Paragraph (c) of this section is applicable to providers of Broadband Personal Communications Services (part 24, subpart E of this chapter), Cellular Radio Telephone Service (part 22, subpart H of this chapter), Specialized Mobile Radio Services in the 800 MHz and 900 MHz bands (included in part 90, subpart S of this chapter), and 900 MHz Broadband Service (included in part 27, subpart P of this chapter) if such providers offer real-time, two-way switched voice or data service that is interconnected with the public switched network and utilizes an in-network switching facility that enables the provider to re-use frequencies and accomplish seamless hand-offs of subscriber calls. The scope of paragraph (b) of this section, concerning the resale rule, is further limited so as to exclude from the requirements of that paragraph those Broadband Personal Communications Services C, D, E, and F block licensees that do not own and control and are not owned and controlled by firms also holding cellular A or B block licenses.</P>
+            <P>
+                (2) 
+                <E T="03">Scope of automatic roaming.</E>
+                 Paragraph (d) of this section is applicable to CMRS carriers if such carriers offer real-time, two-way switched voice or data service that is interconnected with the public switched network and utilizes an in-network switching facility that enables the carrier to re-use frequencies and accomplish seamless hand-offs of subscriber calls. Paragraph (d) of this section is also applicable to the provision of push-to-talk and text-messaging service by CMRS carriers.
+            </P>
+            <P>
+                (3) 
+                <E T="03">Scope of offering roaming arrangements for commercial mobile data services.</E>
+                 Paragraph (e) of this section is applicable to all facilities-based providers of commercial mobile data services.
+            </P>
+            <P>
+                (b) 
+                <E T="03">Resale.</E>
+                 The resale rule is applicable as follows:
+            </P>
+            <P>(1) Each carrier subject to paragraph (b) of this section shall not restrict the resale of its services, unless the carrier demonstrates that the restriction is reasonable.</P>
+            <P>(2) The resale requirement shall not apply to customer premises equipment, whether or not it is bundled with services subject to the resale requirement in this paragraph.</P>
+            <P>
+                (3) This paragraph shall cease to be effective five years after the last group of initial licenses for broadband PCS spectrum in the 1850–1910 and the 1930–1990 MHz bands is awarded; 
+                <E T="03">i.e.</E>
+                , at the close of November 24, 2002.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Manual roaming.</E>
+                 Each carrier subject to paragraph (a)(1) of this section must provide mobile radio service upon request to all subscribers in good standing to the services of any carrier subject to paragraph (a)(1) of this section, including roamers, while such subscribers are located within any portion of the licensee's licensed service area where facilities have been constructed and service to subscribers has commenced, if such subscribers are using mobile equipment that is technically compatible with the licensee's base stations.
+            </P>
+            <P>
+                (d) 
+                <E T="03">Automatic roaming.</E>
+                 Upon a reasonable request, it shall be the duty of each host carrier subject to paragraph (a)(2) of this section to provide automatic roaming to any technologically compatible, facilities-based CMRS carrier on reasonable and not unreasonably discriminatory terms and conditions, pursuant to Sections 201 and 202 of the Communications Act, 47 U.S.C. 201 and 202. The Commission shall presume that a request by a technologically compatible CMRS carrier for automatic roaming is reasonable pursuant to Sections 201 and 202 of the Communications Act, 47 U.S.C. 201 and 202. This presumption may be rebutted on a case by case basis. The Commission will resolve automatic roaming disputes on a case-by-case basis, taking into consideration the totality of the circumstances presented in each case.
+            </P>
+            <P>
+                (e) 
+                <E T="03">Offering roaming arrangements for commercial mobile data services.</E>
+                 (1) A facilities-based provider of commercial mobile data services is required to offer roaming arrangements to other 
+                <PRTPAGE P="13"/>
+                such providers on commercially reasonable terms and conditions, subject to the following limitations:
+            </P>
+            <P>(i) Providers may negotiate the terms of their roaming arrangements on an individualized basis;</P>
+            <P>(ii) It is reasonable for a provider not to offer a data roaming arrangement to a requesting provider that is not technologically compatible;</P>
+            <P>(iii) It is reasonable for a provider not to offer a data roaming arrangement where it is not technically feasible to provide roaming for the particular data service for which roaming is requested and any changes to the host provider's network necessary to accommodate roaming for such data service are not economically reasonable;</P>
+            <P>(iv) It is reasonable for a provider to condition the effectiveness of a roaming arrangement on the requesting provider's provision of mobile data service to its own subscribers using a generation of wireless technology comparable to the technology on which the requesting provider seeks to roam.</P>
+            <P>(2) A party alleging a violation of this section may file a formal or informal complaint pursuant to the procedures in §§ 1.716 through 1.718, 1.720, 1.721, and 1.723 through 1.735 of this chapter, which sections are incorporated herein. For purposes of § 20.12(e), references to a “carrier” or “common carrier” in the formal and informal complaint procedures incorporated herein will mean a provider of commercial mobile data services. The Commission will resolve such disputes on a case-by-case basis, taking into consideration the totality of the circumstances presented in each case. The remedy of damages shall not be available in connection with any complaint alleging a violation of this section. Whether the appropriate procedural vehicle for a dispute is a complaint under this paragraph or a petition for declaratory ruling under § 1.2 of this chapter may vary depending on the circumstances of each case.</P>
+            <CITA>[64 FR 61027, Nov. 9, 1999, as amended at 65 FR 58482, Sept. 29, 2000; 72 FR 50074, Aug. 30, 2007; 75 FR 22276, Apr. 28, 2010; 76 FR 26220, May 6, 2011; 85 FR 43134, July 16, 2020]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.13</SECTNO>
+            <SUBJECT>State petitions for authority to regulate rates.</SUBJECT>
+            <P>(a) States may petition for authority to regulate the intrastate rates of any commercial mobile radio service. The petition must include the following:</P>
+            <P>(1) Demonstrative evidence that market conditions in the state for commercial mobile radio services do not adequately protect subscribers to such services from unjust and unreasonable rates or rates that are unjustly or unreasonably discriminatory. Alternatively, a state's petition may include demonstrative evidence showing that market conditions for commercial mobile radio services do not protect subscribers adequately from unjust and unreasonable rates, or rates that are unjustly or unreasonably discriminatory, and that a substantial portion of the commercial mobile radio service subscribers in the state or a specified geographic area have no alternative means of obtaining basic telephone service. This showing may include evidence of the range of basic telephone service alternatives available to consumers in the state.</P>
+            <P>(2) The following is a non-exhaustive list of examples of the types of evidence, information, and analysis that may be considered pertinent to determine market conditions and consumer protection by the Commission in reviewing any petition filed by a state under this section:</P>
+            <P>(i) The number of commercial mobile radio service providers in the state, the types of services offered by commercial mobile radio service providers in the state, and the period of time that these providers have offered service in the state;</P>
+            <P>(ii) The number of customers of each commercial mobile radio service provider in the state; trends in each provider's customer base during the most recent annual period or other data covering another reasonable period if annual data is unavailable; and annual revenues and rates of return for each commercial mobile radio service provider;</P>
+            <P>
+                (iii) Rate information for each commercial mobile radio service provider, including trends in each provider's rates during the most recent annual period or other data covering another 
+                <PRTPAGE P="14"/>
+                reasonable period if annual data is unavailable;
+            </P>
+            <P>(iv) An assessment of the extent to which services offered by the commercial mobile radio service providers the state proposes to regulate are substitutable for services offered by other carriers in the state;</P>
+            <P>(v) Opportunities for new providers to enter into the provision of competing services, and an analysis of any barriers to such entry;</P>
+            <P>(vi) Specific allegations of fact (supported by affidavit of person with personal knowledge) regarding anti-competitive or discriminatory practices or behavior by commercial mobile radio service providers in the state;</P>
+            <P>(vii) Evidence, information, and analysis demonstrating with particularity instances of systematic unjust and unreasonable rates, or rates that are unjust or unreasonably discriminatory, imposed upon commercial mobile radio service subscribers. Such evidence should include an examination of the relationship between rates and costs. Additionally, evidence of a pattern of such rates, that demonstrates the inability of the commercial mobile radio service marketplace in the state to produce reasonable rates through competitive forces will be considered especially probative; and</P>
+            <P>(viii) Information regarding customer satisfaction or dissatisfaction with services offered by commercial mobile radio service providers, including statistics and other information about complaints filed with the state regulatory commission.</P>
+            <P>(3) Petitions must include a certification that the state agency filing the petition is the duly authorized state agency responsible for the regulation of telecommunication services provided in the state.</P>
+            <P>(4) Petitions must identify and describe in detail the rules the state proposes to establish if the petition is granted.</P>
+            <P>(5) States have the burden of proof. Interested parties may file comments in support or in opposition to the petition within 30 days after public notice of the filing of a petition by a state under this section. Any interested party may file a reply within 15 days after the expiration of the filing period for comments. No additional pleadings may be filed. Except for § 1.45 of this chapter, practice and procedure rules contained in §§ 1.42–1.52 of this chapter shall apply. The provisions of §§ 1.771–1.773 of this chapter do not apply.</P>
+            <P>(6) The Commission shall act upon any petition filed by a state under this paragraph not later than the end of the nine-month period after the filing of the petition.</P>
+            <P>(7) If the Commission grants the petition, it shall authorize the state to regulate rates for commercial mobile radio services in the state during a reasonable period of time, as specified by the Commission. The period of time specified by the Commission will be that necessary to ensure that rates are just and reasonable, or not unjustly or unreasonably discriminatory.</P>
+            <P>(b) States that regulated rates for commercial mobile services as of June 1, 1993, may petition the Commission under this section before August 10, 1994, to extend this authority.</P>
+            <P>(1) The petition will be acted upon by the Commission in accordance with the provisions of paragraphs (a)(1) through (a)(5) of this section.</P>
+            <P>(2) The Commission shall act upon the petition (including any reconsideration) not later than the end of the 12-month period following the date of the filing of the petition by the state involved. Commercial mobile radio service providers offering such service in the state shall comply with the existing regulations of the state until the petition and any reconsideration of the petition are acted upon by the Commission.</P>
+            <P>(3) The provisions of paragraph (a)(7) of this section apply to any petition granted by the Commission under this paragraph.</P>
+            <P>(c) No sooner than 18 months from grant of authority by the Commission under this section for state rate regulations, any interested party may petition the Commission for an order to discontinue state authority for rate regulation.</P>
+            <P>
+                (1) Petitions to discontinue state authority for rate regulation must be based on recent empirical data or other significant evidence demonstrating that the exercise of rate authority by a state is no longer necessary to ensure 
+                <PRTPAGE P="15"/>
+                that the rates for commercial mobile are just and reasonable or not unjustly or unreasonably discriminatory.
+            </P>
+            <P>(2) Any interested party may file comments in support of or in opposition to the petition within 30 days after public notice of the filing of the petition. Any interested party may file a reply within 15 days after the time for filing comments has expired. No additional pleadings may be filed. Except for 1.45 of this chapter, practice and procedure rules contained in § 1.42–1.52 of this chapter apply. The provisions of §§ 1.771–1.773 of this chapter do not apply.</P>
+            <P>(3) The Commission shall act upon any petition filed by any interested party under this paragraph within nine months after the filing of the petition.</P>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.15</SECTNO>
+            <SUBJECT>Requirements under Title II of the Communications Act.</SUBJECT>
+            <P>(a) Commercial mobile radio services providers, to the extent applicable, must comply with sections 201, 202, 206, 207, 208, 209, 216, 217, 223, 225, 226, 227, and 228 of the Communications Act, 47 U.S.C. 201, 202, 206, 207, 208, 209, 216, 217, 223, 225, 226, 227, 228; part 68 of this chapter, 47 CFR part 68; and §§ 1.701–1.748, and 1.815 of this chapter, 47 CFR 1.701–1.748, 1.815.</P>
+            <P>(b) Commercial mobile radio service providers are not required to:</P>
+            <P>
+                (1) File with the Commission copies of contracts entered into with other carriers or comply with other reporting requirements, or with §§ 1.781 through 1.814 and 43.21 of this chapter; except that commercial radio service providers that are facilities-based providers of broadband service or facilities-based providers of mobile telephony service, as described in § 1.7001(b)(1) and (3) of this chapter, are required to file reports pursuant to §§ 1.7000–1.7002 of this chapter. For purposes of this section, 
+                <E T="03">mobile telephony</E>
+                 is defined as real-time, two-way switched voice service that is interconnected with the public switched network utilizing an in-network switching facility that enables the provider to reuse frequencies and accomplish seamless handoff of subscriber calls.
+            </P>
+            <P>(2) Seek authority for interlocking directors (section 212 of the Communications Act);</P>
+            <P>(3) Submit applications for new facilities or discontinuance of existing facilities (section 214 of the Communications Act).</P>
+            <P>(c) Commercial mobile radio service providers shall not file tariffs for international and interstate service to their customers, interstate access service, or international and interstate operator service. Sections 1.771 through 1.773 and part 61 of this chapter are not applicable to international and interstate services provided by commercial mobile radio service providers. Commercial mobile radio service providers shall cancel tariffs for international and interstate service to their customers, interstate access service, and international and interstate operator service.</P>
+            <P>(d) Except as specified as in paragraphs (d)(1) and (2), nothing in this section shall be construed to modify the Commission's rules and policies on the provision of international service under part 63 of this chapter.</P>
+            <P>(1) Notwithstanding the provisions of § 63.21(c) of this chapter, a commercial mobile radio service provider is not required to comply with § 42.10 of this chapter.</P>
+            <P>(2) A commercial mobile radio service (CMRS) provider that is classified as dominant under § 63.10 of this chapter due to an affiliation with a foreign carrier is required to comply with § 42.11 of this chapter if the affiliated foreign carrier collects settlement payments from U.S. carriers for terminating U.S. international switched traffic at the foreign end of the route. Such a CMRS provider is not required to comply with § 42.11, however, if it provides service on the affiliated route solely through the resale of an unaffiliated facilities-based provider's international switched services.</P>
+            <P>
+                (3) For purposes of paragraphs (d)(1) and (2) of this section, 
+                <E T="03">affiliated</E>
+                 and 
+                <E T="03">foreign carrier</E>
+                 are defined in § 63.09 of this Chapter.
+                <PRTPAGE P="16"/>
+            </P>
+            <P>(e) For obligations of commercial mobile radio service providers to provide local number portability, see § 52.1 of this chapter.</P>
+            <CITA>[59 FR 18495, Apr. 19, 1994, as amended at 61 FR 38637, July 25, 1996; 63 FR 43040, Aug. 11, 1998; 65 FR 19685, Apr. 12, 2000; 65 FR 24654, Apr. 27, 2000; 66 FR 16879, Mar. 28, 2001; 69 FR 77938, Dec. 29, 2004; ; 85 FR 838, Jan. 8, 2020]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.18</SECTNO>
+            <RESERVED>[Reserved]</RESERVED>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.19</SECTNO>
+            <SUBJECT>Hearing aid-compatible mobile handsets.</SUBJECT>
+            <P>
+                (a) 
+                <E T="03">Definitions.</E>
+                 For purposes of this section:
+            </P>
+            <P>
+                <E T="03">2007 ANSI standard</E>
+                 refers to the technical standard for hearing aid compatibility applicable to frequencies between 800 MHz and 3 GHz as set forth in ANSI C63.19–2007.
+            </P>
+            <P>
+                <E T="03">2011 ANSI standard</E>
+                 refers to the technical standard for hearing aid compatibility applicable to frequencies between 698 MHz and 6 GHz as set forth in ANSI C63.19–2011.
+            </P>
+            <P>
+                <E T="03">2019 ANSI standard</E>
+                 refers to the technical standard for hearing aid compatibility applicable to frequencies between 614 MHz and 6 GHz as set forth in ANSI C63.19–2019.
+            </P>
+            <P>
+                <E T="03">ANSI standard</E>
+                 refers to the 2007, 2011, and 2019 ANSI standards as a group.
+            </P>
+            <P>
+                <E T="03">Any version of the ANSI standard previous to the 2019 ANSI standard</E>
+                 refers to the 2007 and 2011 ANSI standards.
+            </P>
+            <P>
+                <E T="03">Digital mobile service</E>
+                 refers to a terrestrial mobile service that enables two-way real-time voice communications among members of the public or a substantial portion of the public, including both interconnected and non-interconnected voice over internet protocol (VoIP) services, to the extent that such service is provided over frequencies specified in the 2007 ANSI standard, 2011 ANSI standard or the 2019 ANSI standard.
+            </P>
+            <P>
+                <E T="03">Handset</E>
+                 refers to a device used in delivery of digital mobile service in the United States that contains a built-in speaker and is typically held to the ear in any of its ordinary uses.
+            </P>
+            <P>
+                <E T="03">Manufacturer</E>
+                 refers to a manufacturer of handsets that are used in delivery of digital mobile service, as defined in this section, in the United States.
+            </P>
+            <P>
+                <E T="03">Model</E>
+                 refers to a wireless handset device that a manufacturer has designated as a distinct device model, consistent with its own marketing practices. However, if a manufacturer assigns different model device designations solely to distinguish units sold to different carriers, or to signify other distinctions that do not relate to either form, features, or capabilities, such designations shall not count as distinct models for purposes of this section.
+            </P>
+            <P>
+                <E T="03">Service provider</E>
+                 refers to a provider of digital mobile service, as defined in this section, in the United States.
+            </P>
+            <P>
+                <E T="03">Tier I carrier</E>
+                 refers to a CMRS provider that offers such service nationwide.
+            </P>
+            <P>
+                <E T="03">Volume control requirements</E>
+                 refers to the technical standard established by ANSI/TIA–5050–2018.
+            </P>
+            <P>
+                (b) 
+                <E T="03">Hearing aid compatibility; technical standards</E>
+                —(1) 
+                <E T="03">Handset compatibility on or after June 5, 2023.</E>
+                 In order to satisfy a manufacturer or service provider's obligations under paragraphs (c) and (d) of this section, a handset submitted for equipment certification or for a permissive change relating to hearing aid compatibility on or after June 5, 2023 must meet the 2019 ANSI standard.
+            </P>
+            <P>
+                (2) 
+                <E T="03">Handset compatibility before June 5, 2023.</E>
+                 In order to satisfy a manufacturer or service provider's obligations under paragraphs (c) and (d) of this section, a handset submitted for equipment certification or for a permissive change relating to hearing aid compatibility before June 5, 2023 must meet either:
+            </P>
+            <P>(i) At a minimum, the M3 and T3 ratings associated with the 2011 ANSI standard; or</P>
+            <P>(ii) The 2019 ANSI standard.</P>
+            <P>
+                (3) 
+                <E T="03">Handsets operating over multiple frequency bands or air interfaces.</E>
+                 (i) Beginning on June 5, 2023, a handset is hearing aid-compatible if it meets the 2019 ANSI standard for all frequency bands that are specified in the ANSI standard and all air interfaces over which it operates on those frequency bands, and the handset has been certified as compliant with the test requirements for the 2019 ANSI standard pursuant to § 2.1033(d) of this chapter.
+            </P>
+            <P>
+                (ii) Before June 5, 2023, a handset that uses only the frequencies specified in the 2011 ANSI standard is hearing aid-compatible with regard to radio frequency interference and inductive 
+                <PRTPAGE P="17"/>
+                coupling if it meets the 2011 ANSI standard for all frequency bands and air interfaces over which it operates, and the handset has been certified as compliant with the test requirements for the 2011 ANSI standard pursuant to § 2.1033(d) of this chapter. Before June 5, 2023, a handset that incorporates operations outside the frequencies specified in the 2011 ANSI standard is hearing aid-compatible if the handset otherwise satisfies the requirements of this paragraph (b).
+            </P>
+            <P>
+                (4) 
+                <E T="03">Factual questions.</E>
+                 All factual questions of whether a handset meets the technical standard(s) of this paragraph (b) shall be referred for resolution to the Chief, Office of Engineering and Technology, Federal Communications Commission, 45 L Street NE, Washington, DC 20554.
+            </P>
+            <P>
+                (5) 
+                <E T="03">Certification.</E>
+                 A handset certified under any version of the ANSI standard previous to the 2019 ANSI standard remains hearing aid-compatible for purposes of this section.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Phase-in of hearing aid-compatibility requirements.</E>
+                 The following applies to each manufacturer and service provider that offers handsets used to deliver the services specified in paragraph (a) of this section and that does not fall within the 
+                <E T="03">de minimis</E>
+                 exception set forth in paragraph (e) of this section.
+            </P>
+            <P>
+                (1) 
+                <E T="03">Manufacturers—Number of hearing aid-compatible handset models offered.</E>
+                 For each digital air interface for which it offers handsets in the United States or imported for use in the United States, each manufacturer must offer hearing aid compatible handsets as follows:
+            </P>
+            <P>(i) Beginning October 3, 2018, at least sixty-six (66) percent of those handset models (rounded down to the nearest whole number) must be hearing aid-compatible under paragraph (b) of this section.</P>
+            <P>(ii) Beginning October 4, 2021, at least eighty-five (85) percent of those handset models (rounded down to the nearest whole number) must be hearing aid-compatible under paragraph (b) of this section.</P>
+            <P>
+                (2) 
+                <E T="03">Tier I carriers—Number of hearing aid-compatible handsets models offered.</E>
+                 For each digital air interface for which it offers handsets to customers, each Tier I carrier must:
+            </P>
+            <P>(i) Beginning April 3, 2019, ensure that at least sixty-six (66) percent of the handset models it offers are hearing aid-compatible under paragraph (b) of this section, calculated based on the total number of unique handset models the carrier offers nationwide.</P>
+            <P>(ii) Beginning April 4, 2022, ensure that at least eighty-five (85) percent of the handset models it offers are hearing aid-compatible under paragraph (b) of this section, calculated based on the total number of unique handset models the carrier offers nationwide.</P>
+            <P>
+                (3) 
+                <E T="03">Service providers other than Tier I carriers—Number of hearing aid-compatible handsets models offered.</E>
+                 For each digital air interface for which it offers handsets to customers, each service provider other than a Tier I carrier must:
+            </P>
+            <P>(i) Beginning April 3, 2020, ensure that at least sixty-six (66) percent of the handset models it offers are hearing aid-compatible under paragraph (b) of this section, calculated based on the total number of unique handset models the carrier offers.</P>
+            <P>(ii) Beginning April 3, 2023, ensure that at least eighty-five (85) percent of the handset models it offers are hearing aid-compatible under paragraph (b) of this section, calculated based on the total number of unique handset models the carrier offers.</P>
+            <P>
+                (4) 
+                <E T="03">In-store testing.</E>
+                 All service providers must make available for consumers to test, in each retail store owned or operated by the service provider, all of its handset models that are hearing aid-compatible under paragraph (b) of this section.
+            </P>
+            <P>(d) [Reserved]</P>
+            <P>
+                (e) 
+                <E T="03">De minimis exception.</E>
+                 (1)(i) Manufacturers or service providers that offer two or fewer handsets in an air interface in the United States are exempt from the requirements of this section in connection with that air interface, except with regard to the reporting and certification requirements in paragraph (i) of this section. Service providers that obtain handsets only from manufacturers that offer two or fewer handset models in an air interface in the United States are likewise exempt from the requirements of this section 
+                <PRTPAGE P="18"/>
+                other than paragraph (i) of this section in connection with that air interface.
+            </P>
+            <P>(ii) Notwithstanding paragraph (e)(1)(i) of this section, manufacturers that have had more than 750 employees for at least two years and service providers that have had more than 1500 employees for at least two years, and that have been offering handsets over an air interface for at least two years, that offer one or two handsets in that air interface in the United States must offer at least one handset model that is hearing aid-compatible under paragraph (b) of this section in that air interface. Service providers that obtain handsets only from manufacturers that offer one or two handset models in an air interface in the United States, and that have had more than 750 employees for at least two years and have offered handsets over that air interface for at least two years, are required to offer at least one handset model in that air interface that is hearing aid-compatible under paragraph (b) of this section. For purposes of this paragraph (e)(1)(ii), employees of a parent, subsidiary, or affiliate company under common ownership or control with a manufacturer or service provider are considered employees of the manufacturer or service provider. Manufacturers and service providers covered by this paragraph (e)(1)(ii) must also comply with all other requirements of this section.</P>
+            <P>(2) Manufacturers or service providers that offer three handset models in an air interface must offer at least one handset model that is hearing aid-compatible under paragraph (b) of this section in that air interface. Service providers that obtain handsets only from manufacturers that offer three handset models in an air interface in the United States are required to offer at least one handset model in that air interface that is hearing aid-compatible under paragraph (b) of this section.</P>
+            <P>(3) Manufacturers that offer four or five handset models in an air interface must offer at least two handset models that are hearing aid-compatible under paragraph (b) of this section in that air interface. Tier I carriers who offer four handset models in an air interface must offer at least two handsets that are hearing aid-compatible under paragraph (b) of this section in that air interface and Tier I carriers who offer five handset models in an air interface must offer at least three handsets that are hearing aid-compatible under paragraph (b) of this section in that air interface. Service providers, other than Tier I carriers, who offer four handset models in an air interface must offer at least two handset models that are hearing aid-compatible under paragraph (b) of this section in that air interface and service providers, other than Tier I carriers, who offer five handset models in an air interface must offer at least three handsets that are hearing aid-compatible under paragraph (b) of this section in that air interface.</P>
+            <P>
+                (f) 
+                <E T="03">Labeling and disclosure requirements for hearing aid-compatible handsets</E>
+                —(1) 
+                <E T="03">Package label.</E>
+                 For all handset models certified to be hearing aid-compatible, manufacturers and service providers shall ensure that the handset's package label states that the handset is hearing aid-compatible and the handset's actual conversational gain with and without a hearing aid if certified using a technical standard with volume control requirements. The actual conversational gain displayed for use with a hearing aid shall be the lowest rating assigned to the handset for any covered air interface or frequency band.
+            </P>
+            <P>
+                (2) 
+                <E T="03">Package insert or handset manual.</E>
+                 For all handset models certified to be hearing aid-compatible, manufacturers and service providers shall disclose to consumers through the use of a package insert or in the handset's user manual:
+            </P>
+            <P>(i) That the handset is hearing aid-compatible;</P>
+            <P>(ii) The ANSI standard used to determine the hearing aid compatibility of the handset model's air interfaces and frequency bands;</P>
+            <P>(iii) If using the 2011 ANSI standard or an earlier version of the standard, the lowest hearing aid compatibility rating assigned to any of the covered air interfaces or frequency bands;</P>
+            <P>
+                (iv) The air interfaces or frequency bands on the handset that are not certified to be hearing aid-compatible, if applicable, or have been determined to be hearing aid-compatible under special testing circumstances;
+                <PRTPAGE P="19"/>
+            </P>
+            <P>(v) Any handset model certified to be hearing aid-compatible for some but not all of the air interfaces or frequency bands covered by the model must include the following disclosure language:</P>
+            <EXTRACT>
+                <P>This phone has been tested and certified for use with hearing aids for some of the wireless technologies that it uses. However, there may be some newer wireless technologies used in this phone that have not been tested yet for use with hearing aids. It is important to try the different features of this phone thoroughly and in different locations, using your hearing aid or cochlear implant, to determine if you hear any interfering noise. Consult your service provider or the manufacturer of this phone for information on hearing aid compatibility. If you have questions about return or exchange policies, consult your service provider or phone retailer.</P>
+            </EXTRACT>
+            <P>(vi) An explanation of the ANSI rating system, which includes an explanation that the 2019 ANSI standard does not use the rating system that older versions of the standard used;</P>
+            <P>(vii) An explanation of a handset model's volume control capabilities, including its conversational gain both with and without hearing aids, if the handset is certified using a technical standard that includes volume control requirements; and</P>
+            <P>(viii) An explanation of special testing circumstances, if a handset model has air interfaces that have been certified as hearing aid-compatible under such circumstances, and how these circumstances affect the use and operation of the handset.</P>
+            <P>
+                (g) 
+                <E T="03">Model designation requirements.</E>
+                 Where a manufacturer has made physical changes to a handset that result in a change in the hearing aid compatibility rating under the 2011 ANSI standard or an earlier version of the standard, the altered handset must be given a model designation distinct from that of the handset prior to its alteration.
+            </P>
+            <P>
+                (h) 
+                <E T="03">Website and record retention requirements.</E>
+                 (1) Each manufacturer and service provider that operates a publicly-accessible website must make available on its website a list of all hearing aid-compatible models currently offered, the ANSI standard used to evaluate hearing aid compatibility, the ratings of those models under the relevant ANSI standard, if applicable, and an explanation of the rating system. Each service provider must also include on its website: A list of all non-hearing aid-compatible models currently offered, as well as a link to the current FCC web page containing information about the wireless hearing aid compatibility rules and service providers' obligations. Each service provider must also include the marketing model name/number(s) and FCC ID number of each hearing aid-compatible and non-hearing aid-compatible model currently offered.
+            </P>
+            <P>(2) Service providers must maintain on their website either:</P>
+            <P>(i) A link to a third-party website as designated by the Commission or Wireless Telecommunications Bureau with information regarding hearing aid-compatible and non-hearing aid-compatible handset models; or</P>
+            <P>(ii) A clearly marked list of hearing aid-compatible handset models that are no longer offered if the calendar month/year that model was last offered is within 24 months of the current calendar month/year along with the information listed in paragraph (h)(1) of this section for each hearing aid-compatible handset.</P>
+            <P>(3) If the Wireless Telecommunications Bureau determines that the third-party website has been eliminated or is not updated in a timely manner, it may select another website or require service providers to comply with paragraph (h)(2)(ii) of this section.</P>
+            <P>(4) The information on the website must be updated within 30 days of any relevant changes, and any website pages containing information so updated must indicate the day on which the update occurred.</P>
+            <P>
+                (5) Service providers must maintain internal records including the ratings, if applicable, of all hearing aid-compatible and non-hearing aid-compatible models no longer offered (if the calendar month/year that model was last offered is within 24 months of the current calendar month/year); for models no longer offered (if the calendar month/year that model was last offered is within 24 months of the current calendar month/year), the calendar months and years each hearing aid-
+                <PRTPAGE P="20"/>
+                compatible and non-hearing aid-compatible model was first and last offered; and the marketing model name/number(s) and FCC ID number of each hearing aid-compatible and non-hearing aid-compatible model no longer offered (if the calendar month/year that model was last offered is within 24 months of the current calendar month/year).
+            </P>
+            <P>
+                (i) 
+                <E T="03">Reporting requirements</E>
+                —(1) 
+                <E T="03">Reporting and certification dates.</E>
+                 Service providers shall submit Form 855 certifications on their compliance with the requirements of this section by January 31 of each year. Manufacturers shall submit Form 655 reports on their compliance with the requirements of this section by July 31 of each year. Information in each certification and report must be up-to-date as of the last day of the calendar month preceding the due date of each certification and report.
+            </P>
+            <P>
+                (2) 
+                <E T="03">Content of service provider certifications.</E>
+                 Certifications filed by service providers must include:
+            </P>
+            <P>(i) The name of the signing executive and contact information;</P>
+            <P>(ii) The company(ies) covered by the certification;</P>
+            <P>(iii) The FCC Registration Number (FRN);</P>
+            <P>(iv) If the service provider is subject to paragraph (h) of this section, the website address of the page(s) containing the required information regarding handset models;</P>
+            <P>(v) The percentage of handsets offered that are hearing aid-compatible (providers will derive this percentage by determining the number of hearing aid-compatible handsets offered across all air interfaces during the year divided by the total number of handsets offered during the year); and</P>
+            <P>(vi) The following language:</P>
+            <EXTRACT>
+                <P>I am a knowledgeable executive [of company x] regarding compliance with the Federal Communications Commission's wireless hearing aid compatibility requirements at a wireless service provider covered by those requirements.</P>
+                <P>I certify that the provider was [(in full compliance/not in full compliance)] [choose one] at all times during the applicable time period with the Commission's wireless hearing aid compatibility deployment benchmarks and all other relevant wireless hearing aid compatibility requirements.</P>
+                <P>The company represents and warrants, and I certify by this declaration under penalty of perjury pursuant to 47 CFR 1.16 that the above certification is consistent with 47 CFR 1.17, which requires truthful and accurate statements to the Commission. The company also acknowledges that false statements and misrepresentations to the Commission are punishable under Title 18 of the U.S. Code and may subject it to enforcement action pursuant to Sections 501 and 503 of the Act.</P>
+            </EXTRACT>
+            <P>(vii) If the company selected that it was not in full compliance with this section, an explanation of which wireless hearing aid compatibility requirements it was not in compliance with, when the non-compliance began and (if applicable) ended with respect to each requirement.</P>
+            <P>
+                (3) 
+                <E T="03">Content of manufacturer reports.</E>
+                 Reports filed by manufacturers must include:
+            </P>
+            <P>(i) Handset models tested, since the most recent report, for compliance with the applicable hearing aid compatibility technical ratings, if applicable;</P>
+            <P>(ii) Compliant handset models offered to service providers since the most recent report, identifying each model by marketing model name/number(s) and FCC ID number;</P>
+            <P>(iii) For each compliant model, the air interface(s) and frequency band(s) over which it operates, the hearing aid compatibility ratings for each frequency band and air interface under the ANSI standard (if applicable), the ANSI standard version used, and the months in which the model was available to service providers since the most recent report;</P>
+            <P>(iv) Non-compliant models offered to service providers since the most recent report, identifying each model by marketing model name/number(s) and FCC ID number;</P>
+            <P>(v) For each non-compliant model, the air interface(s) over which it operates and the months in which the model was available to service providers since the most recent report;</P>
+            <P>(vi) Total numbers of compliant and non-compliant models offered to service providers for each air interface as of the time of the report;</P>
+            <P>
+                (vii) Any instance, as of the date of the report or since the most recent report, in which multiple compliant or non-compliant devices were marketed 
+                <PRTPAGE P="21"/>
+                under separate model name/numbers but constitute a single model for purposes of the hearing aid compatibility rules, identifying each device by marketing model name/number and FCC ID number;
+            </P>
+            <P>(viii) Status of product labeling;</P>
+            <P>(ix) Outreach efforts; and</P>
+            <P>(x) If the manufacturer maintains a public website, the website address of the page(s) containing the information regarding hearing aid-compatible handset models required by paragraph (h) of this section.</P>
+            <P>
+                (4) 
+                <E T="03">Format.</E>
+                 The Wireless Telecommunications Bureau is delegated authority to approve or prescribe forms, formats, and methods for submission of the reports and certifications in addition to or instead of those required by this section. Any format that the Bureau may approve or prescribe shall be made available on the Bureau's website.
+            </P>
+            <P>
+                (j) 
+                <E T="03">Enforcement.</E>
+                 Enforcement of this section is hereby delegated to those states that adopt this section and provide for enforcement. The procedures followed by a state to enforce this section shall provide a 30-day period after a complaint is filed, during which time state personnel shall attempt to resolve a dispute on an informal basis. If a state has not adopted or incorporated this section, or failed to act within six (6) months from the filing of a complaint with the state public utility commission, the Commission will accept such complaints. A written notification to the complainant that the state believes action is unwarranted is not a failure to act. The procedures set forth in part 68, subpart E of this chapter are to be followed.
+            </P>
+            <P>
+                (k) 
+                <E T="03">Delegation of rulemaking authority.</E>
+                 (1) The Chief of the Wireless Telecommunications Bureau and the Chief of the Office of Engineering and Technology are delegated authority to issue, consistent with any applicable requirements of 5 U.S.C. 553, an order amending this section to the extent necessary to adopt technical standards for additional frequency bands and/or air interfaces upon the establishment of such standards by ANSI Accredited Standards Committee C63®, provided that the standards do not impose with respect to such frequency bands or air interfaces materially greater obligations than those imposed on other services subject to this section. Any new obligations on manufacturers and Tier I carriers pursuant to paragraphs (c) through (i) of this section as a result of such standards shall become effective no less than one year after release of the order adopting such standards and any new obligations on other service providers shall become effective no less than 15 months after the release of such order, except that any new obligations on manufacturers and service providers subject to paragraph (e)(1)(ii) of this section shall become effective no less than two years after the release of such order.
+            </P>
+            <P>(2) The Chief of the Wireless Telecommunications Bureau and the Chief of the Office of Engineering and Technology are delegated authority, by notice-and-comment rulemaking if required by statute or otherwise in the public interest, to issue an order amending this section to the extent necessary to approve any version of the technical standards for radio frequency interference, inductive coupling, or volume control adopted subsequently to the 2007 ANSI standard for use in determining whether a wireless handset meets the appropriate rating over frequency bands and air interfaces for which technical standards have previously been adopted either by the Commission or pursuant to paragraph (k)(1) of this section. This delegation is limited to the approval of changes to the technical standards that do not raise major compliance issues. Further, by such approvals, the Chiefs may only permit, and not require, the use of such subsequent versions of the technical standards to establish hearing aid compatibility.</P>
+            <P>
+                (l) 
+                <E T="03">Incorporation by reference.</E>
+                 The standards required in this section are incorporated by reference into this section with the approval of the Director of the Federal Register under 5 U.S.C. 552(a) and 1 CFR part 51. All approved incorporation by reference (IBR) material is available for inspection at the Federal Communications Commission (FCC) and the National Archives and Records Administration (NARA). Contact the FCC through the Federal Communications Commission's Reference 
+                <PRTPAGE P="22"/>
+                Information Center, phone: (202) 418–0270. For information on the availability of this material at NARA, visit 
+                <E T="03">www.archives.gov/federal-register/cfr/ibr-locations.html</E>
+                 or email 
+                <E T="03">fr.inspection@nara.gov</E>
+                . The material may be obtained from the following sources in this paragraph (l):
+            </P>
+            <P>
+                (1) IEEE Standards Association (IEEE–SA), 445 Hoes Lane, Piscataway, NJ 08854–4141, (732) 981–0060, 
+                <E T="03">stds-info@ieee.org, https://standards.ieee.org/.</E>
+            </P>
+            <P>(i) ANSI C63.19–2007, American National Standard Methods of Measurement of Compatibility Between Wireless Communication Devices and Hearing Aids, approved June 8, 2007.</P>
+            <P>(ii) ANSI C63.19–2011, American National Standard Methods of Measurement of Compatibility Between Wireless Communication Devices and Hearing Aids, approved May 27, 2011.</P>
+            <P>(iii) ANSI C63.19–2019, American National Standard Methods of Measurement of Compatibility Between Wireless Communication Devices and Hearing Aids, approved August 19, 2019.</P>
+            <P>
+                (2) Telecommunications Industry Association (TIA), 1320 North Courthouse Road, Suite 200, Arlington, VA 22201, (703) 907–7700, 
+                <E T="03">global@ihs.com, https://global.ihs.com/csf_home.cfm?&amp;csf=TIA.</E>
+            </P>
+            <P>(i) ANSI/TIA–5050–2018, Telecommunications—Communications Products—Receive Volume Control Requirements for Wireless (Mobile) Devices, approved January 17, 2018.</P>
+            <P>(ii) [Reserved]</P>
+            <CITA>[73 FR 25587, May 7, 2008, as amended at 75 FR 54522, Sept. 8, 2010; 77 FR 41928, July 17, 2012; 81 FR 183, Jan. 5, 2016; 81 FR 60633, Sept. 2, 2016; 83 FR 8631, Feb. 28, 2018; 83 FR 63105, Dec. 7, 2018; 84 FR 37592, Aug. 1, 2019; 86 FR 23625, 23627, May 4, 2021; 88 FR 21439, Apr. 10, 2023]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.20</SECTNO>
+            <SUBJECT>Conditions applicable to provision of CMRS service by incumbent Local Exchange Carriers.</SUBJECT>
+            <P>
+                (a) 
+                <E T="03">Separate affiliate.</E>
+                 An incumbent LEC providing in-region broadband CMRS shall provide such services through an affiliate that satisfies the following requirements:
+            </P>
+            <P>(1) The affiliate shall maintain separate books of account from its affiliated incumbent LEC. Nothing in this section requires the affiliate to maintain separate books of account that comply with part 32 of this chapter;</P>
+            <P>(2) The affiliate shall not jointly own transmission or switching facilities with its affiliated incumbent LEC that the affiliated incumbent LEC uses for the provision of local exchange service in the same in-region market. Nothing in this section prohibits the affiliate from sharing personnel or other resources or assets with its affiliated incumbent LEC; and</P>
+            <P>(3) The affiliate shall acquire any services from its affiliated incumbent LEC for which the affiliated incumbent LEC is required to file a tariff at tariffed rates, terms, and conditions. Other transactions between the affiliate and the incumbent LEC for services that are not acquired pursuant to tariff must be reduced to writing and must be made on a compensatory, arm's length basis. All transactions between the incumbent LEC and the affiliate are subject to part 32 of this chapter, including the affiliate transaction rules. Nothing in this section shall prohibit the affiliate from acquiring any unbundled network elements or exchange services for the provision of a telecommunications service from its affiliated incumbent LEC, subject to the same terms and conditions as provided in an agreement approved under section 252 of the Communications Act of 1934, as amended.</P>
+            <P>
+                (b) 
+                <E T="03">Independence.</E>
+                 The affiliate required in paragraph (a) of this section shall be a separate legal entity from its affiliated incumbent LEC. The affiliate may be staffed by personnel of its affiliated incumbent LEC, housed in existing offices of its affiliated incumbent LEC, and use its affiliated incumbent LEC's marketing and other services, subject to paragraphs (a)(3) and (c) of this section.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Joint marketing.</E>
+                 Joint marketing of local exchange and exchange access service and CMRS services by an incumbent LEC shall be subject to part 32 of this chapter. In addition, such agreements between the affiliate and the incumbent LEC must be reduced to writing and made available for public inspection upon request at the principle place of business of the affiliate and the incumbent LEC. The documentation must include a certification statement identical to the certification 
+                <PRTPAGE P="23"/>
+                statement currently required to be included with all Automated Reporting and Management Information Systems (ARMIS) reports. The affiliate must also provide a detailed written description of the terms and conditions of the transaction on the Internet within 10 days of the transaction through the affiliate's home page.
+            </P>
+            <P>
+                (d) 
+                <E T="03">Exceptions</E>
+                —(1) 
+                <E T="03">Rural telephone companies.</E>
+                 Rural telephone companies are exempted from the requirements set forth in paragraphs (a), (b) and (c) of this section. A competing telecommunications carrier, interconnected with the rural telephone company, however, may petition the FCC to remove the exemption, or the FCC may do so on its own motion, where the rural telephone company has engaged in anticompetitive conduct.
+            </P>
+            <P>
+                (2) 
+                <E T="03">Incumbent LECs with fewer than 2 percent of subscriber lines.</E>
+                 Incumbent LECs with fewer than 2 percent of the nation's subscriber lines installed in the aggregate nationwide may petition the FCC for suspension or modification of the requirements set forth in paragraphs (a), (b) and (c) of this section. The FCC will grant such a petition where the incumbent LEC demonstrates that suspension or modification of the separate affiliate requirement is
+            </P>
+            <P>(i) Necessary to avoid a significant adverse economic impact on users of telecommunications services generally or to avoid a requirement that would be unduly economically burdensome, and</P>
+            <P>(ii) Consistent with the public interest, convenience, and necessity.</P>
+            <P>
+                (e) 
+                <E T="03">Definitions.</E>
+                 Terms used in this section have the following meanings:
+            </P>
+            <P>
+                <E T="03">Affiliate.</E>
+                 “Affiliate” means a person that (directly or indirectly) owns or controls, is owned or controlled by, or is under common ownership with, another person. For purposes of this section, the term “own” means to own an equity interest (or the equivalent thereof) of more than 10 percent.
+            </P>
+            <P>
+                <E T="03">Broadband Commercial Mobile Radio Service (Broadband CMRS).</E>
+                 For the purposes of this section, “broadband CMRS” means Cellular Radiotelephone Service (part 22, subpart H of this chapter), Specialized Mobile Radio (part 90, subpart S of this chapter), and broadband Personal Communications Services (part 24, subpart E of this chapter).
+            </P>
+            <P>
+                <E T="03">Incumbent Local Exchange Carrier (Incumbent LEC).</E>
+                 “Incumbent LEC” has the same meaning as that term is defined in § 51.5 of this chapter.
+            </P>
+            <P>
+                <E T="03">In-region.</E>
+                 For the purposes of this section, an incumbent LEC's broadband CMRS service is considered “in-region” when 10 percent or more of the population covered by the CMRS affiliate's authorized service area, as determined by the 1990 census figures, is within the affiliated incumbent LEC's wireline service area.
+            </P>
+            <P>
+                <E T="03">Rural Telephone Company.</E>
+                 “Rural Telephone Company” has the same meaning as that term is defined in § 51.5 of this chapter.
+            </P>
+            <P>
+                (f) 
+                <E T="03">Sunset.</E>
+                 This section will no longer be effective after January 1, 2002.
+            </P>
+            <CITA>[62 FR 63871, Dec. 3, 1997, as amended at 66 FR 10968, Feb. 21, 2001]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.21</SECTNO>
+            <SUBJECT>Signal boosters.</SUBJECT>
+            <P>
+                (a) 
+                <E T="03">Operation of Consumer Signal Boosters.</E>
+                 A subscriber in good standing of a commercial mobile radio service system may operate a Consumer Signal Booster under the authorization held by the licensee providing service to the subscriber provided that the subscriber complies with paragraphs (a)(1) through (7) of this section. Failure to comply with all applicable rules in this section and all applicable technical rules for the frequency band(s) of operation voids the authority to operate the Consumer Signal Booster.
+            </P>
+            <P>(1) Prior to operation, the subscriber obtains the consent of the licensee providing service to the subscriber;</P>
+            <P>(2) Prior to operation, the subscriber registers the Consumer Signal Booster with the licensee providing service to the subscriber;</P>
+            <P>(3) The subscriber only operates the Consumer Signal Booster with approved antennas, cables, and/or coupling devices as specified by the manufacturer of the Consumer Signal Booster;</P>
+            <P>
+                (4) The subscriber operates the Consumer Signal Booster on frequencies used for the provision of subscriber-based services under parts 22 (Cellular), 24 (Broadband PCS), 27 (AWS–1, 700 MHz Lower A–E Blocks, and 700 MHz 
+                <PRTPAGE P="24"/>
+                Upper C Block), and 90 (Specialized Mobile Radio) of this chapter. Operation on part 90 (Specialized Mobile Radio) frequencies is permitted upon the Commission's release of a public notice announcing the date Consumer Signal Boosters may be used in the band;
+            </P>
+            <P>(5) The Consumer Signal Booster complies with paragraphs (e), (f), (g), and (h) of this section and § 2.907 of this chapter;</P>
+            <P>(6) The subscriber may not deactivate any features of the Consumer Signal Booster which are designed to prevent harmful interference to wireless networks. These features must be enabled and operating at all times the signal booster is in use; and</P>
+            <P>(7) If operating a Wideband Consumer Signal Booster, the subscriber operates it only for personal use.</P>
+            <P>
+                (b) 
+                <E T="03">De minimis operation of Consumer Signal Boosters.</E>
+                 A third party's incidental use of a subscriber's Consumer Signal Booster operated under this paragraph is 
+                <E T="03">de minimis</E>
+                 and shall be authorized under the authorization held by the licensee providing service to the third party.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Operation of Industrial Signal Boosters.</E>
+                 An individual or non-individual, other than a representative of a foreign government, may operate an Industrial Signal Booster provided that the individual or non-individual:
+            </P>
+            <P>(1) Has an FCC license or obtains the express consent of the licensee(s) whose frequencies are being retransmitted by the device on a regular basis, and</P>
+            <P>(2) Uses an Industrial Signal Booster which complies with paragraph (f) of this section.</P>
+            <P>
+                (d) 
+                <E T="03">Operation on a secondary, non-interference basis.</E>
+                 Operation of signal boosters under this section is on a secondary, non-interference basis to primary services licensed for the frequency bands on which they transmit, and to primary services licensed for the adjacent frequency bands that might be affected by their transmissions.
+            </P>
+            <P>(1) The operation of signal boosters must not cause harmful interference to the communications of any primary licensed service.</P>
+            <P>(2) Upon request of an FCC representative or a licensee experiencing harmful interference, a signal booster operator must:</P>
+            <P>(i) Cooperate in determining the source of the interference, and</P>
+            <P>(ii) If necessary, deactivate the signal booster immediately, or as soon as practicable, if immediate deactivation is not possible.</P>
+            <P>
+                (e) 
+                <E T="03">Consumer Signal Booster Network Protection Standard.</E>
+                 (1) All Consumer Signal Boosters must incorporate features to prevent harmful interference to wireless networks including but not limited to those enumerated in this section.
+            </P>
+            <P>
+                (2) 
+                <E T="03">Certification requirements.</E>
+                 (i) A Consumer Signal Booster can only be certificated and operated if it complies with all applicable rules in this subpart and all applicable technical rules for the frequency band(s) of operation including, but not limited to: § 22.355 of this chapter, Public Mobile Services, frequency tolerance; § 22.913 of this chapter, Cellular Radiotelephone Service effective radiated power limits; § 22.917 of this chapter, Cellular Radiotelephone Service, emission limitations for cellular equipment; § 24.232 of this chapter, Broadband Personal Communications Service, power and antenna height limits; § 24.238 of this chapter, Broadband Personal Communications Service, emission limitations for Broadband PCS equipment; § 27.50 of this chapter, Miscellaneous Wireless Communications Services, power and antenna height limits; § 27.53 of this chapter, Miscellaneous Wireless Communications Services, emission limits; § 90.205 of this chapter, Private Land Mobile Radio Services, power and antenna height limits; § 90.210 of this chapter, Private Land Mobile Radio Services, emission masks; and § 90.247 of this chapter, Private Land Mobile Radio Services, mobile repeater stations.
+            </P>
+            <P>(ii) In case of any conflict between the rules set forth in this section and the rules set forth in parts 22, 24, 27, and 90 of title 47, chapter I of the Code of Federal Regulations, the rules in this section shall govern.</P>
+            <P>
+                (iii) The application for certification must satisfy the Commission that the Consumer Signal Boosters' features designed to prevent harmful interference and protect wireless networks cannot be easily defeated and must be enabled at all times.
+                <PRTPAGE P="25"/>
+            </P>
+            <P>
+                (3) 
+                <E T="03">Frequency Bands.</E>
+                 Consumer Signal Boosters must be designed and manufactured such that they only operate on the frequencies used for the provision of subscriber-based services under parts 22 (Cellular), 24 (Broadband PCS), 27 (AWS–1, 700 MHz Lower A–E Blocks, and 700 MHz Upper C Block), and 90 (Specialized Mobile Radio) of this chapter. The Commission will not certificate any Consumer Signal Boosters for operation on part 90 of this chapter (Specialized Mobile Radio) frequencies until the Commission releases a public notice announcing the date Consumer Signal Boosters may be used in the band.
+            </P>
+            <P>
+                (4) 
+                <E T="03">Self-monitoring.</E>
+                 Consumer Signal Boosters must automatically self-monitor their operation to ensure compliance with applicable noise and gain limits and either self-correct or shut down automatically if their operation exceeds those parameters.
+            </P>
+            <P>
+                (5) 
+                <E T="03">Anti-oscillation.</E>
+                 Consumer Signal Boosters must be able to detect and mitigate any unintended oscillations in uplink and downlink bands (such as may result from insufficient isolation between the antennas).
+            </P>
+            <P>
+                (6) 
+                <E T="03">Power Down.</E>
+                 Consumer Signal Boosters must automatically power down or cease amplification as they approach any affected base station.
+            </P>
+            <P>
+                (7) 
+                <E T="03">Interference Avoidance for Wireless Subsystems.</E>
+                 Consumer Signal Boosters using unlicensed (part 15 of this chapter) or other frequency bands for wireless transmissions between donor and server subsystems for their internal operations must employ interference avoidance methods to prevent interference transmitted into authorized CMRS spectrum bands.
+            </P>
+            <P>
+                (8) 
+                <E T="03">Wideband Consumer Signal Boosters.</E>
+                 A Wideband Consumer Signal Booster will meet the Consumer Signal Booster Network Protection Standard if it complies with paragraphs (e)(1) through (e)(7) of this section and the following:
+            </P>
+            <P>
+                (i) 
+                <E T="03">Technical Requirements</E>
+                —(A) 
+                <E T="03">Noise Limits.</E>
+                 (
+                <E T="03">1</E>
+                ) The transmitted noise power in dBm/MHz of consumer boosters at their uplink port shall not exceed −103 dBm/MHz—RSSI. RSSI (received signal strength indication expressed in negative dB units relative to 1 mW) is the downlink composite received signal power in dBm at the booster donor port for all base stations in the band of operation.
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                ) The transmitted maximum noise power in dBm/MHz of consumer boosters at their uplink and downlink ports shall not exceed the following limits:
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Fixed booster maximum noise power shall not exceed −102.5 dBm/MHz + 20 Log
+                <E T="52">10</E>
+                 (Frequency), where Frequency is the uplink mid-band frequency of the supported spectrum bands in MHz.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Mobile booster maximum noise power shall not exceed−59 dBm/MHz.
+            </P>
+            <P>
+                (
+                <E T="03">iii</E>
+                ) Compliance with Noise limits will use instrumentation calibrated in terms of RMS equivalent voltage, and with booster input ports terminated or without input signals applied within the band of measurement.
+            </P>
+            <P>
+                (B) 
+                <E T="03">Bidirectional Capability.</E>
+                 Consumer Boosters must be able to provide equivalent uplink and downlink gain and conducted uplink power output that is at least 0.05 watts. One-way consumer boosters (
+                <E T="03">i.e.,</E>
+                 uplink only, downlink only, uplink impaired, downlink impaired) are prohibited. Spectrum block filtering may be used provided the uplink filter attenuation is not less than the downlink filter attenuation, and where RSSI is measured after spectrum block filtering is applied referenced to the booster's input port for each band of operation.
+            </P>
+            <P>
+                (C) 
+                <E T="03">Booster Gain Limits.</E>
+                 (
+                <E T="03">1</E>
+                ) The uplink gain in dB of a consumer booster referenced to its input and output ports shall not exceed −34 dB—RSSI + MSCL.
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Where RSSI is the downlink composite received signal power in dBm at the booster donor port for all base stations in the band of operation. RSSI is expressed in negative dB units relative to 1 mW.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Where MSCL (Mobile Station Coupling Loss) is the minimum coupling loss in dB between the wireless device and input port of the consumer booster. MSCL must be calculated or measured for each band of operation and provided in compliance test reports.
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                ) The uplink and downlink maximum gain of a Consumer Booster referenced to its input and output ports shall not exceed the following limits:
+                <PRTPAGE P="26"/>
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Fixed Booster maximum gain shall not exceed 6.5 dB + 20 Log
+                <E T="52">10</E>
+                 (Frequency)
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Where, Frequency is the uplink mid-band frequency of the supported spectrum bands in MHz.
+            </P>
+            <P>
+                (
+                <E T="03">iii</E>
+                ) Mobile Booster maximum gain shall not exceed 50 dB when using an inside antenna (e.g., inside a vehicle), 23 dB when using direct contact coupling (e.g., cradle-type boosters), or 15 dB when directly connected (e.g., boosters with a physical connection to the phone).
+            </P>
+            <P>
+                (D) 
+                <E T="03">Power Limits.</E>
+                 A booster's uplink power must not exceed 1 watt composite conducted power and equivalent isotropic radiated power (EIRP) for each band of operation. Composite downlink power shall not exceed 0.05 watt (17 dBm) conducted and EIRP for each band of operation. Compliance with power limits will use instrumentation calibrated in terms of RMS equivalent voltage.
+            </P>
+            <P>
+                (E) 
+                <E T="03">Out of Band Emission Limits.</E>
+                 Booster out of band emissions (OOBE) shall be at least 6 dB below the FCC's mobile emission limits for the supported bands of operation. Compliance to OOBE limits will utilize high peak-to-average CMRS signal types.
+            </P>
+            <P>
+                (F) 
+                <E T="03">Intermodulation Limits.</E>
+                 The transmitted intermodulation products of a consumer booster at its uplink and downlink ports shall not exceed the power level of −19 dBm for the supported bands of operation. Compliance with intermodulation limits will use boosters operating at maximum gain and maximum rated output power, with two continuous wave (CW) input signals spaced 600 kHz apart and centered in the pass band of the booster, and with a 3 kHz measurement bandwidth.
+            </P>
+            <P>
+                (G) 
+                <E T="03">Booster Antenna Kitting.</E>
+                 All consumer boosters must be sold with user manuals specifying all antennas and cables that meet the requirements of this section. All consumer boosters must be sold together with antennas, cables, and/or coupling devices that meet the requirements of this section. The grantee is required to submit a technical document with the application for FCC equipment authorization that shows compliance of all antennas, cables and/or coupling devices with the requirements of this section, including any antenna or equipment upgrade options that may be available at initial purchase or as a subsequent upgrade.
+            </P>
+            <P>
+                (H) 
+                <E T="03">Transmit Power Off Mode.</E>
+                 When the consumer booster cannot otherwise meet the noise and gain limits defined herein it must operate in “Transmit Power Off Mode.” In this mode of operation, the uplink and downlink noise power shall not exceed −70 dBm/MHz and both uplink and downlink gain shall not exceed the lesser of 23 dB or MSCL.
+            </P>
+            <P>
+                (I) 
+                <E T="03">Uplink Inactivity.</E>
+                 When a consumer booster is not serving an active device connection after 5 minutes the uplink noise power shall not exceed −70 dBm/MHz.
+            </P>
+            <P>
+                (ii) 
+                <E T="03">Interference Safeguards.</E>
+                 Consumer boosters must include features to prevent harmful interference including, at a minimum, those enumerated in this subsection. These features may not be deactivated by the operator and must be enabled and operating at all times the signal booster is in use.
+            </P>
+            <P>
+                (A) 
+                <E T="03">Anti-Oscillation.</E>
+                 Consumer boosters must be able to detect and mitigate (
+                <E T="03">i.e.,</E>
+                 by automatic gain reduction or shut down), any oscillations in uplink and downlink bands. Oscillation detection and mitigation must occur automatically within 0.3 seconds in the uplink band and within 1 second in the downlink band. In cases where oscillation is detected, the booster must continue mitigation for at least one minute before restarting. After five such restarts, the booster must not resume operation until manually reset.
+            </P>
+            <P>
+                (B) 
+                <E T="03">Gain Control.</E>
+                 Consumer boosters must have automatic limiting control to protect against excessive input signals that would cause output power and emissions in excess of that authorized by the Commission.
+            </P>
+            <P>
+                (C) 
+                <E T="03">Interference Avoidance for Wireless Subsystems.</E>
+                 Consumer boosters using unlicensed (part 15) or other frequency bands for wireless transmissions between donor and server subsystems for its internal operations must employ interference avoidance methods to prevent interference transmitted into authorized CMRS spectrum bands and must meet applicable limits for radiofrequency exposure.
+                <PRTPAGE P="27"/>
+            </P>
+            <P>
+                (9) 
+                <E T="03">Provider-Specific Consumer Signal Boosters.</E>
+                 A Provider-Specific Consumer Signal Booster will meet the Consumer Signal Booster Network Protection Standard if it complies with paragraphs (e)(1) through (e)(7) of this section and the following:
+            </P>
+            <P>
+                (i) 
+                <E T="03">Technical Requirements</E>
+                —(A) 
+                <E T="03">Noise Limits.</E>
+                 The transmitted noise power in dBm/MHz of frequency selective consumer boosters outside the licensee's spectrum blocks at their uplink and downlink ports shall not exceed the following limits:
+            </P>
+            <P>
+                (
+                <E T="03">1</E>
+                ) −103 dBm/MHz−RSSI
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Where RSSI is the downlink composite signal power received in dBm for frequencies in the band of operation outside the licensee's spectrum block as measured after spectrum block filtering is applied and is referenced to the booster's donor port for each band of operation. RSSI is expressed in negative dB units relative to 1 mW.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Boosters with MSCL less than 40 dB, shall reduce the Noise output in (A) by 40 dB−MSCL, where MSCL is the minimum coupling loss in dB between the wireless device and booster's server port. MSCL must be calculated or measured for each band of operation and provided in compliance test reports.
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                )(
+                <E T="03">i</E>
+                ) Fixed booster maximum downlink noise power shall not exceed −102.5 dBm/MHz + 20 Log
+                <E T="52">10</E>
+                 (Frequency), where Frequency is the uplink mid-band frequency of the supported spectrum bands in MHz.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Mobile booster maximum noise power shall not exceed −59 dBm/MHz.
+            </P>
+            <P>
+                (
+                <E T="03">iii</E>
+                ) Compliance with Noise limits will use instrumentation calibrated in terms of RMS equivalent voltage, and with booster input ports terminated or without input signals applied within the band of measurement.
+            </P>
+            <P>
+                (B) 
+                <E T="03">Bidirectional Capability.</E>
+                 Consumer Boosters must be able to provide equivalent uplink and downlink gain and conducted uplink power output that is at least 0.05 watts. One-way consumer boosters (
+                <E T="03">i.e.,</E>
+                 uplink only, downlink only, uplink impaired, downlink impaired) are prohibited. Spectrum block filtering used must provide uplink filter attenuation not less than the downlink filter attenuation, and where RSSI is measured after spectrum block filtering is applied referenced to the booster's input port for each band of operation.
+            </P>
+            <P>
+                (C) 
+                <E T="03">Booster Gain Limits.</E>
+                 The gain of the frequency selective consumer booster shall meet the limits below.
+            </P>
+            <P>
+                (
+                <E T="03">1</E>
+                ) The uplink and downlink gain in dB of a frequency selective consumer booster referenced to its input and output ports shall not exceed BSCL−28 dB−(40 dB−MSCL).
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Where BSCL is the coupling loss between the booster's donor port and the base station's input port, and MSCL is the minimum coupling loss in dB between the wireless device and the booster's server port. MSCL must be calculated or measured for each band of operation and provided in compliance test reports.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) In order of preference, BSCL is determined as follows: determine path loss between the base station and the booster; such measurement shall be based on measuring the received forward pilot/control channel power at the booster and reading the pilot/control channel transmit power from the base station as defined in the system information messages sent by the base station; estimate BSCL by assuming that the base station is transmitting at a level of + 25 dBm per channel (assume a small, lightly loaded cell) and measuring the total received signal power level within the channel in dBm (RPCH) received at the booster input port. BSCL is then calculated as 25–RPCH; or assume that the BSCL is 70 dB without performing any measurement.
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                ) The uplink and downlink maximum gain of a frequency selective consumer booster referenced to its input and output ports shall not exceed the following limits:
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) Fixed Booster maximum gain shall not exceed 19.5 dB + 20 Log
+                <E T="52">10</E>
+                 (Frequency), or 100 dB for systems having automatic gain adjustment based on isolation measurements between booster donor and server antennas.
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) Where, Frequency is the uplink mid-band frequency of the supported spectrum bands in MHz.
+            </P>
+            <P>
+                (
+                <E T="03">iii</E>
+                ) Mobile Booster maximum gain shall not exceed 15 dB when directly 
+                <PRTPAGE P="28"/>
+                connected (
+                <E T="03">e.g.,</E>
+                 boosters with a physical connection to the subscriber device), 23 dB when using direct contact coupling (
+                <E T="03">e.g.,</E>
+                 cradle-type boosters), or 50 dB when using an inside antenna (
+                <E T="03">e.g.,</E>
+                 inside a vehicle). For systems using an inside antenna that have automatic gain adjustment based on isolation measurements between booster donor and server antenna and automatic feedback cancellation, the mobile booster maximum gain shall not exceed 58 dB and 65 dB for frequencies below and above 1 GHz, respectively.
+            </P>
+            <P>
+                (D) 
+                <E T="03">Power Limits.</E>
+                 A booster's uplink power must not exceed 1 watt composite conducted power and equivalent isotropic radiated power (EIRP) for each band of operation. Downlink power shall not exceed 0.05 watt (17 dBm) composite and 10 dBm per channel conducted and EIRP for each band of operation. Compliance with power limits will use instrumentation calibrated in terms of RMS equivalent voltage.
+            </P>
+            <P>
+                (E) 
+                <E T="03">Out of Band Gain Limits.</E>
+                 (
+                <E T="03">1</E>
+                ) A frequency selective booster shall have the following minimum attenuation referenced to the gain in the center of the pass band of the booster:
+            </P>
+            <P>
+                (
+                <E T="03">i</E>
+                ) −20 dB at the band edge, where band edge is the end of the licensee's allocated spectrum,
+            </P>
+            <P>
+                (
+                <E T="03">ii</E>
+                ) −30 dB at 1 MHz offset from band edge,
+            </P>
+            <P>
+                (
+                <E T="03">iii</E>
+                ) −40 dB at 5 MHz offset from band edge.
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                ) A frequency selective booster having maximum gain greater than 80 dB (referenced to the center of the pass band) shall limit the out of band gain to 60 dB at 0.2 MHz offset from the band edge, and 45 dB at 1 MHz offset from the band edge, where band edge is the end of the licensee's allocated spectrum.
+            </P>
+            <P>
+                (F) 
+                <E T="03">Out of Band Emission Limits.</E>
+                 Booster out of band emissions (OOBE) shall meet the FCC's mobile emission limits for the supported bands of operation. Compliance to OOBE limits will utilize high peak-to-average CMRS signal types.
+            </P>
+            <P>
+                (G) 
+                <E T="03">Intermodulation Limits.</E>
+                 The transmitted intermodulation products of a consumer booster at its uplink and downlink ports shall not exceed the power level of −19 dBm for the supported bands of operation. Compliance with intermodulation limits will use boosters operating at maximum gain and maximum rated output power, with two continuous wave (CW) input signals spaced 600 kHz apart and centered in the pass band of the booster, and with a 3 kHz measurement bandwidth.
+            </P>
+            <P>
+                (H) 
+                <E T="03">Booster Antenna Kitting.</E>
+                 All consumer boosters must be sold with user manuals specifying all antennas and cables that meet the requirements of this section. All consumer boosters must be sold together with antennas, cables, and/or coupling devices that meet the requirements of this section. The grantee is required to submit a technical document with the application for FCC equipment authorization that shows compliance of all antennas, cables, and/or coupling devices with the requirements of this section, including any antenna or equipment upgrade options that may be available at initial purchase or as a subsequent upgrade.
+            </P>
+            <P>
+                (I) 
+                <E T="03">Transmit Power Off Mode.</E>
+                 When the consumer booster cannot otherwise meet the noise and gain limits defined herein it must operate in “Transmit Power OFF Mode.” In this mode of operation, the uplink and downlink noise power shall not exceed −70 dBm/MHz and uplink gain shall not exceed the lesser of 23 dB or MSCL.
+            </P>
+            <P>
+                (J) 
+                <E T="03">Uplink Inactivity.</E>
+                 When a consumer booster is not serving an active device connection after 5 seconds the uplink noise power shall not exceed −70 dBm/MHz.
+            </P>
+            <P>
+                (ii) 
+                <E T="03">Interference Safeguards.</E>
+                 Consumer boosters must include features to prevent harmful interference including, at a minimum, those enumerated in this subsection. These features may not be deactivated by the operator and must be enabled and operating at all times the signal booster is in use.
+            </P>
+            <P>
+                (A) 
+                <E T="03">Anti-Oscillation.</E>
+                 Consumer boosters must be able to detect and mitigate (
+                <E T="03">i.e.,</E>
+                 by automatic gain reduction or shut down), any oscillations in uplink and downlink bands. Oscillation detection and mitigation must occur automatically within 0.3 seconds in the uplink band and within 1 second in the downlink band. In cases where oscillation is detected, the booster must continue mitigation for at least one 
+                <PRTPAGE P="29"/>
+                minute before restarting. After five such restarts, the booster must not resume operation until manually reset.
+            </P>
+            <P>
+                (B) 
+                <E T="03">Gain Control.</E>
+                 Consumer boosters must have automatic limiting control to protect against excessive input signals that would cause output power and emissions in excess of that authorized by the Commission.
+            </P>
+            <P>
+                (C) 
+                <E T="03">Interference Avoidance for Wireless Subsystems.</E>
+                 Consumer boosters using unlicensed (part 15) or other frequency bands for wireless transmissions between donor and server subsystems for its internal operations must employ interference avoidance methods to prevent interference transmitted into authorized CMRS spectrum bands.
+            </P>
+            <P>
+                (10) 
+                <E T="03">Equivalent Protections.</E>
+                 Consumer Signal Boosters which do not meet the technical specifications enumerated in paragraphs (e)(1) through (e)(9) of this section may also meet the Network Protection Standard if they provide equivalent protections as determined by the Wireless Telecommunications Bureau.
+            </P>
+            <P>
+                (f) 
+                <E T="03">Signal booster labeling requirements.</E>
+                 (1) Signal booster manufacturers, distributors, and retailers must ensure that all signal boosters marketed on or after March 1, 2014 include the following advisories:
+            </P>
+            <P>(i) In on-line, point-of-sale marketing materials,</P>
+            <P>(ii) In any print or on-line owner's manual and installation instructions,</P>
+            <P>(iii) On the outside packaging of the device, and</P>
+            <P>(iv) On a label affixed to the device:</P>
+            <P>(A) For Consumer Signal Boosters:</P>
+            <P>
+                (
+                <E T="03">1</E>
+                ) This is a CONSUMER device.
+            </P>
+            <EXTRACT>
+                <P>BEFORE USE, you MUST REGISTER THIS DEVICE with your wireless provider and have your provider's consent. Most wireless providers consent to the use of signal boosters. Some providers may not consent to the use of this device on their network. If you are unsure, contact your provider.</P>
+                <P>You MUST operate this device with approved antennas and cables as specified by the manufacturer. Antennas MUST be installed at least 20 cm (8 inches) from any person.</P>
+                <P>You MUST cease operating this device immediately if requested by the FCC or a licensed wireless service provider.</P>
+                <P>WARNING. E911 location information may not be provided or may be inaccurate for calls served by using this device.</P>
+                <P>
+                    (
+                    <E T="03">2</E>
+                    ) The label for Consumer Signal Boosters certified for fixed indoor operation also must include the following language:
+                </P>
+                <P>This device may be operated ONLY in a fixed location for in-building use.</P>
+            </EXTRACT>
+            <P>(B) For Industrial Signal Boosters:</P>
+            <EXTRACT>
+                <P>WARNING. This is NOT a CONSUMER device. It is designed for installation by FCC LICENSEES and QUALIFIED INSTALLERS. You MUST have an FCC LICENSE or express consent of an FCC Licensee to operate this device. Unauthorized use may result in significant forfeiture penalties, including penalties in excess of $100,000 for each continuing violation.</P>
+            </EXTRACT>
+            <P>(2) A Consumer Signal Booster label may contain an acknowledgement that particular provider(s) have given their consent for all consumers to use the device. Such an acknowledgement would be inserted prior to, “Some wireless providers may not consent to the use of this device on their network. If you are unsure, contact your provider.” The remaining language of the advisory shall remain the same.</P>
+            <P>
+                (g) 
+                <E T="03">Marketing and sale of signal boosters.</E>
+                 Except as provided in § 2.803 of this chapter, no person, manufacturer, distributor, or retailer may market (as defined in § 2.803 of this chapter) any Consumer Signal Booster that does not comply with the requirements of this section to any person in the United States or to any person intending to operate the Consumer Signal Booster within the United States. Wideband Consumer Signal Boosters may only be sold to members of the general public for their personal use.
+            </P>
+            <P>
+                (h) 
+                <E T="03">Registration.</E>
+                 Each licensee consenting to the operation of a Consumer Signal Booster must establish a free registration mechanism for subscribers and register all Consumer Signal Boosters to which it consents. A licensee must establish a registration mechanism by the later of March 1, 2014 or within 90 days of consenting to the operation of a Consumer Signal Booster. At a minimum, a licensee must collect:
+            </P>
+            <P>(1) The name of the Consumer Signal Booster owner and/or operator, if different individuals;</P>
+            <P>(2) The make, model, and serial number of the device;</P>
+            <P>
+                (3) The location of the device; and
+                <PRTPAGE P="30"/>
+            </P>
+            <P>(4) The date of initial operation. Licensee consent is voluntary and may be withdrawn at the licensee's discretion.</P>
+            <CITA>[78 FR 21559, Apr. 11, 2013, as amended at 79 FR 70795, Nov. 28, 2014; 83 FR 17090, Apr. 18, 2018]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.22</SECTNO>
+            <SUBJECT>Rules governing mobile spectrum holdings.</SUBJECT>
+            <P>
+                (a) Applicants for mobile wireless licenses for commercial use, for assignment or transfer of control of such licenses, or for long-term 
+                <E T="03">de facto</E>
+                 transfer leasing arrangements as defined in § 1.9003 of this chapter and long-term spectrum manager leasing arrangements as identified in § 1.9020(e)(1)(ii) must demonstrate that the public interest, convenience, and necessity will be served thereby. The Commission will evaluate any such license application consistent with the policies set forth in Policies Regarding Mobile Spectrum Holdings, 
+                <E T="03">Report and Order,</E>
+                 FCC 14–63, WT Docket No. 12–269, adopted May 15, 2014.
+            </P>
+            <P>
+                (b) 
+                <E T="03">Attribution of interests.</E>
+                 (1) The following criteria will apply to attribute partial ownership and other interests in spectrum holdings for purposes of:
+            </P>
+            <P>(i) Applying a mobile spectrum holding limit to the licensing of spectrum through competitive bidding; and</P>
+            <P>(ii) Applying the initial spectrum screen to secondary market transactions.</P>
+            <P>
+                (2) 
+                <E T="03">Controlling interests shall be attributable.</E>
+                 Controlling interest means majority voting equity ownership, any general partnership interest, or any means of actual working control (including negative control) over the operation of the licensee, in whatever manner exercised.
+            </P>
+            <P>
+                (3) 
+                <E T="03">Non-controlling interests of 10 percent or more in spectrum shall be attributable.</E>
+                 Interests of less than 10 percent in spectrum shall be attributable if such interest confers 
+                <E T="03">de facto</E>
+                 control, including but not limited to partnership and other ownership interests and any stock interest in a licensee.
+            </P>
+            <P>(4) The following interests in spectrum shall also be attributable to holders:</P>
+            <P>(i) Officers and directors of a licensee shall be considered to have an attributable interest in the entity with which they are so associated. The officers and directors of an entity that controls a licensee or applicant shall be considered to have an attributable interest in the licensee.</P>
+            <P>(ii) Ownership interests that are held indirectly by any party through one or more intervening corporations will be determined by successive multiplication of the ownership percentages for each link in the vertical ownership chain and application of the relevant attribution benchmark to the resulting product, except that if the ownership percentage for an interest in any link in the chain exceeds 50 percent or represents actual control, it shall be treated as if it were a 100 percent interest. (For example, if A owns 20% of B, and B owns 40% of licensee C, then A's interest in licensee C would be 8%. If A owns 20% of B, and B owns 51% of licensee C, then A's interest in licensee C would be 20% because B's ownership of C exceeds 50%).</P>
+            <P>(iii) Any person who manages the operations of a licensee pursuant to a management agreement shall be considered to have an attributable interest in such licensee if such person, or its affiliate, has authority to make decisions or otherwise engage in practices or activities that determine, or significantly influence, the nature or types of services offered by such licensee, the terms upon which such services are offered, or the prices charged for such services.</P>
+            <P>(iv) Any licensee or its affiliate who enters into a joint marketing arrangement with another licensee or its affiliate shall be considered to have an attributable interest in the other licensee's holdings if it has authority to make decisions or otherwise engage in practices or activities that determine or significantly influence the nature or types of services offered by the other licensee, the terms upon which such services are offered, or the prices charged for such services.</P>
+            <P>(v) Limited partnership interests shall be attributed to limited partners and shall be calculated according to both the percentage of equity paid in and the percentage of distribution of profits and losses.</P>
+            <P>
+                (vi) Debt and instruments such as warrants, convertible debentures, options, or other interests (except non-
+                <PRTPAGE P="31"/>
+                voting stock) with rights of conversion to voting interests shall not be attributed unless and until converted or unless the Commission determines that these interests confer 
+                <E T="03">de facto</E>
+                 control.
+            </P>
+            <P>(5) The following interests shall be attributable to holders, except to lessees and sublessees for the purpose of qualifying to bid on reserved licenses offered in the Incentive Auction, discussed in paragraph (c) of this section, on the basis of status as a non-nationwide provider:</P>
+            <P>
+                (i) Long-term 
+                <E T="03">de facto</E>
+                 transfer leasing arrangements as defined in § 1.9003 of this chapter and long-term spectrum manager leasing arrangements as identified in § 1.9020(e)(1)(ii) that enable commercial use shall be attributable to lessees, lessors, sublessees, and sublessors for purposes of this section.
+            </P>
+            <P>(ii) [Reserved]</P>
+            <P>
+                (c) 
+                <E T="03">600 MHz Band holdings.</E>
+                 (1) The Commission will reserve licenses for up to 30 megahertz of the 600 MHz Band, offered in the Incentive Auction authorized by Congress pursuant to 47 U.S.C. 309(j)(8)(G), for otherwise qualified bidders who do not hold an attributable interest in 45 megahertz or more of the total 134 megahertz of below-1-GHz spectrum which consists of the cellular (50 megahertz), the 700 MHz (70 megahertz), and the SMR (14 megahertz) spectrum in a Partial Economic Area (PEA), as calculated on a county by county population-weighted basis, utilizing 2010 U.S. Census data. The amount of reserved and unreserved 600 MHz Band licenses will be determined based on the market-based spectrum reserve set forth in Policies Regarding Mobile Spectrum Holdings, 
+                <E T="03">Report and Order,</E>
+                 FCC 14–63, WT Docket No. 12–269, adopted May 15, 2014, as well as subsequent Public Notices. Nothing in this paragraph will limit, or may be construed to limit, an otherwise qualified bidder that is a non-nationwide provider of mobile wireless services from bidding on any reserved or unreserved license offered in the Incentive Auction.
+            </P>
+            <P>(2) For a period of six years, after initial licensing, no 600 MHz Band license, regardless of whether it is reserved or unreserved, may be transferred, assigned, partitioned, disaggregated, or long term leased to any entity that, after consummation of the transfer, assignment, or leased on a long term basis, would hold an attributable interest in one-third or more of the total suitable and available below-1-GHz spectrum as calculated on a county by county population-weighted basis in the relevant license area, utilizing 2010 U.S. Census data.</P>
+            <P>(3) For a period of six years, after initial licensing, no 600 MHz Band reserved license may be transferred, assigned, partitioned, disaggregated, or leased on a long term basis to an entity that was not qualified to bid on that reserved spectrum license under paragraph (c)(1) of this section at the time of the Incentive Auction short-form application deadline.</P>
+            <CITA>[79 FR 40002, July 11, 2014, as amended at 80 FR 61970, Oct. 14, 2015]</CITA>
+        </SECTION>
+        <SECTION>
+            <SECTNO>§ 20.23</SECTNO>
+            <SUBJECT>Contraband wireless devices in correctional facilities.</SUBJECT>
+            <P>
+                (a) 
+                <E T="03">Good faith negotiations.</E>
+                 CMRS licensees must negotiate in good faith with entities seeking to deploy a Contraband Interdiction System (CIS) in a correctional facility. Upon receipt of a good faith request by an entity seeking to deploy a CIS in a correctional facility, a CMRS licensee must negotiate toward a lease agreement. If, after a 45 day period, there is no agreement, CIS providers seeking Special Temporary Authority (STA) to operate in the absence of CMRS licensee consent may file a request for STA with the Wireless Telecommunications Bureau (WTB), accompanied by evidence demonstrating its good faith, and the unreasonableness of the CMRS licensee's actions, in negotiating an agreement. The request must be served on the CMRS licensee no later than the filing of the STA request, and the CMRS licensee may file a response with WTB, with a copy served on the CIS provider at that time, within 10 days of the filing of the STA request. If WTB determines that the CIS provider has negotiated in good faith, yet the CMRS licensee has not negotiated in good faith, WTB may issue STA to the entity seeking to deploy the CIS, notwithstanding lack of accompanying CMRS licensee consent.
+                <PRTPAGE P="32"/>
+            </P>
+            <P>
+                (b) 
+                <E T="03">Contraband Interdiction System (CIS) authorization process.</E>
+                 The provisions in this section apply to any person seeking certification of a CIS authorized for use in the submission of qualifying disabling requests, whether operating a system that requires a license and is regulated as CMRS or private mobile radio service (PMRS), or operating a passive system that does not require a license. The Wireless Telecommunications Bureau (Bureau) will establish, via public notice, the form and procedure for: CIS operators to file CIS certification applications, self-certifications, and periodic re-certification; CIS operators to serve on wireless providers notice of testing and copies of self-certification; and wireless providers to file objections to self-certifications, including required service on CIS operators and DCFOs.
+            </P>
+            <P>
+                (1) 
+                <E T="03">Application requirements.</E>
+                 To obtain CIS certification, an applicant must submit an application to the Bureau for review and approval that:
+            </P>
+            <P>(i) Demonstrates that all radio transmitters used as part of the CIS have appropriate equipment authorizations pursuant to Commission rules in part 2 of this chapter;</P>
+            <P>(ii) Demonstrates that the CIS is designed and will be configured to locate devices solely within a correctional facility;</P>
+            <P>
+                (iii) Describes the methodology to be used in analyzing data collected by the CIS and demonstrates that such methodology is adequately robust to ensure that the particular wireless device is in fact located within a correctional facility and includes specific data analysis benchmarks designed to ensure successful detection, such as rate of detection of contraband versus non-contraband devices and relevant sample size (
+                <E T="03">e.g.</E>
+                 number of devices observed and length of observation period);
+            </P>
+            <P>(iv) Demonstrates that the CIS will secure and protect all information or data collected as part of its intended use;</P>
+            <P>(v) Demonstrates that the CIS will not interfere with emergency 911 calls;</P>
+            <P>
+                (vi) Describes whether the CIS requires a spectrum or network access agreement (
+                <E T="03">e.g.,</E>
+                 a spectrum leasing arrangement or roaming agreement) to be authorized to operate; and
+            </P>
+            <P>(vii) Includes a proposed test plan for subsequent site-based testing of each CIS, that must include detailed descriptions and technical specifications to facilitate Commission review of whether the system satisfies its legal requirements and technically functions as anticipated.</P>
+            <P>
+                (2) 
+                <E T="03">Marketing and sales.</E>
+                 CIS that are certified for use in qualifying requests for disabling of contraband devices may be marketed or sold only to correctional facilities or entities that will provide contraband interdiction services to such facilities.
+            </P>
+            <P>
+                (3) 
+                <E T="03">Site-based testing and self-certification requirements</E>
+                —(i) 
+                <E T="03">Site-based testing.</E>
+                 A CIS operator seeking to use the CIS to submit qualifying requests for disabling must test a certified CIS at each location where it intends to operate. Thereafter, the CIS operator must file with the Bureau a self-certification that complies with paragraph (b)(3)(ii) of this section, confirming that the testing at that specific correctional facility is complete and successful. The CIS operator must serve notice of the testing on all relevant wireless providers prior to testing and provide such wireless providers a reasonable opportunity to participate in the tests. Relevant wireless providers include any wireless provider holding a spectrum license that:
+            </P>
+            <P>(A) Authorizes operation on the frequencies on which the CIS seeks to detect contraband use; and</P>
+            <P>
+                (B) Authorizes service in the geographic area (
+                <E T="03">e.g.,</E>
+                 census tract, county, Partial Economic Area (PEA), Economic Area (EA), Cellular Market Area (CMA), Regional Economic Area Grouping (REAG)) within which the correctional facility is located.
+            </P>
+            <P>
+                (ii) 
+                <E T="03">Self-certification.</E>
+                 Following the testing, and to be eligible for use in conjunction with qualifying requests for disabling, a CIS operator must file a self-certification with the Bureau that:
+            </P>
+            <P>(A) Identifies the correctional facility where it seeks to deploy;</P>
+            <P>
+                (B) Attests that applicable Federal or state criminal statutes prohibit the possession or operation of contraband devices within the correctional facility (and includes the applicable Federal or state criminal statutory provision);
+                <PRTPAGE P="33"/>
+            </P>
+            <P>(C) Describes the results of on-site tests of the certified CIS conducted at the correctional facility;</P>
+            <P>(D) Attests that the on-site testing was performed consistent with the approved test plans for the certified CIS and that the CIS deployment minimizes the risk of disabling a non-contraband device;</P>
+            <P>(E) Identifies whether any relevant wireless providers participated in the testing, and provides proof that the relevant wireless providers were given notice regarding the testing and a reasonable opportunity to participate;</P>
+            <P>
+                (F) Includes proof of any spectrum and/or network access agreement (
+                <E T="03">e.g.,</E>
+                 a spectrum leasing arrangement and/or roaming agreement) required to be authorized to operate and/or for the system to function effectively;
+            </P>
+            <P>(G) Includes proof that the self-certification was served via electronic means on all relevant wireless providers; and</P>
+            <P>(H) Includes an attestation from the DCFO verifying that all information contained in the self-certification is true and accurate.</P>
+            <P>(I) The self-certification must be filed in accordance with part 1, subpart F, of this chapter.</P>
+            <P>
+                (4) 
+                <E T="03">Submitting objections.</E>
+                 Wireless providers may submit objections to the Bureau within five business days from the certification filing date. Any such objections must be served on the DCFO and the CIS operator.
+            </P>
+            <P>
+                (5) 
+                <E T="03">Recertification.</E>
+                 At least every three years after the initial self-certification, CIS operators seeking to maintain the ability to submit qualifying requests through a DCFO for contraband device disabling must retest their systems and recertify them for continued CIS accuracy. Recertifications must comply with the same rules and filing instructions that apply to the initial self-certification.
+            </P>
+            <P>
+                (6) 
+                <E T="03">Suspension of CIS eligibility.</E>
+                 The Bureau may suspend CIS certification generally or at a particular facility if subsequent credible information calls into question a system's reliability.
+            </P>
+            <P>
+                (7) 
+                <E T="03">Records maintenance.</E>
+                 To ensure the integrity and proper operation of CISs, a CIS operator must retain records of all information supporting each request for disabling and the basis for disabling each device, including copies of all documents submitted in the qualifying request, for at least five years following the date of submission of the relevant disabling request. CIS operators of systems that have been tested and approved for use in qualifying requests must make available all records upon request from the Bureau.
+            </P>
+            <P>
+                (c) 
+                <E T="03">Disabling contraband wireless devices.</E>
+                 A DCFO may request that a CMRS licensee disable a contraband wireless device that has been detected in a correctional facility by a CIS that has been certified in accordance with paragraph (b) of this section. Absent objections from a wireless provider, as described under paragraph (b)(4) of this section, the DCFO may submit a qualifying request to a wireless provider beginning on the sixth business day after the later of the self-certification filing or actual service, as described under paragraph (b)(3)(ii) of this section.
+            </P>
+            <P>
+                (1) 
+                <E T="03">DCFO list.</E>
+                 The Commission will maintain a publicly available list of DCFOs that are authorized to transmit qualifying disabling requests. Authorized DCFOs that seek to be recognized on the Commission's DCFO list must send a letter to the Commission's Contraband Ombudsperson, signed by the relevant state attorney general or the relevant Bureau of Prisons Regional Director and providing:
+            </P>
+            <P>(i) The individual's name;</P>
+            <P>(ii) The individual's official government position; and</P>
+            <P>(iii) A list of correctional facilities over which the individual has oversight and management authority.</P>
+            <P>
+                (2) 
+                <E T="03">Qualifying request.</E>
+                 A qualifying request must be made in writing, contain the certifications in paragraph (c)(2)(i) of this section and the device and correctional facility identifying information in paragraph (c)(2)(ii) of this section, and be signed by the appropriate DCFO. The DCFO must transmit a qualifying request to a CMRS licensee using a secure communication means that will provide certainty regarding the identity of both the sending and receiving parties. A CMRS licensee must adopt a method, or use an existing method, for receiving secured and verified qualifying requests.
+                <PRTPAGE P="34"/>
+            </P>
+            <P>
+                (i) 
+                <E T="03">Certifications.</E>
+                 A qualifying request must include the following certifications by the DCFO:
+            </P>
+            <P>(A) A CIS that has been certified in accordance with paragraph (b) of this section was used to gather the contraband subscriber and device information populated in the qualifying request;</P>
+            <P>(B) The certified CIS was used to identify contraband wireless devices operating in a correctional facility where the CIS has been tested and self-certified for operational readiness and for use in qualifying requests, and the identification of contraband wireless devices occurred within 30 days immediately prior to the date of the qualifying request submission;</P>
+            <P>(C) The DCFO has reviewed the list of contraband wireless devices and attests that it is accurate; and</P>
+            <P>(D) It is a violation of applicable state or Federal criminal statutes to possess or operate a contraband device in the correctional facility.</P>
+            <P>
+                (ii) 
+                <E T="03">Device and correctional facility identifying information.</E>
+                 The qualifying request must identify the contraband wireless device to be disabled and the correctional facility by providing the following information:
+            </P>
+            <P>(A) Identifiers sufficient to:</P>
+            <P>
+                (
+                <E T="03">1</E>
+                ) Identify the applicable wireless service provider;
+            </P>
+            <P>
+                (
+                <E T="03">2</E>
+                ) Uniquely describe each of the contraband wireless devices in question at the subscription level; and
+            </P>
+            <P>
+                (
+                <E T="03">3</E>
+                ) Uniquely describe each of the contraband wireless devices in question at the device-level;
+            </P>
+            <P>(B) Name of the correctional facility at which the contraband wireless device(s) were identified; and</P>
+            <P>(C) Street address of the correctional facility at which the contraband wireless device(s) were identified.</P>
+            <P>
+                (3) 
+                <E T="03">Licensee actions upon receipt of a qualifying request.</E>
+                 Upon receiving a request from a DCFO to disable a contraband wireless device, a licensee providing CMRS service must verify that the request contains the required information for a qualifying request, as defined in paragraph (c)(2) of this section.
+            </P>
+            <P>
+                (i) 
+                <E T="03">Disabling upon receipt of a qualifying request and timing.</E>
+                 If the qualifying request contains the required information, and does not contain an error in the device identifying information preventing the licensee from being able to disable the device, a licensee must, within two business days of receipt of the qualifying request, disable the contraband wireless device from using the wireless provider's network at both the device and subscriber level and take reasonable and practical steps to prevent the contraband wireless device from being used on another wireless provider's network.
+            </P>
+            <P>
+                (ii) 
+                <E T="03">Rejection of a qualifying request and timing.</E>
+                 A licensee may reject a qualifying request within two business days of receipt of a qualifying request if it does not include the information required for a qualifying request or, with respect to a relevant device, the request contains an error in the device-identifying information preventing the licensee from being able to disable the device.
+            </P>
+            <P>
+                (iii) 
+                <E T="03">Customer outreach.</E>
+                 A licensee may immediately disable a contraband wireless device without any customer outreach, or a licensee may contact the customer of record through any available means to notify them that the device will be disabled, but any such notice does not modify the licensee's obligation to comply with paragraphs (c)(3)(i) and (ii) of this section.
+            </P>
+            <P>
+                (iv) 
+                <E T="03">Notification to the Designated Correctional Facility Official.</E>
+                 Within two business days of receiving a qualifying request from a DCFO, a licensee must inform the DCFO whether the request has been granted or rejected.
+            </P>
+            <P>
+                (4) 
+                <E T="03">Reversals.</E>
+                 A licensee may reverse a disabled wireless device if it determines that the wireless device was identified erroneously as contraband. The licensee must promptly inform the DCFO of the erroneously identified wireless device.
+            </P>
+            <P>
+                (i) 
+                <E T="03">DCFO involvement.</E>
+                 Prior to reversing a disabling action, a wireless provider that determines that a device may have been erroneously identified as contraband may request that the DCFO review and confirm the information provided in a qualifying request pursuant to which the device was previously disabled. To trigger DCFO involvement, the wireless provider must provide the DCFO with:
+            </P>
+            <P>
+                (A) The date of the qualifying request;
+                <PRTPAGE P="35"/>
+            </P>
+            <P>(B) The identifying information provided for the device; and</P>
+            <P>(C) Any evidence supporting the wireless provider's belief that the device was erroneously identified.</P>
+            <P>
+                (ii) 
+                <E T="03">DCFO response.</E>
+                 Upon receipt of a request from a wireless provider, the DCFO should review the qualifying request and determine whether the device in question was erroneously identified and either confirm the validity of the identifying information contained in the qualifying request or acknowledge the error and direct the carrier to restore service to the device.
+            </P>
+            <P>
+                (iii) 
+                <E T="03">Restoration of service.</E>
+                 In the event the DCFO directs the wireless provider to reverse the disabling, the wireless provider must, within two business days, restore service to the device and reverse any actions taken to prevent the device from accessing other wireless provider networks.
+            </P>
+            <P>
+                (iv) 
+                <E T="03">Wireless provider action in absence of timely DCFO response.</E>
+                 In the event the DCFO does not respond to a request from a wireless provider for review of a qualifying request within two business days, the wireless provider may proceed with reversing the disabling action.
+            </P>
+            <P>
+                (v) 
+                <E T="03">Notice of reversals.</E>
+                 The DCFO must provide notice to the Contraband Ombudsperson of the number of erroneously disabled devices on a quarterly basis at the end of any quarter during which a device disabling was reversed.
+            </P>
+            <P>
+                (d) 
+                <E T="03">Notification to Managed Access System (MAS) operators of wireless provider technical changes</E>
+                —(1) 
+                <E T="03">Notification requirements.</E>
+                 CMRS licensees leasing spectrum to MAS operators must provide 90 days' advance notice to MAS operators of the following network changes occurring within 15 miles of the correctional facility, unless parties modify notification arrangements through mutual agreement:
+            </P>
+            <P>(i) Adding a new frequency band to service offerings;</P>
+            <P>(ii) Deploying a new air interface technology or changing an existing air interface technology; and/or</P>
+            <P>(iii) Adding, relocating, or removing a site.</P>
+            <P>
+                (2) 
+                <E T="03">Good faith negotiations.</E>
+                 CMRS licensee lessors and MAS operator lessees must negotiate in good faith to reach an agreement for notification for other types of network adjustments not covered by the notice requirement set forth in paragraph (d)(1) of this section and for the parties' treatment of confidential information contained in notifications required pursuant to this section and/or negotiated between the parties.
+            </P>
+            <P>
+                (3) 
+                <E T="03">Emergency network changes exception.</E>
+                 CMRS licensees leasing spectrum to managed access systems (MAS) operators are not required to provide 90 days' advance notice to MAS operators of network technical changes occurring within 15 miles of the correctional facility that are required due to emergency and disaster preparedness. CMRS licensees must provide notice of these technical changes immediately after the exigency.
+            </P>
+            <CITA>[82 FR 22761, May 18, 2017, as amended at 86 FR 44638, Aug. 13, 2021]</CITA>
+        </SECTION>
+    </PART>
+</CFRGRANULE>

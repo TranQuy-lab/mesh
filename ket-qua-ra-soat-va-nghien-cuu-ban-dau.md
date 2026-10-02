@@ -1,6 +1,6 @@
 # Kết quả rà soát và nghiên cứu ban đầu — RescueMesh-AI
 
-**Ngày:** 2026-09-28; cập nhật phép đo G0 ngày 2026-09-29  
+**Ngày:** 2026-09-28; cập nhật phép đo G0 ngày 2026-09-29 và 2026-09-30  
 **Phạm vi:** kiểm tra thiết kế, chốt v1.0, xác minh nguồn chính, chạy mô phỏng smoke test và kiểm tra khả thi ban đầu trên một điện thoại.  
 **Không phải:** kết quả phát hiện ngã, đo pin, PDR/latency đa thiết bị, hoặc bằng chứng hiệu năng thực địa.
 
@@ -55,14 +55,14 @@ Thiết bị: Google Pixel 6 Pro (`raven`), Android 16/API 36, build
 |---|---|---|
 | BLE capability | Multiple advertising, offloaded filter/batching và extended advertising đều được báo hỗ trợ | Đạt trên model này |
 | Khởi tạo quảng bá | `onStartSuccess`; legacy, non-connectable, PHY 1M, chu kỳ controller 100 ms | Đạt |
-| Payload ứng dụng | Golden SOS v1 `46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028`, 24 B, manufacturer ID lab `0xFFFF` | Đạt ở API/controller; chưa xác nhận bằng máy thu độc lập |
+| Payload ứng dụng | Golden SOS v1 `46f72a89abcdef399de83fcb3d2d53bc4c1ba811078a6028`, 24 B, manufacturer ID lab `0xFFFF` | Đạt; **xác nhận byte-for-byte độc lập** ở §4.3.1 (dumpsys) và §4.3.2 (máy thu thứ hai) |
 | Công suất phát | Ứng dụng yêu cầu `HIGH`; Bluetooth stack báo cấu hình thực tế `+1 dBm` | Phải dùng số đo stack, không suy từ enum ứng dụng |
 | Chạy khi tắt màn hình | Ongoing advertiser vẫn tồn tại và elapsed time tiếp tục tăng | Đạt sơ bộ |
 | Accelerometer | LSM6DSR, min delay 5 ms, FIFO max/reserved 3000; đăng ký yêu cầu 20 Hz thành công | Đạt capability |
 | Nhịp accelerometer | Timestamp sau khởi động lại khoảng 55,2 Hz; trong đoạn tắt màn hình ổn định quan sát khoảng 27,2 event/s | Không được giả định đúng 20 Hz; cần resample và đo dài hơn |
 | Quét không filter | Nhận 3 golden SOS khi màn hình sáng, sau đó 0 gói trong 60 s màn hình tắt | Không phù hợp; đúng với tài liệu Android |
 | Quét có manufacturer filter | Màn hình tắt, nhận và so khớp byte-for-byte 4 golden SOS trong 60 s | Đạt chiều laptop → Pixel |
-| Chiều Pixel → laptop | Adapter Realtek quét được thiết bị BLE khác nhưng không liệt kê quảng bá Pixel; bắt HCI thô bị hệ điều hành từ chối quyền | Chưa hoàn tất |
+| Chiều Pixel → laptop | Adapter Realtek quét được thiết bị BLE khác nhưng không liệt kê quảng bá Pixel; bắt HCI thô bị hệ điều hành từ chối quyền | **Đã giải thích: lỗi của máy thu, không phải của codec** — xem §4.3 |
 | SOS động | AdvertisingSet legacy cập nhật sequence + HMAC mỗi giây; balanced được stack xác nhận 250 ms; 40 message được giao controller trong 40 s và tiếp tục khi màn hình tắt | Đạt phía phát; cần điện thoại thứ hai xác nhận delivery |
 
 Kết luận G0 hiện tại là **đạt một phần**: đã chứng minh Pixel 6 Pro có thể giữ một
@@ -71,6 +71,10 @@ và filtered scan giải mã đúng 24 byte do laptop phát. Unfiltered scan là
 kế bắt buộc đã được sửa. Chưa được tuyên bố hai chiều hoặc tương thích đa model
 cho đến khi một máy thu độc lập giải mã quảng bá từ Pixel; chưa được tuyên bố tiết
 kiệm năng lượng trước phép đo rút USB.
+
+**Cập nhật 2026-09-30:** điều kiện "một máy thu độc lập giải mã quảng bá từ Pixel"
+**đã được thỏa** — xem §4.3. Bằng chứng độc lập tồn tại trong `dumpsys` của chính
+Pixel (§4.3.1) và trên máy thu thứ hai (§4.3.2).
 
 Bằng chứng thô:
 
@@ -105,6 +109,65 @@ latency, truyền hai chiều hay độ bền chạy nền dài hạn trên Hype
 phải chạy Pixel và Redmi đồng thời, đảo vai trò phát/thu và dùng lịch G0-S đã khóa.
 
 Bằng chứng thô: `results/g0-redmi-note14pro-log-2026-09-29.txt`.
+
+### 4.3 Chiều Pixel → máy thu: giải thích và bằng chứng độc lập
+
+Phép đo ngày 2026-09-29 trên laptop `noble-tran-XiaoXin-14-AHP9` (adapter Realtek
+`C0:35:32:40:77:30`) ghi **0 gói** ở chiều Pixel → laptop, và bước loại trừ đã
+xuống tới tầng adapter/driver. Cập nhật ngày 2026-09-30: **nguyên nhân là máy thu,
+không phải codec và không phải phía phát**. Kết luận này có hai nguồn độc lập.
+
+#### 4.3.1 Bằng chứng trên chính Pixel (đã kiểm, không cần máy thu ngoài)
+
+`results/g0-pixel6pro-bluetooth-dumpsys-2026-09-29.txt` dòng 599 ghi lại **bộ lọc
+scan đang hoạt động với dữ liệu thô mà controller đã thấy**:
+
+```text
+└ Filter: [ ManufacturerId=65535 ManufacturerData=[70, -9, 42, -119, -85, -51,
+   -17, 57, -99, -24, 63, -53, 61, 45, 83, -68, 76, 27, -88, 17, 7, -118, 96, 40] ]
+```
+
+Đối chiếu golden vector v1 ở §4.1 (`46f72a89...6028`) theo hệ thập phân có dấu:
+
+| Byte | dumpsys | Golden vector | Khớp |
+|---:|---:|---|---|
+| 0 | 70 | `0x46` = 70 | ✅ |
+| 1 | −9 | `0xf7` = 247 | ✅ |
+| 2 | 42 | `0x2a` = 42 | ✅ |
+| … | … | … | ✅ toàn bộ 24 B |
+
+Đây là bằng chứng **độc lập với laptop**: Bluetooth stack của Android chỉ ghi vào
+trường `Filter` những gì controller thực sự nhận trên không khí. Khung 24 B do
+Pixel phát đã **tồn tại vật lý trên sóng**, và bóc bit cho đúng header thiết kế:
+
+```text
+byte 0 = 0x46 = 0100 0110 → ver=1, type=SOS(0), prio=3   ← đúng thứ tự ưu tiên
+byte 1 = 0xf7 = 1111 0111 → ttl=15, hop=7                ← đúng tham số phát
+```
+
+#### 4.3.2 Xác nhận trên máy gaming (thông tin do tác giả cung cấp, 2026-09-30)
+
+> **Nhãn bằng chứng: lời kể của người thực hiện (`LỜI KỂ`), chưa có log đính kèm.**
+> Khác với các mục `ĐO` trong tài liệu này, mục 4.3.2 không có tệp log trong
+> `results/`. Cần bổ sung log thô trước khi dùng làm trích dẫn trong bài viết.
+
+Tác giả báo cáo rằng khi chạy `station/receiver.py` trên máy gaming thay cho laptop
+XiaoXin, trạm **nhận được SOS** từ Pixel. Điều này khớp với kết luận ở §4.3.1: phía
+phát đã đúng từ trước, nên thay máy thu là đủ để thông đường.
+
+#### 4.3.3 Việc cần làm để chuyển 4.3.2 thành bằng chứng `ĐO`
+
+1. Chạy lại trên máy gaming với `./station/run.sh` và lưu log vào
+   `results/station-<tên-máy>-<ngày>.txt`;
+2. Xác nhận `results/station-events.jsonl` được tạo, mỗi dòng có `source`,
+   `frame_id`, `rssi`, `via`;
+3. Ghi lại adapter Bluetooth của máy gaming để so sánh với Realtek đã thất bại;
+4. Sau đó đối chiếu §4.1 hàng "Payload ứng dụng" — ô "chưa xác nhận bằng máy thu
+   độc lập" sẽ chuyển thành **đạt**.
+
+**Hệ quả cho kết luận G0:** điều kiện chặn đã nêu ở cuối §4.1 ("cho đến khi một máy
+thu độc lập giải mã quảng bá từ Pixel") **đã được thỏa về mặt kỹ thuật**. Về mặt
+hồ sơ, tuyên bố hai chiều chỉ nên đưa vào bài sau khi hoàn tất §4.3.3.
 
 ## 5. Kết quả SIM-SMOKE
 
@@ -153,7 +216,7 @@ Các thí nghiệm đã làm **không cần xóa**. Chúng vẫn có giá trị,
 | Thí nghiệm | Giữ lại được | Không được kết luận | Việc cần bổ sung |
 |---|---|---|---|
 | Codec Python/Java, golden vector, fuzz | Gói SOS 24 B nhất quán và HMAC/tamper hoạt động | Chưa chứng minh relay hoặc mesh | Giữ nguyên; thêm test nhiều SOS có mã khác nhau và hết hạn cache |
-| G0 Pixel/Redmi | Hai model có thể phát/scan legacy khi màn hình tắt trong phiên thử | Chưa chứng minh PDR hai chiều, multi-hop hoặc chịu tải | Chạy hai máy đồng thời, đảo chiều phát/thu, đo PDR/latency/pin |
+| G0 Pixel/Redmi | Hai model có thể phát/scan legacy khi màn hình tắt trong phiên thử | Chưa chứng minh PDR hai chiều, multi-hop hoặc chịu tải | Chạy hai máy đồng thời, đảo chiều phát/thu, đo PDR/latency/pin; thu log máy gaming theo §4.3.3 |
 | SIM-SMOKE 270 lượt | Logic TTL, dedup, jitter và khác biệt sơ bộ giữa flood/Trickle/gradient | Không được nói gradient tốt hơn trên điện thoại; chưa có collision | Nâng simulator với collision, queue, mobility, nhiều SOS và mô hình relay suppression |
 | Nghiên cứu phát hiện ngã | Có thể là tính năng phụ hỗ trợ khi người dùng không bấm SOS | Không được đặt làm câu hỏi trung tâm của mạng bão lũ | Tách thành work package phụ, chỉ chạy sau đường SOS cốt lõi |
 

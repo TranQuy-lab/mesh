@@ -1,0 +1,737 @@
+                                                                                                                                                                                  1
+
+
+
+
+                                                     LoRa beyond ALOHA: An Investigation of
+                                                       Alternative Random Access Protocols
+                                                                  Luca Beltramelli, Aamir Mahmood, Patrik Österberg, and Mikael Gidlund
+
+                                            Abstract—We present a stochastic geometry-based model to               LPWAN technology that has recently become popular both in
+                                         investigate alternative medium access choices for LoRaWAN—                industry and academia.
+                                         a widely adopted low-power wide-area networking (LPWAN)                      LoRa, as a communication technology, is the union of a
+                                         technology for the Internet-of-things (IoT). LoRaWAN adoption
+                                         is driven by its simplified network architecture, air interface, and      proprietary modulation scheme at the physical (PHY) layer
+                                         medium access. The physical layer, known as LoRa, provides                with LoRaWAN, the latter being an open standard defining
+                                         quasi-orthogonal virtual channels through spreading factors               the medium access and other higher layers of the commu-
+arXiv:2002.10732v1 [cs.IT] 25 Feb 2020
+
+
+
+
+                                         (SFs) and time-power capture gains. However, the adopted pure             nication stack [4]. According to LoRaWAN specifications,
+                                         ALOHA access mechanism suffers, in terms of scalability, under            most devices access the channel using a mechanism similar to
+                                         the same-channel same-SF transmissions from a large number
+                                         of devices. In this paper, our objective is to explore access             pure ALOHA. ALOHA is a well-understood protocol known
+                                         mechanisms beyond-ALOHA for LoRaWAN. Using recent results                 for its simplicity, ease of implementation, and for adding a
+                                         on time- and power-capture effects of LoRa, we develop a                  minimal communication overhead. The random access nature
+                                         unified model for the comparative study of other choices, i.e.,           of ALOHA perfectly matches to the sporadic data transmis-
+                                         slotted ALOHA and carrier-sense multiple access (CSMA). The               sions of typical monitoring applications. However, ALOHA
+                                         model includes the necessary design parameters of these access
+                                         mechanisms, such as guard time and synchronization accuracy               is known to suffer from limited scalability (i.e. the maximum
+                                         for slotted ALOHA, carrier sensing threshold for CSMA. It also            number of devices that can be served) and the lack of any
+                                         accounts for the spatial interaction of devices in annular shaped         QoS guarantees. Numerous studies [5]–[10], investigating the
+                                         regions, characteristic of LoRa, for CSMA. The performance                performance of LoRa, have highlighted its qualities but also
+                                         derived from the model in terms of coverage probability, channel          its limits, some, in particular, attributable to the ALOHA
+                                         throughput, and energy efficiency are validated using Monte-
+                                         Carlo simulations. Our analysis shows that slotted ALOHA                  protocol. Many works in literature address this latter aspect
+                                         indeed has higher reliability than pure ALOHA but at the cost of          by proposing alternative medium access mechanisms in Lo-
+                                         lower energy efficiency for low device densities. Whereas, CSMA           RaWAN [11]–[18]. The two main research directions of these
+                                         outperforms slotted ALOHA at smaller SFs in terms of reliability          studies are, a) introducing QoS support in LoRa via the use
+                                         and energy efficiency, with its performance degrading to pure             of scheduling mechanisms for deterministic data transmissions
+                                         ALOHA at higher SFs.
+                                                                                                                   in time-critical industrial use-cases and b) enhancing LoRa
+                                                                                                                   scalability via the use of random access mechanisms such
+                                                                 I. I NTRODUCTION                                  as slotted ALOHA and CSMA. This work however follows
+                                                                                                                   the second direction, as improving the reliability (i.e. trans-
+
+                                         L     ow-power wide-area network (LPWAN) technologies are
+                                               rapidly being adopted in delay-tolerant industrial appli-
+                                         cations for wide-area sensing, monitoring, and supervisory
+                                                                                                                   mission success probability) and scalability of LoRa without
+                                                                                                                   compromising its energy efficiency would not only benefit
+                                                                                                                   the already supported industrial applications but also enable
+                                         control with the emphasis on energy-efficient support for                 the use of LoRa in new applications (e.g. sensor backhaul,
+                                         a massive number of devices over long distances [1]. The                  machine health monitoring) [1].
+                                         energy efficiency of LPWANs make them a cost-effective                       To the best of the authors knowledge, the performance of
+                                         candidate solution for non-critical industrial applications [2].          alternative random access schemes for LoRa has not been in-
+                                         The robust modulations that allow LPWANs to achieve wide-                 vestigated nor compared analytically in the literature. Existing
+                                         area coverage can be useful in industrial environments where              works (e.g., [5], [6]) proposing analytical models for LoRa
+                                         the wireless channel is often affected by multipath and fad-              have exclusively analyzed the behavior of pure ALOHA. Sem-
+                                         ing [3]. Moreover, the extended coverage reduces the need for             inal works in stochastic geometry [19], [20] have compared the
+                                         multi-hop communication while supporting mobility. Among                  performance of different access mechanisms, but their models
+                                         others, the most critical challenge that LPWANs face is the               do not capture the PHY layer characteristics of LoRa. In
+                                         interference caused by simultaneous transmissions from a                  this paper, we develop an analytical model for performance
+                                         large number of connected devices. To manage and combat                   analysis of LoRa networks under three basic random access
+                                         interference, the selection of effective and yet energy efficient         mechanisms: pure ALOHA (P-ALOHA), slotted ALOHA
+                                         multiple access mechanisms is paramount. It is, hence, es-                (S-ALOHA) and non-persistent carrier-sense multiple access
+                                         sential to explore all potential medium access design choices             (NP-CSMA). The objective is to analyze how these access
+                                         available for LPWANs to best support all use cases. This work             mechanisms can improve the performance of a LoRa network,
+                                         investigates possible medium access solutions for LoRa, an                especially channel throughput and energy efficiency while
+                                                                                                                   taking into account the LoRa modulation and interference
+                                           The authors are with the Department of Information Systems and Tech-
+                                         nology, Mid Sweden University, Holmgatan 10, 850 71 Sundsvall, Sweden.    specific details. The proposed model can be a helpful tool
+                                         Corresponding author: Luca Beltramelli, email: luca.beltramelli@miun.se   in the design and evaluation of random access mechanisms
+                                                                                                                                  2
+
+
+
+for LoRa networks. In comparison with the existing works           shown promising results [3], [21]. Concurrently, new pro-
+proposing analytical models for the performance analysis of        posals have emerged in recent years to replace default pure
+LoRa, the novel contributions of this paper are as follows:        ALOHA in LoRaWAN with alternative access mechanisms
+   • A unified analytical model for investigating and compar-      more suited for industrial applications. The proposals are
+     ing the performances of three random access mechanisms        in general motivated with one of two goals. The first is
+     P-ALOHA, S-ALOHA, and NP-CSMA in conjunction                  to improve scalability and communication reliability, which
+     with LoRa chirp spread spectrum (CSS) modulation.             in turn increases energy efficiency. Any access mechanism
+     Based on the latest reported results in the literature, the   that reduces interference in a LoRa network compared to P-
+     model incorporates the time- and power-capture effects        ALOHA, can improve the capacity of a gateway to serve more
+     and interference behavior of LoRa CSS technology.             devices. This is especially important for large-scale indoor and
+   • Characterization of the interference intensity in terms       outdoor monitoring applications in industrial environments.
+     of the main parameters of the studied random access           To this end, the access techniques proposed in the literature
+     mechanisms, qualifies the model for the design of media       are variants of S-ALOHA, CSMA, or other random access
+     access control in LoRa: the guard time in S-ALOHA or          solutions offering better channel utilization than P-ALOHA.
+     the sensing threshold in CSMA.                                The second motivating factor in upgrading LoRaWAN channel
+   • A comparison of the studied access mechanisms in terms        access is to support use cases with relaxed but bounded QoS
+     of success probability, channel throughput, and energy        requirements such as industrial process control applications.
+     efficiency. The resulting analysis can be used to explore     This has led to resource reservation-based access solutions
+     the best random access mechanism within the LoRa              based on the allocation of frequency, time, and SF. Below,
+     parameter space (Spreading factor, number of devices,         we summarize the LoRa-specific channel access enhancements
+     deployment area).                                             proposed in the literature.
+   The rest of this paper is organized as follows. Sec. II
+                                                                     1) S-ALOHA: In theory, by replacing pure with a slotted
+gives background information on LoRa and LoRaWAN and
+                                                                   variant of ALOHA, the channel capacity is doubled by virtue
+discusses the related works on random access mechanisms for
+                                                                   of interference reduction in the network. However, providing
+LoRa. Sec. III describes the proposed analytical approach to
+                                                                   energy-efficient synchronization of EDs over the wide cover-
+model different access schemes in LoRa. The analytical and
+                                                                   age of LoRa can be challenging. An S-ALOHA protocol on
+simulation results are presented in Sec. IV. Finally, Sec. V
+                                                                   top of LoRaWAN stack is proposed and implemented in [11].
+concludes this paper.
+                                                                      2) CSMA: In CSMA/CA, EDs sense the channel before
+         II. BACKGROUND AND R ELATED W ORKS                        attempting a transmission, which reduces the interference in
+  This section introduces LoRa and presents the related works      a densely deployed network. Unlike S-ALOHA, an asyn-
+that have proposed alternatives to the default channel access      chronous CSMA does not require synchronization of EDs.
+used by LoRaWAN.                                                   However, its performance is negatively affected by the pres-
+                                                                   ence of hidden nodes. In extreme situations where all nodes
+A. LoRa and LoRaWAN                                                are hidden, CSMA throughput degrades to P-ALOHA. Since
+   LoRa is a chirp spread spectrum (CSS)-based proprietary         LoRa coverage is several kilometers, a significant percentage
+modulation and coding scheme developed by Semtech for              of EDs in the service area can be hidden from each other.
+sub-1 GHz ISM bands. LoRa supports six quasi-orthogonal            For sensing, LoRa chipsets support a channel activity detec-
+spreading factors (SF), where the use of a larger SF increases     tion (CAD) mechanism, designed to detect the presence of
+the coverage range (by lowering the receiver sensitivity) at the   LoRa preamble or data symbols on the channel. The CAD
+cost of datarate [4]. The LoRaWAN open standard specifies          mechanism for enabling CSMA in LoRa was experimentally
+the network entities and their roles, and how devices access       evaluated in [7], [12], while an ns-3 module to simulate p-
+the shared channel. In a LoRaWAN network, the two main             CSMA in a LoRa network is presented in [13].
+entities related to the air interface are gateways and end            3) Scheduled MAC: The use of scheduled MAC in LoRa
+devices (EDs). LoRaWAN specifies three classes of EDs based        have been suggested for timely communication of a limited
+on their downlink response time and energy consumption.            number of devices in industrial applications. In a scheduled
+Class A devices offer the best energy-saving performance           MAC, the channel resource are divided among the EDs to al-
+by waking up only when they have data to transmit using            low for a contention-free transmission. Although attractive for
+ALOHA. Class B devices wake up at periodic intervals to            reducing interference, it brings new challenges of transmitting
+synchronize and exchange data with the gateway, which makes        the scheduling information to EDs and predict their resource
+them a candidate for S-ALOHA based access. Class C devices         requirement. For LoRa, the scheduled MAC techniques pro-
+are always active, continuously listening to the channel for       posed in the literature include: hybrid ALOHA/TDMA access
+transmissions from the gateway.                                    for periodic real-time traffic [14], on-demand TDMA access
+                                                                   using wake-up radios [15], algorithms to assign timeslots
+B. Alternative channel access mechanisms for LoRa.                 according to EDs’ traffic periodicity [16], self-organizing
+  Several works investigating the use of LoRa in industrial        time-slotted communication [17], and time-slotted channel
+scenarios for non time-critical monitoring applications have       hopping [18].
+                                                                                                                                                                    3
+
+
+
+
+   1                                        1                                        1                                        1
+
+
+  0.5                                      0.5                                      0.5                                      0.8
+
+                                                                                                                             0.6
+   0                                        0                                        0
+   1                                        1                                        1
+                                                                                                                             0.4
+
+  0.5                                      0.5                                      0.5
+                                                                                                                             0.2
+
+   0                                        0                                        0                                        0
+        0   200   400   600   800   1000         0   200   400   600   800   1000         0   200   400   600   800   1000         0   10   20     30   40     50
+
+
+ (a) co-SF interference, I1 = SF10 ,       (b) co-SF interference, I1 = SF10 ,      (c) inter-SF interference, I1 = SF9 ,                    (d)
+I2 = SF10 , offset of 0 symbol time,       I2 = SF10 , offset of 0.25 symbol           I2 = SF11 , offset of 0 symbol
+            SIR = 5 dB                             time, SIR = 0 dB                         time, SIR = −15 dB
+Fig. 1. (a-c) IFFT of a signal (S) transmitted using SF 10 and affected by two interferers (I1 and I2 ); (d) Probability that two or more interferers transmitting
+the same symbol.
+
+                  III. M ATHEMATICAL M ODELING                                         In LoRa CSS modulation, each symbol is spreaded over a
+                                                                                    sinusoidal signal with a linearly increasing frequency called an
+   We consider a LoRa network consisting of a single gateway
+                                                                                    up-chirp. A symbol is represented using a shift of the linear
+to provide connectivity to EDs. The EDs are distributed
+                                                                                    frequency increase. At the receiver, the signal is multiplied by
+uniformly around the gateway in a service area of radius R,
+                                                                                    a second sinusoid with linearly decreasing frequency called
+according to a homogeneous Poisson Point Process (PPP) φED
+                                                                                    down-chirp. The resulting signal produces a sharp peak in the
+of intensity λ. The average number of EDs in the area is
+                                                                                    frequency domain corresponding to the symbol value encoded
+N̄ = λπR2 , and the distance distribution of EDs from the
+                                                                                    in the chirp. We analyzed the possible interference scenarios
+gateway is fED (r) = 2r/R2 , 0 ≤ r ≤ R. We assume all
+                                                                                    using the simulation tool developed in [8]. We identified
+EDs use the same channel of bandwidth B, while each ED
+                                                                                    three notable cases: a) fully overlapping co-SF interference; b)
+selects an SF from the set SF ∈ {7, 8, · · · , 12}. The area is
+                                                                                    partial overlapping co-SF interference; c) inter-SF interference.
+divided into six contiguous annuli, each populated by EDs
+                                                                                    We considered two interfering signals (I1 and I2 ), and we
+using the same SF. We consider only unacknowledged uplink
+                                                                                    changed the SF and offset between the useful signal and the
+traffic (with fixed message size) from all EDs to the gateway,
+                                                                                    interfering signals.
+which is prevalent in most LoRa use-cases. LoRa devices, if
+                                                                                       The results showed in Fig. 1 are obtained by considering
+not using listen before talk (LBT), follow regional regulations
+                                                                                    an FFT-based demodulation, perfectly synchronized to the
+on maximum duty-cycle α, as a coexistence mechanism in
+                                                                                    received signal. Fig. 1a shows that, if the symbols encoded
+the ISM band. For a fair comparison, we enforce EDs to
+                                                                                    by the useful and interfering signals are different, the IFFT
+comply with the same duty-cycle limitations irrespective of
+                                                                                    of fully overlapping co-SF interferers contains a peak at
+their medium access mechanism. We assume there is no
+                                                                                    each encoded symbol. The peak value of IFFT depends on
+restriction on the maximum number of frames that can be
+                                                                                    the relative received signal strength (RSS) of the signals.
+simultaneously demodulated at the gateway. In reality, a re-
+                                                                                    Consequently, unless I1 and I2 transmit the same symbols, the
+striction is imposed by the number of demodulating paths
+                                                                                    receiver can decode the transmitted symbol correctly given that
+at the gateway. To account for this hardware limitation, the
+                                                                                    its RSS is higher than the interferers. The signaling alphabet
+proposed model could easily be modified as in [22]. In the
+                                                                                    of LoRa has cardinality 2SF . The probability that from a set of
+following section, before developing the proposed model, we
+                                                                                    n interfering signals with the same SF, two or more transmit
+establish a fresh case of using dominant co-SF interference
+                                                                                    the same symbol is
+based on recent results in the literature. Following that, in
+                                                                                                                                            n2
+Sec. III-B, we identify a distinctive parameter (intensity of                                             Pr(Same symbol) ≈ 1 − e− 2SF+1 .                    (1)
+interferences) in analyzing the performance of different access
+mechanisms, and analytically derive it for a LoRa network                           Fig. 1d shows (1) for different SFs and number of interferers.
+for P-ALOHA, S-ALOHA and NP-CSMA. Later, the success                                Fig. 1b illustrates the case of partially overlapping co-SF
+probability conditions are developed in Sec. III-C, which are                       interference with the transmitted symbol. The peaks in the
+then used to find coverage probability, channel throughput, and                     IFFT caused by the interfering signals are lower and wider
+energy efficiency in Sec. III-D.                                                    for even signal-to-interference ratio (SIR)= 0 dB. Fig. 1c
+                                                                                    shows the inter-SF interference scenario, where the signal is
+                                                                                    transmitted using SF 10, and the interferers are using SF 9 and
+A. Interference model                                                               SF 11. A large number of interferers with high signal strength
+   The role of a multiple access mechanism is to dictate how                        are required before the receiver fails to detect the peak of the
+devices access the shared transmission medium. Consequently,                        transmitted symbol.
+the use of different multiple access mechanisms directly leads                         The ability to receive partially overlapping LoRa transmis-
+to different intensities and distribution of interference. To                       sions by a LoRa receiver is evaluated in [9] and [10]. These
+correctly predict the performance of different medium access                        studies show that a) LoRa does not offer any time capture,
+mechanisms, we first discuss the effect of interference in                          unlike other spread spectrum techniques, and b) the message
+LoRa.                                                                               can be correctly decoded even if the first few preamble
+                                                                                                                                       4
+
+
+
+symbols are overlapped but at least 5 symbols are left for the         1) P-ALOHA: P-ALOHA is a natural match for the PPP
+digital phase lock loop (PLL) to lock the reception. A LoRa         since it maintains the distributional properties of the PPP.
+preamble consists of a fixed part (i.e., synchronization word of    As a result, if the EDs form a PPP of intensity λ and
+2 symbols, and an additional 2.25 symbols) and a configurable       transmit independently with probability α, the active set of
+part that varies from 6 to 65535 symbols. In summary, we            transmitters, by independent thinning property of PPP [19],
+make the following useful observations:                             forms a PPP of intensity αλ. In P-ALOHA, an ED with
+   • Inter-SF interference can be neglected if the SIR is not       a message can immediately transmit and the vulnerability
+     too low.                                                       time of the transmission is two times the message time-on-
+   • Unless the smallest SFs are used by an extremely large         air (ToA). Therefore, the intensity of the interferers PP is
+     number of EDs, in studying the co-SF interferers only
+                                                                                            VP-ALOHA = 2αλ.                         (5)
+     the dominant can be considered.
+   • LoRa can survive collisions affecting the first few sym-          2) LoRA: LoRa access method is P-ALOHA but as ana-
+     bols in the preamble even if the SIR is lower than the         lyzed in Sec. III-A, LoRa is immune to interference affecting
+     minimum required for the power capture to take place.          the first few symbols in a message preamble. This effect
+Based on these observations, we assume perfect orthogonality        leads to reduction in the vulnerability time of a message
+among SFs and consider the dominant co-SF interference only         by (Tp − 5Tsym )/(ToA), where Tp is the preamble duration
+in the subsequent analytical modeling. Arguably, the assump-        and Tsym = 2SF /B is the symbol time. While this effect is
+tion becomes weak for a very large number of interferers.           negligible for large messages, its contribution becomes visible
+However, as the S-ALOHA and CSMA reduce the number of               at small payloads (i.e., a few Bytes). The intensity of the PP
+potential interferers (see Sec. III-B), it is more plausible to     of the interferers for LoRa is
+consider dominant than cumulative interference.
+                                                                                                            
+                                                                                          Tp − 5Tsym
+                                                                         VLoRa =     2−                 · α · λ < VP-ALOHA .    (6)
+                                                                                             ToA
+B. MAC-dependent Intensity of Point Process of Interferers
+                                                                       3) S-ALOHA: In S-ALOHA, devices can transmit only at
+   To characterize interference, be it cumulative or dominant,      the border between two timeslots. The vulnerability time of
+a measure of interest is the set of all interfering devices to a    a transmission is equal to ToA. To be effective, S-ALOHA
+reference transmission. This interference set, a subset of the      requires synchronization of all the devices with a common
+original PPP, is shaped according to the traffic intensity and      source. A synchronization error between devices can cause
+the medium access mechanism used by the network. Motivated          inter-slot collisions, that can be reduced by introducing a guard
+by the discussion in the previous section, our interest is to       interval (GI). The probability that transmissions in adjacent
+characterize the dominant interference I ∗ at the gateway, i.e.,    slots collide depends on the timing error distribution and the
+            I ∗ = max (Ii ) = ptx max {gi l (ri )} ,         (2)    size of the GI. The intensity of the interferers VS-ALOHA can
+                   i∈φI             i∈φI                            be defined as
+where φI is the PP of interferers (interference geometry),                    VS-ALOHA = (1 + g) (1 + pL + pR ) · α · λ,            (7)
+while gi is the fading coefficient and l (ri ) the path loss
+function of the i-th interferer at distance r from the gateway.     where g is the ratio between the length of the GI Tg and the
+    To evaluate the outage or success probability, the distri-      ToA, pL and pR are the probability of experiencing inter-slot
+bution of interference must be known [19]. The interference         interference respectively from the previous and successive. For
+distribution for I ∗ , FI ∗ (x), can be determined from extreme     a Gaussian distributed timing error with standard deviation d,
+order statistics. That is, if FI (x) is the distribution of Ii =    the probability of inter-slot collision with a message transmit-
+gi l(ri ), then FI ∗ (x) for interferers of random size is          ted in the previous and next timeslot are derived from [23]
+                          X                        n                respectively as
+               FI ∗ (x) =      Pr (N = n) [FXi (x)] ,         (3)                                                       
+                          n                                                        Tg + Tp − 5Tsym                     Tg
+                                                                        pL = Q           √              , pR = Q √           . (8)
+where Pr (N = n) is the PMF of the arrival process of                                      2d                           2d
+interfering transmissions. For Poisson arrivals with parameter         Collisions caused by messages transmitted in the previous
+µ, Pr (N = n) = µk e−u /k!, while µ for an annulus of radii         (i.e., left) timeslot are less likely since they affect the preamble
+r1 and r2 is defined as                                             of the transmitted message as highlighted in Sec. III-A.
+                                                                       4) NP-CSMA: The use of CSMA can reduce the number
+                      µ = Vπ r22 − r12 .
+                                       
+                                                           (4)
+                                                                    of interfering devices by employing the LBT technique, where
+   In (4), V is the intensity of PP of interferers φI , defined     each ED senses the channel to determine if it is free be-
+by the channel access rules. Therefore, the intensity V is the      fore attempting a transmission. We consider an asynchronous
+parameter that changes the interference distribution in (3), and    non-persistent CSMA so that the EDs can save energy by
+eventually, the system performance with a change in MAC. In         avoiding synchronization to the gateway. The operation of an
+what follows, we find the intensity Vx of the PP of interferers     ED using the NP-CSMA protocol to transmit a message to
+φI for x ∈ {P-ALOHA, S-ALOHA, CSMA}. The PP φI and                  the gateway can be described as follow: 1) the ED senses the
+its intensity V, in essence, is obtained by applying channel        channel and transmits immediately if it is free; 2) if the ED
+access-dependent thinning of the EDs’ PPP φED .                     senses a busy channel, the transmission is rescheduled to a
+                                                                                                                                      5
+
+
+
+later time according to a random delay distribution. At this         gateway and successfully contended for the channel. Due to
+new point, the ED senses the channel again, repeating the            the complexity of handling MHCPP-II, we approximate the
+process until it transmits the message. During the backoff, the      MHCPP-II of the active interferers as an equi-dense PPP; that
+ED can go in an energy-saving mode as it is not required to          is, the interferers are uniformly and randomly distributed in
+sense the channel. Under these access rules, the interferers are     the model.
+not distributed according to a PPP but instead can be modeled
+                                                                     Lemma 1. The intensity, λ̃, of the interfering EDs is approx-
+as a Matèrn hard-core process of Type II (MHCPP-II) [20]. To
+                                                                     imated with an MHCPP-II of intensity
+use this model, it is necessary to assume that the probability
+                                                                                                               ∗
+of two EDs in the same contention domain having the same                                          1 − e−E[nA ]
+backoff counter value is negligible. This requires mechanisms                             λ̃ = λp              ,                  (12)
+                                                                                                     E [n∗A ]
+that alleviate the backoff timer ties problem to achieve an
+intact CSMA spectrum access, for example, by using adaptive          where E [n∗A ] is the expected number of neighbors for one in-
+contention window size techniques. In an MHCPP-II, each              terfering ED and p is the probability that an ED is contending
+device is marked with a mark uniformly distributed in [0, 1],        for channel access.
+representing the random backoff value selected by the device.        Proof. Not all the EDs in a contention domain will be actively
+The MHCPP-II retains in a neighborhood only the device with          trying to transmit, hence we introduce a probability p that a
+the smallest mark; that is, in a contention domain, only the         device is contending for channel access. The intensity of the
+device with the lowest backoff counter can transmit.                 EDs that have a message for the gateway is λp.
+                                                                        Let E [n∗A ] be the expected number of neighbors for one
+Proposition 1. The intensity of the interfering EDs for asyn-
+                                                                     interfering ED. An ED is able to transmit only if it has the
+chronous NP-CSMA is given by
+                                                                   smallest marker among all the active EDs in its contention
+                         Tp − 5Tsym                                  domain. The probability for this      event to occur can be found
+          VCSMA = 2 −                   (1 − H) λ̃,       (9)                                   −E [n∗ A]
+                             ToA                                     according to [20] as 1−e             . Given that all active EDs
+                                                                                               E [n∗A]
+where, H is the probability that an ED is located within             within the contention domain of the reference transmitter are
+transmitter contention domain and λ̃ is the intensity of the         blocked from transmitting, the expected number of neighbors
+transmission of the interfering EDs.                                 for an interfering node is upper bounded by
+                                                                                   (              
+Proof. In asynchronous CSMA, the transmissions and back-                     ∗       λπ r22 − r12 · [1 − H] p if H ≥ 0.5;
+offs are not aligned to timeslots. Therefore, the vulnerability         E [nA ] ≤                                                 (13)
+                                                                                     λπ r22 − r12 · Hp              if H < 0.5.
+time of a transmission is twice the ToA, and the first term in
+(9) is the same as in (6). The second term is the probability that   Depending on the detection threshold P0 and the annulus
+the generic ED in the annulus is located outside the contention      geometry, not all EDs outside of the transmitter contention
+domain of the transmitter.                                           domain will be part of the same interference contention
+   The fraction of EDs that are located inside the transmitter       domain; that is, for a transmitter, multiple interfering ED can
+contention domain can be found from [20] as                          be present at the same time. To find the expected number
+                       Z 2r2                                         of active EDs within the contention domain of an interfering
+                                  P0
+                H=           e− ptx l(r) fR (r) dr,          (10)    ED, we scale the upper bound of the number of neighbor by
+                       0                                             a smooth function g(H). The expected number of neighbors
+        −P
+            P0                                                       for an interfering ED is
+where e          is the probability that in a unit mean Rayleigh
+           TX l(r)
+                                                                                                                            −1
+                                                                      E [n∗A ] ≃ pπλ r22 − r12 · min 1 − H, H · (g(H)) . (14)
+                                                                                                                
+fading and path loss function l (·), the received signal strength
+at a distance r from a transmitter is above the detection            The derivation of g (H) is presented in Appendix A.            
+threshold P0 . The distance distribution between two random
+device using the same SF is fR (r). If the ED are uniformly            Whereas in P-ALOHA and S-ALOHA the transmission
+distributed on a disk of radius R, fR (r) is given by [24]           probability can be assumed to be equal to the activity factor
+                    "                      r           #             α, in CSMA it has to be determined. An ED has to sense
+               4r         −1
+                              r       r           r2               the channel to be free before transmitting, so that under the
+     fR (r) =         cos           −         1−         .   (11)
+              πR2             2R       2R          4R2               same traffic load, the probability that an ED is contending for
+                                                                     channel access is larger than the transmission probability of
+In other geometries, such as in the case of annuli, the expres-      P-ALOHA or S-ALOHA (p ≥ α). To find the probability p
+sion of the distance distribution becomes more complex.             that an ED is contending for channel access, we model each
+   The expected number of devices in the contention domain           ED as a Geo/Geo/1 queue without buffer. It implies that an
+of the transmitter  can be obtained from (10) as E [n] =             ED attempts to transmit only the most recent of the generated
+              
+λπ · r22 − r12 · H. The expression of λ̃ must be derived             messages. Both the generation and transmission of messages at
+from the analysis of the distribution of the EDs outside of the      an ED follow a geometric distribution with probability pA = α
+contention domain of the reference transmitter. The intensity        and pD , respectively. The transition probability matrix P of
+of the MHCPP-II λ̃ can be found by the thinning process of           the Geo/Geo/1 queue is given by
+the original PPP intensity λ by the probability that an ED
+                                                                                                                  
+                                                                                               1−pA         pA
+other than the reference transmitter has a message for the                            P = (1−p )p 1−p +p p                      (15)
+                                                                                                  A   D    D       A D
+                                                                                                                                    6
+
+
+
+The probability that an ED has a message is the probability            1) Success and Coverage Probability: A transmission from
+that the queue is non-empty. By finding the steady state vector      an ED at distant r from the gateway is successful only if both
+[π0 , π1 ] of the probability matrix in (15), p is determined as     the SNR and SIR conditions are satisfied at the gateway. The
+                                             −1                    success probability for an ED transmitting using SF q is
+                                 (1 − pA ) pD
+                p = π1 = 1 +                        .        (16)                       
+                                                                         psucc,q (r) = P {SIR(r) ≥ δ} ∩ {SNR(r) ≥ θq }
+                                                                                                                           
+                                      pA                                                                                       (21)
+Without acknowledgments, a departure from the queue is                               ≥ P [SIR(r) ≥ δ] · P [SNR(r) ≥ θq ] ,
+equivalent to a transmission. The departure probability is           where P [SNR(r) ≥ θq ] and P [SIR(r) ≥ δ] are given by (18)
+               1−e   −E[nA ]
+                                           1−e  −E[n∗
+                                                    A]               and (20), respectively. The inequality comes from the fact
+     pD = H                    + (1 − H)                 ,   (17)    that the probability that both the SNR and SIR conditions
+                E [nA ]                     E [n∗A ]
+                                                                     are satisfied are not independent. For instance, a message that
+where E [nA ] = E [n] · p is the expected number of active           arriving at the gateway satisfies the SIR condition, it is more
+neighbours for the transmitting ED.                                  likely to also satisfy the SNR condition.
+   The intensity of the MHCPP-II of interferers VCSMA is found          Let lq and lq−1 , respectively, be the outer (r2 ) and inner
+from (9) in Proposition 1 by using (10), (12) and (16).              radius (r1 ) of the annulus containing all EDs using SF q. The
+                                                                     coverage probability of an ED in the service area is given by
+C. Derivation of CCDFs of SNR and SIR                                                     X Z lq
+   We model the wireless channel as a Rayleigh block-fading                        pcov =          psucc,q (r) · fED (r)dr.      (22)
+                                                                                          q     lq−1
+with additive white Gaussian noise (AWGN) and free space
+path loss. The variance of the AWGN is σ 2 [dBm] = −174 +              2) Channel Throughput: We calculate the channel through-
+NF + 10 log10 BW, where NF is the noise figure of the                put as the product of the offered traffic and the success
+receiver and BW is the channel bandwidth. Messages are               probability. Because of the assumption in Sec. III-A, we
+transmitted with power pTX and suffer from path-loss modeled         consider orthogonal SFs; hence the channel throughput for
+by the power-law function l (r) = γr−β , where γ and β are           SF q is given by
+respectively the frequency dependent factor and the path-loss                             Z lq
+                                                          2
+exponent. For the carrier wavelength λc , γ = (λc /4π) .                          Sq = αλ      psucc,q (r) · fED (r)dr.    (23)
+   If a message is transmitted by a device located at a distance                              lq−1
+
+r from the gateway, the received power is given by prx (r) =            3) Energy Efficiency: Let PTX and PRX , respectively, be
+ptx hl(r), where h is the channel gain between the transmitter       the power consumption of an ED while transmitting and
+and the gateway. The probability that the SNR of the received        receiving/sensing the channel. Assuming that the energy con-
+message at the gateway is above the threshold θ is                   sumption in sleep mode is negligible, the energy efficiency of
+                       
+                              σ2 θ
+                                            
+                                                 σ2 θ
+                                                                    an ED at a distance r from the gateway can be found as
+  P [SNR(r) ≥ θ] = P h ≥                = exp −             , (18)
+                             ptx l(r)           ptx l(r)                                      psucc,q (r) · Payload
+                                                                                      η (r) =                       ,       (24)
+obtained by the fact that h ∼ exp(1).                                                                   E0
+   As discussed in Sec. III-A, the receiver might still be able to   where Payload is the payload size of a message, and E0 is
+correctly decode the message depending on the relative signal        the energy used to deliver a message to the gateway, which
+strength between the signal and the interferers. At the gateway,     depends on employed channel access method in the network.
+the SIR for a signal transmitted by an ED at distance r is              In P-ALOHA, since all the energy is used by a device for
+SIR(r) = prx (r)/I ∗ ,                                               transmitting its messages, E0 is
+   where I ∗ is the dominant interference given by (2). The
+                                                                                              E0 = PTX ToA.                     (25)
+probability that the SIR of a message under co-SF interference
+is above the threshold δ is given by                                    In S-ALOHA, additional energy is required for each trans-
+                                
+                                        ptx hl (r)
+                                                                    mission to maintain the synchronization with the gateway. We
+                                   ∗
+            P [SIR(r) ≥ δ] = P I ≤                   .       (19)    assume that the synchronization is maintained by periodic bea-
+                                             δ
+                                P∞                                   cons of duration TB transmitted by the gateway every TSYNC .
+   Using the series exp(x) = k=0 xk /k! in (3), and taking           In comparison with the synchronization method using two-way
+the expectation over the channel gain h, (19) becomes                message exchange of [11], the synchronization by periodic
+                         Z ∞                 
+                                                zl (r)
+                                                                   beacons assumed in this analysis reduces the communication
+                       −µ     −z
+    P [SIR(r) ≥ δ] = e       e exp µFXi                  dz,         overhead in the network.
+                           0                       δ                                                                 
+                                                             (20)                                               ToA
+                                                                               E0 = PTX ToA + PRX · TB ·                ,      (26)
+where FXi (·) is the CDF of the product of the probability                                                    αTSYNC
+distributions of l(r) and h, obtained from [6, (10)].                where the additional term is the energy used for synchronizing
+                                                                     the EDs.
+D. Performance Metrics                                                 The energy efficiency for NP-CSMA can be determined as
+  In this section, we derive the performance metrics used to                                              E [nA ]
+compare the random access protocols.                                            E0 = PTX ToA + PRX                  TCAD ,      (27)
+                                                                                                       1 − e−E[nA ]
+                                                                                                                                                  7
+
+
+
+where the second term is the average energy used by CAD,
+obtained by multiplying the expected number of CAD attempts
+per transmission with the CAD duration TCAD . Since messages
+are not acknowledged by the GW, retransmissions are not
+considered when calculating the energy efficiency. Moreover,
+since the EDs enter energy-saving mode during their backoff,
+we assume that the energy consumption during the random
+backoff is negligible.
+
+                 IV. R ESULTS AND D ISCUSSION
+   The analytical model was validated using Monte-Carlo
+simulations. The success probability at each distance is an
+average value of 2000 simulation runs, while the error bars in
+the figures correspond to a confidence interval of 95%. The
+studied channel access techniques P-ALOHA, S-ALOHA and                         Fig. 2. SIR success probability of LoRa, s-LoRa, P-ALOHA and S-ALOHA
+NP-CSMA, were compared in terms of success probability,                        N̄ = 3000.
+energy efficiency, and channel throughput. The analysis is
+based on typical parameters of LoRa for an outdoor moni-
+toring application, given in Table I. Unless explicitly stated,
+the EDs can belong to any of the three classes defined in
+LoRaWAN, class A, B and C. The SFs are assigned to the
+                                   TABLE I
+                            L O R A PARAMETERS
+
+ Parameter           Sym.   Value       Parameter         Sym.   Value
+ Bandwidth           B      125 kHz     Noise PSD         N0     −174 dBm/Hz
+ Carrier Frequency   fc     868 MHz     Noise Figure      NF     6 dBm
+ Transmit Power      ptx    14 dBm      Activity Factor   α      0.33 %
+ Pathloss Exponent   β      3           Coding Rate              4/8
+ Message Preamble           8 Symbols   Payload                  10 Bytes
+ Clock Skew                 40ppm       Guard Interval    Tg     10.24 ms
+
+uniformly distributed EDs in ascending order according to
+the distance from the gateway. Unless otherwise stated, the
+SFs assignment follows an equal-interval-based allocation,
+                                                                               Fig. 3. Coverage probability of P-ALOHA, S-ALOHA and NP-CSMA,
+generating annuli of equal width. The SNR thresholds are                       N̄ = 3000.
+θq ∈ {−6, −9, −12, −15, −17.5, −20} dB for q = 7, . . . , 12,
+and the SIR threshold δ = 1 dB [5].                                            shows a small performance improvement over P-ALOHA. In
+                                                                               S-LoRa, when synchronization error is considered, it shows a
+                                                                               decrease in the SIR success probability compared to the ideal
+A. Success and Coverage Probability                                            case (S-ALOHA). When the GI is removed (i.e., S-LoRa w/o
+   1) LoRa and S-LoRa: In this section, the performance                        GI), the success probability of S-LoRa does not degrade to
+of perfectly synchronized (ideal) S-ALOHA is compared to                       the performance of LoRa, since a part of the LoRa preamble
+an implementation of slotted ALOHA in LoRa (S-LoRa). A                         acts as a GI versus collisions with messages transmitted in the
+discussion on how to provide synchronization in LoRa is not                    previous timeslot.
+in the scope of this work. In studying S-LoRa, we assume                          Fig. 3 shows the coverage probability of LoRa and S-LoRa
+that all EDs are synchronized using periodic beacons from                      when the EDs are located within a typical distance of 3 and
+the gateway and belong to either class B or class C. The                       6 km from the gateway. The coverage probability decreases
+synchronization error is assumed to be normally distributed                    as the number of EDs, and hence the interference, increases.
+with a standard deviation equal to the product of clock skew                   LoRa and S-LoRa can offer similar coverage probabilities.
+and the synchronization interval TSYNCH .                                      However, S-LoRa offers better scalability for an increasing
+   Fig. 2 shows SIR success probability obtain from (20) when                  number of EDs.
+N̄ = 3000 for P-ALOHA, LoRa, S-ALOHA, S-LoRa with GI                              2) NP-CSMA: Fig. 4 compares the SIR success probability
+(S-LoRa w/ GI) and S-LoRa without GI (S-LoRa w/o GI).                          of CSMA-based LoRa with that of P-ALOHA and S-ALOHA
+The figure shows the characteristic saw-tooth behavior of the                  for equal-interval-based and equal-area-based SF allocation. In
+success probability in LoRa, as presented and analyzed before                  CSMA, the SIR success probability depends on the detection
+in [5] and [6]. The shorter vulnerability time of S-ALOHA                      threshold used by the sensing mechanism. In this analysis, we
+gives a clear advantage over P-ALOHA, reducing the interfer-                   considered sensing thresholds P0 = {−150, −140, −130} dB
+ers by half and increasing the success probability for all SFs                 representing extreme operating range of the CAD mechanism
+on average by 0.16. Accounting for the capture effects of LoRa                 of LoRa chipset [25]. High sensing thresholds cause the
+                                                                                                                                              8
+
+
+
+
+               (a) Equal-interval-based allocation                                            (b) Equal-area-based allocation
+                              Fig. 4.   SIR success probability of P-ALOHA, S-ALOHA and NP-CSMA, N̄ = 3000.
+
+success probability of CSMA to degrade to the performance              energy consumption contributions of transmissions, synchro-
+of P-ALOHA, whereas low sensing threshold increases the                nization (S-ALOHA) and channel sensing (NP-CSMA). The
+success probability of CSMA above that of S-ALOHA. The                 energy efficiency analysis is based on the parameters in
+CSMA performance is affected by the size of the area in which          Table II. Fig. 5a shows the energy efficiency of an ED at
+the same SF EDs are located, making the analysis of different
+SF allocation methods particularly interesting. Devices in the
+outer annuli are affected more by the hidden terminal problem
+because of their longer average distance. However, using a low
+sensing threshold to combat the hidden terminal problem may
+lead to additional backoff by the EDs located in the outer
+annuli due to interference from neighboring gateways.
+   From Fig. 4, it can be argued that for the outer annuli, even
+in our conservative model with a single gateway, NP-CSMA
+offers little gain over P-ALOHA. Hence CSMA should only
+be used by the EDs with the smallest SFs, located closest to             (a) Energy efficiency, N̄ = 3000       (b) Mean energy efficiency
+the gateway and to each other. In the case of equal-interval-          Fig. 5.   Energy efficiency of P-ALOHA, S-ALOHA and NP-CSMA,
+                                                                       R = 3 km.
+based allocation, if the distance between EDs is smaller than          different distances from the gateway based on (24). S-ALOHA
+the sensing range, no hidden terminals are present, and all            has a higher energy efficiency compared to P-ALOHA, es-
+the EDs have the same success probability regardless of their          pecially for the EDs located closer to the outer radius of
+position within the annulus (SF 7 in Fig. 4a). Conversely, in          their annulus. For the EDs closest to the gateway, where the
+the case of equal-area-based allocation (Fig. 4b), the differ-         success probability of P-ALOHA and S-ALOHA are similar
+ence between the outer and inner radii of the smaller SFs              (cf. Fig. 2), P-ALOHA has a higher energy efficiency than
+increases significantly, resulting into a more steep decrease          S-ALOHA. In CSMA the energy efficiency depends on the
+of the success probabilities. The benefit of using channel             sensing threshold P0 , in particular, for small value of P0 , the
+sensing for small SFs, clearly visible for equal-interval-based        energy efficiency of CSMA is higher than both P-ALOHA and
+allocation in Fig. 4a, is partially nullified by the increased         S-ALOHA, remaining almost constant within each annulus.
+annuli area when the equal-area-based allocation is used.                 Fig. 5b shows the mean energy efficiency for all EDs. At
+Overall, for all three access mechanisms, the equal-interval-          a low density of EDs, P-ALOHA and NP-CSMA offer the
+based allocation shows a more fair distribution of the SIR             best energy efficiency. The energy efficiency of S-ALOHA is
+success probability between EDs in different annuli. Fig. 3            reduced by the energy required to maintain the synchroniza-
+compares the coverage probability of NP-CSMA with the other            tion. When the number of EDs increases, the higher success
+access schemes for an equal-interval-based allocation. Given
+that S-ALOHA outperforms both NP-CSMA and P-ALOHA                                                   TABLE II
+for large SFs, the coverage probability offered by S-ALOHA                               E NERGY M ODEL PARAMETERS [26]
+is the highest.
+                                                                            Parameter                       Symbol    Value
+                                                                            Power Consumption in TX         PTX       84.15 mW
+B. Energy Efficiency                                                        Power Consumption in RX/CAD     PRX       15.18 mW
+                                                                            Beacon Preamble + Payload                 10 Symbols + 16 Bytes
+   As mention in Sec. III-D3, in comparing the energy ef-                   Synchronization Interval        TSYNCH    128 s
+ficiency of different access mechanisms, we account for the                 CAD Duration                    TCAD      2 symbols
+                                                                                                                                                9
+
+
+
+
+Fig. 6. CSMA or S-ALOHA? Optimal operating region in parameter space
+(SF, R and N̄ ) to maximize the energy efficiency. The area with unique
+shaded/pattern fill suggests the use of S-ALOHA for an SF, and NP-CSMA
+otherwise. Regions obtained at P0 = −140 dB.
+                                                                          Fig. 7. Channel throughput of the studied access mechanisms (the curves
+                                                                          for Ge−2G and Ge−G are without capture effect), R = 3 km
+probability of S-ALOHA more than compensate for the energy
+used by the synchronization mechanism, making S-ALOHA
+the most energy-efficient.                                                the interference intensity for a selected sensing threshold in
+   To highlight how the proposed model can be used to select              CSMA. Our results revealed several assisting guidelines on
+the optimal (maximizing energy efficiency) medium access                  the design and selection of a medium access solution within
+mechanisms, Fig. 6 shows the operating region of SF 7,                    LoRa’s parameter space: device density, service area, and
+10 and 12 for the parameter space (number of EDs) ×                       spreading factor. The highlight from the results are: i) the
+(R). It can be observed that at small R where the hidden                  power-capture effect exhibited by LoRa significantly improves
+terminals are less or at low device density where the number              the channel throughput of all the access mechanisms at large
+of interferers is small, NP-CSMA surpasses S-ALOHA in                     device densities. ii) the possibility for LoRa messages to
+energy efficiency. There are regions of the parameter space in            survive partial collisions of a message reduces the message
+which EDs with smaller SFs and hence with a smaller average               vulnerability time and the required guard interval in slotted
+distance should use S-ALOHA, whereas EDs with larger SFs                  ALOHA. iii) slotted ALOHA offers higher reliability than pure
+should use CSMA. This counter-intuitive result is because the             ALOHA, at the expense of energy efficiency if the number of
+energy consumption of the synchronization mechanism via                   devices is small. iv) CSMA can provide better reliability and
+periodic beacons increases exponentially with the SF, making              energy efficiency than slotted ALOHA, but only if the devices
+S-ALOHA less energy efficient for large SFs.                              are closely located, as is typically the case for small SFs. In
+                                                                          the future, we plan to investigate the delay performance of
+                                                                          the different access mechanisms to analyze their suitability in
+C. Channel Throughput
+                                                                          the presence of retransmissions for delay-sensitive industrial
+   The channel throughput obtained from (23) for SF 8 and                 applications.
+12 is shown in Fig. 7 for R = 3 km. The small SIR
+threshold required for the power-capture to take place means
+                                                                                                       A PPENDIX
+that the channel access efficiency of P-ALOHA and S-ALOHA
+remains high even for a large number of EDs whereas it                    A. Neighbors in an interfering ED contention domain
+decreases more rapidly for the theoretical expressions de-                   The expected number of active neighbors of a transmitting
+rived without time-power capture effects (Ge−2G and Ge−G ,                ED is calculated by using the distance distribution of the EDs.
+respectively). When multiple messages overlap in time, it                 However, a similar approach cannot be used for the interfering
+is likely for the strongest of these messages to survive the              node, as the distance distribution of the EDs conditioned on
+collision. At this point, it is necessary to recall from Sec. III-A       having a transmission in the annulus becomes too complex.
+that the model uses the dominant interference assuming that               The proposed approximation for E [n∗A ] is presented hereafter.
+no two interferers transmit the same symbol.                              Let H be the fraction of EDs in an annulus within the
+                                                                          contention domain of a transmitter. The value of H can be
+                        V. C ONCLUSIONS                                   immediately found from (10).
+   For a LoRa network, we presented an analytical model and                  When H ≈ 0 (Fig. 8a), the EDs outside of the trans-
+derived metrics for a unified and fair comparison of potential            mitter contention domain are the majority. In this case, the
+medium access choices (pure ALOHA, slotted ALOHA, and                     distance distribution of the ED in the annulus before and
+non-persistent CSMA). The model is extensive in the sense                 after removing the transmitter neighbor will be similar and
+that it includes a) an interference model derived from recent             we can approximate E [n∗A ] ≈ E [nA ]. For H ≈ 1 (Fig. 8c),
+experimental and numerical observations in the literature on              the EDs outside of the transmitter contention domain are a
+time- and power-capture offered by LoRa, b) the guard in-                 small fraction of the total number of EDs in the annulus.
+terval and synchronization error for slotted ALOHA, and c)                In this case, we can assume that all the EDs outside of the
+                                                                                                                                                                              10
+
+
+
+                                                                                                    [7] J. C. Liando, A. Gamage, A. W. Tengourtius, and M. Li, “Known and
+                                                                                                        unknown facts of LoRa: Experiences from a large-scale measurement
+                                                                                                        study,” ACM TOSN, vol. 15, no. 2, p. 16, 2019.
+                                                                                                    [8] D. Croce, M. Gucciardo, S. Mangione, G. Santaromita, and I. Tinnirello,
+                                                                                                        “Impact of LoRa imperfect orthogonality: Analysis of link-level perfor-
+                                                                                                        mance,” IEEE Commun. Lett., vol. 22, no. 4, pp. 796–799, 2018.
+                                                                                                    [9] A. Rahmadhani and F. Kuipers, “When LoRaWAN Frames Collide,” in
+                                                                                                        ACM WiNTECH, 2018.
+                                                                                                   [10] J. Haxhibeqiri, F. Van den Abeele, I. Moerman, and J. Hoebeke, “Lora
+        (a) H  0.5                        (b) H ≈ 0.5                   (c) H  0.5                    scalability: A simulation model based on interference measurements,”
+                                                                                                        Sensors, vol. 17, no. 6, p. 1193, 2017.
+Fig. 8. Representation of the fraction of EDs located inside the transmitter                       [11] T. Polonelli, D. Brunelli, A. Marzocchi, and L. Benini, “Slotted ALOHA
+contention domain                                                                                       on LoRaWAN-design, analysis, and deployment,” Sensors, vol. 19, no. 4,
+                                                                                                        p. 838, 2019.
+                                                  6
+   2                                                                                               [12] C. Pham, “Robust CSMA for long-range LoRa transmissions with image
+                                                  5                                                     sensing devices,” in Wireless Days (WD), 2018, pp. 116–122.
+  1.5                                                                                              [13] T.-H. To and A. Duda, “Simulation of LoRa in ns-3: Improving LoRa
+                                                  4
+                                                                                                        performance with CSMA,” in IEEE ICC, 2018, pp. 1–7.
+   1                                              3
+                                                                                                   [14] L. Leonardi, F. Battaglia, G. Patti, and L. L. Bello, “Industrial LoRa: A
+                                                  2                                                     novel medium access strategy for LoRa in industry 4.0 applications,” in
+  0.5
+                                                  1
+                                                                                                        IEEE IECON, 2018, pp. 4141–4146.
+                                                                                                   [15] R. Piyare, A. Murphy, M. Magno, and L. Benini, “On-Demand LoRa:
+   0                                              0
+        0   0.2   0.4         0.6   0.8    1          0   500   1000   1500   2000   2500   3000        Asynchronous TDMA for Energy Efficient and Low Latency Commu-
+                                                                                                        nication in IoT,” Sensors, vol. 18, no. 11, p. 3718, 2018.
+                        (a)                                            (b)                         [16] J. Haxhibeqiri, I. Moerman, and J. Hoebeke, “Low overhead scheduling
+                                                                                                        of LoRa transmissions for improved scalability,” IEEE Internet Things
+ Fig. 9.    Scaling function for the interfering ED and number of interferers                           J., vol. 6, no. 2, pp. 3097–3109, 2018.
+                                                                                                   [17] D. Zorbas, K. Abdelfadeel, P. Kotzanikolaou, and D. Pesch, “TS-LoRa:
+transmitter contention domain are in the contentiondomain of                                           Time-slotted LoRaWAN for the Industrial Internet of Things,” Computer
+a single interfering device, E [n∗A ] ≈ pπλ r22 − r12 − E [nA ].                                        Communications, 2020.
+For H ≈ 0.5 (Fig. 8b), the EDs outside and inside of                                               [18] M. Rizzi, P. Ferrari, A. Flammini, E. Sisinni, and M. Gidlund, “Using
+                                                                                                        LoRa for industrial wireless networks,” in IEEE WFCS, 2017, pp. 1–4.
+the transmitter contention domain are in similar number. In                                        [19] M. Haenggi et al., “Interference in large wireless networks,” Foundations
+this case, we cannot assume that all the EDs outside of                                                 and Trends R in Networking, vol. 3, no. 2, pp. 127–248, 2009.
+the transmitter contention domain are part of the contention                                       [20] F. Baccelli, B. Błaszczyszyn et al., “Stochastic geometry and wireless
+                                                                                                        networks: Volume II Applications,” Foundations and Trends R in Net-
+domain of a single interfering device as multiple interfering                                           working, vol. 4, no. 1–2, pp. 69–78, 2010.
+EDs can be active. From Fig. 8b, we can observe that the                                           [21] J. Haxhibeqiri, A. Karaagac, F. Van den Abeele, W. Joseph, I. Moerman,
+number of interfering EDs will be two on                                                               and J. Hoebeke, “LoRa indoor coverage and performance in an industrial
+                                           average and we can                                         environment: Case study,” in IEEE ETFA, 2017, pp. 1–8.
+approximate E [n∗A ] ≈ 12 pπλ r22 − r12 − E [nA ] .                                                [22] R. B. Sørensen, N. Razmi, J. J. Nielsen, and P. Popovski, “Analysis of
+   We introduce an exponential function g(H) (Fig. 9a) such                                             LoRaWAN uplink with multiple demodulating paths and capture effect,”
+                                                                                                        arXiv preprint arXiv:1902.02866, 2019.
+that g(H) = 1 for H ∈ {0, 1} and g(H) = 2 for H = 0.5 and                                          [23] S. N. Crozier, “Sloppy-slotted ALOHA,” in Proc. of the Second Inter-
+we use it to scale the upper bound to E [n∗A ] found in (13).                                           national Mobile Satellite Conference, 1990, pp. 357–362.
+                                                                                                 [24] A. M. Mathai, An introduction to geometrical probability: distributional
+                                           1                                                            aspects with applications. CRC Press, 1999, vol. 1.
+             g(H) = 1 + exp 1 −                    .       (28)                                    [25] Semtech, Application Note: SX126x CAD Performance Evaluation,
+                                      4H − 4H 2
+                                                                                                        AN1200.48, Rev 1.0, November 2018.
+Fig. 9b compares the number of interfering EDs obtained by                                         [26] SX1261/2 Long Range, Low Power, sub-GHz RF Transceiver, Semtech,
+                                                                                                        12 2017, rev. 1.1.
+simulations and the proposed mathematical model.
+
+                                          R EFERENCES
+ [1] R. Candell, M. Kashef, Y. Liu, K. B. Lee, and S. Foufou, “Industrial
+     wireless systems guidelines: Practical considerations and deployment
+     life cycle,” IEEE Ind. Electron. Mag., vol. 12, no. 4, pp. 6–17, Dec
+     2018.
+ [2] R. Sanchez-Iborra and M.-D. Cano, “State of the art in LP-WAN
+     solutions for industrial IoT services,” Sensors, vol. 16, no. 5, p. 708,
+     2016.
+ [3] M. Luvisotto, F. Tramarin, L. Vangelista, and S. Vitturi, “On the
+     use of LoRaWAN for indoor industrial IoT applications,” Wireless
+     Communications and Mobile Computing, 2018.
+ [4] M. Centenaro, L. Vangelista, A. Zanella, and M. Zorzi, “Long-range
+     communications in unlicensed bands: The rising stars in the IoT and
+     smart city scenarios,” IEEE Wireless Commun., vol. 23, no. 5, pp. 60–
+     67, 2016.
+ [5] O. Georgiou and U. Raza, “Low power wide area network analysis: Can
+     LoRa scale?” IEEE Wireless Commun. Lett., vol. 6, no. 2, pp. 162–165,
+     2017.
+ [6] A. Mahmood, E. Sisinni, L. Guntupalli, R. Rondón, S. A. Hassan, and
+     M. Gidlund, “Scalability analysis of a LoRa network under imperfect
+     orthogonality,” IEEE Trans. Ind. Informat., vol. 15, no. 3, pp. 1425–
+     1436, 2019.
+

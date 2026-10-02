@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAK.gov</title>
+<meta name="description" content="TAK is the core of a suite of georeferenced imagery and communications tools that allow for scaled operational planning, data sharing, visualized elevation data, and target management.">
+<meta property="og:title" content="TAK.gov">
+<meta property="og:description" content="TAK is the core of a suite of georeferenced imagery and communications tools that allow for scaled operational planning, data sharing, visualized elevation data, and target management.">
+<meta property="og:site_name" content="TAK.gov">
+<meta property="og:image" content="https://tak.gov/assets/TAK_featured_img_1200x627-b744e7d6.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tak.gov/">
+<meta name="twitter:title" content="TAK.gov">
+<meta name="twitter:description" content="TAK is the core of a suite of georeferenced imagery and communications tools that allow for scaled operational planning, data sharing, visualized elevation data, and target management.">
+<meta name="twitter:site" content="TAK.gov">
+<meta name="twitter:image" content="https://tak.gov/assets/TAK_featured_img_1200x627-b744e7d6.jpg">
+<meta name="twitter:card" content="summary">
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="T7Z5llxU1OC14jVkB7DR-9BNxOj4PXyovvr4ZoH_1EWItzZoc4UniS64kws7rsJ_mCXlDT_dT6seHmohp33KDg" />
+    <meta name="csp-nonce" content="fKL35glY2sTOZNEEmZ6H3Q==" />
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://tak.gov/assets/favicon/apple-touch-icon-63c1756a.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://tak.gov/assets/favicon/favicon-32x32-55799b1b.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://tak.gov/assets/favicon/favicon-16x16-be9a37ed.png">
+    <link rel="manifest" href="https://tak.gov/assets/favicon/site-e36b4a83.webmanifest">
+    <link rel="mask-icon" href="https://tak.gov/assets/favicon/safari-pinned-tab-394e85ec.svg" color="#d8e7b9">
+    <meta name="msapplication-TileColor" content="#d8e7b9">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://tak.gov/assets/application-edb16c42.css" data-turbo-track="reload" />
+    <script src="https://tak.gov/assets/onLoadOrInject-275803d0.js" nonce="fKL35glY2sTOZNEEmZ6H3Q=="></script>
+    <script src="https://tak.gov/assets/application-a2682e21.js" data-turbo-track="reload" defer="defer" type="module" nonce="fKL35glY2sTOZNEEmZ6H3Q=="></script>
+    
+</head>
+
+<body class="" data-turbo="false">
+<!-- skip to content: start -->
+<a class="btn btn-primary position-absolute start-50 rounded-bottom visually-hidden-focusable skip-to-content"
+   href="#content"
+   >Skip to main content</a>
+<!-- skip to content: end -->
+
+
+<!-- header: start -->
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100" data-scale="condensed">
+        <div class="container d-flex">
+            <a class="navbar-brand align-middle"
+               href="/"
+               title="Return home">
+                <img src="https://tak.gov/assets/logos/brand-06b80939.svg"
+                     width="86"
+                     class="d-inline-block"
+                     loading="lazy">
+                <img src="https://tak.gov/assets/logos/tak_gov_icon_text-a02e57a6.svg"
+                     width="138"
+                     class="d-none d-xxl-inline-block"
+                     loading="lazy">
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="ico-menu fs-1"></i>
+            </button>
+            <div class="collapse navbar-collapse p-0" id="navbarCollapse">
+                <div class="d-flex flex-wrap flex-lg-nowrap ms-auto align-items-center">
+                    <ul class="navbar-nav mb-md-0 order-3 order-lg-1 navbar-navigation">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarSolutions"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">Solutions</a>
+                            <div class="dropdown-menu start-0 shadow-sm" aria-labelledby="navbarSolutions">
+                                <a class="dropdown-item w-auto m-auto text-center fw-bold" href="/solutions">Our Solutions</a>
+                                <div class="dropdown-divider mb-0 mb-md-2"></div>
+                                    <a class="dropdown-item" href="/solutions/military" title="Military">Military</a>
+                                    <a class="dropdown-item" href="/solutions/law-enforcement" title="Law Enforcement">Law Enforcement</a>
+                                    <a class="dropdown-item" href="/solutions/emergency" title="Fire, Emergency Management &amp; First Responders">Fire, Emergency Management &amp; First Responders</a>
+                                    <a class="dropdown-item" href="/solutions/commercial" title="Commercial">Commercial</a>
+                                    <a class="dropdown-item" href="/solutions/recreation" title="Recreation">Recreation</a>
+                            </div>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                href="/products"
+                                id="navbarProducts"
+                                role="button">Products</a>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/events">Events</a>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/documentation/resources">Resources</a>
+                            </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto position-relative order-0 order-lg-2 navbar-search">
+                        <li class="nav-item dropdown p-3">
+                            <a href="#"
+                               class="dropdown-toggle dropdown-toggler-hide"
+                               id="navbarSearch"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="d-none d-lg-inline ico-search fs-5 text-light"></i>
+                                <span class="d-none">Search</span>
+                            </a>
+                            <div class="dropdown-menu p-3 end-0 shadow-sm" aria-labelledby="navbarSearch">
+                                <div class="form-group m-0">
+                                    <form action="/search"
+                                          id="formGlobalSearch"
+                                          class="navbar-search__form"
+                                          aria-labelledby="navbarSearch">
+                                        <div class="d-flex flex-column input-group input-group-sm">
+                                            <label for="searchForm" class="form-label fw-bold text-bark text-uppercase">Search the entire website</label>
+                                            <input type="text"
+                                                   class="form-control rounded-0 input-group-sm w-100 search-input-square"
+                                                   id="searchForm"
+                                                   name="query"
+                                                   placeholder="Search..."
+                                                   autocomplete="off">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                        <!-- condition start: user is not logged in -->
+                        <ul class="navbar-nav d-flex flex-wrap flex-md-nowrap flex-row order-1 order-lg-3 mt-3 mb-3 mt-lg-0 mb-lg-0 navbar-utility">
+                                <li class="nav-item d-inline-flex justify-content-center position-relative nav-login">
+                                    <a class="btn-login my-auto rounded-0 text-uppercase" title="Click to log into your account" role="button" href="/session/new">LOGIN</a>
+                                </li>
+                            <li class="nav-item d-inline-flex justify-content-center me-0 ms-auto nav-create-account">
+                                <a class="btn btn-primary my-auto" title="Click to create your account" href="/registration/registration_requests/new">CREATE AN ACCOUNT</a>
+                            </li>
+                        </ul>
+                        <!-- condition start: user is not logged in -->
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- header: end -->
+<script src="https://tak.gov/assets/logo-slider-84f80e1b.js" type="module" nonce="fKL35glY2sTOZNEEmZ6H3Q=="></script>
+
+<link rel="stylesheet" href="https://tak.gov/assets/pages/home-659a80e3.css" data-turbo-track="reload" />
+
+
+<!-- main body: start -->
+<main class="main homepage bg-black"
+      data-pattern="bottom-up"
+      data-pattern-color="light">  
+    <!-- marquee modal: start -->
+<div class="modal fade"
+     id="homeVideo"
+     tabindex="-1"
+     aria-labelledby="home-modal-title"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="home-modal-title">TAK INTRO</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/fiBt0wEiKh8"
+                            title="YouTube video"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- marquee modal: end -->
+
+<!-- marquee: start -->
+<section class="marquee"
+		role="complementary"
+		data-overlay="false"
+		data-pattern="false"
+		data-bg="true"
+		style="--marquee-bg-image: url('https://tak.gov/assets/marquee/marquee-home-d8ffb9f7.jpg')">
+
+	<!-- content: start -->
+	<div class="container pb-0 position-relative text-center marquee__content">
+		<div class="row">
+			<div class="col-12 col-md-9 mx-auto">
+				<h1 class="display-1 mb-4 fw-bold">Command the Cognitive High Ground with TAK</h1>
+				<p class="lead homepage-lead mb-0 fw-bold-light">Gain intellectual overmatch with TAK - the advanced geospatial platform built to give your team a decisive edge in complex operational environments.</p>
+				<p class="lead homepage-lead mb-0 mt-2 fw-bold-light">TAK delivers real-time data sharing, intuitive visualizations, and integrated planning and targeting tools, empowering operators to outthink, outmaneuver, and outpace any adversary.</p>
+				<p class="lead homepage-lead mb-0 mt-2 fw-bold-light">Get mission-ready faster, make smarter decisions under pressure, and act with speed and precision. With TAK at the core of your operations, you achieve superior situational understanding when it matters most.</p>
+				<button type="button"
+						class="btn btn-primary mt-5 shadow-sm"
+						data-bs-toggle="modal"
+						data-bs-target="#homeVideo">
+					<i class="ico-play-circle fs-4 me-2"></i>TAK INTRO
+				</button>
+			</div>
+		</div>
+	</div>
+	<!-- content: start -->
+
+	<!-- logo strip: start -->
+	<div class="container-fluid">
+		<div class="row mt-5 border-bottom border-color-light-blue gradient-black-to-transparent">
+			<div class="col-lg-6 col-md-8 col-sm-12 mx-auto marquee__logos pb-3">
+			<span class="d-block h6 fw-bold mb-2 mb-md-4 text-center w-100">Product Owners:</span>
+				<section class="customer-logos slider d-flex flex-row justify-content-center mx-auto ">
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/peo_sw_90-ca6367fa.png" alt="peo_sw"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/fbi_90-c841d048.png" alt="fbi"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/pm_ivas_90-1c4d1980.png" alt="pm_ivas"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/nga_90-fdbe536c.png" alt="nga"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/mctssa-2d17c388.png" alt="s_and_t"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/pm_mc_90-15ee61de.png" alt="pm_mc"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/sml_aerial_networks_90-30429bf3.png" alt="sml_aerial_networks"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/peo_sda_90-d018128e.png" alt="peo_sda"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/peo_isr_sof_90-ae99db96.png" alt="peo_isr_sof"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/pm_ccs_90-11d08b7d.png" alt="pm_ccs"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/dss_90-2248e31e.png" alt="dss"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/navair_90-6d75e491.png" alt="navair"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/sml_airspace_mission_planning_90-09cbca1f.png" alt="sml_airspace_mission_planning"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/pm_amsa_90-83d681de.png" alt="pm_amsa"></div>
+				<div class="slide"><img src="https://tak.gov/assets/product_owners/cbp-71d3a8c7.png" alt="cbp"></div>
+				</section>
+			</div>
+			<!-- logo strip: end -->
+		</div>
+	</div>
+	<!-- logo strip: end -->
+</section>
+<!-- marquee: end -->
+
+  <!-- content area: start -->
+  <article class="content-area pt-0" id="content">
+      <div class="container-fluid text-light">
+        <div class="row pb-5 bg-percent-90 border-bottom border-color-light-blue cards-with-reticle">
+            <div class="col-12 border-bottom border-color-light-blue">
+                <div class="row mx-auto">
+                    <div class="col-12">
+                        <h2 class="h1 fw-bold mb-0 text-center mt-5 mb-5">TAK Mobile and Desktop Apps</h2>
+                    </div>
+                </div>
+                <div class='row mb-3 justify-content-center text-center'>
+                    <div class="homepage-app-container overflow-auto">
+                        <div class='d-inline-block'>
+                            <span class='homepage-app-card text-center mb-2'>
+                                <img class='homepage-app-card-icon mb-2' src="https://tak.gov/assets/badges/Apple_icon-1730d31a.svg">
+                                <h5 class='m-0'><b>iOS</b></h5>
+                                <p class='homepage-app-card-text'>Supported on iOS 16.0 or later.</p>
+                                <span class='homepage-app-card-headers'><b>iTAK</b></span>
+                                <a target="blank" href="https://apps.apple.com/us/app/itak/id1561656396">
+                                    <img class='homepage-app-card-download mb-3' src="https://tak.gov/assets/badges/apple_badge-cb72f655.svg">
+</a>                            </span>
+                            <span class='homepage-app-card text-center mb-2'>
+                                <img class='homepage-app-card-icon mb-2' src="https://tak.gov/assets/badges/Android_icon-b5324000.svg">
+                                <h5 class='m-0'><b>Android</b></h5>
+                                <p class='homepage-app-card-text'>Supported on Android 5 or later.</p>
+                                <span class='homepage-app-card-headers'><b>ATAK</b></span>
+                                <a target="blank" href="https://play.google.com/store/apps/details?id=com.atakmap.app.civ">
+                                    <img class='homepage-app-card-download mb-3' src="https://tak.gov/assets/badges/google_badge-827df6b2.svg">
+</a>                            </span>
+                        </div>
+                        <div class='d-inline-block'>
+                            <span class='homepage-app-card text-center mb-2'>
+                                <img class='homepage-app-card-icon mb-2' src="https://tak.gov/assets/badges/Windows_icon-afe2d857.svg">
+                                <h5 class='m-0'><b>Windows</b></h5>
+                                <p class='homepage-app-card-text'>Supported on Windows 10/11 64-bit.</p>
+                                <span class='homepage-app-card-headers'><b>WinTAK</b></span>
+                                <a target="blank" href="/session/new?return_to=https%3A%2F%2Ftak.gov%2Fproducts%2Fwintak">
+                                    <img class='homepage-app-card-download mb-4' src="https://tak.gov/assets/badges/tak_badge-850f4f26.svg">
+</a>                            </span>
+                            <span class='homepage-app-card text-center me mb-2'>
+                                <img class='homepage-app-card-icon mb-2' src="https://tak.gov/assets/badges/Linux_icon-f5a3ef9c.svg">
+                                <h5 class='m-0'><b>Linux</b></h5>
+                                <p class='homepage-app-card-text homepage-card-text-linux'>Supported on Ubuntu 18.04, Fedora 26, Debian 10, RHEL/CentOS 8</p>
+                                <span class='homepage-app-card-headers'><b>TAKX</b></span>
+                                <a target="blank" href="/session/new?return_to=https%3A%2F%2Ftak.gov%2Fproducts%2Ftakx">
+                                    <img class='homepage-app-card-download mb-4' src="https://tak.gov/assets/badges/tak_badge-850f4f26.svg">
+</a>                            </span>
+                            <span class='homepage-app-card text-center me mb-2'>
+                                <img class='homepage-app-card-icon mb-2' src="https://tak.gov/assets/badges/vr_headset-9ca1ce42.svg">
+                                <h5 class='m-0'><b>VR</b></h5>
+                                <p class='homepage-app-card-text homepage-card-text-linux'>Supported on most VR Headsets</p>
+                                <span class='homepage-app-card-headers'><b>VR-TAK</b></span>
+                                <a target="blank" href="/session/new?return_to=https%3A%2F%2Ftak.gov%2Fproducts%2Fvr-tak">
+                                    <img class='homepage-app-card-download mb-4' src="https://tak.gov/assets/badges/tak_badge-850f4f26.svg">
+</a>                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-center app-link-container blue-links">
+                    <div class="col-12 col-md-4 p-0 text-center text-lg-start">
+                        <p>ATAK (<a target="blank" href="https://github.com/TAK-Product-Center/atak-civ">
+                            source code
+                        </a>)</p>
+                    </div>
+                    <div class="p-0 col-12 col-md-4 text-center">
+                        <p>TAK Server (<a target="blank" href="https://github.com/TAK-Product-Center/Server">
+                            source code
+                        </a>)</p>
+                    </div>
+                    <div class="p-0 col-12 col-md-4 text-center text-lg-end">
+                        <p>VR-TAK (<a target="blank" href="https://github.com/TAK-Product-Center/VR">
+                            source code
+                        </a>)</p>
+                    </div>
+                </div>
+                <div class='homepage-app-banner'>
+                    <span class='text-center d-block pb-2 px-2 mb-5'>
+                        <h5 class='pt-2'><b>Launching your own TAK Server?</b></h5>
+                        <p class='homepage-app-banner-text'>Install or upgrade TAK Server for your organization in minutes</p>
+                        <a class="d-block" target="blank" href="/session/new?return_to=https%3A%2F%2Ftak.gov%2Fproducts%2Ftak-server">
+                            <img class='homepage-app-banner-download' src="https://tak.gov/assets/badges/tak_badge-850f4f26.svg">
+</a>                    </span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="container mt-5">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h2 class="h1 fw-bold mb-0 text-center"><i class="fas fa-bullhorn fs-3 fa-flip-horizontal mb-1 me-3"></i>TAK Announcements</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                  <div class="bg-transparent mb-5">
+    <div class="pt-4">
+      <h3 class="border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+        <i class="ico-zap me-3 fs-5"></i>Pacific Command Visits 1st SFG(A)
+      </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <p class="card-text"><small class="link-secondary fst-italic text-break">https://www.dvidshub.net/image/9901478/pacific-command-visits-1st-sfga</small></p>
+        <p class="card-text mh-150px overflow-auto stylized-scroll">
+          <strong class="fw-bold">
+            August 26, 2026
+            &mdash;
+          </strong>
+          A U.S. Soldier assigned to 5th Security Force Assistance Brigade, explains the use of the Android Tactical Assault Kit (ATAK) in recent exercises to the Senior Enlisted Advisor of Pacific Command, United States Marine Corps Sgt. Major Eric Cook, right, at Joint Base Lewis-McChord, Washington, Aug. 28, 2026. This visit highlights the cooperation between 1st Special Forces Group (Airborne) and 5th SFAB who share a role in strengthening U.S. Army presence in the Pacific theater. 1st SFG(A) maintains highly lethal, rapidly deployable forces to execute the full spectrum of special operations alongside allies, partners, and the joint force as the preferred partner and premier special operations entity in the U.S. Pacific Command area of responsibility. (U.S. Army photo by Cpl Micah Wilson).
+        </p>
+          <a href="https://www.dvidshub.net/image/9901478/pacific-command-visits-1st-sfga"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            >More Info <i class="ico-external-link fs-6 ms-2 mt-n1"></i></a>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/crjwmoyhbalakqa33g36kl50y30k?response-content-disposition=inline%3B%20filename%3D%22pacific_cmd_visits_1st_sfg.jpg%22%3B%20filename%2A%3DUTF-8%27%27pacific_cmd_visits_1st_sfg.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f9f24ad3c70b98b989e1d88d94301c50848dd40d88260ba03e87b9f842ad2f18" class="text-end">
+      </div>
+    </div>
+	</div> 
+  <div class="bg-transparent mb-5">
+    <div class="pt-4">
+      <h3 class="border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+        <i class="ico-zap me-3 fs-5"></i>JRTC 26-10 JFE
+      </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <p class="card-text"><small class="link-secondary fst-italic text-break">https://www.dvidshub.net/image/9935865/jrtc-26-10-jfe</small></p>
+        <p class="card-text mh-150px overflow-auto stylized-scroll">
+          <strong class="fw-bold">
+            August 26, 2026
+            &mdash;
+          </strong>
+          A Paratrooper assigned to 2nd Mobile Brigade Combat Team, 82nd Airborne Division assesses coordinates with an Android Tactical Assault Kit (ATAK) during a Joint Readiness Training Center (JRTC) rotation at Fort Polk, Louisiana. Paratroopers are tasked with attacking and defending themselves from enemy forces throughout the duration of JRTC in order to complete the mission at hand. (U.S. Army photo by Spc. Sebastian Johnston)
+        </p>
+          <a href="https://www.dvidshub.net/image/9935865/jrtc-26-10-jfe"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            >More Info <i class="ico-external-link fs-6 ms-2 mt-n1"></i></a>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/h2mwks82e2s0nggahp9rmqg1x1n2?response-content-disposition=inline%3B%20filename%3D%22paratrooper_2nd_mobile_brigade.jpg%22%3B%20filename%2A%3DUTF-8%27%27paratrooper_2nd_mobile_brigade.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f82fd0da8374953949b18fddf5af657f5ed29a5542be7edfd49da9fcee6f49b0" class="text-end">
+      </div>
+    </div>
+	</div> 
+  <div class="bg-transparent mb-5">
+    <div class="pt-4">
+      <h3 class="border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+        <i class="ico-zap me-3 fs-5"></i>Han Kuang focuses on battlefield responsiveness
+      </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <p class="card-text"><small class="link-secondary fst-italic text-break">https://www.taipeitimes.com/News/taiwan/archives/2026/08/13/2003862417</small></p>
+        <p class="card-text mh-150px overflow-auto stylized-scroll">
+          <strong class="fw-bold">
+            August 13, 2026
+            &mdash;
+          </strong>
+          The Han Kuang Exercise yesterday tested the ability of units to repair damaged vehicles, redeploy forces and adapt to changing battlefield conditions without waiting for orders as the annual drills entered their final day.
+        </p>
+          <a href="https://www.taipeitimes.com/News/taiwan/archives/2026/08/13/2003862417"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            >More Info <i class="ico-external-link fs-6 ms-2 mt-n1"></i></a>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 pt-4">
+          <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/nsd0q0pik0pm11idace5ihu6fhld?response-content-disposition=inline%3B%20filename%3D%22taipei_news_tak.jpg%22%3B%20filename%2A%3DUTF-8%27%27taipei_news_tak.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=8ca2ce8103c5ddcb457c88cdd84f56abef09d2d60988c04eed5bdeb34f322460" class="text-end">
+      </div>
+    </div>
+	</div> 
+
+                                <a href="/news"
+                                    class="btn btn-primary mx-auto mb-5"
+                                    >Browse All TAK News</a>
+                                	<div class="col-12 mx-auto">
+		<div class="card border-0 bg-transparent mb-5">
+			<div class="row g-0">
+				<div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+					<a href="/events/2026_Offsite">
+						<img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/mmmuv09domdoqrm2hftffpz53zwe?response-content-disposition=inline%3B%20filename%3D%22size.png%22%3B%20filename%2A%3DUTF-8%27%27size.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=98fc160517228fceb0325cb1f744abb2591904617ac3ced4acc7919bd474007f" class="w-100 rounded">
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-md-6 order-2">
+					<div class="card-body text-light p-0 ps-md-5 pt-3">
+						<a href="/events/2026_Offsite">
+							<h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+								<i class="ico-globe me-3 fs-5"></i>2026 TAK Offsite
+							</h3>
+						</a>
+						<p class="card-text">This hybrid event, hosted by the TAK Configuration Steering Board (CSB), consists of briefs and demos from the TAK Community across program offices, services, federal agencies, labs, and users.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mx-auto">
+		<div class="card border-0 bg-transparent mb-5">
+			<div class="row g-0">
+				<div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+					<a href="/events/tak-5-6-0-feature-release">
+						<img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/758a2wo4krqobuqrkadul0plzk00?response-content-disposition=inline%3B%20filename%3D%225.6-feature-release.png%22%3B%20filename%2A%3DUTF-8%27%275.6-feature-release.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=6a652a1093cd3ffd4db206484e43c5e6cb94c1f0e116eb8193af6bff221d5f21" class="w-100 rounded">
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-md-6 order-2">
+					<div class="card-body text-light p-0 ps-md-5 pt-3">
+						<a href="/events/tak-5-6-0-feature-release">
+							<h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+								<i class="ico-globe me-3 fs-5"></i>TAK 5.6 Feature Release
+							</h3>
+						</a>
+						<p class="card-text">Explore the Latest in TAK 5.6: A Live Discussion on New Features</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mx-auto">
+		<div class="card border-0 bg-transparent mb-5">
+			<div class="row g-0">
+				<div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+					<a href="/events/2025_Offsite">
+						<img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/d9qlfxhj2w5cui1rgtdfiy3vo5ae?response-content-disposition=inline%3B%20filename%3D%22Picture%202025%20Offsite.jpg%22%3B%20filename%2A%3DUTF-8%27%27Picture%25202025%2520Offsite.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=bb783d213bbb9e069edcf43d007d75cef6efa058c12b84885e275f37691efb16" class="w-100 rounded">
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-md-6 order-2">
+					<div class="card-body text-light p-0 ps-md-5 pt-3">
+						<a href="/events/2025_Offsite">
+							<h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+								<i class="ico-globe me-3 fs-5"></i>2025 TAK Offsite
+							</h3>
+						</a>
+						<p class="card-text">This hybrid event, hosted by the TAK Configuration Steering Board (CSB), consists of briefs and demos from the TAK Community across program offices, services, federal agencies, labs, and users.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mx-auto">
+		<div class="card border-0 bg-transparent mb-5">
+			<div class="row g-0">
+				<div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+					<a href="/events/tak-5-5-0-feature-release">
+						<img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/3xua75ycg27qe1rwnm4rgra0d59e?response-content-disposition=inline%3B%20filename%3D%22TAK%205.5%20Feature%20Release.png%22%3B%20filename%2A%3DUTF-8%27%27TAK%25205.5%2520Feature%2520Release.png&amp;response-content-type=image%2Fpng&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=2708f593d2dbc69a19afa4d0394fda8888320b3f378d6763b029e50568d10f70" class="w-100 rounded">
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-md-6 order-2">
+					<div class="card-body text-light p-0 ps-md-5 pt-3">
+						<a href="/events/tak-5-5-0-feature-release">
+							<h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+								<i class="ico-globe me-3 fs-5"></i>TAK 5.5 Feature Release
+							</h3>
+						</a>
+						<p class="card-text">Explore the Latest in TAK 5.5: A Live Discussion on New Features</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mx-auto">
+		<div class="card border-0 bg-transparent mb-5">
+			<div class="row g-0">
+				<div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+					<a href="/events/tak-5-4-0-feature-release">
+						<img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/mpb04anvpz53syqhnngm4e1a4rkm?response-content-disposition=inline%3B%20filename%3D%22Slide1.JPG%22%3B%20filename%2A%3DUTF-8%27%27Slide1.JPG&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=7b83bea163e09cf644cd62c646c01f6a5693380da348cd90d7f636ea38bae5d9" class="w-100 rounded">
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-md-6 order-2">
+					<div class="card-body text-light p-0 ps-md-5 pt-3">
+						<a href="/events/tak-5-4-0-feature-release">
+							<h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+								<i class="ico-globe me-3 fs-5"></i>TAK 5.4 Feature Release
+							</h3>
+						</a>
+						<p class="card-text">Explore the Latest in TAK 5.4: A Live Discussion on New Features</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- cards w/ title: start -->
+          <div class="row pb-5 bg-percent-90 border-bottom border-color-light-blue cards-with-reticle">
+              <div class="col-12">
+                  <div class="container mt-5">
+                      <!-- cards w/ title introduction: start -->
+                      <div class="row mb-5">
+                          <div class="col-12">
+                              <h2 class="h1 fw-bold mb-0 text-center">Operational Success Starts with TAK</h2>
+                          </div>
+                      </div>
+                      <!-- cards w/ title introduction: end -->
+
+                      <!-- ltr / rtl cards: start -->
+                      <div class="col-12 mx-auto">
+                          <div class="card border-0 bg-transparent mb-5">
+                              <div class="row g-0">
+                                  <div class="col-12 col-md-6 col-md-6 order-1 mb-3 mb-md-0">
+                                      <img src="https://tak.gov/assets/uploads/device-demonstration-01-e1c3e0cf.png"
+                                            class="tak-image-frame light-border">
+                                  </div>
+                                  <div class="col-12 col-md-6 col-md-6 order-2">
+                                      <div class="card-body text-light p-0 ps-md-5 pt-3">
+                                          <h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+                                              <i class="ico-eye me-3 fs-5"></i>Complete Situational Awareness
+                                          </h3>
+                                          <p class="card-text">Maps and situational awareness (SA) are critical to coordinated tasks in many contexts, including kinetic military action, law enforcement, civil protection, and disaster relief. TAK has the ability to display a wide variety of map data, either stored or downloaded in real-time. TAK is the USG's premier tool for shared SA data and has the largest selection of features designed to facilitate real-time coordination between team members through the use of mission specific plugins.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card border-0 bg-transparent my-5">
+                              <div class="row g-0">
+                                  <div class="col-12 col-md-6 order-2 order-md-1">
+                                      <div class="card-body text-light p-0 pe-md-5 pt-3">
+                                          <h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+                                              <i class="ico-map-pin me-3 fs-5"></i>Pre-Mission Planning
+                                          </h3>
+                                          <p class="card-text">In addition to the standard mission execution planning tools, mission specific capabilities give a user more insight into certain aspects of their assigned tasks. Navigation tools, including viewshed analysis, help users select and traverse a pre-planned route buy displaying the elevation profile of the route along with speed, distance, and bearing to the next waypoint.</p>
+                                          <p>Pre-mission planning is essential to enabling safe, effective, and rapid deployment of resources. TAK enables effective planning by providing a common understanding of exposure and vulnerabilities based on real time updates of any rapidly developing environment.</p>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 col-md-6 order-1 order-md-2 mb-3 mb-md-0">
+                                      <img src="https://tak.gov/assets/uploads/solutions-thumb-09-ff9817a4.jpg"
+                                            class="tak-image-frame light-border">
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- last instance: start -->
+                          <div class="card border-0 bg-transparent mt-5">
+                              <div class="row g-0">
+                                  <div class="col-12 col-md-6 order-1 mb-3 mb-md-0">
+                                      <img src="https://tak.gov/assets/uploads/solutions-thumb-10-6f4098af.jpg"
+                                            class="tak-image-frame light-border">
+                                  </div>
+                                  <div class="col-12 col-md-6 order-2">
+                                      <div class="card-body text-light p-0 ps-md-5 pt-3">
+                                          <h3 class="d-block border-bottom border-2 border-light fw-bold pb-2 mb-3 position-relative title-with-icon">
+                                              <i class="ico-zap me-3 fs-5"></i>Streamlined Deployment
+                                          </h3>
+                                          <p class="card-text">Points, routes, drawing objects, and files can be shared through TAK user defined groups, teams or simply broadcasted. While most data sharing clients require a server, TAK’s CoT & chat sharing features can operate in a server-less environment amongst nodes operating on the same network. TAK Server can be introduced to extend client connectivity across networks or federated for persistent command and control.</p>
+                                          <p>From highest commander to the ground forces and attached air & sea assets, deploying with the TAK Common Operational Picture ensures safe, dynamic, and effective mission execution.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- last instance: end -->
+                      </div>
+                      <!-- ltr / rtl cards: end -->
+                  </div>
+              </div>
+          </div>
+          <!-- cards w/ title: end -->
+
+          <!-- tak solutions w/ title: start -->
+          <div class="row slanted-columns-title">
+              <div class="col-12 mt-5">
+                  <h2 class="h1 fw-bold mb-3 mb-sm-0 text-center">Find Your TAK Solution</h2>
+              </div>
+          </div>
+          <div class="row slanted-columns">
+              <div class="col-12">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-12">
+                              <ul class="d-flex flex-sm-row flex-wrap flex-sm-nowrap mx-auto ps-0 w-100 align-items-stretch slanted-columns__list">
+                                    <li class="slanted-columns__instance">
+                                        <div class="slanted-columns__content">
+                                            <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/stekme9atgpa5nwy07bl2q1so4tp?response-content-disposition=inline%3B%20filename%3D%22solutions-slant-military.jpg%22%3B%20filename%2A%3DUTF-8%27%27solutions-slant-military.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=7d97b0313c241fecafee000cb2dadb10fa2721a630c8313cb934506d181dc040"
+                                                    class="slanted-columns__thumbnail"
+                                                    alt="Military">
+                                            <a href="/solutions/military"
+                                                class="slanted-columns__link"
+                                                title="Military">Military</a>
+                                        </div>
+                                    </li>
+                                    <li class="slanted-columns__instance">
+                                        <div class="slanted-columns__content">
+                                            <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/791728eyyegnlx6a1ht7589gglie?response-content-disposition=inline%3B%20filename%3D%22solutions-slant-law-enforcement.jpg%22%3B%20filename%2A%3DUTF-8%27%27solutions-slant-law-enforcement.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=24a83c07eae73847141c2296ad6e904e13082ac4e772e91fcdfa02cd155a7374"
+                                                    class="slanted-columns__thumbnail"
+                                                    alt="Law Enforcement">
+                                            <a href="/solutions/law-enforcement"
+                                                class="slanted-columns__link"
+                                                title="Law Enforcement">Law Enforcement</a>
+                                        </div>
+                                    </li>
+                                    <li class="slanted-columns__instance">
+                                        <div class="slanted-columns__content">
+                                            <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/oljbjor9ugytz5y7b6ql2vzz4ae0?response-content-disposition=inline%3B%20filename%3D%22solutions-slant-emergency-management-first-responders.jpg%22%3B%20filename%2A%3DUTF-8%27%27solutions-slant-emergency-management-first-responders.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a242b3ce56e7e39481ee557667318ce96704b6f65325b421b95bc1f49c00e3a2"
+                                                    class="slanted-columns__thumbnail"
+                                                    alt="Fire, Emergency Management &amp; First Responders">
+                                            <a href="/solutions/emergency"
+                                                class="slanted-columns__link"
+                                                title="Fire, Emergency Management &amp; First Responders">Fire, Emergency Management &amp; First Responders</a>
+                                        </div>
+                                    </li>
+                                    <li class="slanted-columns__instance">
+                                        <div class="slanted-columns__content">
+                                            <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/u57mzzms9j22mmcufcgpzis4p2jw?response-content-disposition=inline%3B%20filename%3D%22solutions-slant-commercial.jpg%22%3B%20filename%2A%3DUTF-8%27%27solutions-slant-commercial.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=038c2d6879c3334aff489c429e9236a53a42fae636705d233962d34af4f62402"
+                                                    class="slanted-columns__thumbnail"
+                                                    alt="Commercial">
+                                            <a href="/solutions/commercial"
+                                                class="slanted-columns__link"
+                                                title="Commercial">Commercial</a>
+                                        </div>
+                                    </li>
+                                    <li class="slanted-columns__instance">
+                                        <div class="slanted-columns__content">
+                                            <img src="https://tak-gov-webapp-assets.s3.us-gov-west-1.amazonaws.com/tc2aex54aprosbblrq4su8l228n0?response-content-disposition=inline%3B%20filename%3D%22solutions-slant-outdoor-recreation.jpg%22%3B%20filename%2A%3DUTF-8%27%27solutions-slant-outdoor-recreation.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIATJSIUVX5SCHDUUNN%2F20260930%2Fus-gov-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20260930T172521Z&amp;X-Amz-Expires=300&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9da92d88c4fa23eb7532db7b10d14523f4c238cdda5699ab3f5e6957ff258862"
+                                                    class="slanted-columns__thumbnail"
+                                                    alt="Recreation">
+                                            <a href="/solutions/recreation"
+                                                class="slanted-columns__link"
+                                                title="Recreation">Recreation</a>
+                                        </div>
+                                    </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- tak solutions w/ title: start -->
+
+            <!-- news articles: start -->
+            <div class="row see-tak-news">
+                <div class="col-12 mx-auto mt-5">
+                    <div class="container mx-auto mt-5">
+                        <div class="col-12 tak-action-card">
+    <!-- introduction: start -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="d-block h2 pb-2 mb-4 border-bottom border-2 border-dark fw-bold position-relative title-with-icon">
+                <i class="ico-star fs-4"></i>See TAK in Action
+            </h6>
+        </div>
+    </div>
+    <!-- introduction: end -->
+    
+        <div class="row mb-3">
+            <div class="col">
+                <iframe id="vid_frame"
+                src="https://tak.gov/videos/2c10ae0c-278a-40e6-b568-d581d1a53eeb/embed"
+                frameborder="0"
+                class="tak-in-action-video">
+            </iframe>
+            </div>
+        </div>
+
+    <!-- cards and button: start -->
+    <div class="row">
+            <div class="col-12 col-md-4 mt-md-0">
+                <div class="news-card card border-0 bg-percent-80 rounded-3 shadow-sm">
+                        <a href="https://www.dvidshub.net/image/9935865/jrtc-26-10-jfe"
+                            class="card-body link-light"
+                            title="JRTC 26-10 JFE"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <h5 class="card-title fw-bold">JRTC 26-10 JFE&nbsp;→</h5>
+                            <p class="news-url link-secondary fst-italic"><small>https://www.dvidshub.net/image/9935865/jrtc-26-10-jfe</small></p>
+                            <p class="card-text"><strong>August 26, 2026 &mdash;</strong> A Paratrooper assigned to 2nd Mobile Brigade Combat Team, 82nd Airborne Division assesses coordinates with an Android Tactical Assault Kit (ATAK) during a Joint Readiness Training Center (JRTC) rotation at Fort Polk, Louisiana. Paratroopers are tasked with attacking and defending themselves from enemy forces throughout the duration of JRTC in order to complete the mission at hand. (U.S. Army photo by Spc. Sebastian Johnston)</p>
+                        </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="news-card card border-0 bg-percent-80 rounded-3 shadow-sm">
+                        <a href="https://www.dvidshub.net/image/9901478/pacific-command-visits-1st-sfga"
+                            class="card-body link-light"
+                            title="Pacific Command Visits 1st SFG(A)"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <h5 class="card-title fw-bold">Pacific Command Visits 1st SFG(A)&nbsp;→</h5>
+                            <p class="news-url link-secondary fst-italic"><small>https://www.dvidshub.net/image/9901478/pacific-command-visits-1st-sfga</small></p>
+                            <p class="card-text"><strong>August 26, 2026 &mdash;</strong> A U.S. Soldier assigned to 5th Security Force Assistance Brigade, explains the use of the Android Tactical Assault Kit (ATAK) in recent exercises to the Senior Enlisted Advisor of Pacific Command, United States Marine Corps Sgt. Major Eric Cook, right, at Joint Base Lewis-McChord, Washington, Aug. 28, 2026. This visit highlights the cooperation between 1st Special Forces Group (Airborne) and 5th SFAB who share a role in strengthening U.S. Army presence in the Pacific theater. 1st SFG(A) maintains highly lethal, rapidly deployable forces to execute the full spectrum of special operations alongside allies, partners, and the joint force as the preferred partner and premier special operations entity in the U.S. Pacific Command area of responsibility. (U.S. Army photo by Cpl Micah Wilson).</p>
+                        </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="news-card card border-0 bg-percent-80 rounded-3 shadow-sm">
+                        <a href="https://www.militaryaerospace.com/uncrewed/news/55397634/droneshield-launches-rfrecon-portable-rf-intelligence-system"
+                            class="card-body link-light"
+                            title="DroneShield launches RfRecon portable RF intelligence system"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <h5 class="card-title fw-bold">DroneShield launches RfRecon portable RF intelligence system&nbsp;→</h5>
+                            <p class="news-url link-secondary fst-italic"><small>https://www.militaryaerospace.com/uncrewed/news/55397634/droneshield-launches-rfrecon-portable-rf-intelligence-system</small></p>
+                            <p class="card-text"><strong>August 13, 2026 &mdash;</strong> DroneShield&#39;s RfRecon combines RF detection, direction finding, and signal analysis in a portable system for counter-UAS and electronic warfare missions.</p>
+                        </a>
+                </div>
+            </div>
+        <!-- view all button: start -->
+        <div class="col-12 mt-5 text-center">
+            <a href="/news"
+                class="btn btn-primary mx-auto"
+                >Browse All TAK News</a>
+        </div>
+        <!-- view all button: end -->
+    </div>
+    <!-- cards and button: end -->
+</div>
+                    </div>
+                </div>
+            </div>
+            <!-- news articles: end -->
+      </div>
+  </article>
+  <!-- content area: end -->
+</main>
+<!-- main body: end -->
+
+<script type="module" nonce="fKL35glY2sTOZNEEmZ6H3Q==">
+//<![CDATA[
+  document.addEventListener("DOMContentLoaded", function() {
+    $("#homeVideo").on('hidden.bs.modal', function (e) {
+      $("#homeVideo iframe").attr("src", $("#homeVideo iframe").attr("src"));
+    });
+  });
+
+//]]>
+</script>
+<!-- footer and disclaimer: start -->
+<footer class="footer mt-auto pt-5 pb-3 pb-md-5" data-pattern="light">
+    <!-- disclaimer: start -->
+    <section class="disclaimer mx-auto w-100 position-relative">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 accordion" id="usageStatement">
+                    <div class="p-3 p-md-5 bg-dark text-light disclaimer__accordion">
+                        <button class="disclaimer__button d-flex d-md-none flex-row w-100 fw-bold"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseUsage"
+                                aria-expanded="false"
+                                aria-controls="collapseUsage">TAK Usage Statement <i class="ico-chevron-down fs-4 ms-auto"></i></button>
+                        <article id="collapseUsage"
+                                 class="disclaimer__content collapse"
+                                 aria-labelledby="headingOne"
+                                 data-bs-parent="#usageStatement">
+                            <br><br>
+                            <p>The TAK capability suite is a United States Government (USG) owned product. Use of these USG owned products outside of test and evaluation require the proper authority to operate (ATO) paperwork granted by your organization’s headquarters (HQ). Before installing and/or using any of the products, ensure you are within the guidelines of your organization.</p>
+                            <p>TAK-MIL is a restricted use product for USG military use only. NO distribution is authorized outside this forum except through properly vetted Program Management Offices.</p>
+                            <p>ATAK-CIV is subject to the Export Administration Regulations (EAR) administered by the Department of Commerce, Bureau of Industry and Security (BIS), which advises this item is classified as EAR99. Other TAK-CIV Product Lines are currently being evaluated for commodity determination.</p>
+                            <p class="mb-0">The TAK capability suite is a United States Government owned product. TAK-MIL is a restricted use product only available through Foreign Military Sales distribution.TAK-CIV is EAR99 as determined by Department of Commerce and has been released by the Department of Defense as open source available here: <a href="https://github.com/TAK-Product-Center/atak-civ" target="_blank">https://github.com/TAK-Product-Center/atak-civ</a>.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- disclaimer: end -->
+
+    <!--footer content: start -->
+    <div class="container">
+        <div class="d-flex flex-wrap flex-md-nowrap">
+            <div class="order-1 order-md-0 col-sm-12 col-md-7 footer__content">
+                <div class="d-flex mb-4 pb-4 footer__content--top">
+                    <div class="col-sm-2 col-md col-md-1 me-4">
+                      <a href="/">
+                        <img src="https://tak.gov/assets/logos/brand-06b80939.svg"
+                             width="70"
+                             height="74"
+                             class="d-inline-block"
+                             loading="lazy">
+                      </a>
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center align-content-center">
+                        <div class="d-block">
+                            <address class="d-inline-block mb-md-0">10221 Burbeck Road, Ft. Belvoir, VA 22060</address>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex footer__content--bottom">
+                    <div class="col footer__links">
+                        <ul class="list-group list-group-horizontal flex-wrap p-0 footer__link-list">
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/documentation/resources"
+                                class="footer__link text-decoration-none"
+                                title="Resources">Resources</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/faq"
+                                   class="footer__link text-decoration-none"
+                                   title="FAQ">FAQ</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/media_center"
+                                   class="footer__link text-decoration-none"
+                                   title="Media Center">Media Center</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/privacy_policy"
+                                   class="footer__link text-decoration-none"
+                                   title="Privacy Policy">Privacy Policy</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/pages/careers"
+                                   class="footer__link text-decoration-none"
+                                   title="Careers">Careers</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/news"
+                                   class="footer__link text-decoration-none"
+                                   title="News">Press &amp; News</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/help_requests/new"
+                                   class="footer__link text-decoration-none"
+                                   title="Contact Us">Contact Us</a>
+                            </li>
+                            <li class="list-group-item ps-0 pe-0 text-start border-0">
+                                <a href="/pages/release-schedule"
+                                   class="footer__link text-decoration-none"
+                                   title="Release Schedule">Release Schedule</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="order-0 order-md-1 col-sm-12 col-md-5 ps-md-5 pe-2 mb-5 justify-content-center footer__messaging">
+                <span class="d-block h3 mb-3">Software Developers</span>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="mb-0 lh-lg">Your opportunity to shape the future of situational awareness is here! Click the link below to learn how to join the movement.</p>
+                        <a href="/documentation/resources"
+                        class="btn btn-primary btn-lg text-decoration-none mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer content: end -->
+</footer>
+<!-- footer and disclaimer: end -->
+
+</body>
+</html>
