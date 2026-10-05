@@ -21,3 +21,8 @@ local.properties
 .vscode/
 .DS_Store
 *~
+
+# Datasets và artefact huấn luyện tải lại được (hướng dẫn trong research/fall_model/README.md)
+research/fall_dataset_sisfall/
+research/fall_baseline/
+research/fall_model/windows_cache.npz

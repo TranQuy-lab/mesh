@@ -16,8 +16,9 @@ con đường đó. **0 ₫ phần cứng.**
 > ESP-NOW bị phản biện (nhiễu thiên tai; mạch ngoài không hợp lý cho vùng cô lập) →
 > hạ xuống tuỳ chọn; (3) chốt cuối: **mạng điện thoại thuần BLE, SOS đi theo người**.
 > **Kế hoạch hiện hành:** [ke-hoach-rescue-sos-phone-2026-10-05.md](ke-hoach-rescue-sos-phone-2026-10-05.md).
-> H7 (phát hiện chìm bằng barometer + IMU) là lớp bổ trợ có điều kiện — chỉ trên máy
-> có barometer, qua cổng G-H7 thì mới được tuyên bố.
+> H7 (phát hiện chìm bằng barometer + IMU) **đã vào đề tài ở mức demo** trên máy có
+> barometer (Pixel 6 — có, GSMArena 2026-10-05); hằng số vẫn `TK` chờ thí nghiệm bồn
+> nước: [nghien-cuu-h7-2026-10-05.md](nghien-cuu-h7-2026-10-05.md).
 
 ## Đọc theo thứ tự
 
@@ -38,6 +39,8 @@ con đường đó. **0 ₫ phần cứng.**
 | 11 | [nghien-cuu-phap-ly-vn-2026-10-01.md](nghien-cuu-phap-ly-vn-2026-10-01.md) | Phụ lục pháp lý VN: hai băng có điều kiện giống hệt, không QCVN cho 433, Luật Viễn thông 19.5, **Thông tư 14/2025/TT-BKHCN**, số liệu bão lũ đã mở toàn văn |
 | 12 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
 | 13 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
+| 14 | [nghien-cuu-h7-2026-10-05.md](nghien-cuu-h7-2026-10-05.md) | **H7 chìm/bị cuốn — đã vào đề tài:** nguyên lý ~0,981 hPa/cm nước, detector + 8/8 test, máy tham chiếu Pixel 6 (barometer xác minh), quy trình thí nghiệm bồn nước |
+| 15 | [ket-qua-chuoi-rescue-sos-phone-2026-10-05.md](ket-qua-chuoi-rescue-sos-phone-2026-10-05.md) | **Kết quả chuỗi đầu-cuối:** trạng thái từng khâu ①–⑤ (app + mesh + cổng ra + server + bản đồ/la bàn), RQ1 LOSO, H7, các việc `CẦN TAY NGƯỜI` |
 
 ### Tài liệu lịch sử
 
@@ -69,8 +72,8 @@ xác minh giai đoạn BLE, và `ccsds.html` — **khôi phục được qua l�
 | [rescuemesh/sim_v2.py](rescuemesh/sim_v2.py) · [run_wp3_matrix.py](rescuemesh/run_wp3_matrix.py) · [run_h3_experiment.py](rescuemesh/run_h3_experiment.py) · [run_r2a_beacon_sweep.py](rescuemesh/run_r2a_beacon_sweep.py) | Simulator và thí nghiệm BLE — **lịch sử**; kết quả `SIM` cũ **không được trích** cho hướng LoRa | — |
 | [rescuemesh/generate_g0_schedule.py](rescuemesh/generate_g0_schedule.py) | Sinh lịch factorial có block và random hoá (tái dùng cho sàng lọc G0-S mới) | 4/4 test xanh |
 | [results/](results/) | Kết quả `SIM`/`ĐO` kèm seed; mọi bảng mô phỏng phải có nhãn `evidence=SIM` | — |
-| [android-g0/](android-g0/) | APK Android — **được kế thừa**: đọc IMU 20 Hz, foreground service, UI (đã chạy trên Pixel 6 Pro và Redmi). Phần BLE advertising/scanning trong vai trò *mạng* là lịch sử; app nay gửi SOS sang nút cầu qua link cá nhân | 4/4 test codec |
-| [station/](station/) · [releases/](releases/) | Trạm thu BLE và APK phát hành — **lịch sử**; trạm sẽ được thay bằng cầu nối gateway LoRa | — |
+| [android-g0/](android-g0/) | **App node SOS đầy đủ (kế hoạch hiện hành):** phát hiện ngã T1 (rơi tự do → va đập → bất động) + H7 barometer → SOS tự động có đếm ngược 30 s; GNSS thật ghi toạ độ vào khung; BLE quét + quảng bá nhiều khung, hàng đợi bền qua restart; cổng ra HTTP + SMS; la bàn chỉ hướng tới SOS đã nhận | 4/4 codec + 6/6 detector self-test; APK build đạt |
+| [station/](station/) · [releases/](releases/) | Trạm/server khâu ④⑤: `server.py` — nhận SOS qua HTTP (app đẩy) + nghe BLE trực tiếp, `/map` bản đồ Leaflet + la bàn cho đội cứu hộ; APK phát hành | `ĐO`: POST/GET/map đã kiểm curl |
 | [assets/rescuemesh-ai-icon.png](assets/rescuemesh-ai-icon.png) | Biểu tượng nhận diện của dự án | — |
 
 Chạy kiểm thử (không cần thư viện ngoài):

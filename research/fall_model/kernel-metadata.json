@@ -1,0 +1,15 @@
+{
+  "id": "THE-USERNAME/fall-detect-loso-far",
+  "title": "Fall detection LOSO + FAR budget (RescueSOS RQ1)",
+  "code_file": "fall-detect-loso-far.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": ["THE-USERNAME/sisfall-mirror"],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

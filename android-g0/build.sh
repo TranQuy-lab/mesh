@@ -19,12 +19,11 @@ mkdir -p "$build_dir/classes" "$build_dir/dex"
   --min-sdk-version 26 \
   --target-sdk-version 36
 
+mapfile -t java_files < <(find "$project_dir/src" -name "*.java" | sort)
 javac -source 11 -target 11 \
   -cp "$android_jar" \
   -d "$build_dir/classes" \
-  "$project_dir/src/org/rescuemesh/g0/MainActivity.java" \
-  "$project_dir/src/org/rescuemesh/g0/SosCodec.java" \
-  "$project_dir/src/org/rescuemesh/g0/ProbeService.java"
+  "${java_files[@]}"
 
 jar --create --file "$build_dir/classes.jar" -C "$build_dir/classes" .
 "$tools_dir/d8" --lib "$android_jar" --min-api 26 \

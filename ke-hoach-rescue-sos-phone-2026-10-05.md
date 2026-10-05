@@ -29,6 +29,12 @@ lọc §3 cho thấy: **thuật toán định tuyến DTN đã có chuẩn học
 có app chạy thật** → công việc của đề tài là **chọn, hiệu chỉnh cho bối cảnh VN,
 đo thật và ghép chuỗi đầu-cuối** — không phát minh lại định tuyến.
 
+**Chỉnh 2026-10-05 (v2) — chế độ chứng minh khả thi:** đề tài định vị là **dự án
+nhỏ chứng minh làm được, không phải công bố**. Các mốc vẫn ghi nhãn bằng chứng
+(`TK/SIM/SUY/ĐO`) nhưng mức nghiệm thu là **"thấy hiệu quả được"** (demo thật trên
+một máy tham chiếu — ví dụ H7 trên Pixel 6). Khung LOSO/FAR giữ làm đích đến; khi
+muốn nâng cấp thành công bố thì siết lại mốc, không phải làm lại.
+
 ---
 
 ## 1. Chuỗi đầu-cuối (kiến trúc chốt)
@@ -54,6 +60,9 @@ Vai trò từng khâu (mỗi câu một dòng, để giữ đơn giản):
 - **④ Server:** bảng dữ liệu + bản đồ web (gói miễn phí Firebase/Supabase, `SUY`
   về dung lượng đủ demo — kiểm khi dựng).
 - **⑤ Người nhận:** Ban chỉ huy PCTT xã/huyện, 114/115, đội cứu hộ — mở trình duyệt.
+  Hai chế độ xem cùng một nguồn toạ độ trong khung SOS: **bản đồ** (tổng thể nhiều
+  SOS) và **la bàn** (mũi tên + khoảng cách tới một SOS, cho cứu hộ đi bộ — chỉ là
+  phép tính giữa hai toạ độ, không định hướng bằng sóng).
 - **Chiều ngược:** nguồn cảnh báo miễn phí có sẵn — **Google FloodHub (API miễn phí,
   dự báo 7 ngày, phủ cả Mekong — xác minh 2026-10-05)** — server gom → tràn BLE về.
 
@@ -97,6 +106,12 @@ Vai trò từng khâu (mỗi câu một dòng, để giữ đơn giản):
   G-H7 thì bỏ khỏi đề tài, không ảnh hưởng phần chính. Đối thủ cạnh: bài báo "người
   trôi trong lũ qua điện thoại" **không tồn tại** (đã tra OpenAlex 4 nhánh — khoảng
   trống thật, nhưng cũng nghĩa là phải tự xây toàn bộ).
+  **Chỉnh 2026-10-05 (người thực hiện):** H7 **đưa vào làm cảm biến luôn** — mốc
+  kiểm chứng là demo trên **Pixel 6** (có barometer — GSMArena, mở trang spec,
+  xác minh 2026-10-05; cả Pixel 6 thường lẫn 6 Pro đều có). Bộ phát hiện tham chiếu
+  + 8 unit test đạt tại `research/h7/` (tài liệu + quy trình bồn nước:
+  [nghien-cuu-h7-2026-10-05.md](nghien-cuu-h7-2026-10-05.md)); hằng số vẫn nhãn
+  `TK` cho tới khi `ĐO` trong bồn.
 
 **Bài học từ kế hoạch cũ áp nguyên trạng:** mỗi khẳng định phải có nhãn
 `DS/SIM/SUY/ĐO/GIẢ ĐỊNH`; so sánh phải ghép cặp theo seed; phát hiện phải báo cáo
@@ -144,6 +159,16 @@ trên ngã thật, §1 kế hoạch dữ liệu ngã); (ii) MobiAct dùng điệ
 giá LOSO + ngân sách FAR ⇒ phải chấm lại mới được nêu. Mọi "99%" trong README
 các repo **cấm trích**.
 
+**Dataset + đường ống huấn luyện RQ1 (bổ sung 2026-10-05):** site SisFall gốc đã chết
+(HTTP 000) ⇒ dùng **mirror GitHub đầy đủ cấu trúc** `Fall-Prevention-Team/sisfallData`
+(SA01–SA23 + SE01–SE15, 4.506/4.510 file — đã clone 931 MB). Hệ số cảm biến **kiểm
+thực nghiệm trên chính dữ liệu**: ADXL345 **256 LSB/g** (trọng lực ≈1,03 g; đỉnh ngã
+F04 ≈4–7 g, khớp y văn), ITG3200 14,375 LSB/(°/s). Kernel huấn luyện LOSO + FAR
+budget viết sẵn tại `research/fall_model/` (GRU nhỏ @ 20 Hz, cửa sổ 2 s, ngưỡng đóng
+băng trên tập train, recall tại ≤1 và ≤9 FA/ngày; smoke test local 2 người đã chạy
+thông). Code mẫu đối chiếu: `naomikgrant/SisFall_DL`, `kajal1106/...` (MobiAct) — cả
+hai đều chia tập theo cửa sổ ⇒ chỉ tham khảo kiến trúc, cấm tái dùng số của họ.
+
 **Và đây là khoảng trống đề tài nhắm (kiểm lại bằng sổ tìm kiếm trước khi viết):**
 1. Chưa có đánh giá công bố của chuỗi **SOS tự động do cảm biến** trên **BLE điện
    thoại thường** ở **Việt Nam** (Bảng 1.1 + sổ cũ).
@@ -167,6 +192,12 @@ các repo **cấm trích**.
    tin giả SOS, spam vị trí; luật: dữ liệu vị trí cá nhân (§7).
 5. **Chính sách pin nền:** foreground service + chế độ tiết kiệm theo % pin; hành
    vi từng hãng (RQ5) là biến nghiên cứu, không phải giả định.
+6. **"Phương hướng" không cần radar:** BLE điện thoại thường không đo được hướng
+   sóng (AoA cần mảng ăng-ten — máy thường không có; RSSI chỉ ra khoảng cách xấp xỉ,
+   nhãn `SUY` cho tới khi D1 đo). Chỉ hướng cho cứu hộ tính từ toạ độ đã có trong
+   khung: bearing + khoảng cách giữa máy cứu hộ và máy nạn nhân ⇒ la bàn/mũi tên,
+   0 phần cứng, 0 thiết lập thêm so với bản đồ. Trong nhà mất GNSS: hiển thị toạ độ
+   cuối + thời gian (trường `gps_fix` có sẵn).
 
 ---
 
@@ -198,14 +229,14 @@ Kết quả drill dùng **hiệu chuẩn simulator** (G2-S) rồi mới chạy m
 
 ---
 
-## 6. AI — chỉ vào sau khi chuỗi đạt (đúng yêu cầu "trước khi qua bước AI")
+## 6. AI — RQ1/A3 chạy song song từ đầu (chỉnh 2026-10-05); A1/A2 vẫn chỉ vào sau khi chuỗi đạt
 
 | # | AI | Điều kiện vào | Đối thủ bắt buộc |
 |---|---|---|---|
 | **A1** | **Triage SOS:** gom trùng theo vị trí/thời gian, xếp ưu tiên (số máy cùng khu = độ tin cậy), phát hiện bất thường (SOS dồn ảo) | Chuỗi đạt G3-S | So với không-gom và so với ngưỡng cứng; nhãn `SIM`→`ĐO` |
 | **A2** | **Chọn người mang tin học theo lịch người dùng** (ai hay đi chợ giờ nào) → tin ưu tiên chờ ở máy đó | Drill D3 có dữ liệu | So với PRoPHET/Spray&Wait trên cùng trace — không có so sánh thì không được nêu (quy tắc báo cáo hiện hành) |
-| **A3** | Phần IMU (RQ1) là AI có sẵn của đề tài — giữ nguyên lộ trình T1→T3 | — | LOSO + FAR budget |
-| **A4** | **H7 — phân lớp "chìm/bị cuốn"** (barometer + IMU), chạy trên máy có barometer | Cổng G-H7: thí nghiệm bồn/bể máy buộc dây phản ánh đúng độ sâu | So với chữ ký IMU-churn đơn thuần; FAR budget như RQ1 |
+| **A3** | Phần IMU (RQ1) — **chỉnh 2026-10-05: chạy song song ngay từ đầu** bằng kernel Kaggle (`research/fall_model/`, huấn luyện trên SisFall mirror); weights MobiAct của kajal1106 (MIT) chỉ dùng đối chiếu khởi động | Kernel LOSO chạy xong trên Kaggle | LOSO + FAR budget (≤1 FA/ngày — KPI §8) |
+| **A4** | **H7 — phân lớp "chìm/bị cuốn"** (barometer + IMU), chạy trên máy có barometer — **đã vào đề tài** (chỉnh 2026-10-05), tham chiếu `research/h7/` | Demo bồn nước trên Pixel 6: barometer phản ánh đúng độ sâu + detector đúng chữ ký | So với chữ ký IMU-churn đơn thuần; FAR budget như RQ1 |
 
 Định vị trung thực: A1 đã có preprint (§3) — khác biệt của ta là **SOS tự động +
 đo thực địa VN + đánh giá đầu-cuối**, và mọi đối thủ phải chạy lại trên **dữ liệu
@@ -267,7 +298,7 @@ của ta**.
 | **WP0** | Đọc mã bitchat-android + The ONE; dựng pipeline The ONE với map xóm OSM | **G0-S:** simulator chạy, 5 thuật toán xuất bảng | Học thêm 1 tuần, thử lại |
 | **WP1** | App: fork transport, cài SOS-frame + foreground service + hàng đợi cổng ra | **G1-S:** 2 máy bấm SOS → nhận nhau thật | Dùng thư viện Nordic, tái thử |
 | **WP2** | Drill D1+D2+D4 (tầm hop, truyền, pin nền) | **G2-S:** có số `ĐO` đầu tiên + hiệu chuẩn sim | Thu hẹp phạm vi (nói rõ) |
-| **WP2b** *(tuỳ chọn)* | Thí nghiệm bồn/bể H7: máy buộc dây, log áp suất + IMU, đo qua túi chống nước | **G-H7:** barometer phản ánh đúng độ sâu + FAR đạt ngân sách | **Bỏ H7/A4 khỏi đề tài** — phần chính không phụ thuộc |
+| **WP2b** | Thí nghiệm bồn/tub H7 trên **Pixel 6** (có barometer): máy bọc túi chống nước buộc dây, log áp suất + IMU, hạ 10→50 cm | **G-H7 (mức demo):** barometer phản ánh đúng độ sâu (≈0,981 hPa/cm) + detector đúng chữ ký trong nước | Giữ nhãn `SUY`, thu hẹp tuyên bố H7 — không bỏ khỏi đề tài (chỉnh 2026-10-05) |
 | **WP3** | Drill D3+D5+D6 (người mang tin, cổng ra, tràn ngược) + RQ1 T1–T3 | **G3-S:** chuỗi đầu-cuối chạy trên ≥ 6 máy | Giữ báo cáo ở mức mô phỏng |
 | **WP4** | Ma trận mô phỏng lớn + hiệu chuẩn bằng drill | **G4-S:** bảng RQ2/RQ3 hoàn chỉnh, nhãn đúng | — |
 | **WP5** | **AI (A1, A2)** — chỉ vào đây | G5-S: có đối thủ trên cùng dữ liệu | Bỏ A2, giữ A1 đơn giản |
@@ -275,6 +306,11 @@ của ta**.
 
 **Chi phí:** 0 ₫ phần cứng. Tốn duy nhất thời gian + (tuỳ chọn) VPS/server khi cần
 chạy thật liên tục.
+
+**Chỉnh 2026-10-05:** RQ1 (A3) không chờ WP5 — kernel huấn luyện đã sẵn sàng tại
+`research/fall_model/`, chỉ thiếu token Kaggle để `kaggle kernels push` (hướng dẫn
+3 bước trong README của thư mục); kết quả LOSO+FAR báo cáo riêng, không chặn cổng
+chuỗi. H7 kiểm chứng demo trên Pixel 6 theo [nghien-cuu-h7-2026-10-05.md](nghien-cuu-h7-2026-10-05.md).
 
 ---
 
@@ -299,6 +335,13 @@ qua raw (7 repo mesh/DTN + 3 repo phát hiện ngã; qaul không tìm thấy đ�
 
 **CRAWDAD (`crawdad.org`) HTTP 000 — không mở được** ⇒ trace Haggle/Cambridge chỉ
 nêu là "chuẩn ngành", không trích link tới khi mở được.
+
+**Bổ sung 2026-10-05 (phiên thực thi):** mirror SisFall `Fall-Prevention-Team/sisfallData`
+(GitHub — clone đủ SA/SE, dùng được ngay vì site gốc chết) · code mẫu
+`naomikgrant/SisFall_DL` + `kajal1106/...` (chia tập theo cửa sổ — không tái dùng đánh
+giá) · GSMArena Pixel 6 (HTTP 200, mở trang spec): **có barometer** — máy tham chiếu H7 ·
+hệ số ADXL345 SisFall kiểm thực nghiệm: **256 LSB/g** (trọng lực ≈1,03 g; đỉnh ngã
+F04 ≈4–7 g) · Kaggle: **chưa có token** tại thời điểm này — kernel đã đóng gói chờ push.
 
 **Số liệu CẤM dùng:**
 
