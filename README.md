@@ -1,31 +1,31 @@
-# AIforlife — RescueMesh-LoRa
+# AIforlife — RescueSOS-Phone
 
 ![Biểu tượng RescueMesh-AI](assets/rescuemesh-ai-icon.png)
 
-Bộ tài liệu và mã tái lập cho đề tài **RescueMesh-LoRa**: mạng **mesh LoRa một
-loại sóng duy nhất** ở băng 920–923 MHz cho vùng bão lũ mất sóng. **Điện thoại của
-người dân là đầu cuối** — tự phát hiện ngã/bất động rồi gửi SOS qua một **nút cầu
-LoRa nhỏ đeo kèm** (link cá nhân BLE 1–2 m), từ đó trở đi mạng thuần LoRa, chuyển
-tiếp có kiểm soát về trạm cứu hộ.
+Bộ tài liệu và mã tái lập cho đề tài **RescueSOS-Phone**: mạng SOS chạy **hoàn toàn
+trên điện thoại thường** cho vùng bão lũ mất sóng — IMU tự phát hiện ngã/bất động,
+tin SOS nhảy BLE từ điện thoại này sang điện thoại kia và **đi theo người di chuyển**
+(lưu–mang–tiếp) tới điện thoại đầu tiên bắt lại được sóng, tự đẩy lên server bản đồ
+(kèm SMS dự phòng) cho Ban chỉ huy PCTT/đội cứu hộ; cảnh báo chảy ngược lại qua đúng
+con đường đó. **0 ₫ phần cứng.**
 
-> ## ⚠️ Chuyển hướng 2026-10-01
+> ## ⚠️ Chuyển hướng 2026-10-05 (bản chốt D13)
 >
-> Bản **BLE** trước đây đã bị loại bỏ vì **tầm gửi gói quá ngắn** ở vai trò *mạng
-> chuyển tiếp*. Dự án nay dùng **một loại sóng duy nhất là LoRa cho mạng cứu hộ**;
-> **điện thoại vẫn là đầu cuối** vì ai cũng đã có sẵn (giải quyết bài toán cấp phát),
-> và nhồi chip LoRa vào điện thoại là việc không khả thi trong phạm vi đề tài.
->
-> Ba hệ quả: (i) mỗi người mang thêm một **nút cầu LoRa** nhỏ — chỉ MCU + chip LoRa
-> + pin, vì GNSS/IMU/màn hình đã có trong điện thoại; (ii) **BLE chỉ còn là link cá
-> nhân 1–2 m** giữa điện thoại và nút cầu của chính nó, không tham gia chuyển tiếp,
-> nên lý do "tầm ngắn" không còn áp dụng; (iii) tài nguyên khan hiếm của mạng đổi từ
-> **byte** sang **airtime** trên một kênh dùng chung.
+> Ba vòng chốt trong cùng ngày: (1) không đủ kinh phí LoRa → hạ LoRa thành hướng dài
+> hạn, đóng băng ở cổng G6, mọi kết quả giữ nguyên giá trị; (2) cảm biến CSI và chuỗi
+> ESP-NOW bị phản biện (nhiễu thiên tai; mạch ngoài không hợp lý cho vùng cô lập) →
+> hạ xuống tuỳ chọn; (3) chốt cuối: **mạng điện thoại thuần BLE, SOS đi theo người**.
+> **Kế hoạch hiện hành:** [ke-hoach-rescue-sos-phone-2026-10-05.md](ke-hoach-rescue-sos-phone-2026-10-05.md).
+> H7 (phát hiện chìm bằng barometer + IMU) là lớp bổ trợ có điều kiện — chỉ trên máy
+> có barometer, qua cổng G-H7 thì mới được tuyên bố.
 
 ## Đọc theo thứ tự
 
 | # | Tệp | Nội dung |
 |---|---|---|
-| 1 | [ke-hoach-nghien-cuu-rescuemesh-lora.md](ke-hoach-nghien-cuu-rescuemesh-lora.md) | **Kế hoạch hiện hành:** chuyển hướng, RQ1–RQ5, giả thuyết H1–H5 có đối thủ, kinh tế airtime, đặc tả khung, WP6–WP12, cổng G6–G11, lộ trình 14 tuần, BOM, pháp lý tần số |
+| 0 | [ke-hoach-rescue-sos-phone-2026-10-05.md](ke-hoach-rescue-sos-phone-2026-10-05.md) | **⚠️ ĐỌC ĐẦU TIÊN — Kế hoạch hiện hành (chốt 2026-10-05):** RescueSOS-Phone — **SOS đi theo người trên mạng điện thoại thuần BLE, 0 ₫ phần cứng**: IMU phát hiện ngã → tin nhảy BLE theo người đi lại (lưu–mang–tiếp) → điện thoại đầu tiên có sóng đẩy lên server bản đồ + SMS → Ban chỉ huy xem web → cảnh báo tràn ngược. Sàng lọc ưu tiên thuật toán/mã có sẵn (bitchat, The ONE, Briar, Reticulum, Nordic); AI chỉ vào sau khi chuỗi đạt cổng; KPI hiệu quả cuối đặt trước ở §8 |
+| 0b | [nghien-cuu-chuyen-huong-wifi-ve-tinh-2026-10-05.md](nghien-cuu-chuyen-huong-wifi-ve-tinh-2026-10-05.md) | Nhật ký chuyển hướng (bản 2): vì sao bỏ LoRa/CSI/ESP-NOW làm đường chuẩn, bằng chứng đã xác minh — nguồn của kế hoạch hiện hành |
+| 1 | [ke-hoach-nghien-cuu-rescuemesh-lora.md](ke-hoach-nghien-cuu-rescuemesh-lora.md) | **Kế hoạch LoRa — ĐÓNG BĂNG ở cổng G6 (hướng dài hạn khi có kinh phí):** RQ1–RQ5, giả thuyết H1–H5 có đối thủ, kinh tế airtime, đặc tả khung, WP6–WP12, cổng G6–G11, BOM, pháp lý tần số. Kế hoạch hiện hành kế thừa nguyên trạng RQ1/T1–T3 và §10.1 (kho dữ liệu ngã) từ đây |
 | 2 | [thiet-ke-he-thong-lora-v2.md](thiet-ke-he-thong-lora-v2.md) | **Thiết kế v2.0:** kiến trúc bốn vai trò, máy trạng thái nút, ba chính sách ngủ/nghe, đặc tả khung byte-by-byte, định tuyến một kênh, an ninh, bảng tham số có nhãn nguồn gốc |
 | 3 | [cau-truc-de-tai-rescuemesh-lora.md](cau-truc-de-tai-rescuemesh-lora.md) | **Cấu trúc đề tài:** tên đề tài, sơ đồ trụ cột, chương mục chi tiết, danh mục bảng/hình, bản đồ RQ → bằng chứng → cổng, kế hoạch viết |
 | 4 | [xac-minh-nguon-lora-va-quyet-dinh-song.md](xac-minh-nguon-lora-va-quyet-dinh-song.md) | **Nhật ký quyết định & sổ nguồn đã xác minh:** vì sao bỏ BLE, vì sao chọn LoRa, vì sao loại WiFi mesh / WiFi HaLow / vệ tinh, kèm DOI đã đối chiếu và danh sách số liệu **bị cấm dùng** |
@@ -39,15 +39,16 @@ tiếp có kiểm soát về trạm cứu hộ.
 | 12 | [xac-minh-nguon-va-tai-lieu-tham-khao.md](xac-minh-nguon-va-tai-lieu-tham-khao.md) | Sổ xác minh nguồn của giai đoạn BLE (còn hiệu lực về **phương pháp** xác minh) |
 | 13 | [research_tools/README.md](research_tools/README.md) | Bộ công cụ tra cứu tái sử dụng (OpenAlex, Crossref, xác minh DOI) — kèm ghi chú rằng `web_search` của phiên bị lỗi 401 và cách đi vòng |
 
-### Tài liệu lịch sử (hướng BLE đã loại)
+### Tài liệu lịch sử
+
+Ngày 2026-10-05 đã **loại khỏi working tree** các tài liệu thời BLE bị thay thế hoàn
+toàn: kế hoạch BLE, cấu trúc đề tài BLE, lịch sàng lọc G0, bản đồ nguồn học tập, sổ
+xác minh giai đoạn BLE, và `ccsds.html` — **khôi phục được qua lịch sử git**. Còn giữ:
 
 | Tệp | Vì sao còn giữ |
 |---|---|
-| [ke-hoach-nghien-cuu-rescuemesh-ai.md](ke-hoach-nghien-cuu-rescuemesh-ai.md) | Nguồn gốc các quyết định phương pháp luận, thang bằng chứng, thiết kế phát hiện ngã |
-| [thiet-ke-he-thong-chi-tiet.md](thiet-ke-he-thong-chi-tiet.md) | Thiết kế T1→T2→T3 và ngân sách khoá được kế thừa |
-| [cau-truc-de-tai-rescuemesh-ai.md](cau-truc-de-tai-rescuemesh-ai.md) | Cách đặt tên đề tài và bản đồ RQ → chương |
-| [ket-qua-ra-soat-va-nghien-cuu-ban-dau.md](ket-qua-ra-soat-va-nghien-cuu-ban-dau.md) · [nghien-cuu-ble-mesh-va-ke-hoach-g0.md](nghien-cuu-ble-mesh-va-ke-hoach-g0.md) | Kết quả `ĐO` trên Pixel 6 Pro và lịch sàng lọc G0 |
-| [nguon-hoc-tap-va-tai-su-dung.md](nguon-hoc-tap-va-tai-su-dung.md) | Bản đồ nguồn để dùng và 10 quy tắc tối ưu |
+| [thiet-ke-he-thong-chi-tiet.md](thiet-ke-he-thong-chi-tiet.md) | Thiết kế T1→T2→T3 và ngân sách khoá được kế thừa ở WP1 |
+| [ket-qua-ra-soat-va-nghien-cuu-ban-dau.md](ket-qua-ra-soat-va-nghien-cuu-ban-dau.md) | Kết quả `ĐO` BLE thật trên Pixel 6 Pro và Redmi — bằng chứng nền cho hướng điện thoại |
 
 ## Mã nguồn
 
@@ -158,7 +159,7 @@ python3 analyze_sim_lora.py     # ghép cặp + Pareto + theo ô
 
 ## Chạy bản trình diễn
 
-Bản trình diễn BLE (hai điện thoại + laptop) thuộc hướng **lịch sử**; xem
-[android-g0/README.md](android-g0/README.md) và [station/README.md](station/README.md)
-nếu cần tái hiện kết quả `ĐO` cũ. Bản trình diễn LoRa sẽ được bổ sung ở WP10–WP11
-sau khi có phần cứng và sau khi qua cổng hiệu chuẩn G9.
+Trình diễn BLE (hai điện thoại + laptop) **trở lại là lõi của WP1–WP2** trong kế
+hoạch hiện hành; nền tảng đã có ở [android-g0/README.md](android-g0/README.md) và
+[station/README.md](station/README.md) (kết quả `ĐO` cũ tái hiện được). Phần trình
+diễn LoRa thuộc hướng đóng băng — chỉ khởi động lại khi có kinh phí và qua cổng G9.
