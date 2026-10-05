@@ -26,3 +26,8 @@ local.properties
 research/fall_dataset_sisfall/
 research/fall_baseline/
 research/fall_model/windows_cache.npz
+
+# Expo console build artefacts
+console/node_modules/
+console/android/
+console/.expo/
