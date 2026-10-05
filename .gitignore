@@ -31,3 +31,6 @@ research/fall_model/windows_cache.npz
 console/node_modules/
 console/android/
 console/.expo/
+
+# APK Console quá lớn cho git (142 MB > 100 MB GitHub) — build lại bằng gradlew
+releases/rescuemesh-console.apk

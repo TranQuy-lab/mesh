@@ -48,6 +48,32 @@ Mỗi khâu, trạng thái kiểm chứng:
   hộ) — bật Location trên máy là khung SOS tự mang toạ độ thật (giây kế tiếp).
 - Chưa kiểm trên máy này: relay đa hop (cần máy thứ hai) và bồn nước H7.
 
+### 1c. App Console phía cứu hộ — Expo SDK 57 (2026-10-05 chiều)
+
+`ĐO` — bằng chứng: `results/console-{map,sos,compass}-tab-2026-10-05.png` (chụp
+trực tiếp màn Pixel 6 Pro).
+
+- **Kiến trúc hai app:** node SOS = app native `android-g0/` (BLE nền bền —
+  RN/Expo không làm tốt BLE advertising nền); Console = app Expo **chỉ đọc**
+  `/api/sos` (5 s/lượt). Cài cùng một máy hoặc hai máy đều được.
+- Console: 4 tab — **Bản đồ** (MapLibre + tile OSM, không cần Google API key;
+  ghim màu theo loại: đỏ=ngã, tím=chìm, cam=tay; BottomSheet chi tiết @expo/ui),
+  **La bàn** (mũi tên theo bearing − hướng máy, khoảng cách lớn), **SOS** (danh
+  sách + khoảng cách/hướng), **Cấu hình** (URL server, AsyncStorage).
+- Chạy thật trên Pixel 6 Pro: JS release bundle, tab SOS hiện "Kết nối server •
+  1 SOS", thẻ "0x6bac5a8f — Bấm tay • pin 7/15 • GPS cấp 3 • **20 m • hướng ĐN**";
+  tab La bàn mũi tên quay đúng tương đối ("SOS 152° • máy đang 245°" → kim lệch
+  đúng góc), khoảng cách 14 m cập nhật live từ GPS + la bàn của máy.
+- **Bốn lỗi thật bắt được nhờ chạy máy thật (đã sửa):** (1) React Navigation 7
+  crash `HeaderTitle` khi theme thiếu `fonts`; (2) splash không bao giờ tự ẩn —
+  `preventAutoHideAsync` mà thiếu `hideAsync` thì app chạy phía sau màn splash;
+  (3) cleartext HTTP chặn cả app Expo (thêm vào app.json + manifest); (4) node
+  native **nghe lại quảng bá BLE của chính mình** trên Pixel 6 Pro → tự nhân đôi
+  khung vào hàng đợi — thêm lọc `srcId == localSourceId`.
+- APK: `releases/rescuemesh-console.apk` (release, bundle nhúng, không cần Metro).
+- Nền bản đồ OSM cần Internet; khi máy mất mạng, ghim SOS + la bàn vẫn chạy
+  (toạ độ nằm trong dữ liệu app), tile nền chỉ trống — offline pack xếp sau drill.
+
 ## 2. RQ1 — mô hình phát hiện ngã (AI tầng T2)
 
 | Bước | Trạng thái |

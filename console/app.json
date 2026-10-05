@@ -18,7 +18,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "org.rescuemesh.console"
+      "package": "org.rescuemesh.console",
+      "usesCleartextTraffic": true
     },
     "web": {
       "output": "static",

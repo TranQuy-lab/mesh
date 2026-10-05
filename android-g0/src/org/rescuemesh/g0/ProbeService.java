@@ -213,6 +213,9 @@ public final class ProbeService extends Service implements SensorEventListener {
 
     private void onValidFrame(byte[] frame) {
         SosRecord rec = SosRecord.unpack(frame);
+        // Một số controller nhận lại quảng bá của chính mình — bỏ qua để không
+        // tự nhân đôi khung vào hàng đợi (bắt tại Pixel 6 Pro, 2026-10-05).
+        if (rec != null && rec.srcId == localSourceId) return;
         boolean isNew = queue.addReceived(frame, System.currentTimeMillis());
         if (!isNew) return;
         long now = System.currentTimeMillis();
