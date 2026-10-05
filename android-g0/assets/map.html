@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="leaflet/leaflet.css">
+<style>
+  html,body,#map{height:100%;margin:0;background:#0E1116}
+  #offline{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:1000;
+    background:#171C24E6;color:#93A1B3;font:12px system-ui;padding:4px 10px;border-radius:8px;
+    display:none}
+  .sos-pin{width:26px;height:26px;border-radius:13px;border:2px solid #fff;color:#fff;
+    font:800 13px system-ui;display:flex;align-items:center;justify-content:center}
+  .own-dot{width:14px;height:14px;border-radius:7px;background:#43A047;border:2px solid #fff}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="offline">Không có Internet — ghim SOS vẫn hiện, nền bản đồ trống</div>
+<script src="leaflet/leaflet.js"></script>
+<script>
+const map = L.map('map', {zoomControl: true, attributionControl: false}).setView([16.0, 107.0], 6);
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19});
+let tilesOk = false;
+tiles.on('tileload', () => { tilesOk = true; document.getElementById('offline').style.display = 'none'; });
+tiles.addTo(map);
+setTimeout(() => { if (!tilesOk) document.getElementById('offline').style.display = 'block'; }, 4000);
+
+const TRIGGER_COLOR = {1:'#FB8C00', 2:'#E53935', 3:'#AB47BC'};
+const TRIGGER_GLYPH = {1:'S', 2:'!', 3:'~'};
+let markers = {};   // key: source
+let ownMarker = null;
+
+function pinIcon(trigger) {
+  const t = TRIGGER_COLOR[trigger] || '#FB8C00';
+  const g = TRIGGER_GLYPH[trigger] || 'S';
+  return L.divIcon({className: '', html:
+    `<div class="sos-pin" style="background:${t}">${g}</div>`, iconSize:[26,26]});
+}
+
+// MainActivity gọi 2 s/lượt qua evaluateJavascript
+window.setOwn = function(lat, lon) {
+  if (lat == null || lon == null || (lat === 0 && lon === 0)) return;
+  if (!ownMarker) {
+    ownMarker = L.marker([lat, lon], {icon: L.divIcon({className:'', html:'<div class="own-dot"></div>', iconSize:[14,14]})}).addTo(map);
+    map.setView([lat, lon], 15);
+  } else ownMarker.setLatLng([lat, lon]);
+};
+
+window.setSos = function(list) {
+  const seen = {};
+  for (const s of (list || [])) {
+    if (s.latitude == null || s.longitude == null) continue;
+    const key = s.source;
+    seen[key] = true;
+    const label = `${s.source}<br>${s.trigger_name || ''} • hop ${s.hop ?? '?'} • pin ${s.battery ?? '?'}`;
+    if (!markers[key]) {
+      markers[key] = L.marker([s.latitude, s.longitude], {icon: pinIcon(s.trigger)}).addTo(map)
+        .bindPopup(label);
+    } else {
+      markers[key].setLatLng([s.latitude, s.longitude]).setPopupContent(label);
+    }
+  }
+  for (const k of Object.keys(markers)) {
+    if (!seen[k]) { map.removeLayer(markers[k]); delete markers[k]; }
+  }
+};
+
+window.focusSos = function(lat, lon) { map.setView([lat, lon], 16); };
+</script>
+</body>
+</html>

@@ -74,6 +74,27 @@ trực tiếp màn Pixel 6 Pro).
 - Nền bản đồ OSM cần Internet; khi máy mất mạng, ghim SOS + la bàn vẫn chạy
   (toạ độ nằm trong dữ liệu app), tile nền chỉ trống — offline pack xếp sau drill.
 
+### 1d. GỘP MỘT APP (2026-10-05, theo yêu cầu người thực hiện)
+
+Quyết định: **một app duy nhất** — `android-g0/` giờ làm cả hai vai trò, không cần
+cài hai app. Kiến trúc gộp giữ nguyên ưu thế của từng mảnh:
+
+| Vai trò | Nơi làm | Ghi chú |
+|---|---|---|
+| Node SOS (BLE + cảm biến + cổng ra) | `ProbeService` — **nguyên vẹn** | native, nền bền, tiết kiệm pin |
+| Bản đồ trong app | `MainActivity` tab "Bản đồ" — **WebView + Leaflet đóng gói trong APK** (`assets/map.html` + `assets/leaflet/`) | 0 dependency Maven; tile OSM cần Internet, ghim SOS vẫn hiện khi mất mạng (banner trung thực) |
+| Dữ liệu bản đồ | `ProbeService.serverPoller` — GET `/api/sos` mỗi 5 s vào `UI.remote`, **gộp** với SOS nghe BLE (`UI.recent`) | cùng URL cấu hình với cổng ra |
+| La bàn + danh sách | tab "La bàn": mũi tên quay theo bearing − hướng máy, chạm danh sách đổi SOS đang theo | dùng sensor la bàn của máy |
+| Cấu hình | tab "Cấu hình": URL server (vừa là cổng ra vừa là nguồn bản đồ) + SMS | |
+
+Chạy thật trên Pixel 6 Pro: process sống, tab Bản đồ render (zoom + banner
+"Không có Internet — ghim SOS vẫn hiện, nền bản đồ trống"), server có 4 sự kiện.
+Lỗi thật bắt được khi gộp: `child already has a parent` (View add hai lần) — sửa.
+
+App Console Expo (`console/`) giữ lại như **phương án thay thế** phía cứu hộ
+(đã `ĐO` đầu-cuối cùng lúc đó); số liệu §1c vẫn đúng. APK node giờ ~2,1 MB
+(+162 KB Leaflet), vẫn gọn để phát cho người dân.
+
 ## 2. RQ1 — mô hình phát hiện ngã (AI tầng T2)
 
 | Bước | Trạng thái |

@@ -47,6 +47,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.nio.charset.StandardCharsets;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Node SOS đầy đủ (khâu ①+②+③): IMU phát hiện ngã (T1) + H7 barometer → SOS
@@ -84,6 +86,8 @@ public final class ProbeService extends Service implements SensorEventListener {
         public volatile long countdownEndMs;
         public volatile int pendingOut;
         public final List<SosRecord> recent = new ArrayList<>();
+        /** SOS lấy từ server (poll 5 s) — nguồn bản đồ/list, không dùng để relay. */
+        public final List<org.json.JSONObject> remote = new ArrayList<>();
     }
 
     public static final UiState UI = new UiState();
@@ -373,6 +377,7 @@ public final class ProbeService extends Service implements SensorEventListener {
         handler.post(ticker);
         handler.post(h7Ticker);
         worker.postDelayed(gatewayLoop, GATEWAY_PERIOD_MS);
+        worker.postDelayed(serverPoller, 2_000L);
         updateUiStatus();
     }
 
@@ -388,6 +393,47 @@ public final class ProbeService extends Service implements SensorEventListener {
                 log("gateway", "error=" + e.getClass().getSimpleName());
             } finally {
                 worker.postDelayed(this, GATEWAY_PERIOD_MS);
+            }
+        }
+    };
+
+    /** Nguồn dữ liệu bản đồ: GET /api/sos mỗi 5 s (cùng URL với cổng ra). */
+    private final Runnable serverPoller = new Runnable() {
+        @Override public void run() {
+            try {
+                SharedPreferences prefs = getSharedPreferences("rescuemesh", Context.MODE_PRIVATE);
+                String url = prefs.getString("server_url", "").trim();
+                if (url.isEmpty()) {
+                    synchronized (UI.remote) { UI.remote.clear(); }
+                    return;
+                }
+                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+                conn.setConnectTimeout(4_000);
+                conn.setReadTimeout(4_000);
+                int code = conn.getResponseCode();
+                if (code >= 200 && code < 300) {
+                    StringBuilder sb = new StringBuilder();
+                    try (java.io.BufferedReader r = new java.io.BufferedReader(
+                            new java.io.InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+                        String line;
+                        while ((line = r.readLine()) != null) sb.append(line);
+                    }
+                    org.json.JSONObject body = new org.json.JSONObject(sb.toString());
+                    org.json.JSONArray arr = body.optJSONArray("sos");
+                    List<org.json.JSONObject> fresh = new ArrayList<>();
+                    if (arr != null) {
+                        for (int i = 0; i < arr.length(); i++) fresh.add(arr.getJSONObject(i));
+                    }
+                    synchronized (UI.remote) {
+                        UI.remote.clear();
+                        UI.remote.addAll(fresh);
+                    }
+                }
+                conn.disconnect();
+            } catch (Exception ignored) {
+                // server tạm mất — giữ danh sách cũ, chu kỳ sau thử lại
+            } finally {
+                worker.postDelayed(this, 5_000L);
             }
         }
     };

@@ -15,6 +15,7 @@ mkdir -p "$build_dir/classes" "$build_dir/dex"
   -o "$build_dir/resources.apk" \
   -I "$android_jar" \
   -R "$build_dir/resources.flata" \
+  -A "$project_dir/assets" \
   --manifest "$project_dir/AndroidManifest.xml" \
   --min-sdk-version 26 \
   --target-sdk-version 36
