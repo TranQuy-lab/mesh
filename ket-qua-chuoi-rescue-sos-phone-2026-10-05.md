@@ -77,19 +77,51 @@ h3-ghost + r2a-beacon-sweep trong `results/`). Chạy lại bằng The ONE là v
 chéo, xếp sau drill D1–D3 (dữ liệu hiệu chuẩn trước, mô phỏng lớn sau — đúng thứ
 tự kế hoạch §5).
 
-## 5. Số LOSO thật — *nối vào khi chạy xong* (`ĐO`-trên-dataset)
+## 5. Số LOSO thật — `ĐO`-trên-dataset (2026-10-05, chạy local CPU ~2,5 giờ)
 
-> Chỗ trống có chủ đích: metrics_loso.json (recall@1fad, recall@9fad, fp/ngày đo
-> được, bảng 38 người) sẽ được chép vào đây kèm lệnh tái lập. **Không điền bằng
-> con số mô phỏng lại từ đầu.**
+**Kết quả LOSO 38 người (SisFall), ngưỡng đóng băng trên tập train, cửa sổ 2 s @ 20 Hz,
+6 kênh (acc ±16 g + gyro), GRU nhỏ:**
 
-Lệnh tái lập:
+| Chỉ số | Giá trị | Ghi chú |
+|---|---|---|
+| Recall @ ≤1 báo động giả/ngày | **mean 32,5 % · median 30,7 % · min 5,1 %** | n = 24 người có ngã |
+| Recall @ ≤9 báo động giả/ngày (mốc Kangas 2012) | **mean 42,3 % · median 43,9 % · min 14,3 %** | n = 24 |
+| FP/ngày đo được trên người test @ ≤1 FA/ngày | **median 0** · max 273 | đa số giữ đúng 0; một số fold vượt — xem validity threat |
+| Cửa sổ đánh giá | 38.504 (1.840 cửa sổ ngã) | 24/38 fold có ngã |
+| Model xuất | **TFLite 40 KB** (`fall_model/out_full/fall_model.tflite`) | cần `tensorflow-lite-select-tf-ops` trên Android (GRU) |
+
+**Vì sao n = 24 chứ không phải 38:** SisFall chỉ có 23 người trẻ (SA) + đúng 1 người
+cao tuổi thực hiện ngã (võ sư Judo **SE06**); SE01–SE05, SE07–SE15 chỉ làm ADL ⇒ các
+fold đó không có cửa sổ ngã để đo (`None` — không phải lỗi chạy).
+
+**Bốn điểm trung thực bắt buộc khi đọc số này:**
+
+1. **Không so sánh được với baseline 96–99 %** trong tài liệu: các số đó là chia tập
+   theo cửa sổ (rò rỉ người) + dán nhãn "cả file ngã = ngã". Nhiệm vụ ở đây khó hơn
+   có chủ đích: chỉ cửa sổ quanh va đập là NGÃ, phần đứng/ngồi trước ngã trong file
+   ngã tính là KHÔNG-NGÃ (không thổi phồng recall — đúng quy tắc §2 kế hoạch).
+2. **Validity threat đã đo thấy:** ngưỡng chọn trên train in-sample quá lạc quan ở
+   một số fold (max 273 FP/ngày thực đo so với ngân sách 1). Hướng sửa đã ghi:
+   chọn ngưỡng từ một "người val" xoay vòng trong tập train thay vì in-sample.
+3. **Kịch bản đánh giá là xấu nhất:** app thật không chấm 172.800 cửa sổ/ngày liên
+   tục — T1 chỉ chấm cửa sổ khi có đỉnh va đập (peak-gated), nên FAR thực tế trên
+   máy sẽ thấp hơn nhiều. Số bảng là trần trên bảo thủ.
+4. **Vai trò của T2 ở mức này:** T1 (3 chữ ký + bất động + đếm ngược 30 s) vẫn là
+   lớp phát hiện chính on-device; model 40 KB là lớp bổ trợ. Muốn T2 làm bộ phát
+   độc lập ở ≤1 FA/ngày thì phải qua các đòn nâng cấp: peak-gated evaluation đúng
+   cadence app, ngưỡng chọn theo người val, cửa sổ quanh va đập dày hơn (stride 0,5 s).
+
+Lệnh tái lập (một lệnh, đã chạy đúng thế này):
 
 ```bash
 cd research
 python3 fall_model/train_fall_loso.py --data fall_dataset_sisfall \
     --cache fall_model/windows_cache.npz --out fall_model/out_full
+python3 fall_model/export_tflite.py fall_model/out_full/model_last.h5 \
+    --out fall_model/out_full/fall_model.tflite
 ```
+
+Chi tiết 38 fold: `research/fall_model/out_full/per_subject.csv` + `metrics_loso.json`.
 
 ## 6. Còn lại để "đống đấy" hoàn chỉnh
 
