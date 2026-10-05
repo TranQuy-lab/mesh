@@ -9,10 +9,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
-/** Nhật ký sự kiện JSONL (drill RQ3/RQ4): t_ms, event, các trường kèm. */
+/** Nhật ký sự kiện JSONL (drill RQ3/RQ4): event + các trường kèm, mốc thời gian thật. */
 public final class EventLog {
     private final File file;
-    private final long bootMs = System.currentTimeMillis();
 
     public EventLog(Context context) {
         file = new File(context.getExternalFilesDir(null), "events.jsonl");
@@ -23,7 +22,7 @@ public final class EventLog {
                 new FileOutputStream(file, true), StandardCharsets.UTF_8)) {
             JSONObject o = fields == null ? new JSONObject() : fields;
             o.put("event", event);
-            o.put("wall_ms", bootMs);
+            o.put("wall_ms", System.currentTimeMillis());
             w.write(o.toString() + "\n");
         } catch (Exception ignored) {}
     }

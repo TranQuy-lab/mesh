@@ -22,6 +22,7 @@
     <application
         android:allowBackup="false"
         android:debuggable="true"
+        android:usesCleartextTraffic="true"
         android:label="RescueMesh"
         android:icon="@drawable/ic_rescuemesh_project"
         android:roundIcon="@drawable/ic_rescuemesh_project"

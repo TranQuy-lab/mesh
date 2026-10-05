@@ -29,6 +29,25 @@ Mỗi khâu, trạng thái kiểm chứng:
 | ④ | `station/server.py`: POST /api/sos, GET /api/sos, nghe BLE song song (Bleak) | **`ĐO`**: curl POST → 1 accepted; /api/sos gộp đúng; lưu JSONL |
 | ⑤ | `/map`: Leaflet + OSM, bảng SOS + khoảng cách + hướng 8 cung từ vị trí người mở web | **`ĐO`**: trang trả về; khoảng cách/hướng tính từ geolocation trình duyệt |
 
+### 1b. Chạy thật trên máy — Pixel 6 Pro, Android 16 (2026-10-05)
+
+`ĐO` — log đầy đủ: `results/g0-pixel6pro-full-node-log-2026-10-05.txt` (45 sự kiện).
+
+- Cài APK qua adb, cấp 7 quyền runtime tự động, node tự lên: `advertise_start ok=true`
+  (legacy, 24 B, +1 dBm) · `scan_start ok=true` (filtered) · gia tốc ~135 Hz ·
+  **barometer ICP10101 có thật → H7 kích hoạt** · codec self-test golden+verify đạt.
+- Bấm SOS trên màn → `sos_issued trigger=1 seq=2` → hàng đợi → gateway HTTP
+  (`adb reverse` về laptop) → **`gateway_sent via=http count=3`** → server `/api/sos`
+  hiện đúng nguồn `0x6bac5a8f`, gộp 3 khung, pin thật 7/15. UI hiển thị la bàn sống
+  (190° Nam) và hàng đợi về 0.
+- **Ba lỗi thật đã bắt và sửa nhờ chạy máy thật:** (1) Android 16 chặn HTTP cleartext
+  → thêm `usesCleartextTraffic` (demo; sản xuất phải HTTPS); (2) BT tắt lúc mở app
+  khiến node nằm im mãi → thêm tự giám sát 10 s bật lại probe; (3) `EventLog` ghi
+  sai mốc thời gian (giờ dựng service thay vì giờ sự kiện).
+- GPS chưa fix trong phòng: công tắc định vị máy đang tắt (adb không được phép bật
+  hộ) — bật Location trên máy là khung SOS tự mang toạ độ thật (giây kế tiếp).
+- Chưa kiểm trên máy này: relay đa hop (cần máy thứ hai) và bồn nước H7.
+
 ## 2. RQ1 — mô hình phát hiện ngã (AI tầng T2)
 
 | Bước | Trạng thái |

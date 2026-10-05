@@ -1,0 +1,46 @@
+--------- beginning of main
+10-05 11:09:28.862 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=100208,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.490
+10-05 11:09:38.862 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=110209,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.487
+10-05 11:09:48.863 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=120210,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.487
+10-05 11:09:58.864 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=130210,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.485
+10-05 11:10:08.865 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=140211,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.485
+10-05 11:10:18.866 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=150212,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.486
+10-05 11:10:28.867 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=160213,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.484
+10-05 11:10:38.868 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=170214,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.485
+10-05 11:10:48.868 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=180214,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.483
+10-05 11:10:58.869 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=190215,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.484
+10-05 11:11:08.870 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=200216,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.482
+10-05 11:11:18.871 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=210217,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.483
+10-05 11:11:28.872 22981 22981 I RescueMeshG0: event=tick,elapsed_ms=220218,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=2,sensor_hz=135.482
+10-05 11:11:34.389 23449 23449 I RescueMeshG0: event=codec_selftest,golden=true,verify=true
+10-05 11:11:34.398 23449 23449 I RescueMeshG0: event=capability,model=Google Pixel 6 Pro,sdk=36,adapter=true,enabled=true,multi_adv=true
+10-05 11:11:34.402 23449 23449 I RescueMeshG0: event=sensor_start,accelerometer_ok=true,period_us=50000
+10-05 11:11:34.404 23449 23449 I RescueMeshG0: event=sensor_start,barometer=ICP10101 Pressure Sensor
+10-05 11:11:34.409 23449 23449 I RescueMeshG0: event=gps,ok=true
+10-05 11:11:34.422 23449 23449 I RescueMeshG0: event=sos_issued,trigger=1,seq=1
+10-05 11:11:34.508 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=123,advertising=false,scanning=false,scan_callbacks=0,valid_frames=0,messages_issued=0,queue_unsent=3,sensor_hz=143.609
+10-05 11:11:34.512 23449 23449 I RescueMeshG0: event=advertise_start,ok=true,legacy=true,tx_dbm=1,connectable=false,payload_bytes=24,messages_issued=1
+10-05 11:11:35.631 23449 23449 I RescueMeshG0: event=scan_start,ok=true,mode=low_latency,filtered=true
+10-05 11:11:44.509 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=10124,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=3,sensor_hz=135.568
+10-05 11:11:54.510 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=20125,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=3,sensor_hz=135.508
+10-05 11:12:04.511 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=30126,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=3,sensor_hz=135.504
+10-05 11:12:14.513 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=40127,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=3,sensor_hz=135.491
+10-05 11:12:24.514 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=50129,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=3,sensor_hz=135.492
+10-05 11:12:34.515 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=60130,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.485
+10-05 11:12:44.516 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=70131,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.487
+10-05 11:12:54.516 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=80131,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.483
+10-05 11:13:04.516 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=90131,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.484
+10-05 11:13:14.517 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=100132,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.486
+10-05 11:13:24.519 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=110134,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.483
+10-05 11:13:34.519 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=120134,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.476
+10-05 11:13:44.521 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=130136,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.486
+10-05 11:13:54.522 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=140138,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.480
+10-05 11:14:04.523 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=150138,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.487
+10-05 11:14:14.525 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=160140,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.482
+10-05 11:14:24.528 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=170141,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.485
+10-05 11:14:34.531 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=180146,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.484
+10-05 11:14:44.532 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=190147,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.485
+10-05 11:14:54.537 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=200149,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.486
+10-05 11:15:04.540 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=210154,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.485
+10-05 11:15:14.542 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=220156,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.484
+10-05 11:15:24.544 23449 23449 I RescueMeshG0: event=tick,elapsed_ms=230158,advertising=true,scanning=true,scan_callbacks=0,valid_frames=0,messages_issued=1,queue_unsent=0,sensor_hz=135.485

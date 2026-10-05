@@ -401,24 +401,11 @@ public final class ProbeService extends Service implements SensorEventListener {
         handler.removeCallbacksAndMessages(null);
         if (worker != null) worker.removeCallbacksAndMessages(null);
         if (workerThread != null) workerThread.quitSafely();
-        if (advertiser != null && legacyAdvertising) {
-            try { advertiser.stopAdvertising(legacyAdvertiseCallback); } catch (Exception ignored) {}
-        } else if (advertiser != null && advertisingSet != null) {
-            try { advertiser.stopAdvertisingSet(advertiseCallback); } catch (Exception ignored) {}
-        }
-        if (scanner != null) {
-            try { scanner.stopScan(scanCallback); } catch (Exception ignored) {}
-        }
+        stopBluetoothProbe();
         if (locationManager != null) {
             try { locationManager.removeUpdates(locationListener); } catch (Exception ignored) {}
         }
         if (sensorManager != null) sensorManager.unregisterListener(this);
-        advertiser = null;
-        advertisingSet = null;
-        scanner = null;
-        advertisingStarted = false;
-        scanningStarted = false;
-        bluetoothProbeStarting = false;
         UI.running = false;
         UI.countdownEndMs = 0;
         countdownEndMs = 0;
@@ -636,9 +623,39 @@ public final class ProbeService extends Service implements SensorEventListener {
                     + ",queue_unsent=" + queue.unsentCount()
                     + ",sensor_hz=" + String.format(Locale.US, "%.3f", sensorHz));
             updateUiStatus();
+            // Tự giám sát Bluetooth: node cứu hộ không được nằm im khi BT bật/tắt
+            BluetoothManager manager = getSystemService(BluetoothManager.class);
+            BluetoothAdapter adapter = manager == null ? null : manager.getAdapter();
+            boolean up = adapter != null && adapter.isEnabled();
+            boolean probeRunning = advertiser != null || scanner != null;
+            if (up && !probeRunning && !bluetoothProbeStarting) {
+                log("bluetooth", "auto_restart=true");
+                startBluetoothProbe();
+            } else if (!up && probeRunning) {
+                log("bluetooth", "adapter_lost,stopping_probe");
+                stopBluetoothProbe();
+            }
             handler.postDelayed(this, 10_000L);
         }
     };
+
+    /** Dọn dẹp probe BLE (adapter tắt giữa chừng) — giữ service và cảm biến sống. */
+    private void stopBluetoothProbe() {
+        if (advertiser != null && legacyAdvertising) {
+            try { advertiser.stopAdvertising(legacyAdvertiseCallback); } catch (Exception ignored) {}
+        } else if (advertiser != null && advertisingSet != null) {
+            try { advertiser.stopAdvertisingSet(advertiseCallback); } catch (Exception ignored) {}
+        }
+        if (scanner != null) {
+            try { scanner.stopScan(scanCallback); } catch (Exception ignored) {}
+        }
+        advertiser = null;
+        advertisingSet = null;
+        scanner = null;
+        advertisingStarted = false;
+        scanningStarted = false;
+        bluetoothProbeStarting = false;
+    }
 
     private void notifyText(String title, String text) {
         NotificationManager nm = getSystemService(NotificationManager.class);

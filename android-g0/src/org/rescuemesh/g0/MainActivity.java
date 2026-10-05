@@ -149,9 +149,9 @@ public final class MainActivity extends Activity implements SensorEventListener 
             recent = new ArrayList<>(s.recent);
         }
         if (recent.isEmpty()) {
-            sosList.setText("Chưa nhận SOS nào qua BLE.");
+            sosList.setText("Chưa có SOS nào (mình phát hoặc nhận qua BLE).");
         } else {
-            StringBuilder lb = new StringBuilder("SOS đã nhận (mới nhất trước):\n");
+            StringBuilder lb = new StringBuilder("SOS gần đây (mình + nhận được):\n");
             int shown = 0;
             for (SosRecord r : recent) {
                 if (shown++ >= 8) break;
